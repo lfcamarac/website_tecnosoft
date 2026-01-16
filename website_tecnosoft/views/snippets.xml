@@ -56,7 +56,7 @@
     <!-- Register Snippet in Editor -->
     <template id="tecnosoft_snippets" inherit_id="website.snippets">
         <xpath expr="//snippets[@id='snippet_structure']" position="inside">
-            <t t-snippet="website_tecnosoft.s_tecnosoft_hero" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="dynamic"/>
+            <t t-snippet="website_tecnosoft.s_tecnosoft_hero" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png"/>
             <t t-snippet="website_tecnosoft.s_tecnosoft_dynamic" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="dynamic"/>
         </xpath>
     </template>
