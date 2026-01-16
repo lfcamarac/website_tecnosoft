@@ -20,7 +20,7 @@ publicWidget.registry.TecnosoftPopups = publicWidget.Widget.extend({
         const popupEl = document.getElementById('tecnosoft_popup');
         if (!popupEl) return;
 
-        const modal = new bootstrap.Modal(popupEl);
+        const modal = new window.bootstrap.Modal(popupEl);
 
         // Check if already shown in this session
         if (sessionStorage.getItem('tecnosoft_popup_shown')) return;
