@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Custom Layout Overrides -->
+    <template id="tecnosoft_layout" inherit_id="website.layout" name="Tecnosoft Layout">
+        <xpath expr="//header" position="attributes">
+            <attribute name="class" add="tecnosoft-header shadow-sm sticky-top" separator=" "/>
+        </xpath>
+    </template>
+
+    <!-- Custom Header -->
+    <template id="tecnosoft_header" inherit_id="portal.frontend_layout" name="Tecnosoft Header">
+        <xpath expr="//header" position="inside">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+                <div class="container">
+                    <a class="navbar-brand d-flex align-items-center" href="/">
+                        <img t-if="website.logo" t-att-src="website.image_url(website, 'logo')" class="img-fluid" style="max-height: 50px;" alt="Logo"/>
+                        <span class="ms-2 fw-bold text-primary" t-field="website.name"/>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#tecnosoft_nav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="tecnosoft_nav">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                            <t t-foreach="website.menu_id.child_id" t-as="menu">
+                                <li class="nav-item">
+                                    <a t-attf-class="nav-link #{'active' if menu.url == request.httprequest.path else ''}" t-att-href="menu.url">
+                                        <span t-field="menu.name"/>
+                                    </a>
+                                </li>
+                            </t>
+                        </ul>
+                        <div class="d-flex align-items-center">
+                            <!-- Search Icon (B2B/B2C) -->
+                            <a href="/shop" class="nav-link text-dark mx-2">
+                                <i class="fa fa-search"></i>
+                            </a>
+                            <!-- Cart -->
+                            <t t-set="website_sale_cart_quantity" t-value="request.website.sale_get_order().cart_quantity or 0"/>
+                            <a href="/shop/cart" class="nav-link text-dark position-relative mx-2">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span t-if="website_sale_cart_quantity" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">
+                                    <t t-esc="website_sale_cart_quantity"/>
+                                </span>
+                            </a>
+                            <!-- User Account -->
+                            <div class="dropdown mx-2">
+                                <a class="nav-link dropdown-toggle text-dark d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown">
+                                    <i class="fa fa-user-circle me-1"></i>
+                                    <span class="d-none d-md-inline" t-esc="user_id.name[:15] + '...' if len(user_id.name) > 15 else user_id.name"/>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
+                                    <li><a class="dropdown-item" href="/my/home">Mi Cuenta</a></li>
+                                    <li><a class="dropdown-item" href="/shop/cart">Mi Carrito</a></li>
+                                    <li><hr class="dropdown-divider"/></li>
+                                    <li><a class="dropdown-item text-danger" href="/web/session/logout">Cerrar Sesión</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </xpath>
+    </template>
+
+    <!-- Custom Footer -->
+    <template id="tecnosoft_footer" inherit_id="website.footer_custom" name="Tecnosoft Footer">
+        <xpath expr="//div[@id='footer']" position="replace">
+            <footer id="footer" class="bg-dark text-white pt-5 pb-3">
+                <div class="container">
+                    <div class="row g-4">
+                        <!-- Branding & Contact -->
+                        <div class="col-lg-4">
+                            <h5 class="text-primary fw-bold mb-4" t-field="website.name"/>
+                            <p class="text-muted small">
+                                Tecnosoft es tu socio estratégico en soluciones de eCommerce y tecnología empresarial. 
+                                Innovación y robustez en cada proyecto.
+                            </p>
+                            <div class="mt-4">
+                                <p class="mb-1"><i class="fa fa-map-marker text-primary me-2"></i> Calle Tecnología 123, Ciudad IT</p>
+                                <p class="mb-1"><i class="fa fa-phone text-primary me-2"></i> +1 234 567 890</p>
+                                <p class="mb-1"><i class="fa fa-envelope text-primary me-2"></i> hola@tecnosoft.com</p>
+                            </div>
+                        </div>
+                        <!-- Quick Links -->
+                        <div class="col-lg-2 offset-lg-1 col-md-4">
+                            <h6 class="text-uppercase fw-bold mb-4">Empresa</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><a href="/aboutus" class="text-muted text-decoration-none hover-primary">Nosotros</a></li>
+                                <li class="mb-2"><a href="/contactus" class="text-muted text-decoration-none hover-primary">Contacto</a></li>
+                                <li class="mb-2"><a href="/jobs" class="text-muted text-decoration-none hover-primary">Empleo</a></li>
+                                <li class="mb-2"><a href="/blog" class="text-muted text-decoration-none hover-primary">Blog</a></li>
+                            </ul>
+                        </div>
+                        <!-- Resources -->
+                        <div class="col-lg-2 col-md-4">
+                            <h6 class="text-uppercase fw-bold mb-4">Recursos</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><a href="/shop" class="text-muted text-decoration-none hover-primary">Tienda</a></li>
+                                <li class="mb-2"><a href="/help" class="text-muted text-decoration-none hover-primary">Ayuda</a></li>
+                                <li class="mb-2"><a href="/terms" class="text-muted text-decoration-none hover-primary">Términos</a></li>
+                                <li class="mb-2"><a href="/privacy" class="text-muted text-decoration-none hover-primary">Privacidad</a></li>
+                            </ul>
+                        </div>
+                        <!-- Newsletter -->
+                        <div class="col-lg-3 col-md-4">
+                            <h6 class="text-uppercase fw-bold mb-4">Newsletter</h6>
+                            <p class="text-muted small mb-3">Recibe las últimas noticias y ofertas de Tecnosoft.</p>
+                            <form action="/website/newsletter" method="post" class="js_subscribe">
+                                <div class="input-group">
+                                    <input type="email" class="form-control bg-transparent border-primary text-white" placeholder="Tu email" aria-label="Email"/>
+                                    <button class="btn btn-primary" type="button">Unirme</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <hr class="my-5 border-secondary"/>
+                    <div class="row align-items-center">
+                        <div class="col-md-6 text-center text-md-start">
+                            <p class="mb-0 text-muted small">© <t t-esc="datetime.datetime.now().year"/> Tecnosoft. Todos los derechos reservados.</p>
+                        </div>
+                        <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                            <a href="#" class="text-muted me-3"><i class="fa fa-facebook"></i></a>
+                            <a href="#" class="text-muted me-3"><i class="fa fa-twitter"></i></a>
+                            <a href="#" class="text-muted me-3"><i class="fa fa-linkedin"></i></a>
+                            <a href="#" class="text-muted"><i class="fa fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </xpath>
+    <!-- Shop Page Customization -->
+    <template id="tecnosoft_products" inherit_id="website_sale.products" name="Tecnosoft Products">
+        <xpath expr="//div[@id='products_grid']" position="attributes">
+            <attribute name="class" add="tecnosoft-products-grid" separator=" "/>
+        </xpath>
+    </template>
+
+    <!-- Product Item Customization with SEO -->
+    <template id="tecnosoft_product_item" inherit_id="website_sale.products_item" name="Tecnosoft Product Item">
+        <xpath expr="//form" position="attributes">
+            <attribute name="class" add="tecnosoft-product-card h-100 shadow-sm border-0 rounded-3 overflow-hidden" separator=" "/>
+            <attribute name="itemscope" add="itemscope" separator=" "/>
+            <attribute name="itemtype" add="http://schema.org/Product" separator=" "/>
+        </xpath>
+        <xpath expr="//div[hasclass('oe_product_image')]" position="attributes">
+            <attribute name="class" add="border-bottom-0" separator=" "/>
+        </xpath>
+        <xpath expr="//h6[hasclass('o_wsale_products_item_title')]" position="inside">
+            <meta itemprop="name" t-att-content="product.name"/>
+        </xpath>
+        <xpath expr="//div[hasclass('product_price')]" position="attributes">
+            <attribute name="itemprop" add="offers" separator=" "/>
+            <attribute name="itemscope" add="itemscope" separator=" "/>
+            <attribute name="itemtype" add="http://schema.org/Offer" separator=" "/>
+        </xpath>
+    </template>
+
+    <!-- Product Page Customization -->
+    <template id="tecnosoft_product" inherit_id="website_sale.product" name="Tecnosoft Product Page">
+        <xpath expr="//div[@id='product_details']" position="attributes">
+            <attribute name="class" add="ps-lg-5" separator=" "/>
+        </xpath>
+        <xpath expr="//h1[@t-field='product.name']" position="attributes">
+            <attribute name="class" add="fw-bold text-dark mb-3" separator=" "/>
+        </xpath>
+    </template>
+</odoo>

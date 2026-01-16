@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Snippet Options -->
+    <template id="tecnosoft_snippet_options" inherit_id="website.snippet_options">
+        <xpath expr="//div[@data-js='DynamicSnippet']" position="attributes">
+            <attribute name="data-selector" add=".s_tecnosoft_dynamic" separator=","/>
+        </xpath>
+    </template>
+
+    <!-- Snippet Template -->
+    <template id="s_tecnosoft_dynamic" name="Tecnosoft Dynamic Products">
+        <section class="s_tecnosoft_dynamic pt-5 pb-5">
+            <div class="container text-center">
+                <h2 class="fw-bold mb-4">Productos Destacados Tecnosoft</h2>
+                <div class="tecnosoft_dynamic_container row g-4" data-limit="4">
+                    <!-- OWL will render content here -->
+                    <div class="col-12">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Cargando...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <!-- Register Snippet in Editor -->
+    <template id="tecnosoft_snippets" inherit_id="website.snippets">
+        <xpath expr="//div[@id='snippet_feature']//div[hasclass('o_panel_body')]" position="inside">
+            <t t-snippet="website_tecnosoft.s_tecnosoft_dynamic" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png"/>
+        </xpath>
+    </template>
+</odoo>
