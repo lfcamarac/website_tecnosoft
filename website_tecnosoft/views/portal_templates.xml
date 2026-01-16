@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Custom Portal Dashboard -->
+    <template id="tecnosoft_portal_my_home" inherit_id="portal.portal_my_home" name="Tecnosoft Portal Dashboard">
+        <xpath expr="//div[hasclass('o_portal_my_home')]" position="attributes">
+            <attribute name="class" add="tecnosoft-portal-dashboard row g-4" separator=" "/>
+        </xpath>
+        <xpath expr="//div[hasclass('o_portal_docs_list')]" position="attributes">
+            <attribute name="class" add="col-12" separator=" "/>
+        </xpath>
+    </template>
+
+    <!-- Enhance Portal Layout with Sidebar/Card style -->
+    <template id="tecnosoft_portal_layout" inherit_id="portal.portal_layout" name="Tecnosoft Portal Layout">
+        <xpath expr="//div[@id='o_my_sidebar']" position="attributes">
+            <attribute name="class" add="card border-0 shadow-sm rounded-4 p-4 sticky-top" separator=" "/>
+            <attribute name="style" add="top: 100px; height: fit-content;" separator=" "/>
+        </xpath>
+        <xpath expr="//div[hasclass('o_portal_content')]" position="attributes">
+            <attribute name="class" add="ps-lg-5" separator=" "/>
+        </xpath>
+    </template>
+
+    <!-- Custom Portal Home Icons and Cards -->
+    <template id="tecnosoft_portal_home_card" inherit_id="portal.portal_my_home" name="Tecnosoft Portal Cards" priority="20">
+        <xpath expr="//div[hasclass('o_portal_docs_list')]" position="before">
+            <div class="col-12 mb-4">
+                <div class="tecnosoft-portal-welcome p-5 bg-primary text-white rounded-4 shadow-sm position-relative overflow-hidden">
+                    <div class="position-relative z-index-1">
+                        <h2 class="fw-bold">Bienvenido, <t t-esc="request.env.user.partner_id.name"/></h2>
+                        <p class="lead mb-0 opacity-75">Gestiona tus pedidos, facturas y preferencias desde tu panel profesional.</p>
+                    </div>
+                    <i class="fa fa-user-circle position-absolute end-0 bottom-0 opacity-25 m-n4" style="font-size: 15rem;"></i>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

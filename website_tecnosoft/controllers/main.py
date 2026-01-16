@@ -18,3 +18,13 @@ class TecnosoftController(http.Controller):
             'image_url': f'/web/image/product.template/{p.id}/image_512',
             'url': p.website_url,
         } for p in products]
+
+    @http.route('/website_tecnosoft/subscribe_price_tracker', type='json', auth='user', website=True)
+    def subscribe_price_tracker(self, product_id, **kwargs):
+        """ Subscribe user to price drop notifications. """
+        tracker = request.env['website.price.tracker'].sudo().create({
+            'partner_id': request.env.user.partner_id.id,
+            'product_id': int(product_id),
+            'last_notified_price': request.env['product.template'].sudo().browse(int(product_id)).list_price,
+        })
+        return {'status': 'success', 'id': tracker.id}

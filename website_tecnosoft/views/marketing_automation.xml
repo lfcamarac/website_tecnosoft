@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Review Reminder Email Template -->
+    <record id="email_template_review_reminder" model="mail.template">
+        <field name="name">Tecnosoft: Review Reminder</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="subject">¿Qué te ha parecido tu compra en Tecnosoft?</field>
+        <field name="email_from">{{ object.company_id.email_formatted }}</field>
+        <field name="email_to">{{ object.partner_id.email_formatted }}</field>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                    Hola <t t-out="object.partner_id.name"/>,<br/><br/>
+                    Esperamos que estés disfrutando de tu pedido <strong><t t-out="object.name"/></strong>.
+                    <br/><br/>
+                    Tu opinión es muy importante para nosotros y para otros clientes de Tecnosoft. ¿Podrías dedicarnos un minuto para dejarnos una reseña?
+                    <br/><br/>
+                    <a t-att-href="object.website_id.get_base_url() + '/shop/product/' + str(object.order_line[0].product_id.product_tmpl_id.id) if object.order_line else '/shop'" 
+                       style="background-color: #0056b3; padding: 10px 20px; text-decoration: none; color: #fff; border-radius: 5px;">Dejar una reseña</a>
+                    <br/><br/>
+                    ¡Gracias por ser parte de nuestra comunidad!
+                </p>
+            </div>
+        </field>
+    </record>
+
+    <!-- Cron for Review Reminders -->
+    <record id="ir_cron_review_reminder" model="ir.cron">
+        <field name="name">Tecnosoft: Send Review Reminders</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_send_review_reminders()</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="active" eval="True"/>
+    </record>
+
+    <!-- AI Chatbot Personalization -->
+    <template id="tecnosoft_chatbot_style" inherit_id="website.layout" name="Tecnosoft Chatbot Style">
+        <xpath expr="//div[@id='wrapwrap']" position="inside">
+            <style>
+                .o_chatbot_button {
+                    background-color: #0056b3 !important;
+                    box-shadow: 0 4px 15px rgba(0, 86, 179, 0.3) !important;
+                    border-radius: 50% !important;
+                    bottom: 30px !important;
+                    right: 30px !important;
+                }
+                .o_chatbot_chat_window {
+                    border-radius: 15px !important;
+                    overflow: hidden !important;
+                    border: none !important;
+                    box-shadow: 0 10px 40px rgba(0,0,0,0.15) !important;
+                }
+            </style>
+        </xpath>
+    </template>
+</odoo>

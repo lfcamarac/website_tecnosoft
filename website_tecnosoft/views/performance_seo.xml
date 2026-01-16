@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Performance: Video & Iframe Lazy Loading -->
+    <template id="tecnosoft_performance_optimizations" inherit_id="website.layout" name="Tecnosoft Performance">
+        <xpath expr="//div[@id='wrapwrap']" position="inside">
+            <script type="text/javascript">
+                document.addEventListener("DOMContentLoaded", function() {
+                    var lazyVideos = [].slice.call(document.querySelectorAll("video.lazy, iframe.lazy"));
+                    if ("IntersectionObserver" in window) {
+                        var lazyVideoObserver = new IntersectionObserver(function(entries, observer) {
+                            entries.forEach(function(video) {
+                                if (video.isIntersecting) {
+                                    for (var source in video.target.children) {
+                                        var videoSource = video.target.children[source];
+                                        if (typeof videoSource.tagName === "string" &amp;&amp; videoSource.tagName === "SOURCE") {
+                                            videoSource.src = videoSource.dataset.src;
+                                        }
+                                    }
+                                    video.target.load();
+                                    video.target.classList.remove("lazy");
+                                    lazyVideoObserver.unobserve(video.target);
+                                }
+                            });
+                        });
+                        lazyVideos.forEach(function(lazyVideo) {
+                            lazyVideoObserver.observe(lazyVideo);
+                        });
+                    }
+                });
+            </script>
+        </xpath>
+    </template>
+
+    <!-- GDPR: Custom Consent Banner -->
+    <template id="tecnosoft_gdpr_banner" inherit_id="website.layout" name="Tecnosoft GDPR Banner">
+        <xpath expr="//div[@id='wrapwrap']" position="inside">
+            <div id="tecnosoft_gdpr" class="position-fixed bottom-0 start-0 w-100 p-3 bg-white shadow-lg border-top d-none animate-slide-up" style="z-index: 1060;">
+                <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between">
+                    <div class="mb-3 mb-md-0 me-md-4">
+                        <h6 class="fw-bold mb-1">Tu privacidad es importante</h6>
+                        <p class="small text-muted mb-0">Utilizamos cookies para mejorar tu experiencia y analizar nuestro tráfico. ¿Aceptas el uso de cookies?</p>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-secondary btn-sm rounded-pill px-3" id="tecnosoft_gdpr_decline">Configurar</button>
+                        <button class="btn btn-primary btn-sm rounded-pill px-4" id="tecnosoft_gdpr_accept">Aceptar todo</button>
+                    </div>
+                </div>
+            </div>
+            <style>
+                @keyframes slideUp {
+                    from { transform: translateY(100%); }
+                    to { transform: translateY(0); }
+                }
+                .animate-slide-up {
+                    animation: slideUp 0.5s ease-out forwards;
+                }
+            </style>
+            <script type="text/javascript">
+                document.addEventListener("DOMContentLoaded", function() {
+                    const banner = document.getElementById('tecnosoft_gdpr');
+                    if (!localStorage.getItem('tecnosoft_gdpr_consent')) {
+                        setTimeout(() => banner.classList.remove('d-none'), 2000);
+                    }
+                    document.getElementById('tecnosoft_gdpr_accept')?.addEventListener('click', () => {
+                        localStorage.setItem('tecnosoft_gdpr_consent', 'accepted');
+                        banner.classList.add('d-none');
+                    });
+                });
+            </script>
+        </xpath>
+    </template>
+</odoo>
