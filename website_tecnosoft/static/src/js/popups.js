@@ -16,7 +16,19 @@ publicWidget.registry.TecnosoftPopups = publicWidget.Widget.extend({
     /**
      * Show popup based on exit intent or time delay
      */
-    _initExitIntentPopup() {
+    async _initExitIntentPopup() {
+        // Wait for bootstrap to be available (up to 5 seconds)
+        let tries = 0;
+        while (!window.bootstrap && tries < 50) {
+            await new Promise(resolve => setTimeout(resolve, 100));
+            tries++;
+        }
+
+        if (!window.bootstrap) {
+            console.warn("Tecnosoft: Bootstrap not found, skipping popup init.");
+            return;
+        }
+
         const popupEl = document.getElementById('tecnosoft_popup');
         if (!popupEl) return;
 
