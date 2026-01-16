@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="tecnosoft_robots" inherit_id="website.robots">
-        <xpath expr="//t[@t-out='robots']" position="after">
+        <xpath expr="//t[@t-out='request.website.sudo().robots_txt']" position="after">
 User-agent: *
 Allow: /shop
 Allow: /static/
