@@ -2,8 +2,10 @@
 <odoo>
     <!-- Snippet Options -->
     <template id="tecnosoft_snippet_options" inherit_id="website.snippet_options">
-        <xpath expr="//div[@data-js='DynamicSnippet']" position="attributes">
-            <attribute name="data-selector" add=".s_tecnosoft_dynamic" separator=","/>
+        <xpath expr="." position="inside">
+            <div data-js="dynamic_snippet" data-selector=".s_tecnosoft_dynamic">
+                <!-- Snippet options go here -->
+            </div>
         </xpath>
     </template>
 
