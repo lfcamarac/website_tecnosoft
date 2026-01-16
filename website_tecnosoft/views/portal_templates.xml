@@ -13,8 +13,7 @@
     <!-- Enhance Portal Layout with Sidebar/Card style -->
     <template id="tecnosoft_portal_layout" inherit_id="portal.portal_layout" name="Tecnosoft Portal Layout">
         <xpath expr="//div[descendant::t[@t-call='portal.side_content']][1]" position="attributes">
-            <attribute name="class" add="card border-0 shadow-sm rounded-4 p-4 sticky-top" separator=" "/>
-            <attribute name="style" add="top: 100px; height: fit-content;" separator=" "/>
+            <attribute name="class" add="sticky-top" separator=" "/>
         </xpath>
         <xpath expr="//div[contains(@t-attf-class, 'o_portal_content')]" position="attributes">
             <attribute name="class" add="ps-lg-5" separator=" "/>

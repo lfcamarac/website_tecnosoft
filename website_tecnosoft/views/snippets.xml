@@ -26,9 +26,37 @@
         </section>
     </template>
 
+    <template id="s_tecnosoft_hero" name="Modern Hero">
+        <section class="s_tecnosoft_hero position-relative pt128 pb128 bg-primary">
+             <div class="container position-relative z-index-1">
+                <div class="row align-items-center">
+                    <div class="col-lg-7 text-white">
+                        <h1 class="display-3 fw-bold mb-4">Elevate Your Business</h1>
+                        <p class="lead mb-5 opacity-75">Premium solutions designed for modern enterprises. Experience the difference with Tecnosoft.</p>
+                        <div class="d-flex gap-3">
+                            <a href="#" class="btn btn-light btn-lg px-5 py-3 fw-bold text-primary rounded-pill">Get Started</a>
+                            <a href="#" class="btn btn-outline-light btn-lg px-5 py-3 fw-bold rounded-pill">Learn More</a>
+                        </div>
+                    </div>
+                     <div class="col-lg-5">
+                        <!-- Placeholder for Hero Image -->
+                        <div class="bg-white bg-opacity-10 rounded-4 p-5 text-center text-white backdrop-blur">
+                            <i class="fa fa-rocket fa-5x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Background Shape -->
+            <div class="position-absolute top-0 end-0 bottom-0 start-0 overflow-hidden">
+                 <div class="position-absolute top-0 end-0 bg-white opacity-10 rounded-circle" style="width: 600px; height: 600px; margin-right: -100px; margin-top: -100px;"></div>
+            </div>
+        </section>
+    </template>
+
     <!-- Register Snippet in Editor -->
     <template id="tecnosoft_snippets" inherit_id="website.snippets">
         <xpath expr="//snippets[@id='snippet_structure']" position="inside">
+            <t t-snippet="website_tecnosoft.s_tecnosoft_hero" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="dynamic"/>
             <t t-snippet="website_tecnosoft.s_tecnosoft_dynamic" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="dynamic"/>
         </xpath>
     </template>
