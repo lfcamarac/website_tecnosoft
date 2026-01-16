@@ -28,7 +28,7 @@
 
     <!-- Register Snippet in Editor -->
     <template id="tecnosoft_snippets" inherit_id="website.snippets">
-        <xpath expr="//div[@id='snippet_feature']//div[hasclass('o_panel_body')]" position="inside">
+        <xpath expr="//div[@id='snippet_structure']//div[hasclass('o_panel_body')]" position="inside">
             <t t-snippet="website_tecnosoft.s_tecnosoft_dynamic" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png"/>
         </xpath>
     </template>
