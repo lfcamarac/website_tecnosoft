@@ -51,6 +51,7 @@
             'website_tecnosoft/static/src/js/popups.js',
             'website_tecnosoft/static/src/js/price_tracker.js',
             'website_tecnosoft/static/src/js/quick_view.js',
+            'website_tecnosoft/static/src/js/marketing_snippets.js',
         ],
         'web.assets_qweb': [
             'website_tecnosoft/static/src/xml/dynamic_snippets.xml',

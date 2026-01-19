@@ -241,6 +241,79 @@
         </section>
     </template>
 
+    <template id="s_tecnosoft_countdown" name="Countdown Timer">
+        <section class="s_tecnosoft_countdown pt-5 pb-5 bg-primary text-white" data-date="2026-12-31 23:59:59">
+            <div class="container text-center">
+                <h3 class="fw-bold mb-4">¡Oferta Limitada!</h3>
+                <div class="countdown-wrapper d-flex justify-content-center gap-3 gap-md-5">
+                    <div class="time-block text-center">
+                        <span class="days display-3 fw-bold">00</span>
+                        <div class="small text-uppercase opacity-75">Días</div>
+                    </div>
+                    <div class="time-block text-center">
+                        <span class="hours display-3 fw-bold">00</span>
+                        <div class="small text-uppercase opacity-75">Horas</div>
+                    </div>
+                    <div class="time-block text-center">
+                        <span class="minutes display-3 fw-bold">00</span>
+                        <div class="small text-uppercase opacity-75">Min</div>
+                    </div>
+                    <div class="time-block text-center">
+                        <span class="seconds display-3 fw-bold">00</span>
+                        <div class="small text-uppercase opacity-75">Seg</div>
+                    </div>
+                </div>
+                <div class="mt-5">
+                    <a href="/shop" class="btn btn-light rounded-pill px-5 fw-bold text-primary">Comprar Ahora</a>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_tecnosoft_shop_offer" name="Deal of the Day">
+        <section class="s_tecnosoft_shop_offer pt-0 pb-0 bg-white shadow-sm rounded-4 overflow-hidden my-5 mx-auto container p-0" data-date="2026-12-31 23:59:59">
+            <div class="row g-0 align-items-center">
+                <div class="col-lg-6">
+                    <div class="h-100 bg-secondary d-flex align-items-center justify-content-center p-5">
+                         <img src="/web/image/website.s_parallax_default_image" class="img-fluid rounded shadow" style="max-height: 400px;"/>
+                    </div>
+                </div>
+                <div class="col-lg-6 p-5">
+                    <span class="badge bg-danger mb-3">Oferta del Día</span>
+                    <h2 class="fw-bold mb-3">Wireless Noise Cancelling Headphones</h2>
+                    <p class="text-muted mb-4 lead">Experimenta un sonido premium con cancelación de ruido activa inteligente.</p>
+                     
+                    <div class="countdown-wrapper d-flex gap-4 mb-4 text-center">
+                         <div class="p-3 bg-light rounded">
+                            <span class="days h3 fw-bold d-block mb-0">00</span>
+                            <small class="text-muted">Días</small>
+                        </div>
+                        <div class="p-3 bg-light rounded">
+                            <span class="hours h3 fw-bold d-block mb-0">00</span>
+                            <small class="text-muted">Horas</small>
+                        </div>
+                        <div class="p-3 bg-light rounded">
+                            <span class="minutes h3 fw-bold d-block mb-0">00</span>
+                            <small class="text-muted">Min</small>
+                        </div>
+                        <div class="p-3 bg-light rounded">
+                            <span class="seconds h3 fw-bold d-block mb-0">00</span>
+                            <small class="text-muted">Seg</small>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="h2 text-primary fw-bold mb-0">$249</span>
+                        <span class="text-muted text-decoration-line-through h4 mb-0">$399</span>
+                    </div>
+                    <div class="mt-4">
+                        <a href="#" class="btn btn-primary rounded-pill w-100 py-3 fw-bold">Aprovechar Oferta</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
     <template id="s_tecnosoft_mega_links" name="Mega Menu Links (4 Cols)">
         <section class="s_tecnosoft_mega_links pt-3 pb-3">
             <div class="container">
@@ -396,6 +469,10 @@
             <t t-snippet="website_tecnosoft.s_tecnosoft_mega_links" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="mega"/>
             <t t-snippet="website_tecnosoft.s_tecnosoft_mega_category" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="mega"/>
             <t t-snippet="website_tecnosoft.s_tecnosoft_mega_promo" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="mega"/>
+            
+            <!-- Marketing Blocks -->
+            <t t-snippet="website_tecnosoft.s_tecnosoft_countdown" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="dynamic"/>
+            <t t-snippet="website_tecnosoft.s_tecnosoft_shop_offer" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="dynamic"/>
         </xpath>
     </template>
 </odoo>
