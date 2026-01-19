@@ -1,0 +1,36 @@
+/* Sticky Add To Cart Bar */
+#tecnosoft_sticky_cart {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(0,0,0,0.05);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    
+    &.transform-translate-y-100 {
+        transform: translateY(100%);
+    }
+
+    &.visible {
+        transform: translateY(0);
+    }
+    
+    img {
+        border: 1px solid rgba(0,0,0,0.1);
+    }
+    
+    h6 {
+        font-size: 0.95rem;
+    }
+    
+    .btn-primary {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+// Mobile padding adjustment to prevent overlaying content
+@include media-breakpoint-only(xs) {
+    body.has-sticky-cart {
+        padding-bottom: 80px;
+    }
+}
