@@ -221,11 +221,20 @@
             <attribute name="class" add="border-bottom-0 position-relative" separator=" "/>
         </xpath>
         <xpath expr="//div[hasclass('oe_product_image')]" position="inside">
-            <!-- Labels Overlay -->
-            <div class="tecnosoft-labels position-absolute top-0 start-0 w-100 p-2 d-flex flex-column align-items-start gap-1" style="pointer-events: none;">
-                <t t-foreach="product.label_ids" t-as="label">
-                    <span t-attf-class="badge rounded-pill fw-bold shadow-sm"
-                          t-attf-style="background-color: {{label.bg_color}}; color: {{label.text_color}}; font-size: 0.7rem;">
+            <!-- Labels Overlay - Top Labels -->
+            <div class="tecnosoft-labels tecnosoft-labels-top position-absolute top-0 start-0 w-100 p-2 d-flex flex-wrap gap-1" style="pointer-events: none;">
+                <t t-foreach="product.label_ids.filtered(lambda l: l.position in ('top-left', 'top-right'))" t-as="label">
+                    <span t-attf-class="tecnosoft-label tecnosoft-label-{{label.style or 'badge'}} tecnosoft-label-{{label.position}} fw-bold shadow-sm"
+                          t-attf-style="background-color: {{label.bg_color}}; color: {{label.text_color}};">
+                        <t t-esc="label.name"/>
+                    </span>
+                </t>
+            </div>
+            <!-- Labels Overlay - Bottom Labels -->
+            <div class="tecnosoft-labels tecnosoft-labels-bottom position-absolute bottom-0 start-0 w-100 p-2 d-flex flex-wrap gap-1" style="pointer-events: none;">
+                <t t-foreach="product.label_ids.filtered(lambda l: l.position in ('bottom-left', 'bottom-right'))" t-as="label">
+                    <span t-attf-class="tecnosoft-label tecnosoft-label-{{label.style or 'badge'}} tecnosoft-label-{{label.position}} fw-bold shadow-sm"
+                          t-attf-style="background-color: {{label.bg_color}}; color: {{label.text_color}};">
                         <t t-esc="label.name"/>
                     </span>
                 </t>

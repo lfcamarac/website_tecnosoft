@@ -10,6 +10,7 @@
                     <group>
                         <group>
                             <field name="name"/>
+                            <field name="style"/>
                             <field name="position"/>
                         </group>
                         <group>
@@ -30,6 +31,7 @@
         <field name="arch" type="xml">
             <list string="Labels" editable="bottom">
                 <field name="name"/>
+                <field name="style"/>
                 <field name="bg_color" widget="color"/>
                 <field name="text_color" widget="color"/>
                 <field name="position"/>

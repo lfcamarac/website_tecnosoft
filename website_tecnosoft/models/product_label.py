@@ -11,7 +11,14 @@ class ProductLabel(models.Model):
     position = fields.Selection([
         ('top-left', 'Top Left'),
         ('top-right', 'Top Right'),
+        ('bottom-left', 'Bottom Left'),
+        ('bottom-right', 'Bottom Right'),
     ], string='Position', default='top-left')
+    style = fields.Selection([
+        ('badge', 'Badge (Rounded)'),
+        ('ribbon', 'Ribbon (Corner)'),
+        ('tag', 'Tag (Pill)'),
+    ], string='Style', default='badge')
     preview_html = fields.Html('Preview', compute='_compute_preview_html')
 
     def _compute_preview_html(self):

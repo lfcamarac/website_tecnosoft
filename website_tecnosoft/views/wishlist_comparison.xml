@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Add Wishlist & Compare buttons to header -->
+    <template id="tecnosoft_header_wishlist_compare" inherit_id="website_tecnosoft.tecnosoft_header" name="Tecnosoft Header Wishlist/Compare">
+        <xpath expr="//a[contains(@href, '/shop/cart')]" position="before">
+            <!-- Compare Button -->
+            <t t-if="request.env['website'].get_current_website().viewref('website_sale_comparison.add_to_compare')">
+                <a href="/shop/compare" class="nav-link text-dark position-relative mx-2 o_product_compare" title="Comparar">
+                    <i class="fa fa-exchange"></i>
+                    <t t-set="compare_list" t-value="request.website.get_current_website().sale_get_compare_list()"/>
+                    <span t-if="compare_list" class="badge rounded-pill" t-esc="len(compare_list)"/>
+                </a>
+            </t>
+            <!-- Wishlist Button -->
+            <t t-if="request.env['website'].get_current_website().viewref('website_sale_wishlist.add_to_wishlist')">
+                <a href="/shop/wishlist" class="nav-link text-dark position-relative mx-2 o_wsale_my_wish" title="Lista de Deseos">
+                    <i class="fa fa-heart-o"></i>
+                    <t t-set="wish_count" t-value="len(request.env['product.wishlist'].sudo().search([('partner_id', '=', request.env.user.partner_id.id)]))"/>
+                    <span t-if="wish_count" class="badge rounded-pill" t-esc="wish_count"/>
+                </a>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- Override product card to add wishlist/compare buttons -->
+    <template id="tecnosoft_product_card_buttons" inherit_id="website_sale.products_item" name="Tecnosoft Product Card Buttons">
+        <xpath expr="//div[hasclass('oe_product_image')]" position="inside">
+            <!-- Wishlist Button -->
+            <t t-if="request.env['website'].get_current_website().viewref('website_sale_wishlist.add_to_wishlist')">
+                <button type="button" 
+                        class="btn o_add_wishlist js_add_wishlist" 
+                        t-att-data-product-product-id="product.product_variant_id.id"
+                        t-att-data-product-template-id="product.id"
+                        title="Añadir a Lista de Deseos"
+                        aria-label="Añadir a Lista de Deseos">
+                    <i class="fa fa-heart-o"></i>
+                </button>
+            </t>
+            <!-- Compare Button -->
+            <t t-if="request.env['website'].get_current_website().viewref('website_sale_comparison.add_to_compare')">
+                <button type="button" 
+                        class="btn o_add_compare js_add_cart_json" 
+                        t-att-data-product-product-id="product.product_variant_id.id"
+                        title="Comparar"
+                        aria-label="Añadir a Comparar">
+                    <i class="fa fa-exchange"></i>
+                </button>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- Custom Wishlist Page Template -->
+    <template id="tecnosoft_wishlist_page" inherit_id="website_sale_wishlist.product_wishlist" name="Tecnosoft Wishlist Page">
+        <xpath expr="//div[hasclass('oe_cart')]" position="attributes">
+            <attribute name="class" add="tecnosoft-wishlist-page" separator=" "/>
+        </xpath>
+    </template>
+
+    <!-- Custom Compare Page Template -->
+    <template id="tecnosoft_compare_page" inherit_id="website_sale_comparison.product_compare" name="Tecnosoft Compare Page">
+        <xpath expr="//div[@id='wrap']" position="attributes">
+            <attribute name="class" add="tecnosoft-compare-page" separator=" "/>
+        </xpath>
+    </template>
+
+    <!-- Add wishlist/compare to Quick View -->
+    <template id="tecnosoft_quick_view_buttons" inherit_id="website_tecnosoft.quick_view_modal" name="Quick View Wishlist/Compare">
+        <xpath expr="//a[@role='button'][contains(@class, 'a-submit')]" position="after">
+            <!-- Wishlist Button in Quick View -->
+            <t t-if="request.env['website'].get_current_website().viewref('website_sale_wishlist.add_to_wishlist')">
+                <button type="button" 
+                        class="btn btn-outline-danger rounded-pill js_add_wishlist" 
+                        t-att-data-product-product-id="product.product_variant_id.id"
+                        t-att-data-product-template-id="product.id"
+                        title="Añadir a Lista de Deseos">
+                    <i class="fa fa-heart-o"></i>
+                </button>
+            </t>
+            <!-- Compare Button in Quick View -->
+            <t t-if="request.env['website'].get_current_website().viewref('website_sale_comparison.add_to_compare')">
+                <button type="button" 
+                        class="btn btn-outline-secondary rounded-pill o_add_compare" 
+                        t-att-data-product-product-id="product.product_variant_id.id"
+                        title="Comparar">
+                    <i class="fa fa-exchange"></i>
+                </button>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- Add to Mobile Bottom Bar -->
+    <template id="tecnosoft_mobile_bar_wishlist" inherit_id="website_tecnosoft.tecnosoft_layout" name="Mobile Bar Wishlist">
+        <xpath expr="//nav[hasclass('zenith-mobile-bottom-bar')]//a[@href='/my/home']" position="before">
+            <a href="/shop/wishlist" class="nav-item position-relative">
+                <i class="fa fa-heart-o"></i>
+                <span>Deseos</span>
+                <t t-set="wish_count" t-value="len(request.env['product.wishlist'].sudo().search([('partner_id', '=', request.env.user.partner_id.id)]))"/>
+                <span t-if="wish_count" class="cart-badge badge rounded-pill bg-danger" t-esc="wish_count"/>
+            </a>
+        </xpath>
+    </template>
+</odoo>

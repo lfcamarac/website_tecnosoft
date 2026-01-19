@@ -6,7 +6,7 @@
     'version': '18.0.2.0.0',
     'author': 'Tecnosoft 2025, C.A.',
     'website': 'https://www.tecnosoft.dev',
-    'depends': ['website', 'website_sale'],
+    'depends': ['website', 'website_sale', 'website_sale_comparison', 'website_sale_wishlist'],
     'data': [
         'security/ir.model.access.csv',
         'views/theme_templates.xml',
@@ -21,6 +21,7 @@
         'views/quick_view.xml',
         'views/product_brand_views.xml',
         'views/product_label_views.xml',
+        'views/wishlist_comparison.xml',
     ],
     'demo': [
         'data/demo_data.xml',
@@ -42,6 +43,8 @@
             'website_tecnosoft/static/src/scss/product_sticky.scss',
             'website_tecnosoft/static/src/scss/animations.scss',
             'website_tecnosoft/static/src/scss/mobile_bar.scss',
+            'website_tecnosoft/static/src/scss/wishlist_comparison.scss',
+            'website_tecnosoft/static/src/scss/product_labels.scss',
             'website_tecnosoft/static/src/js/dynamic_snippets.js',
             'website_tecnosoft/static/src/js/options.js',
             'website_tecnosoft/static/src/js/side_cart.js',
