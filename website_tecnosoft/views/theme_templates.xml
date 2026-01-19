@@ -262,7 +262,7 @@
         <xpath expr="//h1[@t-field='product.name']" position="attributes">
             <attribute name="class" add="fw-bold text-dark mb-3" separator=" "/>
         </xpath>
-        <xpath expr="//div[@id='wrapwrap']" position="inside">
+        <xpath expr="//div[@id='wrap']" position="inside">
             <div id="tecnosoft_sticky_cart" class="d-none d-md-flex align-items-center justify-content-between fixed-bottom bg-white shadow-lg p-3 border-top z-index-1000 transform-translate-y-100 transition-all">
                 <div class="d-flex align-items-center gap-3">
                     <img t-if="product.image_128" t-att-src="'/web/image/product.template/%s/image_128' % product.id" class="rounded shadow-sm" style="width: 50px; height: 50px; object-fit: cover;"/>
