@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- QUICK VIEW MODAL CONTENT -->
+    <template id="quick_view_modal" name="Quick View Content">
+        <div class="product-quick-view-container position-relative bg-white rounded-3 shadow overflow-hidden">
+            <button type="button" class="btn-close position-absolute top-0 end-0 m-3 z-index-10" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="row g-0">
+                <!-- Product Image -->
+                <div class="col-md-6 bg-light d-flex align-items-center justify-content-center">
+                    <div class="p-4" style="max-height: 500px;">
+                        <img t-if="product.image_1920" 
+                             t-att-src="'/web/image/product.template/%s/image_1024' % product.id" 
+                             class="img-fluid object-contain" 
+                             style="max-height: 450px;" 
+                             alt="Product Image"/>
+                        <span t-else="" class="text-muted fa fa-camera fa-4x"></span>
+                    </div>
+                </div>
+                <!-- Product Details -->
+                <div class="col-md-6 p-5">
+                    <h2 class="fw-bold mb-2" t-field="product.name"/>
+                    <div class="mb-3">
+                        <t t-if="product.is_product_variant">
+                            <h3 class="text-primary fw-bold" t-field="product.list_price" 
+                                t-options="{'widget': 'monetary', 'display_currency': product.currency_id}"/>
+                        </t>
+                        <t t-else="">
+                            <h3 class="text-primary fw-bold" t-field="product.list_price" 
+                                t-options="{'widget': 'monetary', 'display_currency': product.currency_id}"/>
+                        </t>
+                    </div>
+                    <div class="text-muted mb-4" t-field="product.description_sale"/>
+                    
+                    <form t-if="product._is_add_to_cart_possible()" action="/shop/cart/update" method="POST">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <input type="hidden" name="product_id" t-att-value="product.product_variant_id.id"/>
+                        <div class="d-flex align-items-center gap-3 mb-4">
+                            <div class="input-group" style="width: 140px;">
+                                <a href="#" class="btn btn-outline-secondary js_add_cart_json">
+                                    <i class="fa fa-minus"></i>
+                                </a>
+                                <input type="text" class="form-control text-center quantity" data-min="1" name="add_qty" value="1"/>
+                                <a href="#" class="btn btn-outline-secondary js_add_cart_json">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                            </div>
+                            <a role="button" class="btn btn-primary flex-grow-1 py-2 fw-bold js_check_product a-submit" href="#">
+                                <i class="fa fa-shopping-cart me-2"></i> Añadir
+                            </a>
+                        </div>
+                    </form>
+                    <div t-else="" class="alert alert-warning">
+                        Producto no disponible
+                    </div>
+                    
+                    <a t-att-href="product.website_url" class="btn btn-link text-decoration-none px-0">
+                        Ver detalles completos <i class="fa fa-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </template>
+</odoo>

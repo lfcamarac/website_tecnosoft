@@ -35,7 +35,7 @@
             </div>
 
             <!-- Global Style Engine -->
-            <div data-js="tecnosoft_style_options" data-selector="main">
+            <div data-js="tecnosoft_style_options" data-selector="#wrapwrap">
                 <we-row string="Estilo Zenith">
                     <we-select string="Tema" data-attribute-name="zenith_style" data-no-preview="true">
                         <we-button data-select-data-attribute="">Moderno (Default)</we-button>

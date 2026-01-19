@@ -57,81 +57,82 @@
         </xpath>
     </template>
 
-    <!-- Custom Header -->
+    <!-- Custom Header: Replaces default frontend_layout header -->
     <template id="tecnosoft_header" inherit_id="portal.frontend_layout" name="Tecnosoft Header">
-        <xpath expr="//header" position="inside">
-            <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
-                <div class="container">
-                    <a class="navbar-brand d-flex align-items-center" href="/">
-                        <img t-if="website.logo" t-att-src="website.image_url(website, 'logo')" class="img-fluid" style="max-height: 50px;" alt="Logo"/>
-                        <span class="ms-2 fw-bold text-primary" t-field="website.name"/>
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#tecnosoft_nav">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="tecnosoft_nav">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                            <t t-foreach="website.menu_id.child_id" t-as="menu">
-                                <li class="nav-item">
-                                    <a t-attf-class="nav-link #{'active' if menu.url == request.httprequest.path else ''}" t-att-href="menu.url">
-                                        <span t-field="menu.name"/>
-                                    </a>
-                                </li>
-                            </t>
-                        </ul>
-                        <div class="d-flex align-items-center">
-                            <!-- Multi-language & Multi-currency -->
-                            <div class="d-flex align-items-center me-2">
-                                <t t-call="portal.language_selector">
-                                    <t t-set="_btn_class" t-value="'nav-link text-dark py-0 px-2'"/>
-                                    <t t-set="_dropdown_menu_class" t-value="'dropdown-menu-end shadow border-0 mt-2'"/>
-                                </t>
-                                <t t-if="website and website.pricelist_id and len(website.get_pricelist_available()) &gt; 1">
-                                    <div class="dropdown mx-1">
-                                        <a href="#" class="nav-link dropdown-toggle text-dark py-0" data-bs-toggle="dropdown">
-                                            <t t-esc="website.get_current_pricelist().currency_id.name"/>
+        <xpath expr="//header" position="replace">
+            <header class="tecnosoft-header shadow-sm sticky-top o_header_standard">
+                <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+                    <div class="container">
+                        <a class="navbar-brand d-flex align-items-center" href="/">
+                            <img t-if="website.logo" t-att-src="website.image_url(website, 'logo')" class="img-fluid" style="max-height: 50px;" alt="Logo"/>
+                            <span class="ms-2 fw-bold text-primary" t-field="website.name"/>
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#tecnosoft_nav">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="tecnosoft_nav">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                                <t t-foreach="website.menu_id.child_id" t-as="menu">
+                                    <li class="nav-item">
+                                        <a t-attf-class="nav-link #{'active' if menu.url == request.httprequest.path else ''}" t-att-href="menu.url">
+                                            <span t-field="menu.name"/>
                                         </a>
-                                        <div class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
-                                            <t t-foreach="website.get_pricelist_available()" t-as="pl">
-                                                <a t-att-href="'/shop/change_pricelist/%s' % pl.id" class="dropdown-item">
-                                                    <t t-esc="pl.currency_id.name"/>
-                                                </a>
-                                            </t>
-                                        </div>
-                                    </div>
+                                    </li>
                                 </t>
-                            </div>
-                            <!-- Search Icon (B2B/B2C) -->
-                            <a href="/shop" class="nav-link text-dark mx-2">
-                                <i class="fa fa-search"></i>
-                            </a>
-                            <!-- Cart -->
-                            <t t-set="website_sale_cart_quantity" t-value="request.website.sale_get_order().cart_quantity or 0"/>
-                            <a href="/shop/cart" class="nav-link text-dark position-relative mx-2">
-                                <i class="fa fa-shopping-cart"></i>
-                                <span t-if="website_sale_cart_quantity" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">
-                                    <t t-esc="website_sale_cart_quantity"/>
-                                </span>
-                            </a>
-                            <!-- User Account -->
-                            <div class="dropdown mx-2">
-                                <a class="nav-link dropdown-toggle text-dark d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown">
-                                    <i class="fa fa-user-circle me-1"></i>
-                                    <span class="d-none d-md-inline" t-esc="user_id.name[:15] + '...' if len(user_id.name) > 15 else user_id.name"/>
+                            </ul>
+                            <div class="d-flex align-items-center">
+                                <!-- Multi-language & Multi-currency -->
+                                <div class="d-flex align-items-center me-2">
+                                    <t t-call="portal.language_selector">
+                                        <t t-set="_btn_class" t-value="'nav-link text-dark py-0 px-2'"/>
+                                        <t t-set="_dropdown_menu_class" t-value="'dropdown-menu-end shadow border-0 mt-2'"/>
+                                    </t>
+                                    <t t-if="website and website.pricelist_id and len(website.get_pricelist_available()) &gt; 1">
+                                        <div class="dropdown mx-1">
+                                            <a href="#" class="nav-link dropdown-toggle text-dark py-0" data-bs-toggle="dropdown">
+                                                <t t-esc="website.get_current_pricelist().currency_id.name"/>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
+                                                <t t-foreach="website.get_pricelist_available()" t-as="pl">
+                                                    <a t-att-href="'/shop/change_pricelist/%s' % pl.id" class="dropdown-item">
+                                                        <t t-esc="pl.currency_id.name"/>
+                                                    </a>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </div>
+                                <!-- Search Icon (B2B/B2C) -->
+                                <a href="/shop" class="nav-link text-dark mx-2">
+                                    <i class="fa fa-search"></i>
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
-                                    <li><a class="dropdown-item" href="/my/home">Mi Cuenta</a></li>
-                                    <li><a class="dropdown-item" href="/shop/cart">Mi Carrito</a></li>
-                                    <li><hr class="dropdown-divider"/></li>
-                                    <li><a class="dropdown-item text-danger" href="/web/session/logout">Cerrar Sesión</a></li>
-                                </ul>
+                                <!-- Cart -->
+                                <t t-set="website_sale_cart_quantity" t-value="request.website.sale_get_order().cart_quantity or 0"/>
+                                <a href="/shop/cart" class="nav-link text-dark position-relative mx-2">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <span t-if="website_sale_cart_quantity" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">
+                                        <t t-esc="website_sale_cart_quantity"/>
+                                    </span>
+                                </a>
+                                <!-- User Account -->
+                                <div class="dropdown mx-2">
+                                    <a class="nav-link dropdown-toggle text-dark d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown">
+                                        <i class="fa fa-user-circle me-1"></i>
+                                        <span class="d-none d-md-inline" t-esc="user_id.name[:15] + '...' if len(user_id.name) > 15 else user_id.name"/>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
+                                        <li><a class="dropdown-item" href="/my/home">Mi Cuenta</a></li>
+                                        <li><a class="dropdown-item" href="/shop/cart">Mi Carrito</a></li>
+                                        <li><hr class="dropdown-divider"/></li>
+                                        <li><a class="dropdown-item text-danger" href="/web/session/logout">Cerrar Sesión</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </nav>
+                </nav>
+            </header>
         </xpath>
-    </template>
 
     <!-- Custom Footer -->
     <template id="tecnosoft_footer" inherit_id="website.footer_custom" name="Tecnosoft Footer">
@@ -208,15 +209,24 @@
         </xpath>
     </template>
 
-    <!-- Product Item Customization with SEO -->
+    <!-- Product Item Customization with SEO & Quick View -->
     <template id="tecnosoft_product_item" inherit_id="website_sale.products_item" name="Tecnosoft Product Item">
         <xpath expr="//form" position="attributes">
-            <attribute name="class" add="tecnosoft-product-card h-100 shadow-sm border-0 rounded-3 overflow-hidden" separator=" "/>
+            <attribute name="class" add="tecnosoft-product-card h-100 shadow-sm border-0 rounded-3 overflow-hidden position-relative" separator=" "/>
             <attribute name="itemscope" add="itemscope" separator=" "/>
             <attribute name="itemtype" add="http://schema.org/Product" separator=" "/>
         </xpath>
         <xpath expr="//div[hasclass('oe_product_image')]" position="attributes">
-            <attribute name="class" add="border-bottom-0" separator=" "/>
+            <attribute name="class" add="border-bottom-0 position-relative" separator=" "/>
+        </xpath>
+        <xpath expr="//div[hasclass('oe_product_image')]" position="inside">
+            <!-- Quick View Overlay Button -->
+            <button type="button" class="btn btn-light rounded-circle shadow o_quick_view position-absolute top-50 start-50 translate-middle opacity-0 tecnosoft-quick-view-btn" 
+                    t-att-data-product-id="product.id"
+                    aria-label="Vista Rápida"
+                    title="Vista Rápida">
+                <i class="fa fa-eye"></i>
+            </button>
         </xpath>
         <xpath expr="//h6[hasclass('o_wsale_products_item_title')]" position="inside">
             <meta itemprop="name" t-att-content="product.name"/>

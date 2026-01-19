@@ -18,6 +18,7 @@
         'views/portal_templates.xml',
         'views/marketing_automation.xml',
         'views/performance_seo.xml',
+        'views/quick_view.xml',
     ],
     'demo': [
         'data/demo_data.xml',
@@ -44,6 +45,7 @@
             'website_tecnosoft/static/src/js/sales_triggers.js',
             'website_tecnosoft/static/src/js/popups.js',
             'website_tecnosoft/static/src/js/price_tracker.js',
+            'website_tecnosoft/static/src/js/quick_view.js',
         ],
         'web.assets_qweb': [
             'website_tecnosoft/static/src/xml/dynamic_snippets.xml',

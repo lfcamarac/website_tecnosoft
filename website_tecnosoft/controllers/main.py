@@ -56,3 +56,35 @@ class TecnosoftController(http.Controller):
             'last_notified_price': request.env['product.template'].sudo().browse(int(product_id)).list_price,
         })
         return {'status': 'success', 'id': tracker.id}
+
+    @http.route('/website_tecnosoft/quick_view', type='http', auth='public', website=True)
+    def quick_view(self, product_id, **kwargs):
+        """ Render the Quick View modal content. """
+        product = request.env['product.template'].browse(int(product_id))
+        return request.render("website_tecnosoft.quick_view_modal", {
+            'product': product,
+        })
+    
+    @http.route('/website_tecnosoft/get_cart_data', type='json', auth='public', website=True)
+    def get_cart_data(self):
+        """ Return cart data for the Side Cart panel. """
+        order = request.website.sale_get_order()
+        if not order or not order.order_line:
+            return {'lines': [], 'total': 0, 'cart_quantity': 0}
+        
+        lines = []
+        for line in order.order_line:
+            lines.append({
+                'id': line.id,
+                'product_name': line.product_id.name,
+                'quantity': line.product_uom_qty,
+                'price': line.price_total,
+                'img': f'/web/image/product.product/{line.product_id.id}/image_128',
+            })
+            
+        return {
+            'lines': lines,
+            'total': order.amount_total,
+            'cart_quantity': order.cart_quantity,
+            'currency': order.currency_id.symbol,
+        }
