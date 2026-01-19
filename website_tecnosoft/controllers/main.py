@@ -64,6 +64,44 @@ class TecnosoftController(http.Controller):
         return request.render("website_tecnosoft.quick_view_modal", {
             'product': product,
         })
+
+    @http.route('/llms.txt', type='http', auth='public', website=True, sitemap=False)
+    def llms_txt(self, **kwargs):
+        """ Serve a markdown summary of the website for AI agents (GEO). """
+        website = request.website
+        
+        # Fetch Top Categories
+        categories = request.env['product.public.category'].search([('parent_id', '=', False)], limit=10)
+        
+        # Fetch Top Brands (if available)
+        brands = []
+        if hasattr(request.env['product.template'], 'brand_id'):
+             brands = request.env['tecnosoft.product.brand'].search([], limit=10, order='product_count desc')
+
+        # Build Markdown Content
+        content = [
+            f"# {website.name} - AI Summary",
+            f"\n## Mission",
+            f"{website.company_id.report_header or 'Leading provider of technology solutions.'}",
+            f"\n## Main Navigation",
+        ]
+        
+        for menu in website.menu_id.child_id:
+            content.append(f"- [{menu.name}]({menu.url})")
+
+        content.append("\n## Top Categories")
+        for cat in categories:
+            content.append(f"- {cat.name} (/shop/category/{cat.id})")
+            
+        if brands:
+            content.append("\n## Top Brands")
+            for brand in brands:
+                content.append(f"- {brand.name}")
+
+        return request.make_response(
+            "\n".join(content),
+            headers=[('Content-Type', 'text/plain')]
+        )
     
     @http.route('/website_tecnosoft/get_cart_data', type='json', auth='public', website=True)
     def get_cart_data(self):

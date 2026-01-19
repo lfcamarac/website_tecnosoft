@@ -264,7 +264,7 @@
                     </div>
                 </div>
                 <div class="mt-5">
-                    <a href="/shop" class="btn btn-light rounded-pill px-5 fw-bold text-primary">Comprar Ahora</a>
+                    <a href="/shop" class="btn btn-light rounded-pill px-5 fw-bold text-primary" aria-label="Ver Ofertas Limitadas">Comprar Ahora</a>
                 </div>
             </div>
         </section>
@@ -275,7 +275,7 @@
             <div class="row g-0 align-items-center">
                 <div class="col-lg-6">
                     <div class="h-100 bg-secondary d-flex align-items-center justify-content-center p-5">
-                         <img src="/web/image/website.s_parallax_default_image" class="img-fluid rounded shadow" style="max-height: 400px;"/>
+                         <img src="/web/image/website.s_parallax_default_image" class="img-fluid rounded shadow" style="max-height: 400px;" alt="Producto en Oferta"/>
                     </div>
                 </div>
                 <div class="col-lg-6 p-5">
@@ -307,7 +307,7 @@
                         <span class="text-muted text-decoration-line-through h4 mb-0">$399</span>
                     </div>
                     <div class="mt-4">
-                        <a href="#" class="btn btn-primary rounded-pill w-100 py-3 fw-bold">Aprovechar Oferta</a>
+                        <a href="#" class="btn btn-primary rounded-pill w-100 py-3 fw-bold" aria-label="Comprar Headphones en Oferta">Aprovechar Oferta</a>
                     </div>
                 </div>
             </div>

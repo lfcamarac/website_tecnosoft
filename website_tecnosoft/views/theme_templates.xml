@@ -275,13 +275,47 @@
                     <form t-if="product._is_add_to_cart_possible()" action="/shop/cart/update" method="POST" class="d-flex gap-2">
                         <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                         <input type="hidden" name="product_id" t-att-value="product.product_variant_id.id"/>
-                        <input type="number" class="form-control text-center" name="add_qty" value="1" min="1" style="width: 70px;"/>
-                        <button type="submit" class="btn btn-primary fw-bold shadow-sm js_check_product a-submit">
+                        <input type="number" class="form-control text-center" name="add_qty" value="1" min="1" style="width: 70px;" aria-label="Cantidad a añadir"/>
+                        <button type="submit" class="btn btn-primary fw-bold shadow-sm js_check_product a-submit" aria-label="Añadir al Carrito">
                             <i class="fa fa-shopping-cart me-2"></i> Añadir al Carrito
                         </button>
                     </form>
                 </div>
             </div>
+            
+            <!-- GEO / AI Structured Data -->
+            <script type="application/ld+json">
+            {
+                "@context": "https://schema.org/",
+                "@type": "Product",
+                "name": "<t t-esc="product.name"/>",
+                "image": "<t t-esc="website.base_url + '/web/image/product.template/' + str(product.id) + '/image_1920'"/>",
+                "description": "<t t-esc="product.description_sale or product.name"/>",
+                "sku": "<t t-esc="product.default_code or ''"/>",
+                "brand": {
+                    "@type": "Brand",
+                    "name": "<t t-esc="product.brand_id.name if product.brand_id else ''"/>"
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "url": "<t t-esc="website.base_url + product.website_url"/>",
+                    "priceCurrency": "<t t-esc="website.currency_id.name"/>",
+                    "price": "<t t-esc="product.list_price"/>",
+                    "availability": "<t t-esc="'https://schema.org/InStock' if product.is_published else 'https://schema.org/OutOfStock'"/>"
+                },
+                "potentialAction": {
+                    "@type": "BuyAction",
+                    "target": {
+                        "@type": "EntryPoint",
+                        "urlTemplate": "<t t-esc="website.base_url + '/shop/cart/update?product_id=' + str(product.product_variant_id.id) + '&amp;add_qty=1'"/>",
+                        "actionPlatform": [
+                            "http://schema.org/DesktopWebPlatform",
+                            "http://schema.org/MobileWebPlatform"
+                        ]
+                    }
+                }
+            }
+            </script>
         </xpath>
     </template>
 </odoo>
