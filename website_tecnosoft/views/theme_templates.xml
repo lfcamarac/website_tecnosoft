@@ -133,6 +133,7 @@
                 </nav>
             </header>
         </xpath>
+    </template>
 
     <!-- Custom Footer -->
     <template id="tecnosoft_footer" inherit_id="website.footer_custom" name="Tecnosoft Footer">
