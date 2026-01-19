@@ -220,6 +220,16 @@
             <attribute name="class" add="border-bottom-0 position-relative" separator=" "/>
         </xpath>
         <xpath expr="//div[hasclass('oe_product_image')]" position="inside">
+            <!-- Labels Overlay -->
+            <div class="tecnosoft-labels position-absolute top-0 start-0 w-100 p-2 d-flex flex-column align-items-start gap-1" style="pointer-events: none;">
+                <t t-foreach="product.label_ids" t-as="label">
+                    <span t-attf-class="badge rounded-pill fw-bold shadow-sm"
+                          t-attf-style="background-color: {{label.bg_color}}; color: {{label.text_color}}; font-size: 0.7rem;">
+                        <t t-esc="label.name"/>
+                    </span>
+                </t>
+            </div>
+            
             <!-- Quick View Overlay Button -->
             <button type="button" class="btn btn-light rounded-circle shadow o_quick_view position-absolute top-50 start-50 translate-middle opacity-0 tecnosoft-quick-view-btn" 
                     t-att-data-product-id="product.id"
@@ -242,6 +252,11 @@
     <template id="tecnosoft_product" inherit_id="website_sale.product" name="Tecnosoft Product Page">
         <xpath expr="//div[@id='product_details']" position="attributes">
             <attribute name="class" add="ps-lg-5" separator=" "/>
+        </xpath>
+        <xpath expr="//h1[@t-field='product.name']" position="before">
+            <div t-if="product.brand_id" class="mb-2">
+                <span class="badge bg-light text-primary border" t-field="product.brand_id.name"/>
+            </div>
         </xpath>
         <xpath expr="//h1[@t-field='product.name']" position="attributes">
             <attribute name="class" add="fw-bold text-dark mb-3" separator=" "/>

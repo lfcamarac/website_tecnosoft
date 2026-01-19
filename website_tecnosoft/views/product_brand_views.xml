@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Brand Form View -->
+    <record id="tecnosoft_product_brand_view_form" model="ir.ui.view">
+        <field name="name">tecnosoft.product.brand.form</field>
+        <field name="model">tecnosoft.product.brand</field>
+        <field name="arch" type="xml">
+            <form string="Brand">
+                <sheet>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name"/></h1>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Brand List View -->
+    <record id="tecnosoft_product_brand_view_tree" model="ir.ui.view">
+        <field name="name">tecnosoft.product.brand.tree</field>
+        <field name="model">tecnosoft.product.brand</field>
+        <field name="arch" type="xml">
+            <list string="Brands">
+                <field name="name"/>
+                <field name="product_count"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Brand Action -->
+    <record id="tecnosoft_product_brand_action" model="ir.actions.act_window">
+        <field name="name">Product Brands</field>
+        <field name="res_model">tecnosoft.product.brand</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Add Brand Menu to Website > eCommerce -->
+    <menuitem id="menu_product_brand" 
+              name="Brands" 
+              parent="website_sale.menu_catalog" 
+              action="tecnosoft_product_brand_action" 
+              sequence="20"/>
+
+    <!-- Add Brand field to Product Template Form -->
+    <record id="product_template_form_view_brand" model="ir.ui.view">
+        <field name="name">product.template.form.brand</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <field name="public_categ_ids" position="after">
+                <field name="brand_id"/>
+            </field>
+        </field>
+    </record>
+</odoo>

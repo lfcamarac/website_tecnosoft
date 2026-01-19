@@ -19,6 +19,8 @@
         'views/marketing_automation.xml',
         'views/performance_seo.xml',
         'views/quick_view.xml',
+        'views/product_brand_views.xml',
+        'views/product_label_views.xml',
     ],
     'demo': [
         'data/demo_data.xml',

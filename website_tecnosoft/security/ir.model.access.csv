@@ -3,3 +3,9 @@ access_website_price_tracker_public,website.price.tracker.public,model_website_p
 access_website_price_tracker_portal,website.price.tracker.portal,model_website_price_tracker,base.group_portal,1,1,1,1
 access_website_price_tracker_user,website.price.tracker.user,model_website_price_tracker,base.group_user,1,1,1,1
 access_website_price_tracker_admin,website.price.tracker.admin,model_website_price_tracker,base.group_system,1,1,1,1
+access_tecnosoft_product_brand_admin,tecnosoft.product.brand.admin,model_tecnosoft_product_brand,base.group_system,1,1,1,1
+access_tecnosoft_product_brand_user,tecnosoft.product.brand.user,model_tecnosoft_product_brand,base.group_user,1,0,0,0
+access_tecnosoft_product_brand_public,tecnosoft.product.brand.public,model_tecnosoft_product_brand,base.group_public,1,0,0,0
+access_tecnosoft_product_label_admin,tecnosoft.product.label.admin,model_tecnosoft_product_label,base.group_system,1,1,1,1
+access_tecnosoft_product_label_user,tecnosoft.product.label.user,model_tecnosoft_product_label,base.group_user,1,0,0,0
+access_tecnosoft_product_label_public,tecnosoft.product.label.public,model_tecnosoft_product_label,base.group_public,1,0,0,0
