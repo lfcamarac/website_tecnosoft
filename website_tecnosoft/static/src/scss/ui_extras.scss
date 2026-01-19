@@ -1,0 +1,44 @@
+/* Tecnosoft UI Extras */
+
+/* Sticky CTA */
+.tecnosoft-sticky-cta {
+    z-index: 1040;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transform: translateY(100%);
+}
+
+.tecnosoft-sticky-cta.show-cta {
+    transform: translateY(0);
+}
+
+/* Social Proof */
+.tecnosoft-social-proof {
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: translateX(-120%);
+}
+
+.tecnosoft-social-proof.show-proof {
+    transform: translateX(0);
+}
+
+.bg-primary-light {
+    background-color: rgba(var(--primary-rgb), 0.1);
+}
+
+/* GDPR Banner */
+#tecnosoft_gdpr {
+    border-top: 1px solid #eee;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+/* General Animations */
+@keyframes animate-pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.animate-pulse {
+    animation: animate-pulse 2s infinite;
+}

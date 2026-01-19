@@ -5,6 +5,56 @@
         <xpath expr="//header" position="attributes">
             <attribute name="class" add="tecnosoft-header shadow-sm sticky-top" separator=" "/>
         </xpath>
+        <xpath expr="//div[@id='wrapwrap']" position="inside">
+            <div class="zenith-side-cart-overlay"></div>
+            <div class="zenith-side-cart">
+                <div class="cart-header">
+                    <h4>Mi Carrito</h4>
+                    <span class="close-cart fa fa-times"></span>
+                </div>
+                <div class="cart-content">
+                    <!-- Items injected by JS -->
+                    <div class="text-center py-5 empty-cart-msg">
+                        <i class="fa fa-shopping-basket fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">Tu carrito está vacío</p>
+                    </div>
+                </div>
+                <div class="cart-footer">
+                    <div class="subtotal">
+                        <span>Total</span>
+                        <span class="total-amount">$ 0.00</span>
+                    </div>
+                    <div class="actions">
+                        <a href="/shop/cart" class="btn btn-outline-primary py-3 rounded-pill fw-bold">Ver Carrito</a>
+                        <a href="/shop/checkout" class="btn btn-primary py-3 rounded-pill fw-bold">Pagar Ahora</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Bottom Bar -->
+            <nav class="zenith-mobile-bottom-bar d-flex d-md-none">
+                <a href="/" class="nav-item active">
+                    <i class="fa fa-home"></i>
+                    <span>Inicio</span>
+                </a>
+                <a href="/shop" class="nav-item">
+                    <i class="fa fa-search"></i>
+                    <span>Explorar</span>
+                </a>
+                <a href="/shop/cart" class="nav-item position-relative">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span>Carrito</span>
+                    <t t-set="website_sale_cart_quantity" t-value="request.website.sale_get_order().cart_quantity or 0"/>
+                    <span t-if="website_sale_cart_quantity" class="cart-badge badge rounded-pill bg-danger">
+                        <t t-esc="website_sale_cart_quantity"/>
+                    </span>
+                </a>
+                <a href="/my/home" class="nav-item">
+                    <i class="fa fa-user"></i>
+                    <span>Cuenta</span>
+                </a>
+            </nav>
+        </xpath>
     </template>
 
     <!-- Custom Header -->
@@ -30,6 +80,27 @@
                             </t>
                         </ul>
                         <div class="d-flex align-items-center">
+                            <!-- Multi-language & Multi-currency -->
+                            <div class="d-flex align-items-center me-2">
+                                <t t-call="portal.language_selector">
+                                    <t t-set="_btn_class" t-value="'nav-link text-dark py-0 px-2'"/>
+                                    <t t-set="_dropdown_menu_class" t-value="'dropdown-menu-end shadow border-0 mt-2'"/>
+                                </t>
+                                <t t-if="website and website.pricelist_id and len(website.get_pricelist_available()) &gt; 1">
+                                    <div class="dropdown mx-1">
+                                        <a href="#" class="nav-link dropdown-toggle text-dark py-0" data-bs-toggle="dropdown">
+                                            <t t-esc="website.get_current_pricelist().currency_id.name"/>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
+                                            <t t-foreach="website.get_pricelist_available()" t-as="pl">
+                                                <a t-att-href="'/shop/change_pricelist/%s' % pl.id" class="dropdown-item">
+                                                    <t t-esc="pl.currency_id.name"/>
+                                                </a>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
                             <!-- Search Icon (B2B/B2C) -->
                             <a href="/shop" class="nav-link text-dark mx-2">
                                 <i class="fa fa-search"></i>

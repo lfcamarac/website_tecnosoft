@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- We don't want to overwrite the homepage if it has content, 
+         but we provide a 'Zenith Showcase' page -->
+    <record id="zenith_showcase_page" model="website.page">
+        <field name="name">Zenith Showcase</field>
+        <field name="type">qweb</field>
+        <field name="url">/zenith-showcase</field>
+        <field name="website_published">True</field>
+        <field name="key">website_tecnosoft.zenith_showcase</field>
+        <field name="arch" type="xml">
+            <t name="Zenith Showcase" t-name="website_tecnosoft.zenith_showcase">
+                <t t-call="website.layout">
+                    <div id="wrap" class="oe_structure">
+                        <section class="s_tecnosoft_hero bg-primary pt128 pb128">
+                            <div class="container text-center text-white">
+                                <h1 class="display-1 fw-bold">ZENITH</h1>
+                                <p class="lead">The future of eCommerce is here.</p>
+                                <div class="mt-4">
+                                    <a href="/shop" class="btn btn-light btn-lg px-5 rounded-pill fw-bold">Explore Store</a>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="s_tecnosoft_features pt80 pb80">
+                            <div class="container text-center">
+                                <h2 class="mb-5 fw-bold">Why Zenith?</h2>
+                                <div class="row g-4">
+                                    <div class="col-md-4">
+                                        <div class="feature-card p-5 bg-white shadow-sm rounded-4">
+                                            <i class="fa fa-bolt fa-3x text-primary mb-3"></i>
+                                            <h4 class="fw-bold">Fast</h4>
+                                            <p class="text-muted">Optimized for speed and SEO.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="feature-card p-5 bg-white shadow-sm rounded-4">
+                                            <i class="fa fa-paint-brush fa-3x text-primary mb-3"></i>
+                                            <h4 class="fw-bold">Beautiful</h4>
+                                            <p class="text-muted">Stunning out-of-the-box design.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="feature-card p-5 bg-white shadow-sm rounded-4">
+                                            <i class="fa fa-code fa-3x text-primary mb-3"></i>
+                                            <h4 class="fw-bold">Reliable</h4>
+                                            <p class="text-muted">Clean code following Odoo 18 standards.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </t>
+            </t>
+        </field>
+    </record>
+</odoo>

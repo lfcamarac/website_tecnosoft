@@ -1,23 +1,51 @@
 # -*- coding: utf-8 -*-
 from odoo import http
 from odoo.http import request
+from odoo.osv import expression
 
 class TecnosoftController(http.Controller):
     @http.route('/website_tecnosoft/get_dynamic_products', type='json', auth='public', website=True)
     def get_dynamic_products(self, limit=4, **kwargs):
-        """ Fetch top products for the dynamic snippets. """
-        products = request.env['product.template'].sudo().search([
-            ('website_published', '=', True),
-            ('sale_ok', '=', True)
-        ], limit=limit, order='website_sequence asc')
+        """ Deprecated: Use get_products_data instead. """
+        return self.get_products_data(limit=limit).get('products', [])
+
+    @http.route('/website_tecnosoft/get_products_data', type='json', auth='public', website=True)
+    def get_products_data(self, domain=None, limit=4, order='website_sequence asc', options={}, **kwargs):
+        """ Fetch products based on flexible criteria. """
+        domain = domain or []
+        base_domain = [('website_published', '=', True), ('sale_ok', '=', True)]
+        final_domain = expression.AND([base_domain, domain])
         
-        return [{
-            'id': p.id,
-            'name': p.name,
-            'price': p.list_price,
-            'image_url': f'/web/image/product.template/{p.id}/image_512',
-            'url': p.website_url,
-        } for p in products]
+        products = request.env['product.template'].sudo().search(final_domain, limit=limit, order=order)
+        
+        pricelist = request.website.get_current_pricelist()
+        currency = pricelist.currency_id
+        
+        product_list = []
+        for p in products:
+            # Get price from pricelist
+            price = pricelist._get_product_price(p, 1.0)
+            price_formatted = currency.format(price)
+            
+            product_list.append({
+                'id': p.id,
+                'name': p.name,
+                'price': price,
+                'price_formatted': price_formatted,
+                'image_url': f'/web/image/product.template/{p.id}/image_512',
+                'url': p.website_url,
+                'description_sale': p.description_sale,
+            })
+
+        return {'products': product_list}
+
+    @http.route('/website_tecnosoft/get_categories_info', type='json', auth='public', website=True)
+    def get_categories_info(self, category_ids, **kwargs):
+        """ Fetch names and info for a list of category IDs. """
+        if not category_ids:
+            return []
+        categories = request.env['product.public.category'].sudo().browse(category_ids).exists()
+        return [{'id': c.id, 'name': c.name} for c in categories]
 
     @http.route('/website_tecnosoft/subscribe_price_tracker', type='json', auth='user', website=True)
     def subscribe_price_tracker(self, product_id, **kwargs):

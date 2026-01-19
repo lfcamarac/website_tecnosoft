@@ -1,0 +1,65 @@
+/* Marketing Snippets Styles */
+
+// Brand Slider
+.s_tecnosoft_brands {
+    .brand-item {
+        transition: all 0.3s ease;
+        filter: grayscale(1);
+        opacity: 0.6;
+
+        &:hover {
+            filter: grayscale(0);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+    }
+
+    // Auto-scroll animation if JS is not used for this specific slider
+    .tecnosoft-slider-wrapper {
+        &.auto-animate {
+            animation: brand-scroll 30s linear infinite;
+        }
+    }
+}
+
+@keyframes brand-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+// Features Grid
+.s_tecnosoft_features {
+    .feature-card {
+        border: 1px solid rgba(0,0,0,0.05);
+        
+        .icon-wrapper {
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            background: rgba(var(--primary-rgb), 0.1);
+            border-radius: 50%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        &:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08) !important;
+            border-color: var(--primary);
+
+            .icon-wrapper {
+                background: var(--primary);
+                color: white !important;
+                transform: rotateY(360deg);
+            }
+        }
+
+        h5 {
+            margin-top: 1rem;
+            color: #333;
+        }
+    }
+}

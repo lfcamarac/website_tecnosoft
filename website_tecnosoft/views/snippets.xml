@@ -3,22 +3,237 @@
     <!-- Snippet Options -->
     <template id="tecnosoft_snippet_options" inherit_id="website.snippet_options">
         <xpath expr="." position="inside">
-            <div data-js="dynamic_snippet" data-selector=".s_tecnosoft_dynamic">
-                <!-- Snippet options go here -->
+            <div data-js="tecnosoft_dynamic_options" data-selector=".s_tecnosoft_dynamic, .s_tecnosoft_tabs">
+                <we-row string="Configuración">
+                    <we-select string="Límite" data-attribute-name="limit" data-no-preview="true">
+                        <we-button data-select-data-attribute="4">4 Productos</we-button>
+                        <we-button data-select-data-attribute="8">8 Productos</we-button>
+                        <we-button data-select-data-attribute="12">12 Productos</we-button>
+                    </we-select>
+                    <we-select string="Modo" data-attribute-name="mode" data-no-preview="true">
+                        <we-button data-select-data-attribute="grid">Cuadrícula</we-button>
+                        <we-button data-select-data-attribute="slider">Carrusel</we-button>
+                    </we-select>
+                    <we-checkbox string="Reproducción Automática" data-attribute-name="autoplay" data-no-preview="true" t-if="mode == 'slider'"/>
+                    <we-checkbox string="Flechas" data-attribute-name="arrows" data-no-preview="true" t-if="mode == 'slider'"/>
+                </we-row>
+                <we-row string="Categorías (Tabs)" t-if="snippet_id == 's_tecnosoft_tabs'">
+                    <!-- Simple category selection via IDs for now, as we don't have a complex record picker -->
+                    <we-input string="IDs Categorías (coma)" data-attribute-name="tab_category_ids" data-no-preview="true" placeholder="e.g. 1, 5, 8"/>
+                </we-row>
+            </div>
+
+            <!-- Hotspot Options -->
+            <div data-js="tecnosoft_hotspot_options" data-selector=".tecnosoft_hotspot">
+                <we-row string="Posición">
+                    <we-range string="Horizontal (%)" data-attribute-name="pos_x" data-min="0" data-max="100" data-step="1"/>
+                    <we-range string="Vertical (%)" data-attribute-name="pos_y" data-min="0" data-max="100" data-step="1"/>
+                </we-row>
+                <we-row string="Producto">
+                    <we-input string="ID Producto" data-attribute-name="product_id" data-no-preview="true" placeholder="e.g. 10"/>
+                </we-row>
+            </div>
+
+            <!-- Global Style Engine -->
+            <div data-js="tecnosoft_style_options" data-selector="main">
+                <we-row string="Estilo Zenith">
+                    <we-select string="Tema" data-attribute-name="zenith_style" data-no-preview="true">
+                        <we-button data-select-data-attribute="">Moderno (Default)</we-button>
+                        <we-button data-select-data-attribute="zenith-style-minimalista">Minimalista</we-button>
+                        <we-button data-select-data-attribute="zenith-style-futurista">Futurista</we-button>
+                        <we-button data-select-data-attribute="zenith-style-epico">Épico</we-button>
+                        <we-button data-select-data-attribute="zenith-style-dinamico">Dinámico</we-button>
+                    </we-select>
+                </we-row>
+            </div>
+
+            <!-- Header Variants -->
+            <div data-js="tecnosoft_header_options" data-selector="header.tecnosoft-header">
+                <we-row string="Diseño Header">
+                    <we-select string="Variante" data-attribute-name="header_variant" data-no-preview="true">
+                        <we-button data-select-data-attribute="">Estándar</we-button>
+                        <we-button data-select-data-attribute="header-variant-centered">Maestro Centrado</we-button>
+                        <we-button data-select-data-attribute="header-variant-minimal">Minimalista Sticky</we-button>
+                        <we-button data-select-data-attribute="header-variant-glass">Cristal Flotante</we-button>
+                    </we-select>
+                </we-row>
+            </div>
+
+            <!-- Timeline Options -->
+            <div data-js="tecnosoft_timeline_options" data-selector="section.s_tecnosoft_timeline">
+                <we-row string="Contenido">
+                    <we-button data-add-item="true" data-no-preview="true" class="fa fa-plus"> Añadir Hito</we-button>
+                </we-row>
+            </div>
+
+            <!-- Pricing Table Options -->
+            <div data-js="tecnosoft_pricing_options" data-selector="section.s_tecnosoft_pricing">
+                <we-row string="Contenido">
+                    <we-button data-add-card="true" data-no-preview="true" class="fa fa-plus"> Añadir Plan</we-button>
+                </we-row>
+            </div>
+
+            <!-- Pricing Card Sub-options -->
+            <div data-js="tecnosoft_pricing_card_options" data-selector=".tecnosoft-pricing-card">
+                <we-row string="Plan">
+                    <we-checkbox string="Más Popular" data-toggle-popular="true" data-no-preview="true"/>
+                    <we-button data-remove-card="true" data-no-preview="true" class="fa fa-trash text-danger"> Borrar</we-button>
+                </we-row>
+            </div>
+
+            <!-- Timeline Item Sub-options -->
+            <div data-js="tecnosoft_timeline_item_options" data-selector=".tecnosoft-timeline-item">
+                <we-row string="Hito">
+                    <we-button data-remove-item="true" data-no-preview="true" class="fa fa-trash text-danger"> Borrar</we-button>
+                </we-row>
             </div>
         </xpath>
     </template>
 
     <!-- Snippet Template -->
     <template id="s_tecnosoft_dynamic" name="Tecnosoft Dynamic Products">
-        <section class="s_tecnosoft_dynamic pt-5 pb-5">
+        <section class="s_tecnosoft_dynamic pt-5 pb-5" data-snippet-id="s_tecnosoft_dynamic" data-ui-config='{"limit": 4, "mode": "grid"}'>
             <div class="container text-center">
                 <h2 class="fw-bold mb-4">Productos Destacados Tecnosoft</h2>
-                <div class="tecnosoft_dynamic_container row g-4" data-limit="4">
-                    <!-- OWL will render content here -->
+                <div class="tecnosoft_dynamic_container row g-4">
+                    <!-- OWL/JS will render content here -->
                     <div class="col-12">
                         <div class="spinner-border text-primary" role="status">
                             <span class="visually-hidden">Cargando...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_tecnosoft_tabs" name="Tecnosoft Category Tabs">
+        <section class="s_tecnosoft_tabs pt-5 pb-5" data-snippet-id="s_tecnosoft_tabs" data-ui-config='{"limit": 4, "mode": "grid", "tab_category_ids": ""}'>
+            <div class="container">
+                <div class="tecnosoft_tabs_header mb-4">
+                    <!-- JS will render tabs here -->
+                </div>
+                <div class="tecnosoft_dynamic_container row g-4">
+                    <!-- Products will be rendered here -->
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_tecnosoft_brands" name="Tecnosoft Brand Slider">
+        <section class="s_tecnosoft_brands pt-5 pb-5 bg-light overflow-hidden">
+            <div class="container">
+                <div class="tecnosoft-slider-container position-relative is-slider">
+                    <div class="tecnosoft-slider-wrapper d-flex align-items-center gap-5 flex-nowrap overflow-auto py-4" style="scroll-snap-type: x mandatory; scrollbar-width: none;">
+                        <div class="brand-item flex-shrink-0" style="scroll-snap-align: start; width: 150px;">
+                            <img src="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" class="img-fluid grayscale-hover" style="max-height: 60px; object-fit: contain;"/>
+                        </div>
+                        <div class="brand-item flex-shrink-0" style="scroll-snap-align: start; width: 150px;">
+                            <img src="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" class="img-fluid grayscale-hover" style="max-height: 60px; object-fit: contain;"/>
+                        </div>
+                        <div class="brand-item flex-shrink-0" style="scroll-snap-align: start; width: 150px;">
+                            <img src="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" class="img-fluid grayscale-hover" style="max-height: 60px; object-fit: contain;"/>
+                        </div>
+                        <div class="brand-item flex-shrink-0" style="scroll-snap-align: start; width: 150px;">
+                            <img src="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" class="img-fluid grayscale-hover" style="max-height: 60px; object-fit: contain;"/>
+                        </div>
+                        <div class="brand-item flex-shrink-0" style="scroll-snap-align: start; width: 150px;">
+                            <img src="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" class="img-fluid grayscale-hover" style="max-height: 60px; object-fit: contain;"/>
+                        </div>
+                        <div class="brand-item flex-shrink-0" style="scroll-snap-align: start; width: 150px;">
+                            <img src="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" class="img-fluid grayscale-hover" style="max-height: 60px; object-fit: contain;"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_tecnosoft_features" name="Tecnosoft Benefit Grid">
+        <section class="s_tecnosoft_features pt-5 pb-5">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-md-3">
+                        <div class="feature-card text-center p-4 h-100 bg-white shadow-sm rounded-4 transition-all">
+                            <div class="icon-wrapper mb-3 text-primary">
+                                <i class="fa fa-truck fa-3x"></i>
+                            </div>
+                            <h5 class="fw-bold">Envío Gratis</h5>
+                            <p class="text-muted small mb-0">En pedidos superiores a $100</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="feature-card text-center p-4 h-100 bg-white shadow-sm rounded-4 transition-all">
+                            <div class="icon-wrapper mb-3 text-primary">
+                                <i class="fa fa-shield fa-3x"></i>
+                            </div>
+                            <h5 class="fw-bold">Pago Seguro</h5>
+                            <p class="text-muted small mb-0">Encriptación SSL garantizada</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="feature-card text-center p-4 h-100 bg-white shadow-sm rounded-4 transition-all">
+                            <div class="icon-wrapper mb-3 text-primary">
+                                <i class="fa fa-refresh fa-3x"></i>
+                            </div>
+                            <h5 class="fw-bold">Devoluciones</h5>
+                            <p class="text-muted small mb-0">30 días para cambios</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="feature-card text-center p-4 h-100 bg-white shadow-sm rounded-4 transition-all">
+                            <div class="icon-wrapper mb-3 text-primary">
+                                <i class="fa fa-support fa-3x"></i>
+                            </div>
+                            <h5 class="fw-bold">Soporte 24/7</h5>
+                            <p class="text-muted small mb-0">Estamos para ayudarte</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_tecnosoft_timeline" name="Tecnosoft Timeline">
+        <section class="s_tecnosoft_timeline pt-5 pb-5" data-js="tecnosoft_timeline_options">
+            <div class="container">
+                <div class="timeline-wrapper position-relative">
+                    <div class="timeline-line position-absolute top-0 bottom-0 start-50 translate-middle-x bg-primary opacity-25" style="width: 4px;"></div>
+                    <div class="timeline-item tecnosoft-timeline-item row mb-5 align-items-center">
+                        <div class="col-md-5 text-end pe-md-5">
+                            <h4 class="fw-bold">2023</h4>
+                            <p class="text-muted">Lanzamiento oficial de Zenith</p>
+                        </div>
+                        <div class="col-md-2 text-center position-relative">
+                            <div class="timeline-dot bg-primary rounded-circle shadow mx-auto" style="width: 20px; height: 20px; z-index: 2;"></div>
+                        </div>
+                        <div class="col-md-5 ps-md-5">
+                            <!-- Empty side to keep line centered -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_tecnosoft_pricing" name="Tecnosoft Pricing Table">
+        <section class="s_tecnosoft_pricing pt-5 pb-5 bg-light" data-js="tecnosoft_pricing_options">
+            <div class="container">
+                <div class="row g-4 justify-content-center pricing-container">
+                    <div class="col-lg-4 col-md-6 tecnosoft-pricing-card">
+                        <div class="pricing-card p-5 bg-white rounded-4 shadow-sm text-center border-0 h-100 position-relative">
+                            <h6 class="text-uppercase text-muted fw-bold mb-3">Básico</h6>
+                            <div class="d-flex justify-content-center align-items-baseline mb-4">
+                                <span class="h2 fw-bold">$</span>
+                                <span class="display-4 fw-bold">29</span>
+                                <span class="text-muted">/mes</span>
+                            </div>
+                            <ul class="list-unstyled mb-5">
+                                <li class="mb-3"><i class="fa fa-check text-primary me-2"></i> 100 Productos</li>
+                                <li class="mb-3"><i class="fa fa-check text-primary me-2"></i> Soporte Básico</li>
+                                <li class="mb-3 text-muted"><i class="fa fa-times me-2"></i> Analíticas Avanzadas</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100 py-3 rounded-pill fw-bold">Empezar</a>
                         </div>
                     </div>
                 </div>
@@ -32,16 +247,20 @@
                 <div class="row align-items-center">
                     <div class="col-lg-7 text-white">
                         <h1 class="display-3 fw-bold mb-4">Elevate Your Business</h1>
-                        <p class="lead mb-5 opacity-75">Premium solutions designed for modern enterprises. Experience the difference with Tecnosoft.</p>
+                        <p class="lead mb-5 opacity-75">Premium solutions designed for modern enterprises. Experience the difference with Zenith.</p>
                         <div class="d-flex gap-3">
                             <a href="#" class="btn btn-light btn-lg px-5 py-3 fw-bold text-primary rounded-pill">Get Started</a>
                             <a href="#" class="btn btn-outline-light btn-lg px-5 py-3 fw-bold rounded-pill">Learn More</a>
                         </div>
                     </div>
-                     <div class="col-lg-5">
-                        <!-- Placeholder for Hero Image -->
-                        <div class="bg-white bg-opacity-10 rounded-4 p-5 text-center text-white backdrop-blur">
+                     <div class="col-lg-5 position-relative">
+                        <!-- Hero Image Container with Hotspots -->
+                        <div class="tecnosoft_hero_img_container position-relative bg-white bg-opacity-10 rounded-4 p-5 text-center text-white backdrop-blur overflow-hidden">
                             <i class="fa fa-rocket fa-5x"></i>
+                            <!-- Dynamic Hotspots will go here -->
+                             <div class="tecnosoft_hotspot position-absolute" style="top: 40%; left: 30%;" data-product-id="">
+                                <div class="hotspot-point"></div>
+                             </div>
                         </div>
                     </div>
                 </div>
@@ -57,7 +276,12 @@
     <template id="tecnosoft_snippets" inherit_id="website.snippets">
         <xpath expr="//snippets[@id='snippet_structure']" position="inside">
             <t t-snippet="website_tecnosoft.s_tecnosoft_hero" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png"/>
-            <t t-snippet="website_tecnosoft.s_tecnosoft_dynamic" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="dynamic"/>
+            <t t-snippet="website_tecnosoft.s_tecnosoft_dynamic" t-thumbnail="/website_tecnosoft/static/description/thumb_hero.png" group="dynamic"/>
+            <t t-snippet="website_tecnosoft.s_tecnosoft_tabs" t-thumbnail="/website_tecnosoft/static/description/thumb_tabs.png" group="dynamic"/>
+            <t t-snippet="website_tecnosoft.s_tecnosoft_brands" t-thumbnail="/website_tecnosoft/static/description/thumb_brands.png" group="dynamic"/>
+            <t t-snippet="website_tecnosoft.s_tecnosoft_features" t-thumbnail="/website_tecnosoft/static/description/thumb_features.png" group="dynamic"/>
+            <t t-snippet="website_tecnosoft.s_tecnosoft_timeline" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="dynamic"/>
+            <t t-snippet="website_tecnosoft.s_tecnosoft_pricing" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="dynamic"/>
         </xpath>
     </template>
 </odoo>
