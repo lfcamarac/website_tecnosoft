@@ -241,6 +241,115 @@
         </section>
     </template>
 
+    <template id="s_tecnosoft_mega_links" name="Mega Menu Links (4 Cols)">
+        <section class="s_tecnosoft_mega_links pt-3 pb-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <h6 class="fw-bold text-uppercase text-primary">Computers</h6>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="nav-link text-muted">Laptops</a></li>
+                            <li><a href="#" class="nav-link text-muted">Desktops</a></li>
+                            <li><a href="#" class="nav-link text-muted">Servers</a></li>
+                            <li><a href="#" class="nav-link text-muted">Accessories</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3">
+                        <h6 class="fw-bold text-uppercase text-primary">Tablets</h6>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="nav-link text-muted">iPad</a></li>
+                            <li><a href="#" class="nav-link text-muted">Android</a></li>
+                            <li><a href="#" class="nav-link text-muted">Windows</a></li>
+                            <li><a href="#" class="nav-link text-muted">Cases</a></li>
+                        </ul>
+                    </div>
+                     <div class="col-lg-3">
+                        <h6 class="fw-bold text-uppercase text-primary">Smartphones</h6>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="nav-link text-muted">iPhone</a></li>
+                            <li><a href="#" class="nav-link text-muted">Samsung</a></li>
+                            <li><a href="#" class="nav-link text-muted">Xiaomi</a></li>
+                            <li><a href="#" class="nav-link text-muted">Google Pixel</a></li>
+                        </ul>
+                    </div>
+                     <div class="col-lg-3">
+                        <h6 class="fw-bold text-uppercase text-primary">Components</h6>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="nav-link text-muted">Processors</a></li>
+                            <li><a href="#" class="nav-link text-muted">Graphics Cards</a></li>
+                            <li><a href="#" class="nav-link text-muted">Motherboards</a></li>
+                            <li><a href="#" class="nav-link text-muted">RAM</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_tecnosoft_mega_category" name="Mega Menu Categories">
+        <section class="s_tecnosoft_mega_category pt-3 pb-3">
+            <div class="container">
+                <div class="row g-3">
+                    <div class="col-lg-3">
+                        <a href="#" class="text-decoration-none">
+                            <div class="category-card p-3 text-center bg-white rounded shadow-sm h-100">
+                                <img src="/web/image/website.s_mega_menu_images_sub_menu_01" class="img-fluid mb-2 rounded" style="max-height: 80px;"/>
+                                <h6 class="category-name text-dark fw-bold mb-0">Computers</h6>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3">
+                        <a href="#" class="text-decoration-none">
+                            <div class="category-card p-3 text-center bg-white rounded shadow-sm h-100">
+                                <img src="/web/image/website.s_mega_menu_images_sub_menu_02" class="img-fluid mb-2 rounded" style="max-height: 80px;"/>
+                                <h6 class="category-name text-dark fw-bold mb-0">Smartphones</h6>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3">
+                        <a href="#" class="text-decoration-none">
+                            <div class="category-card p-3 text-center bg-white rounded shadow-sm h-100">
+                                <img src="/web/image/website.s_mega_menu_images_sub_menu_03" class="img-fluid mb-2 rounded" style="max-height: 80px;"/>
+                                <h6 class="category-name text-dark fw-bold mb-0">Accessories</h6>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3">
+                        <a href="#" class="text-decoration-none">
+                            <div class="category-card p-3 text-center bg-white rounded shadow-sm h-100">
+                                <img src="/web/image/website.s_mega_menu_images_sub_menu_04" class="img-fluid mb-2 rounded" style="max-height: 80px;"/>
+                                <h6 class="category-name text-dark fw-bold mb-0">Cameras</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_tecnosoft_mega_promo" name="Mega Menu Promo">
+        <section class="s_tecnosoft_mega_promo pt-3 pb-3">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <div class="promo-content h-100 w-100 rounded overflow-hidden position-relative">
+                             <img src="/web/image/website.s_parallax_default_image" class="img-fluid w-100 object-cover" style="height: 250px;"/>
+                             <div class="promo-overlay position-absolute bottom-0 start-0 w-100 p-4">
+                                 <h3 class="text-white fw-bold mb-1">New Collection</h3>
+                                 <p class="text-white-50 mb-0">Upgrade your setup today</p>
+                             </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <h4 class="fw-bold mb-3">Limited Offer</h4>
+                        <p class="text-muted">Get 20% off on all accessories this weekend only.</p>
+                        <a href="#" class="btn btn-primary rounded-pill px-4 fw-bold">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
     <template id="s_tecnosoft_hero" name="Modern Hero">
         <section class="s_tecnosoft_hero position-relative pt128 pb128 bg-primary">
              <div class="container position-relative z-index-1">
@@ -282,6 +391,11 @@
             <t t-snippet="website_tecnosoft.s_tecnosoft_features" t-thumbnail="/website_tecnosoft/static/description/thumb_features.png" group="dynamic"/>
             <t t-snippet="website_tecnosoft.s_tecnosoft_timeline" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="dynamic"/>
             <t t-snippet="website_tecnosoft.s_tecnosoft_pricing" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="dynamic"/>
+            
+            <!-- Mega Menu Blocks -->
+            <t t-snippet="website_tecnosoft.s_tecnosoft_mega_links" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="mega"/>
+            <t t-snippet="website_tecnosoft.s_tecnosoft_mega_category" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="mega"/>
+            <t t-snippet="website_tecnosoft.s_tecnosoft_mega_promo" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="mega"/>
         </xpath>
     </template>
 </odoo>

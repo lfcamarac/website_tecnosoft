@@ -35,6 +35,7 @@
             'website_tecnosoft/static/src/scss/custom_headers.scss',
             'website_tecnosoft/static/src/scss/special_blocks.scss',
             'website_tecnosoft/static/src/scss/styles_engine.scss',
+            'website_tecnosoft/static/src/scss/mega_menu.scss',
             'website_tecnosoft/static/src/scss/side_cart.scss',
             'website_tecnosoft/static/src/scss/product_sticky.scss',
             'website_tecnosoft/static/src/scss/animations.scss',
