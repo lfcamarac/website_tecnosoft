@@ -17,10 +17,7 @@
                             <field name="text_color" widget="color"/>
                         </group>
                     </group>
-                    <div class="mt-4 p-4 border rounded text-center" 
-                         t-attf-style="background-color: {{bg_color}}; color: {{text_color}}; width: 100px; margin: 0 auto;">
-                        <field name="name" readonly="1"/>
-                    </div>
+                    <field name="preview_html" nolabel="1"/>
                 </sheet>
             </form>
         </field>

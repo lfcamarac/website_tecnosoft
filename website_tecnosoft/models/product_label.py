@@ -12,6 +12,16 @@ class ProductLabel(models.Model):
         ('top-left', 'Top Left'),
         ('top-right', 'Top Right'),
     ], string='Position', default='top-left')
+    preview_html = fields.Html('Preview', compute='_compute_preview_html')
+
+    def _compute_preview_html(self):
+        for record in self:
+            record.preview_html = f"""
+                <div class="mt-4 p-4 border rounded text-center" 
+                     style="background-color: {record.bg_color or '#e74c3c'}; color: {record.text_color or '#ffffff'}; width: 100px; margin: 0 auto;">
+                    {record.name or ''}
+                </div>
+            """
 
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
