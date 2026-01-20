@@ -24,13 +24,30 @@ publicWidget.registry.ZenithSideCart = publicWidget.Widget.extend({
 
     _onAddToCart(ev) {
         // Wait for Odoo's default action to complete (Add to Cart)
-        // Then refresh and open
+        // Then show Upsell Modal
         setTimeout(() => {
-            this._refreshCart().then(() => {
-                this.$panel.addClass('open');
-                this.$overlay.addClass('open');
-            });
+            this._showUpsellModal();
         }, 800);
+    },
+
+    async _showUpsellModal() {
+        // Fetch related products (e.g. top 4 products for now)
+        const data = await this.rpc('/website_tecnosoft/get_products_data', { limit: 4 });
+        
+        const { renderToElement } = await import("@web/core/utils/render");
+        const element = renderToElement('website_tecnosoft.CartUpsellModal', {
+            related_products: data.products
+        });
+
+        // Remove existing modal if any
+        $('#tecnosoft_cart_upsell').remove();
+        $('body').append(element);
+        
+        const modal = new bootstrap.Modal(document.getElementById('tecnosoft_cart_upsell'));
+        modal.show();
+        
+        // Also refresh the side cart in background
+        this._refreshCart();
     },
 
     async _refreshCart() {

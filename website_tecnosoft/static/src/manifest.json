@@ -1,0 +1,21 @@
+{
+  "name": "Tecnosoft Zenith",
+  "short_name": "Zenith",
+  "start_url": "/shop",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#007bff",
+  "description": "Tecnosoft eCommerce Zenith - The Ultimate High-Performance Theme",
+  "icons": [
+    {
+      "src": "/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/website_tecnosoft/static/description/tecnosoft_screenshot.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

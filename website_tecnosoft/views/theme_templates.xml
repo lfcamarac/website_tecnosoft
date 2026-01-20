@@ -5,6 +5,10 @@
         <xpath expr="//header" position="attributes">
             <attribute name="class" add="tecnosoft-header shadow-sm sticky-top" separator=" "/>
         </xpath>
+        <xpath expr="//head" position="inside">
+            <link rel="manifest" href="/website_tecnosoft/static/src/manifest.json"/>
+            <meta name="theme-color" content="#007bff"/>
+        </xpath>
         <xpath expr="//div[@id='wrapwrap']" position="inside">
             <div class="zenith-side-cart-overlay"></div>
             <div class="zenith-side-cart">
@@ -102,8 +106,20 @@
                                         </div>
                                     </t>
                                 </div>
-                                <!-- Search Icon (B2B/B2C) -->
-                                <a href="/shop" class="nav-link text-dark mx-2">
+                                <!-- AJAX Search -->
+                                <div class="tecnosoft-ajax-search mx-2 d-none d-lg-block position-relative" style="width: 250px;">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" class="form-control rounded-pill border-primary-light ps-3" placeholder="Buscar..." id="tecnosoft_search_input" autocomplete="off"/>
+                                        <div class="input-group-text bg-transparent border-0 position-absolute end-0 top-50 translate-middle-y me-2" style="z-index: 5;">
+                                            <i class="fa fa-search text-muted"></i>
+                                        </div>
+                                    </div>
+                                    <div id="tecnosoft_search_results" class="dropdown-menu shadow-lg border-0 mt-2 p-0 w-100 overflow-hidden" style="display: none; max-height: 400px; overflow-y: auto;">
+                                        <!-- Results injected via JS -->
+                                    </div>
+                                </div>
+                                <!-- Mobile Search Icon -->
+                                <a href="/shop" class="nav-link text-dark mx-2 d-lg-none">
                                     <i class="fa fa-search"></i>
                                 </a>
                                 <!-- Cart -->
@@ -205,8 +221,23 @@
 
     <!-- Shop Page Customization -->
     <template id="tecnosoft_products" inherit_id="website_sale.products" name="Tecnosoft Products">
+        <!-- Mobile Filter Button -->
+        <xpath expr="//div[@id='products_grid_before']" position="before">
+            <div class="d-lg-none mb-3">
+                <button type="button" class="btn btn-primary-light w-100 fw-bold tecnosoft-mobile-filter-toggle">
+                    <i class="fa fa-filter me-2"></i> Filtros y Categorías
+                </button>
+            </div>
+        </xpath>
         <xpath expr="//div[@id='products_grid']" position="attributes">
             <attribute name="class" add="tecnosoft-products-grid" separator=" "/>
+        </xpath>
+        <!-- Mobile Sidebar Wrapper -->
+        <xpath expr="//div[@id='products_grid_before']" position="attributes">
+            <attribute name="class" add="tecnosoft-shop-sidebar" separator=" "/>
+        </xpath>
+        <xpath expr="//div[@id='products_grid_before']" position="after">
+            <div class="tecnosoft-shop-sidebar-overlay d-lg-none"></div>
         </xpath>
     </template>
 
@@ -263,6 +294,20 @@
         <xpath expr="//div[@id='product_details']" position="attributes">
             <attribute name="class" add="ps-lg-5" separator=" "/>
         </xpath>
+        <!-- Size Guide Button -->
+        <xpath expr="//div[@id='product_details']//form" position="before">
+            <div class="d-flex gap-2 mb-3">
+                <button type="button" class="btn btn-link text-primary p-0 small fw-bold text-decoration-none" data-bs-toggle="modal" data-bs-target="#tecnosoft_size_guide">
+                    <i class="fa fa-ruler-combined me-1"></i> Guía de Tallas
+                </button>
+                <t t-if="product.video_url">
+                    <span class="text-muted opacity-25">|</span>
+                    <button type="button" class="btn btn-link text-danger p-0 small fw-bold text-decoration-none" data-bs-toggle="modal" data-bs-target="#tecnosoft_product_video">
+                        <i class="fa fa-play-circle me-1"></i> Ver Video
+                    </button>
+                </t>
+            </div>
+        </xpath>
         <xpath expr="//h1[@t-field='product.name']" position="before">
             <div t-if="product.brand_id" class="mb-2">
                 <span class="badge bg-light text-primary border" t-field="product.brand_id.name"/>
@@ -272,6 +317,55 @@
             <attribute name="class" add="fw-bold text-dark mb-3" separator=" "/>
         </xpath>
         <xpath expr="//div[@id='wrap']" position="inside">
+            <!-- Size Guide Modal -->
+            <div class="modal fade" id="tecnosoft_size_guide" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content border-0 shadow-lg rounded-4">
+                        <div class="modal-header border-0 pb-0">
+                            <h5 class="fw-bold mb-0">Guía de Tallas</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body p-4">
+                            <div class="table-responsive">
+                                <table class="table table-bordered text-center align-middle mb-0">
+                                    <thead class="bg-light">
+                                        <tr>
+                                            <th>Talla</th>
+                                            <th>Pecho (cm)</th>
+                                            <th>Cintura (cm)</th>
+                                            <th>Cadera (cm)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>S</td><td>86-91</td><td>71-76</td><td>86-91</td></tr>
+                                        <tr><td>M</td><td>97-102</td><td>81-86</td><td>97-102</td></tr>
+                                        <tr><td>L</td><td>107-112</td><td>91-97</td><td>107-112</td></tr>
+                                        <tr><td>XL</td><td>117-122</td><td>102-107</td><td>117-122</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p class="small text-muted mt-3 mb-0">* Estas medidas son orientativas. Si tienes dudas, contáctanos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Video Modal -->
+            <div t-if="product.video_url" class="modal fade" id="tecnosoft_product_video" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                    <div class="modal-content bg-transparent border-0">
+                        <div class="modal-header border-0 p-0 mb-2">
+                             <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body p-0">
+                            <div class="ratio ratio-16x9 shadow-lg rounded overflow-hidden">
+                                <iframe t-att-src="product.video_url" allowfullscreen="true"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div id="tecnosoft_sticky_cart" class="d-none d-md-flex align-items-center justify-content-between fixed-bottom bg-white shadow-lg p-3 border-top z-index-1000 transform-translate-y-100 transition-all">
                 <div class="d-flex align-items-center gap-3">
                     <img t-if="product.image_128" t-att-src="'/web/image/product.template/%s/image_128' % product.id" class="rounded shadow-sm" style="width: 50px; height: 50px; object-fit: cover;"/>

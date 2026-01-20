@@ -10,10 +10,14 @@ class TecnosoftController(http.Controller):
         return self.get_products_data(limit=limit).get('products', [])
 
     @http.route('/website_tecnosoft/get_products_data', type='json', auth='public', website=True)
-    def get_products_data(self, domain=None, limit=4, order='website_sequence asc', options={}, **kwargs):
+    def get_products_data(self, domain=None, limit=4, order='website_sequence asc', options={}, search=None, **kwargs):
         """ Fetch products based on flexible criteria. """
         domain = domain or []
         base_domain = [('website_published', '=', True), ('sale_ok', '=', True)]
+        
+        if search:
+            domain = expression.AND([domain, [('name', 'ilike', search)]])
+        
         final_domain = expression.AND([base_domain, domain])
         
         products = request.env['product.template'].sudo().search(final_domain, limit=limit, order=order)

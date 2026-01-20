@@ -59,3 +59,45 @@
         }
     }
 }
+
+// Vertical Mega Menu
+.s_tecnosoft_vertical_menu {
+    border-radius: 0.5rem;
+    overflow: visible; // To allow mega-content visibility
+    
+    .vertical-menu-header {
+        border-radius: 0.5rem 0.5rem 0 0;
+    }
+    
+    .vertical-nav-list {
+        .nav-item {
+            position: relative;
+            
+            .nav-link {
+                transition: background-color 0.2s ease, color 0.2s ease;
+                font-weight: 500;
+                
+                &:hover {
+                    background-color: rgba(var(--primary-rgb), 0.05);
+                    color: var(--o-color-primary) !important;
+                }
+            }
+            
+            .vertical-mega-content {
+                top: 0;
+                left: 100%;
+                visibility: hidden;
+                opacity: 0;
+                transform: translateX(10px);
+                transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+                z-index: 1000;
+            }
+            
+            &:hover .vertical-mega-content {
+                visibility: visible;
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    }
+}

@@ -55,9 +55,14 @@
             'website_tecnosoft/static/src/js/price_tracker.js',
             'website_tecnosoft/static/src/js/quick_view.js',
             'website_tecnosoft/static/src/js/marketing_snippets.js',
+            'website_tecnosoft/static/src/js/ajax_search.js',
+            'website_tecnosoft/static/src/js/ajax_filters.js',
+            'website_tecnosoft/static/src/js/pwa_init.js',
         ],
         'web.assets_qweb': [
             'website_tecnosoft/static/src/xml/dynamic_snippets.xml',
+            'website_tecnosoft/static/src/xml/ajax_search.xml',
+            'website_tecnosoft/static/src/xml/cart_upsell.xml',
         ],
     },
     'images': [
