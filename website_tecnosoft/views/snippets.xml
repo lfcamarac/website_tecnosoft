@@ -553,8 +553,6 @@
             <t t-snippet="website_tecnosoft.s_tecnosoft_vertical_menu" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="mega"/>
             
             <!-- Marketing Blocks -->
-            <t t-snippet="website_tecnosoft.s_tecnosoft_category_tabs" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="dynamic"/>
-            <t t-snippet="website_tecnosoft.s_tecnosoft_brands_slider" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="dynamic"/>
             <t t-snippet="website_tecnosoft.s_tecnosoft_countdown" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="dynamic"/>
             <t t-snippet="website_tecnosoft.s_tecnosoft_shop_offer" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="dynamic"/>
         </xpath>
