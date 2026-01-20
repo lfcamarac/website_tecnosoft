@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- Snippet Options -->
+    <template id="tecnosoft_configurator_options" inherit_id="website.snippet_options">
+        <xpath expr="." position="inside">
+            <div data-selector=".s_tecnosoft_configurator" data-js="TecnosoftConfiguratorOptions">
+                <we-select string="Estilo Global" data-no-preview="true">
+                    <we-button data-set-style="moderno">Moderno</we-button>
+                    <we-button data-set-style="minimalista">Minimalista</we-button>
+                    <we-button data-set-style="futurista">Futurista</we-button>
+                    <we-button data-set-style="epico">Épico</we-button>
+                    <we-button data-set-style="dinamico">Dinámico</we-button>
+                </we-select>
+                <we-colorpicker string="Color Primario" data-select-label="Color Primario" data-set-primary-color=""/>
+            </div>
+        </xpath>
+    </template>
+
     <template id="tecnosoft_snippet_options" inherit_id="website.snippet_options">
         <xpath expr="." position="inside">
             <div data-js="tecnosoft_dynamic_options" data-selector=".s_tecnosoft_dynamic, .s_tecnosoft_tabs">
@@ -475,6 +490,20 @@
         </section>
     </template>
 
+    <template id="s_tecnosoft_configurator" name="Zenith Theme Configurator">
+        <section class="s_tecnosoft_configurator py-2 bg-light border-bottom d-none-public" data-zenith-style="moderno">
+            <div class="container py-3">
+                <div class="alert alert-info border-0 shadow-sm mb-0 d-flex align-items-center">
+                    <i class="fa fa-magic fa-2x me-3 opacity-50"></i>
+                    <div>
+                        <h6 class="fw-bold mb-1">Zenith Theme Configurator</h6>
+                        <p class="small mb-0 opacity-75">Este bloque solo es visible en modo edición. Úsalo para cambiar el estilo global del sitio.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
     <template id="s_tecnosoft_hero" name="Modern Hero">
         <section class="s_tecnosoft_hero position-relative pt128 pb128 bg-primary">
              <div class="container position-relative z-index-1">
@@ -524,6 +553,8 @@
             <t t-snippet="website_tecnosoft.s_tecnosoft_vertical_menu" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="mega"/>
             
             <!-- Marketing Blocks -->
+            <t t-snippet="website_tecnosoft.s_tecnosoft_category_tabs" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="dynamic"/>
+            <t t-snippet="website_tecnosoft.s_tecnosoft_brands_slider" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="dynamic"/>
             <t t-snippet="website_tecnosoft.s_tecnosoft_countdown" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="dynamic"/>
             <t t-snippet="website_tecnosoft.s_tecnosoft_shop_offer" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="dynamic"/>
         </xpath>

@@ -175,18 +175,48 @@ publicWidget.registry.TecnosoftDynamicSnippet = publicWidget.Widget.extend({
 
     /**
      * @private
-     * Syncs the global zenith style class to the body
      */
     _syncZenithStyle() {
-        const bodyValue = document.querySelector('main')?.dataset.zenithStyle;
-        if (bodyValue) {
-            document.body.classList.forEach(className => {
-                if (className.startsWith('zenith-style-')) {
-                    document.body.classList.remove(className);
-                }
-            });
-            document.body.classList.add(bodyValue);
+        // Find if a configurator snippet exists
+        const $configurator = $('.s_tecnosoft_configurator');
+        if ($configurator.length) {
+            const style = $configurator.data('zenithStyle') || 'moderno';
+            const primaryColor = $configurator.data('zenithPrimaryColor');
+            
+            this._applyZenithStyle(style);
+            if (primaryColor) {
+                this._applyZenithColor(primaryColor);
+            }
         }
+    },
+
+    /**
+     * @private
+     */
+    _applyZenithStyle(style) {
+        const bodyClasses = document.body.className.split(' ').filter(c => !c.startsWith('zenith-style-'));
+        document.body.className = bodyClasses.join(' ') + ' zenith-style-' + style;
+    },
+
+    /**
+     * @private
+     */
+    _applyZenithColor(color) {
+        document.documentElement.style.setProperty('--zenith-primary', color);
+    },
+
+    /**
+     * @private
+     */
+    _onZenithStyleChanged(ev, style) {
+        this._applyZenithStyle(style);
+    },
+
+    /**
+     * @private
+     */
+    _onZenithColorChanged(ev, color) {
+        this._applyZenithColor(color);
     },
 });
 

@@ -95,6 +95,96 @@
     transition: opacity 0.3s ease;
 }
 
+/* Brands Directory */
+.ecom-brands-directory {
+    .brands-alphabet-nav {
+        background: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 50px;
+        box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    .hover-translate-y {
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+            border-color: var(--o-color-primary) !important;
+        }
+    }
+    
+    .scroll-margin-top {
+        scroll-margin-top: 100px;
+    }
+    
+    .brand-logo-wrapper {
+        background: white;
+        border-radius: 12px;
+        padding: 10px;
+    }
+}
+
+/* Brands Slider Animation */
+.s_tecnosoft_brands_slider {
+    .tecnosoft-brand-logos {
+        width: max-content;
+        animation: slide-left 20s linear infinite;
+        
+        &:hover {
+            animation-play-state: paused;
+        }
+        
+        .grayscale {
+            filter: grayscale(100%);
+            opacity: 0.6;
+            &.hover-color:hover {
+                filter: grayscale(0%);
+                opacity: 1;
+            }
+        }
+    }
+}
+
+/* Product Comparison Page */
+.tecnosoft-compare-page {
+    .table-compare {
+        border-collapse: separate;
+        border-spacing: 0;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid #eee;
+        
+        thead th {
+            background: #f8f9fa;
+            border-bottom: 2px solid var(--o-color-primary) !important;
+            padding: 1.5rem 1rem;
+            position: sticky;
+            top: 70px; // Adjust for header
+            z-index: 10;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: rgba(var(--primary-rgb), 0.02);
+        }
+        
+        tbody tr:hover {
+            background-color: rgba(var(--primary-rgb), 0.05);
+        }
+        
+        .product_summary {
+            .card-body {
+                padding: 1rem;
+                h6 { font-weight: 700; margin-bottom: 0.5rem; }
+            }
+        }
+    }
+}
+
+@keyframes slide-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
 /* Cart Upsell Modal */
 #tecnosoft_cart_upsell {
     .modal-content {

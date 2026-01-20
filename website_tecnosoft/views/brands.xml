@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="brands_directory_page" name="Directorio de Marcas">
+        <t t-call="website.layout">
+            <div id="wrap" class="js_sale ecom-brands-directory pb-5">
+                <!-- Hero Section -->
+                <section class="s_title bg-primary bg-gradient text-white py-5 mb-5 shadow-sm">
+                    <div class="container text-center">
+                        <h1 class="display-4 fw-bold mb-3">Nuestras Marcas</h1>
+                        <p class="lead opacity-75">Explora productos por sus fabricantes y marcas favoritas.</p>
+                    </div>
+                </section>
+
+                <div class="container">
+                    <!-- Alphabet Navigation -->
+                    <div class="brands-alphabet-nav d-flex flex-wrap justify-content-center gap-2 mb-5">
+                        <t t-foreach="alphabet" t-as="char">
+                            <a t-attf-href="#brand_group_{{char}}" 
+                               t-attf-class="btn btn-sm {{ 'btn-primary' if char in grouped_brands else 'btn-outline-secondary disabled opacity-25' }} rounded-pill px-3 fw-bold">
+                                <t t-esc="char"/>
+                            </a>
+                        </t>
+                    </div>
+
+                    <!-- Groups -->
+                    <div class="brands-groups-wrapper">
+                        <t t-foreach="grouped_brands.items()" t-as="group">
+                            <div t-attf-id="brand_group_{{group[0]}}" class="brand-group-section mb-5 scroll-margin-top">
+                                <h2 class="display-6 fw-bold border-bottom pb-2 mb-4 text-primary">
+                                    <t t-esc="group[0]"/>
+                                </h2>
+                                <div class="row g-4">
+                                    <t t-foreach="group[1]" t-as="brand">
+                                        <div class="col-6 col-md-4 col-lg-3">
+                                            <a t-attf-href="/shop?brand={{brand.id}}" class="brand-card card h-100 border-0 shadow-sm text-center p-3 text-decoration-none transition-all hover-translate-y">
+                                                <div class="brand-logo-wrapper mb-3 d-flex align-items-center justify-content-center" style="height: 100px;">
+                                                    <img t-if="brand.image" t-att-src="website.image_url(brand, 'image')" class="img-fluid" t-att-alt="brand.name" style="max-height: 80px;"/>
+                                                    <i t-else="" class="fa fa-briefcase fa-3x text-light"></i>
+                                                </div>
+                                                <h5 class="fw-bold mb-1 text-dark" t-field="brand.name"/>
+                                                <div class="small text-muted">
+                                                    <t t-esc="brand.product_count"/> productos
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </t>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+
+                    <!-- Empty State -->
+                    <div t-if="not grouped_brands" class="text-center py-5">
+                        <i class="fa fa-search fa-3x text-muted mb-3"></i>
+                        <h3>No se encontraron marcas</h3>
+                        <p class="text-muted">Prueba a añadir algunas marcas en el backend.</p>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

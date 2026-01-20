@@ -221,23 +221,19 @@
 
     <!-- Shop Page Customization -->
     <template id="tecnosoft_products" inherit_id="website_sale.products" name="Tecnosoft Products">
-        <!-- Mobile Filter Button -->
-        <xpath expr="//div[@id='products_grid_before']" position="before">
+        <xpath expr="//div[@id='products_grid']" position="before">
+            <!-- Mobile Filter Button (Safer target) -->
             <div class="d-lg-none mb-3">
                 <button type="button" class="btn btn-primary-light w-100 fw-bold tecnosoft-mobile-filter-toggle">
                     <i class="fa fa-filter me-2"></i> Filtros y Categorías
                 </button>
             </div>
+            <!-- Mobile Sidebar Overlay -->
+            <div class="tecnosoft-shop-sidebar-overlay d-lg-none"></div>
         </xpath>
+        
         <xpath expr="//div[@id='products_grid']" position="attributes">
             <attribute name="class" add="tecnosoft-products-grid" separator=" "/>
-        </xpath>
-        <!-- Mobile Sidebar Wrapper -->
-        <xpath expr="//div[@id='products_grid_before']" position="attributes">
-            <attribute name="class" add="tecnosoft-shop-sidebar" separator=" "/>
-        </xpath>
-        <xpath expr="//div[@id='products_grid_before']" position="after">
-            <div class="tecnosoft-shop-sidebar-overlay d-lg-none"></div>
         </xpath>
     </template>
 

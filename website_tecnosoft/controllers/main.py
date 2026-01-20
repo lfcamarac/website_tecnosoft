@@ -2,8 +2,29 @@
 from odoo import http
 from odoo.http import request
 from odoo.osv import expression
+import collections
 
 class TecnosoftController(http.Controller):
+
+    @http.route('/brands', type='http', auth='public', website=True)
+    def brands_directory(self, **kwargs):
+        """ Render the alphabetized brands directory. """
+        brands = request.env['tecnosoft.product.brand'].sudo().search([])
+        
+        # Group brands by first letter
+        grouped_brands = collections.defaultdict(list)
+        for brand in brands:
+            first_letter = brand.name[0].upper() if brand.name else '#'
+            if not first_letter.isalpha():
+                first_letter = '#'
+            grouped_brands[first_letter].append(brand)
+            
+        values = {
+            'grouped_brands': collections.OrderedDict(sorted(grouped_brands.items())),
+            'alphabet': "ABCDEFGHIJKLMNOPQRSTUVWXYZ#",
+        }
+        return request.render('website_tecnosoft.brands_directory_page', values)
+
     @http.route('/website_tecnosoft/get_dynamic_products', type='json', auth='public', website=True)
     def get_dynamic_products(self, limit=4, **kwargs):
         """ Deprecated: Use get_products_data instead. """

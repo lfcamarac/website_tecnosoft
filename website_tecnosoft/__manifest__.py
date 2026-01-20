@@ -14,6 +14,7 @@
         'views/website_views.xml',
         'views/sales_triggers.xml',
         'views/popups.xml',
+        'views/brands.xml',
         'views/price_tracker.xml',
         'views/portal_templates.xml',
         'views/marketing_automation.xml',

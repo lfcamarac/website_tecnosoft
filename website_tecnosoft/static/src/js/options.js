@@ -146,3 +146,25 @@ options.registry.TecnosoftPricingCardOptions = options.Class.extend({
         }
     },
 });
+options.registry.TecnosoftConfiguratorOptions = options.Class.extend({
+    setStyle(previewMode, value) {
+        this.$target[0].dataset.zenithStyle = value;
+        // Broadcast change so dynamic_snippets can pick it up
+        this.$target.trigger('zenith_style_changed', [value]);
+    },
+
+    setPrimaryColor(previewMode, value) {
+        this.$target[0].dataset.zenithPrimaryColor = value;
+        this.$target.trigger('zenith_color_changed', [value]);
+    },
+
+    _computeWidgetState(methodName, params) {
+        if (methodName === 'setStyle') {
+            return this.$target[0].dataset.zenithStyle || 'moderno';
+        }
+        if (methodName === 'setPrimaryColor') {
+            return this.$target[0].dataset.zenithPrimaryColor || '';
+        }
+        return this._super(...arguments);
+    },
+});
