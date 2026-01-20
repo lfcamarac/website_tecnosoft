@@ -51,7 +51,7 @@
 
     <!-- Custom Wishlist Page Template -->
     <template id="tecnosoft_wishlist_page" inherit_id="website_sale_wishlist.product_wishlist" name="Tecnosoft Wishlist Page">
-        <xpath expr="//div[hasclass('oe_cart')]" position="attributes">
+        <xpath expr="//div[@id='wrap']" position="attributes">
             <attribute name="class" add="tecnosoft-wishlist-page" separator=" "/>
         </xpath>
     </template>
