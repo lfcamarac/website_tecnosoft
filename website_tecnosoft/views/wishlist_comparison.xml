@@ -4,19 +4,17 @@
     <template id="tecnosoft_header_wishlist_compare" inherit_id="website_tecnosoft.tecnosoft_header" name="Tecnosoft Header Wishlist/Compare">
         <xpath expr="//a[contains(@href, '/shop/cart')]" position="before">
             <!-- Compare Button -->
-            <t t-if="request.env['website'].get_current_website().viewref('website_sale_comparison.add_to_compare')">
+            <t t-if="is_view_active('website_sale_comparison.add_to_compare')">
                 <a href="/shop/compare" class="nav-link text-dark position-relative mx-2 o_product_compare" title="Comparar">
-                    <i class="fa fa-exchange"></i>
-                    <t t-set="compare_list" t-value="request.website.get_current_website().sale_get_compare_list()"/>
-                    <span t-if="compare_list" class="badge rounded-pill" t-esc="len(compare_list)"/>
+                    <i class="fa fa-exchange o_not-animable"></i>
                 </a>
             </t>
             <!-- Wishlist Button -->
-            <t t-if="request.env['website'].get_current_website().viewref('website_sale_wishlist.add_to_wishlist')">
+            <t t-if="is_view_active('website_sale_wishlist.add_to_wishlist')">
                 <a href="/shop/wishlist" class="nav-link text-dark position-relative mx-2 o_wsale_my_wish" title="Lista de Deseos">
-                    <i class="fa fa-heart-o"></i>
-                    <t t-set="wish_count" t-value="len(request.env['product.wishlist'].sudo().search([('partner_id', '=', request.env.user.partner_id.id)]))"/>
-                    <span t-if="wish_count" class="badge rounded-pill" t-esc="wish_count"/>
+                    <i class="fa fa-heart-o o_not-animable"></i>
+                    <t t-set="wish_count" t-value="request.env['product.wishlist'].sudo().search_count([('partner_id', '=', request.env.user.partner_id.id)]) if request.env.user.partner_id else 0"/>
+                    <span t-if="wish_count" class="badge rounded-pill bg-primary" t-esc="wish_count"/>
                 </a>
             </t>
         </xpath>
