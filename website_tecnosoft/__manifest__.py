@@ -23,6 +23,7 @@
         'views/product_brand_views.xml',
         'views/product_label_views.xml',
         'views/wishlist_comparison.xml',
+        'views/headers/header_zenith_v1.xml',
     ],
     'demo': [
         'data/demo_data.xml',
@@ -37,6 +38,7 @@
             'website_tecnosoft/static/src/scss/hotspots.scss',
             'website_tecnosoft/static/src/scss/marketing_snippets.scss',
             'website_tecnosoft/static/src/scss/custom_headers.scss',
+            'website_tecnosoft/static/src/scss/headers/header_zenith_v1.scss',
             'website_tecnosoft/static/src/scss/special_blocks.scss',
             'website_tecnosoft/static/src/scss/styles_engine.scss',
             'website_tecnosoft/static/src/scss/mega_menu.scss',

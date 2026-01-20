@@ -16,6 +16,16 @@
         </xpath>
     </template>
 
+    <template id="zenith_header_selector_option" inherit_id="website.snippet_options">
+        <xpath expr="//we-select[@data-variable='header-template']/we-button[last()]" position="after">
+            <we-button title="Zenith Header V1" 
+                       data-name="header_zenith_v1_opt" 
+                       data-customize-website-views="website_tecnosoft.header_zenith_v1" 
+                       data-customize-website-variable="'header_zenith_v1'" 
+                       data-img="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png"/>
+        </xpath>
+    </template>
+
     <template id="tecnosoft_snippet_options" inherit_id="website.snippet_options">
         <xpath expr="." position="inside">
             <div data-js="tecnosoft_dynamic_options" data-selector=".s_tecnosoft_dynamic, .s_tecnosoft_tabs">
