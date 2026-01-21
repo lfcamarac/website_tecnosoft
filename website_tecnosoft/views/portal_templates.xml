@@ -35,6 +35,15 @@
         </xpath>
     </template>
 
+    <!-- Highlight Quote Requests in Portal -->
+    <template id="portal_my_orders_quote_badge" inherit_id="website_sale.portal_my_orders" name="Tecnosoft Portal Quote Badge">
+        <xpath expr="//t[@t-foreach='orders']//span[hasclass('badge')]" position="after">
+            <span t-if="order.is_quote_request" class="badge rounded-pill bg-info ms-1">
+                <i class="fa fa-clock-o me-1"></i>REVISIÓN
+            </span>
+        </xpath>
+    </template>
+
     <!-- Add Reorder Button to Portal Order List -->
     <template id="portal_my_orders_reorder" inherit_id="website_sale.portal_my_orders" name="Tecnosoft Portal Reorder">
         <xpath expr="//t[@t-foreach='orders']//td[hasclass('text-end')]" position="inside">

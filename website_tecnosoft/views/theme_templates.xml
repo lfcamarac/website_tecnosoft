@@ -449,5 +449,12 @@
     <!-- Alternative Products (Alternative version of the card) -->
     <template id="tecnosoft_product_alternative" inherit_id="website_sale.product_item" name="Tecnosoft Alternative Card" active="False">
         <!-- This is a placeholder for when we want to force specific cards in recommendations -->
+    <!-- Request Quote button in Cart -->
+    <template id="tecnosoft_cart_request_quote" inherit_id="website_sale.cart" name="Tecnosoft Cart Request Quote">
+        <xpath expr="//div[hasclass('justify-content-between')]//a[hasclass('btn-primary')]" position="after">
+            <a role="button" href="/shop/request_quote" class="btn btn-outline-primary rounded-pill px-4 fw-bold ms-2">
+                <i class="fa fa-file-text-o me-2"></i> SOLICITAR PRESUPUESTO
+            </a>
+        </xpath>
     </template>
 </odoo>

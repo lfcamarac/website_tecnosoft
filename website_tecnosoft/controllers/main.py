@@ -122,6 +122,28 @@ class TecnosoftController(http.Controller):
                 )
         return request.redirect('/shop/cart')
 
+    @http.route('/shop/request_quote', type='http', auth='public', website=True)
+    def shop_request_quote(self, **kwargs):
+        """ Convert current cart into a 'sent' quotation for admin review. """
+        sale_order = request.website.sale_get_order()
+        if not sale_order or not sale_order.order_line:
+            return request.redirect('/shop/cart')
+        
+        # Mark as quotation and potentially add a note
+        sale_order.sudo().write({
+            'state': 'draft',
+            'is_quote_request': True,
+        })
+        # Optional: Send notification or log a message
+        sale_order.message_post(body="El cliente ha solicitado un presupuesto personalizado desde el sitio web.")
+        
+        # Odoo usually expects 'sent' state for quotations that the salesman has seen
+        # but for 'review request', keeping it as draft with a specific flag or just notifying is safer.
+        # We'll redirect to a thank you / confirmation page
+        return request.render('website_tecnosoft.tecnosoft_quote_request_thanks', {
+            'order': sale_order
+        })
+
     @http.route('/website_tecnosoft/get_categories_info', type='json', auth='public', website=True)
     def get_categories_info(self, category_ids, **kwargs):
         """ Fetch names and info for a list of category IDs. """
