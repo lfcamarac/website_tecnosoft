@@ -125,7 +125,15 @@ publicWidget.registry.TecnosoftAjaxFilters = publicWidget.Widget.extend({
         } catch (error) {
             console.error("Tecnosoft AJAX Filter Error:", error);
             window.location.href = newUrl; // Fallback to hard reload
+            // Remove loading indicator and update content
+            $('#tecnosoft_skeleton_overlay').remove();
+            $('.tecnosoft-products-grid').removeClass('d-none opacity-50');
         } finally {
+                if (!$('#tecnosoft_skeleton_overlay').length) {
+                    $('.tecnosoft-products-grid').parent().append('<div id="tecnosoft_skeleton_overlay">' + skeletonHtml + '</div>');
+                    $('.tecnosoft-products-grid').addClass('d-none');
+                }
+            }
             this.$('#products_grid').css('opacity', '1');
             this.$('.ajax-loading-overlay').remove();
         }
