@@ -70,6 +70,7 @@
             'website_tecnosoft/static/src/js/price_slider.js',
             'website_tecnosoft/static/src/js/infinite_scroll.js',
             'website_tecnosoft/static/src/js/store_locator.js',
+            'website_tecnosoft/static/src/js/countdown.js',
             'website_tecnosoft/static/src/js/branch_stock.js',
         ],
         'web.assets_frontend_minimal': [

@@ -268,6 +268,13 @@
                     </button>
                 </t>
             </div>
+            <!-- Flash Offer Countdown -->
+            <div t-if="product.validity_date" class="tecnosoft-flash-offer mb-4 p-3 rounded-4 bg-primary-light border border-primary-soft shadow-sm">
+                <div class="d-flex align-items-center gap-2 mb-2 text-primary fw-bold small">
+                    <i class="fa fa-bolt"></i> <span class="text-uppercase letter-spacing-1">¡Oferta por Tiempo Limitado!</span>
+                </div>
+                <div class="tecnosoft-countdown" t-att-data-end-date="product.validity_date"/>
+            </div>
         </xpath>
         <xpath expr="//div[@id='add_to_cart_wrap']" position="before">
              <h5 t-if="branch_stock" class="mt-4 mb-3 border-bottom pb-2 fw-bold text-uppercase text-secondary small">Disponibilidad por Sede</h5>
