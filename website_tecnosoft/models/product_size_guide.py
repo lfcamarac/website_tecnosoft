@@ -41,3 +41,21 @@ class ProductTemplate(models.Model):
                 ('website_published', '=', True)
             ], limit=3)
         return products
+
+    def action_generate_ai_description(self):
+        """ Method to generate SEO optimized description using AI.
+            In a real scenario, this would call Odoo's 'iap' or an external LLM.
+            For Tecnosoft, we'll implement a premium prompt logic.
+        """
+        self.ensure_one()
+        # Mock AI logic for now, or use Odoo 18 built-in if accessible via code
+        prompt = f"Escribe una descripción de producto técnica, moderna y orientada a SEO para: {self.name}. "
+        if self.brand_id:
+            prompt += f"Marca: {self.brand_id.name}. "
+        
+        # Example of premium enhancement
+        new_desc = f"<p>Descubre el nuevo <strong>{self.name}</strong>. Diseñado para ofrecer el máximo rendimiento y estilo.</p>"
+        new_desc += "<ul><li>Calidad Premium</li><li>Garantía Tecnosoft</li><li>Envío Rápido</li></ul>"
+        
+        self.website_description = new_desc
+        return True

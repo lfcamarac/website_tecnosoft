@@ -60,8 +60,11 @@
         <field name="arch" type="xml">
             <xpath expr="//page[@name='sales']" position="inside">
                 <group string="Dimensiones">
-                    <field name="size_guide_id"/>
+                    <field name="size_guide_id" options="{'no_create': True}"/>
                 </group>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button name="action_generate_ai_description" string="✨ GENERAR DESCRIPCIÓN AI" type="object" class="btn-primary" invisible="not id"/>
             </xpath>
         </field>
     </record>
