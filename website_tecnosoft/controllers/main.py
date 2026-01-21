@@ -106,6 +106,22 @@ class TecnosoftController(http.Controller):
                 )
         return {'success': True}
 
+    @http.route('/shop/reorder/<int:order_id>', type='http', auth='public', website=True)
+    def shop_reorder(self, order_id, **kwargs):
+        """ Re-add all products from a previous order to the current cart. """
+        order = request.env['sale.order'].sudo().browse(order_id)
+        if not order or order.partner_id != request.env.user.partner_id:
+            return request.redirect('/my/orders')
+
+        sale_order = request.website.sale_get_order(force_create=True)
+        for line in order.order_line:
+            if line.product_id.website_published:
+                sale_order._cart_update(
+                    product_id=line.product_id.id,
+                    add_qty=line.product_uom_qty
+                )
+        return request.redirect('/shop/cart')
+
     @http.route('/website_tecnosoft/get_categories_info', type='json', auth='public', website=True)
     def get_categories_info(self, category_ids, **kwargs):
         """ Fetch names and info for a list of category IDs. """

@@ -34,4 +34,22 @@
             </div>
         </xpath>
     </template>
+
+    <!-- Add Reorder Button to Portal Order List -->
+    <template id="portal_my_orders_reorder" inherit_id="website_sale.portal_my_orders" name="Tecnosoft Portal Reorder">
+        <xpath expr="//t[@t-foreach='orders']//td[hasclass('text-end')]" position="inside">
+            <a t-attf-href="/shop/reorder/#{order.id}" class="btn btn-secondary btn-sm rounded-pill ms-2" title="Volver a pedir">
+                <i class="fa fa-refresh"></i>
+            </a>
+        </xpath>
+    </template>
+
+    <!-- Add Reorder Button to Portal Order Detail -->
+    <template id="portal_order_page_reorder" inherit_id="website_sale.portal_order_page" name="Tecnosoft Portal Order Reorder">
+        <xpath expr="//div[@id='portal_order_content']//h2" position="inside">
+            <a t-attf-href="/shop/reorder/#{order.id}" class="btn btn-primary rounded-pill float-end small fw-bold">
+                <i class="fa fa-refresh me-1"></i> REPETIR PEDIDO
+            </a>
+        </xpath>
+    </template>
 </odoo>
