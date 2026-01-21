@@ -1,1 +1,0 @@
-# Number-CounteUp-Pure-Javascript
