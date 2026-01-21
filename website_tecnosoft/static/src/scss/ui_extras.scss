@@ -564,6 +564,44 @@
   }
 }
 
+/* Combo Product Odoo 18 Styling */
+.js_product_combo {
+  .o_combo_selection {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
+    padding: 10px 0;
+
+    .o_combo_option {
+      border: 2px solid #eee;
+      border-radius: 12px;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      background: white;
+
+      img {
+        border-radius: 8px;
+        margin-bottom: 8px;
+      }
+
+      .o_combo_option_name {
+        font-weight: 600;
+        font-size: 0.8rem;
+        display: block;
+      }
+
+      &.active {
+        border-color: var(--primary);
+        background: rgba(var(--primary-rgb), 0.05);
+        transform: scale(1.05);
+        box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.1);
+      }
+    }
+  }
+}
+
 /* Side Cart Enhancements */
 .tecnosoft-header {
     .navbar {
