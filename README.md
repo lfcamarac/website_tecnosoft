@@ -1,38 +1,56 @@
 # Tecnosoft eCommerce Theme for Odoo 18.0
 
-Este repositorio contiene el tema **Tecnosoft**, una solución de eCommerce de nivel "top" diseñada específicamente para Odoo 18.0. El tema está optimizado para ofrecer una experiencia visual premium, interactividad moderna con OWL y un rendimiento superior para entornos B2C y B2B.
+Tema **Premium All-in-One** para Odoo 18.0 con características empresariales avanzadas: Multi-Sede, Búsqueda Inteligente, Filtros AJAX y más.
 
 ## 📁 Estructura del Proyecto
 
 ```text
 .
 ├── website_tecnosoft/      # Módulo principal de Odoo
-│   ├── controllers/        # Controladores Python para datos dinámicos
-│   ├── data/               # Datos maestros y configuración inicial
-│   ├── doc/                # Documentación técnica y guías de tuning
-│   ├── static/             # Recursos web (JS/OWL, SCSS, XML, Imágenes)
-│   └── views/              # Plantillas QWeb y vistas del sitio
-└── README.md               # Este archivo
+│   ├── controllers/        # main.py, main_branch.py (stock dinámico)
+│   ├── models/             # product_brand, product_label, tecnosoft_branch
+│   ├── static/             # JS (AJAX), SCSS (Premium), XML (Templates)
+│   └── views/              # Headers, Snippets, Templates
+└── README.md
 ```
 
 ## 🚀 Características Principales
 
-- **Diseño Premium**: Interfaz moderna basada en Bootstrap 5 con tipografía cuidada (Inter & Outfit).
-- **Snippets Dinámicos**: Bloques de construcción inteligentes que utilizan **OWL (Odoo Web Library)** para renderizado en tiempo real.
-- **Optimización SEO**: Integración nativa de datos estructurados de **Schema.org** y configuración avanzada de `robots.txt`.
-- **Modo B2B**: Soporte para ocultación de precios a visitantes públicos y portales corporativos.
-- **Rendimiento**: Carga diferida (Lazy Loading) y soporte automático para formato WebP.
+### Navegación & Diseño
+- **Header Zenith V1**: Compatible con editor de Odoo
+- **Mega Menús Premium**: 3 tipos (Links, Categorías, Promo)
+- **Footer Moderno**: Newsletter y redes sociales
+
+### Multi-Sede & Stock Inteligente (Phase 4)
+- **Sistema de Sedes**: Agrupa almacenes para mostrar disponibilidad
+- **Stock Dinámico AJAX**: Actualización en tiempo real al cambiar variantes
+- **Selector de Moneda Premium**: Diseño glassmorphism
+
+### Búsqueda & Conversión (Phase 5)
+- **Búsqueda Instantánea**: Con marca, categoría y precio
+- **Sticky Add to Cart**: Sincronizado con variantes
+- **Smart Product Cards**: Imagen hover, action bar premium
+
+### Performance & UX (Phase 6)
+- **Filtros AJAX**: Sin recarga, smooth scroll
+- **Optimización**: Preconnect, lazy loading
+- **URL State Management**: Navegación con pushState
 
 ## 🛠️ Instalación
 
-1. Clona este repositorio en tu carpeta de `addons` personalizada.
-2. Actualiza la lista de aplicaciones en tu instancia de Odoo 18.
-3. Busca el módulo `Tecnosoft Theme` (website_tecnosoft) e instálalo.
-4. Selecciona el tema desde el editor del Sitio Web.
+1. Clonar en carpeta `addons` de Odoo
+2. Actualizar lista de aplicaciones
+3. Instalar `Tecnosoft Theme`
+4. Configurar Sedes en Website > Configuración > Sedes
 
-## ⚙️ Configuración del Servidor
+## ⚙️ Configuración
 
-Para maximizar el rendimiento del tema, se recomienda configurar el archivo `odoo.conf` siguiendo nuestra [Guía de Tuning](website_tecnosoft/doc/server_tuning.md).
+**Activar Header Zenith**: Editor > Personalizar > Seleccionar "Zenith Header V1"
+
+**Configurar Multi-Sede**:
+1. Website > Configuración > Sedes
+2. Crear sede y asignar almacenes
+3. Stock se muestra automáticamente
 
 ---
-Desarrollado para la integración con **Antigravity**.
+Desarrollado con **Antigravity** | Odoo 18.0
