@@ -20,6 +20,49 @@
         </xpath>
     </template>
 
+    <!-- Delivery Tracking Timeline -->
+    <template id="portal_order_page_tracking" inherit_id="website_sale.portal_order_page" name="Tecnosoft Portal Tracking">
+        <xpath expr="//div[@id='portal_order_content']" position="before">
+            <div class="tecnosoft-tracking-timeline bg-white p-4 rounded-4 shadow-sm mb-4 border border-light">
+                <h5 class="fw-bold mb-4 text-uppercase small text-muted letter-spacing-1">Estado del Envío</h5>
+                <div class="d-flex justify-content-between position-relative">
+                    <div class="timeline-line position-absolute w-100 top-50 translate-middle-y bg-light" style="height: 4px; z-index: 0;"></div>
+                    
+                    <t t-set="order_state" t-value="order.state"/>
+                    <t t-set="delivery_state" t-value="order.delivery_status or 'pending'"/>
+
+                    <div t-attf-class="timeline-step text-center position-relative z-index-1 #{'active' if order_state in ['draft', 'sent', 'sale'] else ''}">
+                        <div class="step-icon rounded-circle bg-white border border-2 d-flex align-items-center justify-content-center mx-auto mb-2" style="width: 40px; height: 40px;">
+                            <i class="fa fa-shopping-basket"></i>
+                        </div>
+                        <div class="small fw-bold">Pedido</div>
+                    </div>
+
+                    <div t-attf-class="timeline-step text-center position-relative z-index-1 #{'active' if order.picking_ids and any(p.state == 'assigned' for p in order.picking_ids) else ''}">
+                        <div class="step-icon rounded-circle bg-white border border-2 d-flex align-items-center justify-content-center mx-auto mb-2" style="width: 40px; height: 40px;">
+                            <i class="fa fa-archive"></i>
+                        </div>
+                        <div class="small fw-bold">Preparando</div>
+                    </div>
+
+                    <div t-attf-class="timeline-step text-center position-relative z-index-1 #{'active' if order.picking_ids and any(p.state == 'done' for p in order.picking_ids) else ''}">
+                        <div class="step-icon rounded-circle bg-white border border-2 d-flex align-items-center justify-content-center mx-auto mb-2" style="width: 40px; height: 40px;">
+                            <i class="fa fa-truck"></i>
+                        </div>
+                        <div class="small fw-bold">Enviado</div>
+                    </div>
+
+                    <div t-attf-class="timeline-step text-center position-relative z-index-1 #{'active' if delivery_state == 'full' else ''}">
+                        <div class="step-icon rounded-circle bg-white border border-2 d-flex align-items-center justify-content-center mx-auto mb-2" style="width: 40px; height: 40px;">
+                            <i class="fa fa-check-circle"></i>
+                        </div>
+                        <div class="small fw-bold">Entregado</div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
     <!-- Custom Portal Home Icons and Cards -->
     <template id="tecnosoft_portal_home_card" inherit_id="portal.portal_my_home" name="Tecnosoft Portal Cards" priority="20">
         <xpath expr="//div[hasclass('o_portal_docs')]" position="before">

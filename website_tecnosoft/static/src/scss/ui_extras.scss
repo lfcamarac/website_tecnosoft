@@ -777,6 +777,40 @@
   }
 }
 
+/* Shipping Tracking Timeline */
+.tecnosoft-tracking-timeline {
+  .timeline-step {
+    width: 80px;
+    
+    .step-icon {
+      color: #ccc;
+      transition: all 0.4s ease;
+      font-size: 1.1rem;
+    }
+
+    &.active {
+      .step-icon {
+        border-color: var(--primary) !important;
+        color: var(--primary);
+        background: rgba(var(--primary-rgb), 0.05) !important;
+        box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.2);
+        transform: scale(1.1);
+      }
+      .small {
+        color: var(--primary);
+      }
+    }
+  }
+
+  .timeline-line {
+    opacity: 0.1;
+  }
+  
+  .active ~ .timeline-line {
+      /* Dynamic progress bar color if needed using gradients */
+  }
+}
+
 /* Side Cart Enhancements */
 .tecnosoft-header {
     .navbar {
