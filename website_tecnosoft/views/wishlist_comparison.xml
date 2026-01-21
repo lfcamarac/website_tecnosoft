@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- Safely redefine old IDs to overwrite anything broken in the DB -->
-    <template id="tecnosoft_header_wishlist_compare" inherit_id="website_tecnosoft.tecnosoft_header" name="Tecnosoft Header Wishlist/Compare (Legacy Fix)">
+    <template id="tecnosoft_header_wishlist_compare" inherit_id="website_tecnosoft.header_zenith_v1" name="Tecnosoft Header Wishlist/Compare (Legacy Fix)">
         <xpath expr="//a[contains(@href, '/shop/cart')]" position="before">
             <t t-if="is_view_active('website_sale_comparison.add_to_compare')">
                 <a href="/shop/compare" class="nav-link text-dark position-relative mx-2 o_product_compare" title="Comparar">
@@ -11,14 +11,14 @@
         </xpath>
     </template>
 
-    <template id="tecnosoft_header_wishlist_compare_v2" inherit_id="website_tecnosoft.tecnosoft_header" name="Tecnosoft Header Wishlist/Compare V2 (Legacy Fix)">
+    <template id="tecnosoft_header_wishlist_compare_v2" inherit_id="website_tecnosoft.header_zenith_v1" name="Tecnosoft Header Wishlist/Compare V2 (Legacy Fix)">
         <xpath expr="//a[contains(@href, '/shop/cart')]" position="before">
             <!-- Already fixed in V1 above, doing nothing here to avoid double icons -->
         </xpath>
     </template>
 
     <!-- Final and Clean Version - V3 -->
-    <template id="tecnosoft_header_wishlist_compare_v3" inherit_id="website_tecnosoft.tecnosoft_header" name="Tecnosoft Header Wishlist/Compare Final">
+    <template id="tecnosoft_header_wishlist_compare_v3" inherit_id="website_tecnosoft.header_zenith_v1" name="Tecnosoft Header Wishlist/Compare Final">
         <xpath expr="//a[contains(@href, '/shop/cart')]" position="before">
             <!-- Compare Button -->
             <t t-if="is_view_active('website_sale_comparison.add_to_compare')">
