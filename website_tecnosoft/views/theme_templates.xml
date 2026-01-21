@@ -437,7 +437,7 @@
 
     <!-- Price Slider Override -->
     <template id="tecnosoft_price_filter" inherit_id="website_sale.filter_products_price" name="Tecnosoft Price Filter Visual">
-        <xpath expr="//div[hasclass('o_wsale_price_range_testing')]" position="replace">
+        <xpath expr="//div[hasclass('o_wsale_price_range')]" position="replace">
             <div class="tecnosoft-price-filter-wrapper mb-4">
                 <h6 class="text-uppercase fw-bold mb-3 small text-muted">Rango de Precio</h6>
                 <div class="px-2">
