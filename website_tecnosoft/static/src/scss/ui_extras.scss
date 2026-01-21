@@ -692,6 +692,22 @@
   }
 }
 
+/* B2B Price Visibility */
+.tecnosoft-b2b-price-marker {
+  font-family: inherit;
+  
+  .badge {
+    background: rgba(40, 167, 69, 0.08) !important;
+    border-color: rgba(40, 167, 69, 0.2) !important;
+    color: #28a745 !important;
+    letter-spacing: 0.5px;
+    
+    i {
+      font-size: 1.1em;
+    }
+  }
+}
+
 /* Side Cart Enhancements */
 .tecnosoft-header {
     .navbar {

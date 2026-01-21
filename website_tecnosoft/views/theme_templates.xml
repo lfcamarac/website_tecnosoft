@@ -305,6 +305,15 @@
         <xpath expr="//h1[@t-field='product.name']" position="attributes">
             <attribute name="class" add="fw-bold text-dark mb-3" separator=" "/>
         </xpath>
+        <!-- B2B Special Price Badge -->
+        <xpath expr="//div[@id='product_details']//t[@t-call='website_sale.product_price']" position="before">
+            <t t-set="is_b2b" t-value="not request.env.user._is_public()"/>
+            <div t-if="is_b2b" class="tecnosoft-b2b-price-marker mb-2 animate__animated animate__fadeIn">
+                <span class="badge bg-success-light text-success border border-success-soft rounded-pill px-3 py-2 small fw-bold">
+                    <i class="fa fa-handshake-o me-2"></i> TARIFA ESPECIAL ACTIVADA
+                </span>
+            </div>
+        </xpath>
         <xpath expr="//div[@id='wrap']" position="inside">
             <!-- Dynamic Size Guide Modal -->
             <div class="modal fade" id="tecnosoft_size_guide" tabindex="-1" aria-hidden="true">
