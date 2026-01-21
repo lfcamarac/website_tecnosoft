@@ -433,6 +433,8 @@
             }
             </script>
         </xpath>
+    </template>
+
     <!-- Price Slider Override -->
     <template id="tecnosoft_price_filter" inherit_id="website_sale.filter_products_price" name="Tecnosoft Price Filter Visual">
         <xpath expr="//div[hasclass('o_wsale_price_range_testing')]" position="replace">
