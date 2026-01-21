@@ -429,5 +429,18 @@
                 </div>
             </div>
         </xpath>
+    <!-- Cross-selling & Up-selling Premium Styling -->
+    <template id="tecnosoft_recommended_products" inherit_id="website_sale.recommended_products" name="Tecnosoft Recommended Products">
+        <xpath expr="//div[hasclass('container')]" position="attributes">
+            <attribute name="class" add="tecnosoft-recommended pt-5 pb-5 border-top mt-5" separator=" "/>
+        </xpath>
+        <xpath expr="//h3" position="attributes">
+            <attribute name="class" add="fw-bold text-center mb-5 text-uppercase" separator=" "/>
+        </xpath>
+    </template>
+
+    <!-- Alternative Products (Alternative version of the card) -->
+    <template id="tecnosoft_product_alternative" inherit_id="website_sale.product_item" name="Tecnosoft Alternative Card" active="False">
+        <!-- This is a placeholder for when we want to force specific cards in recommendations -->
     </template>
 </odoo>
