@@ -459,6 +459,57 @@
   }
 }
 
+/* Checkout & Wizard Premium Styling */
+.tecnosoft-checkout-wizard {
+  .wizard-step {
+    .step-icon {
+      width: 36px;
+      height: 36px;
+      background: #eee;
+      color: #999;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .step-title {
+      color: #999;
+    }
+
+    &.active {
+      .step-icon {
+        background: var(--primary);
+        color: white;
+        transform: scale(1.1);
+        box-shadow: 0 4px 10px rgba(var(--primary-rgb), 0.3);
+      }
+      .step-title {
+        color: var(--primary);
+      }
+    }
+
+    &.completed {
+      .step-icon {
+        background: #28a745;
+        color: white;
+      }
+      .step-title {
+        color: #28a745;
+      }
+    }
+  }
+
+  .step-divider {
+    border-top-width: 2px !important;
+    border-color: #eee !important;
+  }
+}
+
+.tecnosoft-checkout-page {
+  .bg-light-soft {
+    background-color: #f4f7f9;
+  }
+}
+
 /* Side Cart Enhancements */
 .tecnosoft-header {
     .navbar {

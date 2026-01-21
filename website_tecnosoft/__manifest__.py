@@ -26,6 +26,7 @@
         'views/headers/header_zenith_v1.xml',
         'views/wishlist_comparison.xml',
         'views/variant_templates.xml',
+        'views/checkout_templates.xml',
         'views/tecnosoft_branch_views.xml',
     ],
     'demo': [
@@ -67,6 +68,7 @@
             'website_tecnosoft/static/src/js/recently_viewed_snippet.js',
             'website_tecnosoft/static/src/js/price_slider.js',
             'website_tecnosoft/static/src/js/infinite_scroll.js',
+            'website_tecnosoft/static/src/js/store_locator.js',
             'website_tecnosoft/static/src/js/branch_stock.js',
         ],
         'web.assets_frontend_minimal': [

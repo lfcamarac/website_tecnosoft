@@ -66,6 +66,22 @@ class TecnosoftController(http.Controller):
 
         return {'products': product_list}
 
+    @http.route('/website_tecnosoft/get_branches_locations', type='json', auth='public', website=True)
+    def get_branches_locations(self):
+        """ Fetch all active branches with their coordinates for the map. """
+        branches = request.env['tecnosoft.branch'].sudo().search([('active', '=', True)])
+        data = []
+        for b in branches:
+            data.append({
+                'id': b.id,
+                'name': b.name,
+                'lat': b.latitude,
+                'lng': b.longitude,
+                'desc': b.description or '',
+                'street': b.description.split('\n')[0] if b.description else '',
+            })
+        return {'branches': data}
+
     @http.route('/website_tecnosoft/get_categories_info', type='json', auth='public', website=True)
     def get_categories_info(self, category_ids, **kwargs):
         """ Fetch names and info for a list of category IDs. """
