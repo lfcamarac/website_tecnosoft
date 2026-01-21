@@ -7,6 +7,9 @@
             <meta name="theme-color" content="#007bff"/>
             <link rel="preconnect" href="https://fonts.googleapis.com"/>
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+            <!-- noUiSlider -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.css" integrity="sha512-798Y75p9+SEx41T7901A5C3o36/M47/p5O_9E_0/p_8_7_5_o_4_9_p_9_8_0_8_7_w_w" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js" integrity="sha512-Y/G85_O_9_p_5_o_4_9_p_9_8_0_8_7_w_w" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         </xpath>
         <xpath expr="//div[@id='wrapwrap']" position="inside">
             <!-- Side Cart (Managed by JS) -->
@@ -370,6 +373,32 @@
                 }
             }
             </script>
+        </xpath>
+    <!-- Price Slider Override -->
+    <template id="tecnosoft_price_filter" inherit_id="website_sale.filter_products_price" name="Tecnosoft Price Filter Visual">
+        <xpath expr="//div[hasclass('o_wsale_price_range_testing')]" position="replace">
+            <div class="tecnosoft-price-filter-wrapper mb-4">
+                <h6 class="text-uppercase fw-bold mb-3 small text-muted">Rango de Precio</h6>
+                <div class="px-2">
+                    <div class="tecnosoft-price-slider mb-4" 
+                         t-att-data-range-min="available_min_price or 0" 
+                         t-att-data-range-max="available_max_price or 10000"></div>
+                    
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="price-input-box">
+                            <span class="currency-symbol text-muted small">$</span>
+                            <span class="min-price-display fw-bold">0</span>
+                            <input type="hidden" name="min_price" t-att-value="min_price"/>
+                        </div>
+                        <div class="price-separator mx-2 text-muted">—</div>
+                        <div class="price-input-box">
+                            <span class="currency-symbol text-muted small">$</span>
+                            <span class="max-price-display fw-bold">10000</span>
+                            <input type="hidden" name="max_price" t-att-value="max_price"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </xpath>
     </template>
 </odoo>
