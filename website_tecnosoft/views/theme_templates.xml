@@ -297,8 +297,18 @@
                 </table>
             </div>
         </xpath>
-        <xpath expr="//div[@id='product_details']" position="inside">
-            <t t-call="website_tecnosoft.tecnosoft_complete_the_look"/>
+        <xpath expr="//div[@id='product_details']//t[@t-call='website_sale.product_price']" position="after">
+            <div class="tecnosoft-delivery-estimate mt-3 mb-4 p-3 bg-light-soft rounded-4 border border-dashed border-primary-soft">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="delivery-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; min-width: 40px;">
+                        <i class="fa fa-bolt"></i>
+                    </div>
+                    <div>
+                        <div class="fw-bold text-dark small">ENVÍO PRIORITARIO</div>
+                        <div class="text-primary fw-bold" t-esc="product.get_estimated_delivery_date()"/>
+                    </div>
+                </div>
+            </div>
         </xpath>
         <xpath expr="//h1[@t-field='product.name']" position="before">
             <div t-if="product.brand_id" class="mb-2">

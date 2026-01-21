@@ -836,6 +836,25 @@
   }
 }
 
+/* Estimated Delivery Dates */
+.tecnosoft-delivery-estimate {
+  background: rgba(var(--primary-rgb), 0.03) !important;
+  border-style: dashed !important;
+  border-width: 1px !important;
+  border-color: rgba(var(--primary-rgb), 0.2) !important;
+  
+  .delivery-icon {
+    box-shadow: 0 4px 10px rgba(var(--primary-rgb), 0.3);
+    animation: pulse-primary 2s infinite;
+  }
+}
+
+@keyframes pulse-primary {
+  0% { box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(var(--primary-rgb), 0); }
+  100% { box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0); }
+}
+
 /* Side Cart Enhancements */
 .tecnosoft-header {
     .navbar {

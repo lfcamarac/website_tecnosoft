@@ -59,3 +59,33 @@ class ProductTemplate(models.Model):
         
         self.website_description = new_desc
         return True
+
+    def get_estimated_delivery_date(self):
+        """ Returns a string with the estimated delivery date.
+            logic: today + 3 days (excluding weekends for premium feel).
+        """
+        import datetime
+        from odoo.tools import format_date
+        
+        today = datetime.date.today()
+        # Simple logic: 2-4 business days
+        min_days = 2
+        max_days = 4
+        
+        def add_business_days(start_date, days):
+            current_date = start_date
+            while days > 0:
+                current_date += datetime.timedelta(days=1)
+                if current_date.weekday() < 5: # Monday-Friday
+                    days -= 1
+            return current_date
+
+        min_date = add_business_days(today, min_days)
+        max_date = add_business_days(today, max_days)
+        
+        # Format: "Recíbelo entre el jueves, 23 y el sábado, 25"
+        lang = self.env.context.get('lang') or 'es_ES'
+        min_str = format_date(self.env, min_date, lang_code=lang, date_format='EEEE, d')
+        max_str = format_date(self.env, max_date, lang_code=lang, date_format='EEEE, d MMMM')
+        
+        return f"Recíbelo entre el {min_str.capitalize()} y el {max_str.capitalize()}"
