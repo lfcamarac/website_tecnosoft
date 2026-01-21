@@ -10,6 +10,9 @@
             <!-- noUiSlider -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.css" integrity="sha512-798Y75p9+SEx41T7901A5C3o36/M47/p5O_9E_0/p_8_7_5_o_4_9_p_9_8_0_8_7_w_w" crossorigin="anonymous" referrerpolicy="no-referrer" />
             <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js" integrity="sha512-Y/G85_O_9_p_5_o_4_9_p_9_8_0_8_7_w_w" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <!-- Leaflet (OpenStreetMap) -->
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+            <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         </xpath>
         <xpath expr="//div[@id='wrapwrap']" position="inside">
             <!-- Side Cart (Managed by JS) -->

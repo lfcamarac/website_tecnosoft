@@ -14,3 +14,5 @@ class TecnosoftBranch(models.Model):
         help="El stock disponible en estos almacenes se sumará para mostrarse como disponibilidad de esta sede."
     )
     description = fields.Text(string="Descripción / Dirección", help="Información extra para mostrar en el sitio web (ej. Dirección)")
+    latitude = fields.Float(string='Latitud', digits=(10, 7))
+    longitude = fields.Float(string='Longitud', digits=(10, 7))

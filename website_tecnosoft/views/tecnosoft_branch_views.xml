@@ -14,12 +14,16 @@
                         <group>
                             <field name="active"/>
                             <field name="sequence"/>
+                            <field name="latitude"/>
+                            <field name="longitude"/>
                         </group>
                         <group>
                             <field name="warehouse_ids" widget="many2many_tags"/>
                         </group>
                     </group>
-                    <field name="description" placeholder="Dirección o notas para el cliente..."/>
+                    <group string="Dirección / Información adicional">
+                        <field name="description" nolabel="1" placeholder="Dirección completa, horarios, etc..."/>
+                    </group>
                 </sheet>
             </form>
         </field>
@@ -32,6 +36,8 @@
             <list string="Sedes" editable="bottom">
                 <field name="sequence" widget="handle"/>
                 <field name="name"/>
+                <field name="latitude"/>
+                <field name="longitude"/>
                 <field name="warehouse_ids" widget="many2many_tags"/>
                 <field name="active"/>
             </list>
