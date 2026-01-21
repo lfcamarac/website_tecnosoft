@@ -23,6 +23,7 @@
         'views/quick_view.xml',
         'views/product_brand_views.xml',
         'views/product_label_views.xml',
+        'views/product_size_guide_views.xml',
         'views/headers/header_zenith_v1.xml',
         'views/wishlist_comparison.xml',
         'views/variant_templates.xml',

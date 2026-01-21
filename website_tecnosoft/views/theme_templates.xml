@@ -299,33 +299,33 @@
             <attribute name="class" add="fw-bold text-dark mb-3" separator=" "/>
         </xpath>
         <xpath expr="//div[@id='wrap']" position="inside">
-            <!-- Size Guide Modal -->
+            <!-- Dynamic Size Guide Modal -->
             <div class="modal fade" id="tecnosoft_size_guide" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content border-0 shadow-lg rounded-4">
+                        <t t-set="actual_guide" t-value="product.get_size_guide()"/>
                         <div class="modal-header border-0 pb-0">
-                            <h5 class="fw-bold mb-0">Guía de Tallas</h5>
+                            <h5 class="fw-bold mb-0" t-esc="actual_guide.name if actual_guide else 'Guía de Tallas'"/>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body p-4">
-                            <div class="table-responsive">
-                                <table class="table table-bordered text-center align-middle mb-0">
-                                    <thead class="bg-light">
-                                        <tr>
-                                            <th>Talla</th>
-                                            <th>Pecho (cm)</th>
-                                            <th>Cintura (cm)</th>
-                                            <th>Cadera (cm)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td>S</td><td>86-91</td><td>71-76</td><td>86-91</td></tr>
-                                        <tr><td>M</td><td>97-102</td><td>81-86</td><td>97-102</td></tr>
-                                        <tr><td>L</td><td>107-112</td><td>91-97</td><td>107-112</td></tr>
-                                        <tr><td>XL</td><td>117-122</td><td>102-107</td><td>117-122</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <t t-if="actual_guide">
+                                <div class="tecnosoft-dynamic-guide" t-out="actual_guide.content"/>
+                            </t>
+                            <t t-else="">
+                                <div class="alert alert-info">Guía de tallas estándar seleccionada.</div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered text-center align-middle mb-0">
+                                        <thead class="bg-light">
+                                            <tr><th>Talla</th><th>Pecho (cm)</th><th>Cintura (cm)</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>S</td><td>86-91</td><td>71-76</td></tr>
+                                            <tr><td>M</td><td>97-102</td><td>81-86</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </t>
                             <p class="small text-muted mt-3 mb-0">* Estas medidas son orientativas. Si tienes dudas, contáctanos.</p>
                         </div>
                     </div>

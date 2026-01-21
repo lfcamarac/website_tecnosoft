@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_product_size_guide_form" model="ir.ui.view">
+        <field name="name">product.size.guide.form</field>
+        <field name="model">product.size.guide</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Ej. Guía de Camisetas"/></h1>
+                    </div>
+                    <group>
+                        <field name="content" widget="html" options="{'style-inline': true}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_product_size_guide_tree" model="ir.ui.view">
+        <field name="name">product.size.guide.tree</field>
+        <field name="model">product.size.guide</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_product_size_guide" model="ir.actions.act_window">
+        <field name="name">Guías de Tallas</field>
+        <field name="res_model">product.size.guide</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_product_size_guide"
+              name="Guías de Tallas"
+              parent="website.menu_website_global_configuration"
+              action="action_product_size_guide"
+              sequence="55"/>
+
+    <!-- Inherit Category Form to add Size Guide -->
+    <record id="product_public_category_form_view" model="ir.ui.view">
+        <field name="name">product.public.category.form.size.guide</field>
+        <field name="model">product.public.category</field>
+        <field name="inherit_id" ref="website_sale.product_public_category_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='parent_id']" position="after">
+                <field name="size_guide_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit Product Template Form to add Size Guide -->
+    <record id="product_template_form_view_size_guide" model="ir.ui.view">
+        <field name="name">product.template.form.size.guide</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='sales']" position="inside">
+                <group string="Dimensiones">
+                    <field name="size_guide_id"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
