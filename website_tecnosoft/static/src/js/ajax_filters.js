@@ -79,9 +79,18 @@ publicWidget.registry.TecnosoftAjaxFilters = publicWidget.Widget.extend({
         // Update URL bar
         window.history.pushState({ path: newUrl }, '', newUrl);
 
-        // Visual feedback
-        this.$grid.css('opacity', '0.5');
-        this.$grid.prepend('<div class="ajax-loading-overlay position-absolute top-50 start-50 translate-middle text-primary"><div class="spinner-border"></div></div>');
+        // Visual feedback & Scroll (UX)
+        const $gridContainer = this.$('#products_grid');
+        $gridContainer.css('opacity', '0.5');
+        // Inject loader
+        if (!this.$('.ajax-loading-overlay').length) {
+             $gridContainer.prepend('<div class="ajax-loading-overlay position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center" style="z-index:10; background: rgba(255,255,255,0.5);"><div class="spinner-border text-primary" role="status"></div></div>');
+        }
+        
+        // Smooth scroll to top of products
+        $('html, body').animate({
+            scrollTop: $("#products_grid_before").offset().top - 100
+        }, 500);
 
         try {
             const response = await fetch(newUrl);
@@ -90,28 +99,34 @@ publicWidget.registry.TecnosoftAjaxFilters = publicWidget.Widget.extend({
             const htmlDoc = parser.parseFromString(text, 'text/html');
 
             const newGrid = htmlDoc.querySelector('#products_grid');
-            const newSidebar = htmlDoc.querySelector('#products_grid_before');
+            const newSidebar = htmlDoc.querySelector('#products_grid_before'); // Filters sidebar
             const newPager = htmlDoc.querySelector('.products_pager');
 
             if (newGrid) {
                 this.$('#products_grid').replaceWith(newGrid);
             }
             if (newSidebar) {
-                this.$('#products_grid_before').replaceWith(newSidebar);
+                // If sidebar exists (desktop) or mobile drawer content
+                const $currSidebar = this.$('#products_grid_before');
+                if ($currSidebar.length) {
+                     $currSidebar.replaceWith(newSidebar);
+                } else {
+                    // Mobile drawer content update might be needed if it's separate
+                }
             }
             if (newPager) {
                 this.$('.products_pager').replaceWith(newPager);
             }
 
-            // Re-trigger start for widgets inside the new content if needed
-            // But publicWidget.registry should handle new elements on DOM change?
-            // Usually we need to rebuild or just rely on delegating.
+            // Re-initialize widgets (lazy loading images, animations)
+            // Odoo public widgets usually re-scan, but explicit trigger helps
+            $(window).trigger('resize'); 
             
         } catch (error) {
             console.error("Tecnosoft AJAX Filter Error:", error);
             window.location.href = newUrl; // Fallback to hard reload
         } finally {
-            this.$grid.css('opacity', '1');
+            this.$('#products_grid').css('opacity', '1');
             this.$('.ajax-loading-overlay').remove();
         }
     },

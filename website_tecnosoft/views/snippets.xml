@@ -17,7 +17,7 @@
     </template>
 
     <template id="zenith_header_selector_option" inherit_id="website.snippet_options">
-        <xpath expr="//we-select[@data-variable='header-template']/we-button[last()]" position="after">
+        <xpath expr="//we-select[@data-variable='header-template']" position="inside">
             <we-button title="Zenith Header V1" 
                        data-name="header_zenith_v1_opt" 
                        data-customize-website-views="website_tecnosoft.header_zenith_v1" 
@@ -73,7 +73,7 @@
             </div>
 
             <!-- Header Variants -->
-            <div data-js="tecnosoft_header_options" data-selector="header.tecnosoft-header">
+            <div data-js="tecnosoft_header_options" data-selector="header.tecnosoft-header-v1">
                 <we-row string="Diseño Header">
                     <we-select string="Variante" data-attribute-name="header_variant" data-no-preview="true">
                         <we-button data-select-data-attribute="">Estándar</we-button>
@@ -340,43 +340,43 @@
     </template>
 
     <template id="s_tecnosoft_mega_links" name="Mega Menu Links (4 Cols)">
-        <section class="s_tecnosoft_mega_links pt-3 pb-3">
+        <section class="s_tecnosoft_mega_links pt-4 pb-4 bg-white">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3">
-                        <h6 class="fw-bold text-uppercase text-primary">Computers</h6>
+                        <h6 class="fw-bold text-uppercase text-primary o_default_snippet_text">Computers</h6>
                         <ul class="list-unstyled">
-                            <li><a href="#" class="nav-link text-muted">Laptops</a></li>
-                            <li><a href="#" class="nav-link text-muted">Desktops</a></li>
-                            <li><a href="#" class="nav-link text-muted">Servers</a></li>
-                            <li><a href="#" class="nav-link text-muted">Accessories</a></li>
+                            <li class="mb-2"><a href="#" class="nav-link text-muted p-0 transition-all hover-translate-x">Laptops</a></li>
+                            <li class="mb-2"><a href="#" class="nav-link text-muted p-0 transition-all hover-translate-x">Desktops</a></li>
+                            <li class="mb-2"><a href="#" class="nav-link text-muted p-0 transition-all hover-translate-x">Servers</a></li>
+                            <li class="mb-2"><a href="#" class="nav-link text-muted p-0 transition-all hover-translate-x">Accessories</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-3">
-                        <h6 class="fw-bold text-uppercase text-primary">Tablets</h6>
+                        <h6 class="fw-bold text-uppercase text-primary o_default_snippet_text">Tablets</h6>
                         <ul class="list-unstyled">
-                            <li><a href="#" class="nav-link text-muted">iPad</a></li>
-                            <li><a href="#" class="nav-link text-muted">Android</a></li>
-                            <li><a href="#" class="nav-link text-muted">Windows</a></li>
-                            <li><a href="#" class="nav-link text-muted">Cases</a></li>
+                            <li class="mb-2"><a href="#" class="nav-link text-muted p-0 transition-all hover-translate-x">iPad</a></li>
+                            <li class="mb-2"><a href="#" class="nav-link text-muted p-0 transition-all hover-translate-x">Android</a></li>
+                            <li class="mb-2"><a href="#" class="nav-link text-muted p-0 transition-all hover-translate-x">Windows</a></li>
+                            <li class="mb-2"><a href="#" class="nav-link text-muted p-0 transition-all hover-translate-x">Cases</a></li>
                         </ul>
                     </div>
                      <div class="col-lg-3">
-                        <h6 class="fw-bold text-uppercase text-primary">Smartphones</h6>
+                        <h6 class="fw-bold text-uppercase text-primary o_default_snippet_text">Smartphones</h6>
                         <ul class="list-unstyled">
-                            <li><a href="#" class="nav-link text-muted">iPhone</a></li>
-                            <li><a href="#" class="nav-link text-muted">Samsung</a></li>
-                            <li><a href="#" class="nav-link text-muted">Xiaomi</a></li>
-                            <li><a href="#" class="nav-link text-muted">Google Pixel</a></li>
+                            <li class="mb-2"><a href="#" class="nav-link text-muted p-0 transition-all hover-translate-x">iPhone</a></li>
+                            <li class="mb-2"><a href="#" class="nav-link text-muted p-0 transition-all hover-translate-x">Samsung</a></li>
+                            <li class="mb-2"><a href="#" class="nav-link text-muted p-0 transition-all hover-translate-x">Xiaomi</a></li>
+                            <li class="mb-2"><a href="#" class="nav-link text-muted p-0 transition-all hover-translate-x">Google Pixel</a></li>
                         </ul>
                     </div>
                      <div class="col-lg-3">
-                        <h6 class="fw-bold text-uppercase text-primary">Components</h6>
+                        <h6 class="fw-bold text-uppercase text-primary o_default_snippet_text">Components</h6>
                         <ul class="list-unstyled">
-                            <li><a href="#" class="nav-link text-muted">Processors</a></li>
-                            <li><a href="#" class="nav-link text-muted">Graphics Cards</a></li>
-                            <li><a href="#" class="nav-link text-muted">Motherboards</a></li>
-                            <li><a href="#" class="nav-link text-muted">RAM</a></li>
+                            <li class="mb-2"><a href="#" class="nav-link text-muted p-0 transition-all hover-translate-x">Processors</a></li>
+                            <li class="mb-2"><a href="#" class="nav-link text-muted p-0 transition-all hover-translate-x">Graphics Cards</a></li>
+                            <li class="mb-2"><a href="#" class="nav-link text-muted p-0 transition-all hover-translate-x">Motherboards</a></li>
+                            <li class="mb-2"><a href="#" class="nav-link text-muted p-0 transition-all hover-translate-x">RAM</a></li>
                         </ul>
                     </div>
                 </div>
@@ -385,37 +385,37 @@
     </template>
 
     <template id="s_tecnosoft_mega_category" name="Mega Menu Categories">
-        <section class="s_tecnosoft_mega_category pt-3 pb-3">
+        <section class="s_tecnosoft_mega_category pt-4 pb-4">
             <div class="container">
                 <div class="row g-3">
                     <div class="col-lg-3">
                         <a href="#" class="text-decoration-none">
-                            <div class="category-card p-3 text-center bg-white rounded shadow-sm h-100">
-                                <img src="/web/image/website.s_mega_menu_images_sub_menu_01" class="img-fluid mb-2 rounded" style="max-height: 80px;"/>
+                            <div class="category-card p-4 text-center bg-white rounded-3 shadow-sm h-100 transition-all hover-lift border-0">
+                                <img src="/web/image/website.s_mega_menu_images_sub_menu_01" class="img-fluid mb-3 rounded" style="max-height: 80px;"/>
                                 <h6 class="category-name text-dark fw-bold mb-0">Computers</h6>
                             </div>
                         </a>
                     </div>
                     <div class="col-lg-3">
                         <a href="#" class="text-decoration-none">
-                            <div class="category-card p-3 text-center bg-white rounded shadow-sm h-100">
-                                <img src="/web/image/website.s_mega_menu_images_sub_menu_02" class="img-fluid mb-2 rounded" style="max-height: 80px;"/>
+                            <div class="category-card p-4 text-center bg-white rounded-3 shadow-sm h-100 transition-all hover-lift border-0">
+                                <img src="/web/image/website.s_mega_menu_images_sub_menu_02" class="img-fluid mb-3 rounded" style="max-height: 80px;"/>
                                 <h6 class="category-name text-dark fw-bold mb-0">Smartphones</h6>
                             </div>
                         </a>
                     </div>
                     <div class="col-lg-3">
                         <a href="#" class="text-decoration-none">
-                            <div class="category-card p-3 text-center bg-white rounded shadow-sm h-100">
-                                <img src="/web/image/website.s_mega_menu_images_sub_menu_03" class="img-fluid mb-2 rounded" style="max-height: 80px;"/>
+                            <div class="category-card p-4 text-center bg-white rounded-3 shadow-sm h-100 transition-all hover-lift border-0">
+                                <img src="/web/image/website.s_mega_menu_images_sub_menu_03" class="img-fluid mb-3 rounded" style="max-height: 80px;"/>
                                 <h6 class="category-name text-dark fw-bold mb-0">Accessories</h6>
                             </div>
                         </a>
                     </div>
                     <div class="col-lg-3">
                         <a href="#" class="text-decoration-none">
-                            <div class="category-card p-3 text-center bg-white rounded shadow-sm h-100">
-                                <img src="/web/image/website.s_mega_menu_images_sub_menu_04" class="img-fluid mb-2 rounded" style="max-height: 80px;"/>
+                            <div class="category-card p-4 text-center bg-white rounded-3 shadow-sm h-100 transition-all hover-lift border-0">
+                                <img src="/web/image/website.s_mega_menu_images_sub_menu_04" class="img-fluid mb-3 rounded" style="max-height: 80px;"/>
                                 <h6 class="category-name text-dark fw-bold mb-0">Cameras</h6>
                             </div>
                         </a>

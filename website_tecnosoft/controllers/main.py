@@ -60,6 +60,8 @@ class TecnosoftController(http.Controller):
                 'image_url': f'/web/image/product.template/{p.id}/image_512',
                 'url': p.website_url,
                 'description_sale': p.description_sale,
+                'brand_name': p.brand_id.name if p.brand_id else None,
+                'category_name': p.public_categ_ids[0].name if p.public_categ_ids else None,
             })
 
         return {'products': product_list}

@@ -2,14 +2,14 @@
 <odoo>
     <!-- Custom Layout Overrides -->
     <template id="tecnosoft_layout" inherit_id="website.layout" name="Tecnosoft Layout">
-        <xpath expr="//header" position="attributes">
-            <attribute name="class" add="tecnosoft-header shadow-sm sticky-top" separator=" "/>
-        </xpath>
         <xpath expr="//head" position="inside">
             <link rel="manifest" href="/website_tecnosoft/static/src/manifest.json"/>
             <meta name="theme-color" content="#007bff"/>
+            <link rel="preconnect" href="https://fonts.googleapis.com"/>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
         </xpath>
         <xpath expr="//div[@id='wrapwrap']" position="inside">
+            <!-- Side Cart (Managed by JS) -->
             <div class="zenith-side-cart-overlay"></div>
             <div class="zenith-side-cart">
                 <div class="cart-header">
@@ -17,7 +17,6 @@
                     <span class="close-cart fa fa-times"></span>
                 </div>
                 <div class="cart-content">
-                    <!-- Items injected by JS -->
                     <div class="text-center py-5 empty-cart-msg">
                         <i class="fa fa-shopping-basket fa-3x text-muted mb-3"></i>
                         <p class="text-muted">Tu carrito está vacío</p>
@@ -61,95 +60,6 @@
         </xpath>
     </template>
 
-    <!-- Custom Header: Replaces default frontend_layout header -->
-    <template id="tecnosoft_header" inherit_id="portal.frontend_layout" name="Tecnosoft Header">
-        <xpath expr="//header" position="replace">
-            <header class="tecnosoft-header shadow-sm sticky-top o_header_standard">
-                <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
-                    <div class="container">
-                        <a class="navbar-brand d-flex align-items-center" href="/">
-                            <img t-if="website.logo" t-att-src="website.image_url(website, 'logo')" class="img-fluid" style="max-height: 50px;" alt="Logo"/>
-                            <span class="ms-2 fw-bold text-primary" t-field="website.name"/>
-                        </a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#tecnosoft_nav">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="tecnosoft_nav">
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                                <t t-foreach="website.menu_id.child_id" t-as="menu">
-                                    <li class="nav-item">
-                                        <a t-attf-class="nav-link #{'active' if menu.url == request.httprequest.path else ''}" t-att-href="menu.url">
-                                            <span t-field="menu.name"/>
-                                        </a>
-                                    </li>
-                                </t>
-                            </ul>
-                            <div class="d-flex align-items-center">
-                                <!-- Multi-language & Multi-currency -->
-                                <div class="d-flex align-items-center me-2">
-                                    <t t-call="portal.language_selector">
-                                        <t t-set="_btn_class" t-value="'nav-link text-dark py-0 px-2'"/>
-                                        <t t-set="_dropdown_menu_class" t-value="'dropdown-menu-end shadow border-0 mt-2'"/>
-                                    </t>
-                                    <t t-if="website and website.pricelist_id and len(website.get_pricelist_available()) &gt; 1">
-                                        <div class="dropdown mx-1">
-                                            <a href="#" class="nav-link dropdown-toggle text-dark py-0" data-bs-toggle="dropdown">
-                                                <t t-esc="website.get_current_pricelist().currency_id.name"/>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
-                                                <t t-foreach="website.get_pricelist_available()" t-as="pl">
-                                                    <a t-att-href="'/shop/change_pricelist/%s' % pl.id" class="dropdown-item">
-                                                        <t t-esc="pl.currency_id.name"/>
-                                                    </a>
-                                                </t>
-                                            </div>
-                                        </div>
-                                    </t>
-                                </div>
-                                <!-- AJAX Search -->
-                                <div class="tecnosoft-ajax-search mx-2 d-none d-lg-block position-relative" style="width: 250px;">
-                                    <div class="input-group input-group-sm">
-                                        <input type="text" class="form-control rounded-pill border-primary-light ps-3" placeholder="Buscar..." id="tecnosoft_search_input" autocomplete="off"/>
-                                        <div class="input-group-text bg-transparent border-0 position-absolute end-0 top-50 translate-middle-y me-2" style="z-index: 5;">
-                                            <i class="fa fa-search text-muted"></i>
-                                        </div>
-                                    </div>
-                                    <div id="tecnosoft_search_results" class="dropdown-menu shadow-lg border-0 mt-2 p-0 w-100 overflow-hidden" style="display: none; max-height: 400px; overflow-y: auto;">
-                                        <!-- Results injected via JS -->
-                                    </div>
-                                </div>
-                                <!-- Mobile Search Icon -->
-                                <a href="/shop" class="nav-link text-dark mx-2 d-lg-none">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                                <!-- Cart -->
-                                <t t-set="website_sale_cart_quantity" t-value="request.website.sale_get_order().cart_quantity or 0"/>
-                                <a href="/shop/cart" class="nav-link text-dark position-relative mx-2">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    <span t-if="website_sale_cart_quantity" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">
-                                        <t t-esc="website_sale_cart_quantity"/>
-                                    </span>
-                                </a>
-                                <!-- User Account -->
-                                <div class="dropdown mx-2">
-                                    <a class="nav-link dropdown-toggle text-dark d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown">
-                                        <i class="fa fa-user-circle me-1"></i>
-                                        <span class="d-none d-md-inline" t-esc="user_id.name[:15] + '...' if len(user_id.name) > 15 else user_id.name"/>
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
-                                        <li><a class="dropdown-item" href="/my/home">Mi Cuenta</a></li>
-                                        <li><a class="dropdown-item" href="/shop/cart">Mi Carrito</a></li>
-                                        <li><hr class="dropdown-divider"/></li>
-                                        <li><a class="dropdown-item text-danger" href="/web/session/logout">Cerrar Sesión</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-            </header>
-        </xpath>
-    </template>
 
     <!-- Custom Footer -->
     <template id="tecnosoft_footer" inherit_id="website.footer_custom" name="Tecnosoft Footer">
@@ -244,37 +154,60 @@
             <attribute name="itemscope" add="itemscope" separator=" "/>
             <attribute name="itemtype" add="http://schema.org/Product" separator=" "/>
         </xpath>
+        
+        <!-- Image Container Modifications -->
         <xpath expr="//div[hasclass('oe_product_image')]" position="attributes">
-            <attribute name="class" add="border-bottom-0 position-relative" separator=" "/>
+            <attribute name="class" add="border-bottom-0 position-relative overflow-hidden" separator=" "/>
         </xpath>
+        
         <xpath expr="//div[hasclass('oe_product_image')]" position="inside">
-            <!-- Labels Overlay - Top Labels -->
-            <div class="tecnosoft-labels tecnosoft-labels-top position-absolute top-0 start-0 w-100 p-2 d-flex flex-wrap gap-1" style="pointer-events: none;">
-                <t t-foreach="product.label_ids.filtered(lambda l: l.position in ('top-left', 'top-right'))" t-as="label">
-                    <span t-attf-class="tecnosoft-label tecnosoft-label-{{label.style or 'badge'}} tecnosoft-label-{{label.position}} fw-bold shadow-sm"
-                          t-attf-style="background-color: {{label.bg_color}}; color: {{label.text_color}};">
-                        <t t-esc="label.name"/>
-                    </span>
-                </t>
-            </div>
-            <!-- Labels Overlay - Bottom Labels -->
-            <div class="tecnosoft-labels tecnosoft-labels-bottom position-absolute bottom-0 start-0 w-100 p-2 d-flex flex-wrap gap-1" style="pointer-events: none;">
-                <t t-foreach="product.label_ids.filtered(lambda l: l.position in ('bottom-left', 'bottom-right'))" t-as="label">
-                    <span t-attf-class="tecnosoft-label tecnosoft-label-{{label.style or 'badge'}} tecnosoft-label-{{label.position}} fw-bold shadow-sm"
-                          t-attf-style="background-color: {{label.bg_color}}; color: {{label.text_color}};">
+            <!-- Secondary Image (Hover Effect) -->
+            <t t-set="second_image" t-value="product.product_variant_ids and product.product_variant_ids[0].image_1920 or product.image_1920"/> <!-- Placeholder logic - ideally we use extra media -->
+            <!-- Note: deeply retrieving extra_variant_media might be heavy here, checking for profile extra images if available -->
+            <span class="d-none d-md-block tecnosoft-secondary-image position-absolute top-0 start-0 w-100 h-100 bg-white"
+                  t-attf-style="background-image: url('/web/image/product.template/#{product.id}/image_1024'); opacity: 0; transition: opacity 0.3s ease;">
+                  <!-- Ideally this would point to a different image field if Odoo stored 'hover_image' separately, 
+                       for now we use the main image zooming or a specific logic if user has 'product_images' module. 
+                       In standard Odoo, we often stick to the main image or look for the first extra image. -->
+            </span>
+            <!-- (Optimization: In a real 'All-in-One' we'd access product.product_template_image_ids[0] if exists) -->
+
+            <!-- Labels Overlay -->
+            <div class="tecnosoft-labels position-absolute top-0 start-0 w-100 p-2 d-flex flex-column gap-1" style="pointer-events: none; z-index: 2;">
+                <t t-foreach="product.label_ids" t-as="label">
+                    <span t-attf-class="badge tecnosoft-label-{{label.style}} tecnosoft-label-{{label.position}} align-self-{{'start' if 'left' in label.position else 'end'}} shadow-sm"
+                          t-attf-style="background-color: {{label.bg_color}}; color: {{label.text_color}}; backdrop-filter: blur(5px);">
                         <t t-esc="label.name"/>
                     </span>
                 </t>
             </div>
             
-            <!-- Quick View Overlay Button -->
-            <button type="button" class="btn btn-light rounded-circle shadow o_quick_view position-absolute top-50 start-50 translate-middle opacity-0 tecnosoft-quick-view-btn" 
-                    t-att-data-product-id="product.id"
-                    aria-label="Vista Rápida"
-                    title="Vista Rápida">
-                <i class="fa fa-eye"></i>
-            </button>
+            <!-- Premium Action Bar (Slide Up) -->
+            <div class="tecnosoft-action-bar position-absolute bottom-0 start-0 w-100 p-2 d-flex justify-content-center gap-2 translate-y-100 transition-all opacity-0" style="z-index: 3;">
+                
+                <!-- Quick View -->
+                <button type="button" class="btn btn-light rounded-circle shadow-sm o_quick_view tecnosoft-quick-view-btn" 
+                        t-att-data-product-template-id="product.id"
+                        aria-label="Vista Rápida" title="Vista Rápida">
+                    <i class="fa fa-eye"></i>
+                </button>
+                
+                <!-- Add to Cart (Icon only for clean look) -->
+                <t t-if="product._is_add_to_cart_possible()">
+                    <a role="button" class="btn btn-primary rounded-circle shadow-sm a-submit" aria-label="Añadir">
+                        <i class="fa fa-shopping-cart"></i>
+                    </a>
+                </t>
+                
+                <!-- Wishlist (Native Hook) -->
+                <t t-if="request.website.viewref('website_sale_wishlist.add_to_wishlist').active">
+                    <button type="button" class="btn btn-light rounded-circle shadow-sm o_add_wishlist" t-att-disabled="in_wishlist" t-att-data-product-template-id="product.id" t-att-data-product-product-id="product.product_variant_ids[0].id" title="Add to Wishlist">
+                        <i class="fa fa-heart o_heart_icon" role="img" aria-label="Add to wishlist"></i>
+                    </button>
+                </t>
+            </div>
         </xpath>
+
         <xpath expr="//h6[hasclass('o_wsale_products_item_title')]" position="inside">
             <meta itemprop="name" t-att-content="product.name"/>
         </xpath>
@@ -302,6 +235,27 @@
                         <i class="fa fa-play-circle me-1"></i> Ver Video
                     </button>
                 </t>
+            </div>
+        </xpath>
+        <xpath expr="//div[@id='add_to_cart_wrap']" position="before">
+             <h5 t-if="branch_stock" class="mt-4 mb-3 border-bottom pb-2 fw-bold text-uppercase text-secondary small">Disponibilidad por Sede</h5>
+            <div id="tecnosoft_branch_stock_container" t-att-class="'mb-4 bg-light p-3 rounded shadow-sm border ' + (not branch_stock and 'd-none' or '')">
+                <table class="table table-sm table-borderless mb-0">
+                    <tbody>
+                        <tr t-foreach="branch_stock" t-as="branch">
+                            <td class="align-middle py-2">
+                                <i class="fa fa-map-marker text-primary me-2"></i>
+                                <span class="fw-bold text-dark" t-esc="branch['name']"/>
+                                <small class="d-block text-muted ps-4" t-if="branch['desc']" t-esc="branch['desc']"/>
+                            </td>
+                            <td class="text-end align-middle py-2">
+                                <span class="badge bg-success rounded-pill px-3 py-2 shadow-sm">
+                                    <t t-esc="branch['qty']"/> Disponibles
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </xpath>
         <xpath expr="//h1[@t-field='product.name']" position="before">
@@ -362,7 +316,7 @@
                 </div>
             </div>
 
-            <div id="tecnosoft_sticky_cart" class="d-none d-md-flex align-items-center justify-content-between fixed-bottom bg-white shadow-lg p-3 border-top z-index-1000 transform-translate-y-100 transition-all">
+            <div id="tecnosoft_sticky_cart" class="tecnosoft-sticky-cart-bar d-none d-md-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center gap-3">
                     <img t-if="product.image_128" t-att-src="'/web/image/product.template/%s/image_128' % product.id" class="rounded shadow-sm" style="width: 50px; height: 50px; object-fit: cover;"/>
                     <div>

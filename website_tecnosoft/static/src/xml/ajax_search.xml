@@ -9,8 +9,12 @@
                             <img t-att-src="product.image_url" class="rounded shadow-sm" style="width: 48px; height: 48px; object-fit: cover;"/>
                         </div>
                         <div class="search-result-info flex-grow-1 overflow-hidden">
+                            <div class="d-flex align-items-center gap-2 mb-1" t-if="product.brand_name or product.category_name">
+                                <span t-if="product.brand_name" class="badge bg-light text-dark border small" t-esc="product.brand_name"/>
+                                <span t-if="product.category_name" class="text-muted small text-truncate" style="max-width: 100px;" t-esc="product.category_name"/>
+                            </div>
                             <h6 class="mb-0 fw-bold text-dark text-truncate" t-esc="product.name"/>
-                            <div class="small text-primary fw-bold" t-esc="product.price_formatted"/>
+                            <div class="small text-primary fw-bold mt-1" t-esc="product.price_formatted"/>
                         </div>
                         <div class="search-result-arrow ms-2 text-muted opacity-50">
                             <i class="fa fa-chevron-right"/>

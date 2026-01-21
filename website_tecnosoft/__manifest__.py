@@ -11,6 +11,7 @@
         'security/ir.model.access.csv',
         'views/theme_templates.xml',
         'views/snippets.xml',
+        'data/presets.xml',
         'views/website_views.xml',
         'views/sales_triggers.xml',
         'views/popups.xml',
@@ -24,6 +25,7 @@
         'views/product_label_views.xml',
         'views/wishlist_comparison.xml',
         'views/headers/header_zenith_v1.xml',
+        'views/tecnosoft_branch_views.xml',
     ],
     'demo': [
         'data/demo_data.xml',
@@ -61,6 +63,7 @@
             'website_tecnosoft/static/src/js/ajax_search.js',
             'website_tecnosoft/static/src/js/ajax_filters.js',
             'website_tecnosoft/static/src/js/pwa_init.js',
+            'website_tecnosoft/static/src/js/branch_stock.js',
         ],
         'web.assets_qweb': [
             'website_tecnosoft/static/src/xml/dynamic_snippets.xml',

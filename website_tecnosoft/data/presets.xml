@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- 
+    Presets: Configuration of default view states for the theme.
+    Ref: https://www.odoo.com/documentation/18.0/es_419/developer/tutorials/website_theme.html
+    -->
+
+    <!-- Disable standard headers to avoid conflicts/double headers if they are active by default -->
+    <record id="website.template_header_default" model="ir.ui.view">
+        <field name="active" eval="False"/>
+    </record>
+    <record id="website.template_header_hamburger" model="ir.ui.view">
+        <field name="active" eval="False"/>
+    </record>
+    <record id="website.template_header_vertical" model="ir.ui.view">
+        <field name="active" eval="False"/>
+    </record>
+    <record id="website.template_header_sidebar" model="ir.ui.view">
+        <field name="active" eval="False"/>
+    </record>
+
+    <!-- Configure Homepage Layout Options if needed -->
+    <!-- 
+    <record id="website.page_home" model="website.page">
+        <field name="header_overlay" eval="True"/> 
+    </record> 
+    -->
+</odoo>

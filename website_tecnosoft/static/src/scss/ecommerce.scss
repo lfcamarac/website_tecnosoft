@@ -1,106 +1,96 @@
 // Shop & Product Styling for Tecnosoft
+// "Premium All-in-One" Architecture
+
+// Variables (Use Odoo variables where possible, but here are local scopes)
+$tecnosoft-card-transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
 .tecnosoft-product-card {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: $tecnosoft-card-transition;
     background: #fff;
+    overflow: hidden; // Ensure hover elements don't spill
 
     .oe_product_image {
-        padding: 1.5rem;
+        padding: 0; // Full bleed images are more premium
+        position: relative;
         background: #f8f9fa;
         overflow: hidden;
 
-        img {
-            transition: transform 0.5s ease;
+        img:first-child {
+            transition: opacity 0.3s ease, transform 0.5s ease;
+        }
+
+        // Secondary Image Logic
+        .tecnosoft-secondary-image {
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            z-index: 1;
+            transition: opacity 0.4s ease;
         }
     }
 
+    // Hover State: The "Magic"
     &:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0, 50, 100, 0.1) !important;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important;
 
-        .oe_product_image img {
-            transform: scale(1.05);
+        .oe_product_image {
+            // Show secondary image
+            .tecnosoft-secondary-image {
+                opacity: 1 !important;
+            }
+            // Optional: Hide primary if secondary has transparency, but usually overlay is enough
+        }
+
+        // Reveal Action Bar
+        .tecnosoft-action-bar {
+            transform: translateY(0) !important;
+            opacity: 1 !important;
+        }
+    }
+
+    // Action Bar Styling
+    .tecnosoft-action-bar {
+        // Blur background for legibility
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(8px);
+        border-top: 1px solid rgba(0,0,0,0.05);
+
+        .btn {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            
+            &:hover {
+                transform: scale(1.1);
+            }
         }
     }
 }
 
-// B2B UI Enhancements
-.o_wsale_product_btn {
-    .btn {
-        border-radius: 50% !important;
-        width: 38px;
-        height: 38px;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-left: 5px;
-    }
+// Premium Labels (Glassmorphism)
+.tecnosoft-label-badge {
+    // Override badge defaults
+    border-radius: 4px;
+    padding: 0.35em 0.65em;
+    font-size: 0.75em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-// Price Hiding for Public Users (Optional B2B style)
-.tecnosoft-hide-price {
-    .product_price {
-        display: none !important;
-    }
-
-    .tecnosoft-b2b-login-msg {
-        display: block !important;
-        font-size: 0.85rem;
-        color: #6c757d;
-        font-style: italic;
-    }
+// B2B & Utilities
+.o_wsale_product_btn .btn {
+    border-radius: 50% !important;
 }
 
-// Sales Triggers & Urgency
-.tecnosoft-sticky-cta {
-    z-index: 1040;
-    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-
-    &.show-cta {
-        transform: translateY(0) !important;
-    }
-}
-
-.tecnosoft-social-proof {
-    transition: transform 0.5s ease-out;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(5px);
-
-    &.show-proof {
-        transform: translateX(0) !important;
-    }
-}
-
-.animate-pulse {
-    animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.1);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-.bg-primary-light {
-    background-color: rgba(0, 86, 179, 0.1);
-}
-
-.transition-all {
-    transition: all 0.3s ease;
-}
-
-.translate-y-100 {
-    transform: translateY(100%);
-}
-
-.translate-x-n100 {
-    transform: translateX(-120%);
-}
+// Animation helpers
+.transition-all { transition: all 0.3s ease; }
+.translate-y-100 { transform: translateY(100%); }
+.opacity-0 { opacity: 0; }

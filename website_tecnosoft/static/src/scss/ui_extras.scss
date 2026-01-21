@@ -1,14 +1,24 @@
 /* Tecnosoft UI Extras */
 
-/* Sticky CTA */
-.tecnosoft-sticky-cta {
+/* Sticky Cart Bar (Premium) */
+.tecnosoft-sticky-cart-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   z-index: 1040;
-  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(0,0,0,0.05);
+  padding: 15px 0;
+  box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+  
   transform: translateY(100%);
-}
-
-.tecnosoft-sticky-cta.show-cta {
-  transform: translateY(0);
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  
+  &.is-visible {
+    transform: translateY(0);
+  }
 }
 
 /* Social Proof */
@@ -244,3 +254,170 @@
         }
     }
 }
+
+/* ---------------------------------------------------- */
+/* Migrated from bootstrap_overridden.scss              */
+/* ---------------------------------------------------- */
+
+// Button Styling
+.btn-primary {
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+}
+
+// Card Styling
+.card {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        background: rgba(255, 255, 255, 0.95);
+    }
+}
+
+// Header Styling (Extended)
+.tecnosoft-header {
+    .navbar {
+        transition: all 0.3s ease;
+
+        .nav-link {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 500;
+            color: #343a40 !important;
+            position: relative;
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 5px;
+                left: 50%;
+                width: 0;
+                height: 2px;
+                background: #0056b3;
+                transition: all 0.3s ease;
+                transform: translateX(-50%);
+            }
+
+            &:hover,
+            &.active {
+                color: #0056b3 !important;
+
+                &::after {
+                    width: 20px;
+                }
+            }
+        }
+    }
+}
+
+// Footer Styling (Extended)
+#footer {
+    h5, h6 {
+        font-family: 'Outfit', sans-serif;
+    }
+
+    .hover-primary {
+        transition: color 0.2s ease;
+        &:hover {
+            color: #0056b3 !important;
+        }
+    }
+
+    .input-group {
+        .form-control {
+            &:focus {
+                box-shadow: none;
+                border-color: #0056b3;
+            }
+        }
+    }
+}
+
+/* Mega Menu & Navigation Styles */
+.s_tecnosoft_mega_links {
+    .nav-link {
+        transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.2s ease;
+        &:hover {
+            color: var(--o-color-primary) !important;
+            transform: translateX(5px);
+        }
+    }
+}
+
+.s_tecnosoft_mega_category {
+    .category-card {
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0,0,0,0.03);
+        
+        &:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+        }
+    }
+}
+
+.s_tecnosoft_mega_promo {
+    .promo-content {
+        transition: box-shadow 0.3s ease;
+        &:hover {
+             box-shadow: 0 15px 35px rgba(0,0,0,0.15) !important;
+        }
+    }
+    
+    .group-hover-zoom {
+        &:hover img {
+            transform: scale(1.05);
+        }
+    }
+    
+    .bg-gradient-to-t-black {
+        background: linear-gradient(to top, rgba(0,0,0, 0.8) 0%, rgba(0,0,0, 0) 100%);
+    }
+}
+
+.hover-lift {
+    transition: transform 0.3s ease;
+    &:hover {
+        transform: translateY(-3px);
+    }
+}
+
+.transition-transform {
+    transition: transform 0.5s ease;
+}
+
+
+
+/* Premium Currency & Language Switcher */
+.o_pricelist_dropdown .dropdown-toggle,
+.js_language_selector .dropdown-toggle {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 50px !important;
+    padding: 5px 15px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease;
+    
+    &:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+        transform: translateY(-2px);
+    }
+}
+
+
+
+

@@ -1,30 +1,34 @@
-[data-zenith-reveal] {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
 
-.zenith-revealed {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-}
+/* 
+    Tecnosoft Animations - Aligned with Odoo's o_animate engine.
+    Ref: https://www.odoo.com/documentation/18.0/es_419/developer/howtos/website_themes/animations.html
 
-// Style specific animations
+    We previously used [data-zenith-reveal], which is non-standard.
+    We now extend Odoo's native animation classes or provide compatible helpers.
+*/
+
+// Ensure our custom style wrappers work with Odoo animations
 .zenith-style-futuristic {
-    [data-zenith-reveal] {
-        transform: scale(0.95) translateY(20px);
-    }
-    .zenith-revealed {
-        transform: scale(1) translateY(0) !important;
-        text-shadow: 0 0 10px rgba(0, 255, 242, 0.3);
+    .o_animate {
+        // Futuristic override for standard animations
+        &.o_anim_fade_in_up {
+            transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
     }
 }
 
 .zenith-style-epic {
-    [data-zenith-reveal] {
-        transform: translateX(-20px);
+    .o_animate {
+         // Epic override
+        &.o_anim_fade_in_left {
+            transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55) !important;
+        }
     }
-    .zenith-revealed {
-        transform: translateX(0) !important;
-    }
+}
+
+// Deprecated fallback for backward compatibility (if needed during migration)
+// Users should switch to 'o_animate' and 'o_anim_fade_in_up' via the Editor.
+[data-zenith-reveal] {
+    @extend .o_animate;
+    @extend .o_anim_fade_in_up;
 }
