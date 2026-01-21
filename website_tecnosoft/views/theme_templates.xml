@@ -150,6 +150,32 @@
         </xpath>
     </template>
 
+    <!-- Modern Breadcrumbs Override -->
+    <template id="tecnosoft_breadcrumbs" inherit_id="website.layout" name="Tecnosoft Breadcrumbs">
+        <xpath expr="//main" position="before">
+            <t t-if="not is_homepage and not request.path == '/'">
+                <div class="tecnosoft-breadcrumb-wrapper bg-light py-3 border-bottom">
+                    <div class="container d-flex align-items-center justify-content-between">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mb-0 small fw-bold">
+                                <li class="breadcrumb-item"><a href="/" class="text-decoration-none text-muted">INICIO</a></li>
+                                <!-- Odoo handles breadcrumbs dynamically normally, 
+                                     but we can inject a cleaner version here if needed. 
+                                     For now, we style the actual breadcrumbs in SCSS. -->
+                                <t t-if="request.path.startswith('/shop')">
+                                    <li class="breadcrumb-item"><a href="/shop" class="text-decoration-none text-muted">TIENDA</a></li>
+                                </t>
+                            </ol>
+                        </nav>
+                        <div class="breadcrumb-actions d-none d-md-block">
+                             <span class="text-muted small fw-bold">Tecnosoft Theme Zenith</span>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
     <!-- Product Item Customization with SEO & Quick View -->
     <template id="tecnosoft_product_item" inherit_id="website_sale.products_item" name="Tecnosoft Product Item">
         <xpath expr="//form" position="attributes">

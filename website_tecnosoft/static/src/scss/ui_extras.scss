@@ -324,7 +324,142 @@
   }
 }
 
-// Header Styling (Extended)
+/* Premium Variant Selectors (Swatches) */
+.js_product {
+  .variant_attribute {
+    .attribute_name {
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.5px;
+      color: #999;
+      margin-bottom: 12px;
+      display: block;
+
+      &::after {
+        content: ":";
+      }
+    }
+
+    /* Color Swatches */
+    .o_variant_pills, .list-inline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 0;
+      margin: 0;
+
+      .list-inline-item {
+        margin: 0;
+      }
+    }
+
+    /* Color Pill Styling */
+    label.o_variant_pills_input_value {
+      border: 2px solid #eee !important;
+      border-radius: 50% !important;
+      width: 32px;
+      height: 32px;
+      padding: 0 !important;
+      transition: all 0.3s ease;
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+
+      &.active {
+        border-color: var(--primary) !important;
+        transform: scale(1.15);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        &::after {
+          content: "\f00c";
+          font-family: FontAwesome;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          color: white;
+          font-size: 10px;
+          text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+      }
+
+      &:hover {
+        border-color: #ddd !important;
+        transform: scale(1.1);
+      }
+    }
+
+    /* Radio/Button Styling (Pills) */
+    .o_variant_pills_input_value:not(.o_variant_pills_input_value_color) {
+      border-radius: 12px !important;
+      width: auto !important;
+      height: auto !important;
+      padding: 8px 16px !important;
+      font-weight: 600;
+      font-size: 0.85rem;
+      background: #f8f9fa;
+      border: 1px solid #eee !important;
+
+      &.active {
+        background: var(--primary);
+        color: white !important;
+        border-color: var(--primary) !important;
+        &::after { display: none; }
+      }
+    }
+  }
+}
+
+/* Modern Breadcrumbs */
+.tecnosoft-breadcrumb-wrapper {
+  background: #f8f9fa !important;
+  border-bottom: 1px solid #eee;
+
+  .breadcrumb {
+    .breadcrumb-item {
+      display: flex;
+      align-items: center;
+      
+      & + .breadcrumb-item::before {
+        content: "\f105";
+        font-family: FontAwesome;
+        font-size: 10px;
+        margin-right: 12px;
+        color: #ccc;
+      }
+
+      a {
+        transition: color 0.3s;
+        &:hover {
+          color: var(--primary) !important;
+        }
+      }
+    }
+  }
+}
+
+/* Infinite Scroll / Load More */
+.tecnosoft-load-more-wrapper {
+  .btn-load-more {
+    border-width: 2px;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    padding: 15px 40px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(var(--primary-rgb), 0.2);
+    }
+
+    &:active {
+      transform: translateY(-1px);
+    }
+  }
+}
+
+/* Side Cart Enhancements */
 .tecnosoft-header {
     .navbar {
         transition: all 0.3s ease;
