@@ -297,6 +297,9 @@
                 </table>
             </div>
         </xpath>
+        <xpath expr="//div[@id='product_details']" position="inside">
+            <t t-call="website_tecnosoft.tecnosoft_complete_the_look"/>
+        </xpath>
         <xpath expr="//h1[@t-field='product.name']" position="before">
             <div t-if="product.brand_id" class="mb-2">
                 <span class="badge bg-light text-primary border" t-field="product.brand_id.name"/>

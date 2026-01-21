@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="tecnosoft_complete_the_look" name="Completa el Look">
+        <t t-set="together_prods" t-value="product.get_frequently_bought_together()"/>
+        <div t-if="together_prods" class="tecnosoft-complete-look mt-5 pt-4 border-top">
+            <h4 class="fw-bold mb-4 text-uppercase letter-spacing-1"><i class="fa fa-magic me-2 text-primary"></i> Completa el Look</h4>
+            <div class="row g-3 align-items-center">
+                <!-- Current Product Thumbnail -->
+                <div class="col-md-auto text-center">
+                    <div class="rounded-3 border p-2 bg-white" style="width: 100px;">
+                        <img t-attf-src="/web/image/product.template/#{product.id}/image_128" class="img-fluid rounded"/>
+                        <div class="small fw-bold mt-1">Este producto</div>
+                    </div>
+                </div>
+                
+                <div class="col-md-auto d-none d-md-block">
+                    <i class="fa fa-plus text-muted opacity-50"></i>
+                </div>
+
+                <!-- Suggested Products -->
+                <div class="col-md">
+                    <div class="d-flex gap-3 overflow-auto pb-2">
+                        <t t-foreach="together_prods" t-as="tpl">
+                            <div class="together-item bg-white border rounded-4 p-3 shadow-sm flex-shrink-0" style="width: 200px;">
+                                <div class="position-relative mb-2">
+                                    <img t-attf-src="/web/image/product.template/#{tpl.id}/image_256" class="img-fluid rounded-3"/>
+                                    <div class="form-check position-absolute top-0 start-0 m-2">
+                                        <input class="form-check-input js_together_check" type="checkbox" checked="checked" t-att-data-id="tpl.product_variant_id.id" t-att-data-price="tpl.list_price"/>
+                                    </div>
+                                </div>
+                                <div class="small fw-bold text-truncate" t-esc="tpl.name"/>
+                                <div class="text-primary small" t-esc="tpl.list_price" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+
+                <!-- Selection Summary & Add Pack -->
+                <div class="col-lg-3">
+                    <div class="bg-dark text-white p-4 rounded-4 shadow-lg h-100 d-flex flex-column justify-content-center">
+                        <div class="small text-uppercase opacity-75 mb-1">Total del Pack</div>
+                        <div class="h3 fw-bold mb-3" id="together_pack_total">--</div>
+                        <button class="btn btn-primary btn-lg rounded-pill fw-bold w-100 js_add_together_pack">
+                            AÑADIR PACK <i class="fa fa-shopping-basket ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</odoo>

@@ -708,6 +708,42 @@
   }
 }
 
+/* Complete the Look Cross-selling Styling */
+.tecnosoft-complete-look {
+  .together-item {
+    transition: all 0.3s ease;
+    border: 1px solid #eee !important;
+    
+    &:hover {
+      border-color: var(--primary) !important;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05) !important;
+      transform: translateY(-5px);
+    }
+
+    .form-check-input {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      
+      &:checked {
+        background-color: var(--primary);
+        border-color: var(--primary);
+      }
+    }
+  }
+
+  #together_pack_total {
+    color: var(--primary);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .letter-spacing-1 {
+    letter-spacing: 1px;
+  }
+}
+
 /* Side Cart Enhancements */
 .tecnosoft-header {
     .navbar {
