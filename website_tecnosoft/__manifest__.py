@@ -24,6 +24,7 @@
         'views/product_brand_views.xml',
         'views/product_label_views.xml',
         'views/product_size_guide_views.xml',
+        'views/quick_order_templates.xml',
         'views/headers/header_zenith_v1.xml',
         'views/wishlist_comparison.xml',
         'views/variant_templates.xml',
@@ -71,6 +72,7 @@
             'website_tecnosoft/static/src/js/infinite_scroll.js',
             'website_tecnosoft/static/src/js/store_locator.js',
             'website_tecnosoft/static/src/js/countdown.js',
+            'website_tecnosoft/static/src/js/quick_order.js',
             'website_tecnosoft/static/src/js/branch_stock.js',
         ],
         'web.assets_frontend_minimal': [

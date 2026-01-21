@@ -82,6 +82,30 @@ class TecnosoftController(http.Controller):
             })
         return {'branches': data}
 
+    @http.route('/shop/quick-order', type='http', auth='public', website=True)
+    def quick_order_page(self, **kwargs):
+        """ Render the dedicated Quick Order page. """
+        return request.render('website_tecnosoft.tecnosoft_quick_order')
+
+    @http.route('/website_tecnosoft/bulk_add_cart', type='json', auth='public', website=True)
+    def bulk_add_cart(self, products, **kwargs):
+        """ Add multiple products and quantities to cart at once.
+            'products' should be a list of {'product_id': id, 'qty': qty}
+        """
+        sale_order = request.website.sale_get_order(force_create=True)
+        if not sale_order:
+            return {'error': 'Order not found'}
+
+        for prod_info in products:
+            prod_id = int(prod_info.get('product_id'))
+            qty = float(prod_info.get('qty', 1))
+            if prod_id and qty > 0:
+                sale_order._cart_update(
+                    product_id=prod_id,
+                    add_qty=qty
+                )
+        return {'success': True}
+
     @http.route('/website_tecnosoft/get_categories_info', type='json', auth='public', website=True)
     def get_categories_info(self, category_ids, **kwargs):
         """ Fetch names and info for a list of category IDs. """
