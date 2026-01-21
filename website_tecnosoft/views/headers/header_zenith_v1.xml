@@ -82,7 +82,8 @@
                             <ul class="dropdown-menu shadow-lg border-0 p-3 mt-0 rounded-bottom-4">
                                 <li><a class="dropdown-item py-2 rounded" href="/shop">Todos los Productos</a></li>
                                 <li><hr class="dropdown-divider opacity-50"/></li>
-                                <t t-foreach="website.get_public_categories()" t-as="cat">
+                                <t t-set="categories" t-value="request.env['product.public.category'].search([('parent_id', '=', False)], limit=10)"/>
+                                <t t-foreach="categories" t-as="cat">
                                     <li><a class="dropdown-item py-2 rounded" t-att-href="'/shop/category/%s' % slug(cat)" t-esc="cat.name"/></li>
                                 </t>
                             </ul>
