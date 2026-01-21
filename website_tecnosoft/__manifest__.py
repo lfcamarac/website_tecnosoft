@@ -76,6 +76,7 @@
             'website_tecnosoft/static/src/js/countdown.js',
             'website_tecnosoft/static/src/js/complete_look.js',
             'website_tecnosoft/static/src/js/quick_order.js',
+            'website_tecnosoft/static/src/js/variant_preview.js',
             'website_tecnosoft/static/src/js/branch_stock.js',
         ],
         'web.assets_frontend_minimal': [
