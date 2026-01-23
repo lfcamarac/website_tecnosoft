@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- QUICK VIEW MODAL CONTENT -->
+    <!-- QUICK VIEW MODAL CONTENT (DISABLED: XPath errors in Odoo 18) -->
+    <!--
     <template id="quick_view_modal" name="Quick View Content">
         <div class="product-quick-view-container position-relative bg-white rounded-4 shadow-lg overflow-hidden border-0">
             <button type="button" class="btn-close position-absolute top-0 end-0 m-4 z-index-10 shadow-sm bg-white rounded-circle p-2" data-bs-dismiss="modal" aria-label="Close" style="width: 32px; height: 32px;"></button>
             <div class="row g-0">
-                <!-- Product Image Gallery Section -->
+                < ! - - Product Image Gallery Section - - >
                 <div class="col-md-7 bg-light d-flex align-items-center justify-content-center border-end overflow-hidden position-relative">
                     <div class="quick-view-badge position-absolute top-0 start-0 m-4 shadow-sm" t-if="product.brand_id">
                         <span class="badge bg-white text-primary px-3 py-2 rounded-pill fw-bold" t-esc="product.brand_id.name"/>
@@ -19,7 +21,7 @@
                         <span t-else="" class="text-muted fa fa-camera fa-5x"></span>
                     </div>
                 </div>
-                <!-- Product Details & Configurator Section -->
+                < ! - - Product Details & Configurator Section - - >
                 <div class="col-md-5 d-flex flex-column">
                     <div class="p-5 flex-grow-1 overflow-auto" style="max-height: 80vh;">
                         <nav aria-label="breadcrumb" class="mb-2">
@@ -39,12 +41,12 @@
 
                         <div class="text-muted mb-4 small lh-base" t-field="product.description_sale"/>
                         
-                        <!-- ADD TO CART FORM -->
+                        < ! - - ADD TO CART FORM - - >
                         <form t-if="product._is_add_to_cart_possible()" action="/shop/cart/update" method="POST" class="js_add_cart_variants">
                             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                             <input type="hidden" name="product_id" t-att-value="product.product_variant_id.id"/>
                             
-                            <!-- Variant Selectors Slot (Uses Odoo Configurator logic if available) -->
+                            < ! - - Variant Selectors Slot (Uses Odoo Configurator logic if available) - - >
                             <div class="js_product mb-4">
                                 <t t-call="website_sale.variants">
                                     <t t-set="ul_class" t-value="'flex-column'"/>
@@ -93,4 +95,5 @@
             </div>
         </div>
     </template>
+    -->
 </odoo>
