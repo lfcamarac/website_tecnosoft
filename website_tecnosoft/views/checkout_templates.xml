@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- One-Page Checkout Styling & Behavioral Overrides -->
+    <!-- One-Page Checkout Styling & Behavioral Overrides (DISABLED: XPath errors in Odoo 18) -->
+    <!--
     <template id="tecnosoft_checkout_layout" inherit_id="website_sale.checkout" name="Tecnosoft Checkout Layout">
         <xpath expr="//div[@id='wrap']" position="attributes">
             <attribute name="class" add="tecnosoft-checkout-page bg-light-soft pt-5 pb-5" separator=" "/>
         </xpath>
         
-        <!-- Header for Checkout (Simple & Clean) -->
+        < ! - - Header for Checkout (Simple & Clean) - - >
         <xpath expr="//div[hasclass('container')][1]" position="before">
             <div class="checkout-header mb-5">
                 <div class="container text-center">
@@ -16,13 +18,15 @@
             </div>
         </xpath>
 
-        <!-- Structure: Left Column (Forms) | Right Column (Sticky Summary) -->
+        < ! - - Structure: Left Column (Forms) | Right Column (Sticky Summary) - - >
         <xpath expr="//div[hasclass('row')]" position="attributes">
             <attribute name="class" add="g-5" separator=" "/>
         </xpath>
     </template>
+    -->
 
-    <!-- Floating Order Summary -->
+    <!-- Floating Order Summary (DISABLED: Potential missing ID) -->
+    <!--
     <template id="tecnosoft_cart_summary" inherit_id="website_sale.cart_summary" name="Tecnosoft Sticky Summary">
         <xpath expr="//div[hasclass('card')]" position="attributes">
             <attribute name="class" add="border-0 shadow-lg rounded-4 sticky-top overflow-hidden" separator=" "/>
@@ -35,8 +39,10 @@
             <attribute name="class" add="fw-bold text-dark border-bottom pb-3 mb-4" separator=" "/>
         </xpath>
     </template>
+    -->
 
-    <!-- Visual Step Indicator -->
+    <!-- Visual Step Indicator (DISABLED: Potential missing ID) -->
+    <!--
     <template id="tecnosoft_wizard_checkout" inherit_id="website_sale.wizard_checkout" name="Tecnosoft Wizard Styling">
         <xpath expr="//div[hasclass('wizard')]" position="replace">
             <div class="tecnosoft-checkout-wizard mb-5">
@@ -65,4 +71,5 @@
             </div>
         </xpath>
     </template>
+    -->
 </odoo>
