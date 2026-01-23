@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- Premium Variant Selectors Override -->
+    <!-- Premium Variant Selectors Override (DISABLED: XPath errors in Odoo 18) -->
+    <!--
     <template id="tecnosoft_variants" inherit_id="website_sale.variants" name="Tecnosoft Premium Variants">
-        <!-- We use XPath to wrap attributes in a more styled container if needed, 
+        < ! - - We use XPath to wrap attributes in a more styled container if needed, 
              but mostly SCSS handles the styling of standard Odoo classes.
-             If we want custom behavior (like image swatches), we might need to change the template logic. -->
+             If we want custom behavior (like image swatches), we might need to change the template logic. - - >
         <xpath expr="//ul[hasclass('js_add_cart_variants')]" position="attributes">
             <attribute name="class" add="tecnosoft-variant-list border-0 p-0" separator=" "/>
         </xpath>
         
-        <!-- Customize Color Attribute rendering if we want to force a specific look -->
+        < ! - - Customize Color Attribute rendering if we want to force a specific look - - >
         <xpath expr="//label[hasclass('o_variant_pills_input_value')]" position="attributes">
             <attribute name="t-attf-class" add="rounded-circle shadow-sm" separator=" "/>
             <attribute name="t-att-data-preview-image">
@@ -17,4 +19,5 @@
             </attribute>
         </xpath>
     </template>
+    -->
 </odoo>
