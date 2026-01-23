@@ -18,7 +18,6 @@
                 <div class="compare-drawer-body p-3 d-flex gap-3 overflow-auto custom-scrollbar">
                     <!-- Dynamic Items will be injected here -->
                 </div>
-                </div>
             </div>
             
             <!-- Theme Customizer Panel -->
