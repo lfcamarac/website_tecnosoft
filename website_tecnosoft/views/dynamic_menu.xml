@@ -17,6 +17,8 @@
     </template>
 
     <!-- QWeb Template for JS Rendering -->
+    <!-- QWeb Template for JS Rendering (DISABLED: web.assets_frontend not found in Odoo 18 context) -->
+    <!--
     <template id="dynamic_mega_menu_template_assets" name="Dynamic Menu Assets" inherit_id="web.assets_frontend">
         <xpath expr="." position="inside">
              <t t-name="website_tecnosoft.DynamicMegaMenuTemplate">
@@ -42,4 +44,5 @@
              </t>
         </xpath>
     </template>
+    -->
 </odoo>
