@@ -469,7 +469,8 @@
     </template>
     -->
 
-    <!-- Request Quote button in Cart -->
+    <!-- Request Quote button in Cart (DISABLED: XPath not found) -->
+    <!--
     <template id="tecnosoft_cart_request_quote" inherit_id="website_sale.cart" name="Tecnosoft Cart Request Quote">
         <xpath expr="//div[hasclass('justify-content-between')]//a[hasclass('btn-primary')]" position="after">
             <a role="button" href="/shop/request_quote" class="btn btn-outline-primary rounded-pill px-4 fw-bold ms-2">
@@ -477,6 +478,7 @@
             </a>
         </xpath>
     </template>
+    -->
 
     <!-- Lottie Empty Cart -->
     <template id="tecnosoft_empty_cart_lottie" inherit_id="website_sale.cart" name="Tecnosoft Empty Cart Lottie">
