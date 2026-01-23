@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="footer_zenith_v1" inherit_id="website.footer_custom" name="Footer Zenith V1" active="False">
+        <xpath expr="//div[@id='footer']" position="replace">
+            <div id="footer" class="oe_structure oe_structure_solo" t-ignore="true" t-if="not no_footer">
+                <section class="s_text_block pt-5 pb-5 bg-dark text-white" data-snippet="footer_zenith_v1">
+                    <div class="container">
+                        <div class="row">
+                            <!-- Column 1: Brand & About -->
+                            <div class="col-lg-4 mb-5 mb-lg-0">
+                                <a href="/" class="d-block mb-4">
+                                    <h3 class="fw-bold text-white mb-0">Zenith<span class="text-primary">.</span></h3>
+                                </a>
+                                <p class="text-white-50 mb-4 pe-lg-5">
+                                    Creamos experiencias digitales excepcionales. La tecnología más avanzada al alcance de tu mano, con el soporte que mereces.
+                                </p>
+                                <div class="social-links d-flex gap-3">
+                                    <a href="#" class="btn btn-outline-light rounded-circle btn-sm"><i class="fa fa-instagram"></i></a>
+                                    <a href="#" class="btn btn-outline-light rounded-circle btn-sm"><i class="fa fa-facebook"></i></a>
+                                    <a href="#" class="btn btn-outline-light rounded-circle btn-sm"><i class="fa fa-twitter"></i></a>
+                                    <a href="#" class="btn btn-outline-light rounded-circle btn-sm"><i class="fa fa-linkedin"></i></a>
+                                </div>
+                            </div>
+
+                            <!-- Column 2: Quick Links -->
+                            <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                                <h6 class="text-uppercase fw-bold mb-4 ls-1">Explorar</h6>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><a href="/shop" class="text-white-50 text-decoration-none hover-white transition-all">Tienda</a></li>
+                                    <li class="mb-2"><a href="/about-us" class="text-white-50 text-decoration-none hover-white transition-all">Nosotros</a></li>
+                                    <li class="mb-2"><a href="/blog" class="text-white-50 text-decoration-none hover-white transition-all">Blog</a></li>
+                                    <li class="mb-2"><a href="/contactus" class="text-white-50 text-decoration-none hover-white transition-all">Contacto</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Column 3: Categories -->
+                            <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                                <h6 class="text-uppercase fw-bold mb-4 ls-1">Categorías</h6>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none hover-white transition-all">Laptops</a></li>
+                                    <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none hover-white transition-all">Smartphones</a></li>
+                                    <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none hover-white transition-all">Audio</a></li>
+                                    <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none hover-white transition-all">Accesorios</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Column 4: Newsletter -->
+                            <div class="col-lg-4 col-md-4">
+                                <h6 class="text-uppercase fw-bold mb-4 ls-1">Suscríbete</h6>
+                                <p class="text-white-50 mb-3 small">Recibe ofertas exclusivas y novedades.</p>
+                                <div class="input-group mb-3">
+                                    <input type="email" class="form-control bg-white bg-opacity-10 border-0 text-white placeholder-white-50" placeholder="Tu email"/>
+                                    <button class="btn btn-primary" type="button"><i class="fa fa-paper-plane"></i></button>
+                                </div>
+                                <div class="payment-methods mt-4 pt-4 border-top border-white border-opacity-10">
+                                    <i class="fa fa-cc-visa fa-2x me-2 opacity-50"></i>
+                                    <i class="fa fa-cc-mastercard fa-2x me-2 opacity-50"></i>
+                                    <i class="fa fa-cc-paypal fa-2x me-2 opacity-50"></i>
+                                    <i class="fa fa-cc-amex fa-2x opacity-50"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Bottom Bar -->
+                <div class="bg-black py-3 border-top border-white border-opacity-10">
+                    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+                        <p class="mb-0 text-white-50 small">&copy; 2025 Tecnosoft. All rights reserved.</p>
+                        <div class="d-flex gap-3 mt-2 mt-md-0">
+                            <a href="#" class="text-white-50 small text-decoration-none">Privacidad</a>
+                            <a href="#" class="text-white-50 small text-decoration-none">Términos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

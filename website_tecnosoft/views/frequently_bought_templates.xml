@@ -48,4 +48,9 @@
             </div>
         </div>
     </template>
+    <template id="tecnosoft_complete_the_look_injection" inherit_id="website_sale.product" name="Complete the Look Injection">
+        <xpath expr="//div[@id='product_full_description']" position="before">
+            <t t-call="website_tecnosoft.tecnosoft_complete_the_look"/>
+        </xpath>
+    </template>
 </odoo>

@@ -3,14 +3,23 @@
 import publicWidget from "@web/legacy/js/public/public_widget";
 
 publicWidget.registry.TecnosoftCountdown = publicWidget.Widget.extend({
-    selector: '.tecnosoft-countdown',
+    selector: '.s_tecnosoft_countdown',
     
     /**
      * @override
      */
     start() {
-        this.endTime = new Date(this.$el.data('end-date')).getTime();
-        if (this.endTime) {
+        // Snippet defines data-date="YYYY-MM-DD HH:MM:SS" on the section
+        const dateStr = this.$el.data('date');
+        // Handle Safari/Cross-browser date parsing
+        this.endTime = new Date(dateStr.replace(/-/g, "/")).getTime(); 
+        
+        if (this.endTime && !isNaN(this.endTime)) {
+            this.$days = this.$('.days');
+            this.$hours = this.$('.hours');
+            this.$minutes = this.$('.minutes');
+            this.$seconds = this.$('.seconds');
+            
             this._updateTimer();
             this.timer = setInterval(() => this._updateTimer(), 1000);
         }
@@ -26,7 +35,7 @@ publicWidget.registry.TecnosoftCountdown = publicWidget.Widget.extend({
 
         if (distance < 0) {
             clearInterval(this.timer);
-            this.$el.html('<div class="alert alert-warning py-1 px-3 mb-0 small fw-bold">OFERTA TERMINADA</div>');
+            this.$el.find('.countdown-wrapper').html('<div class="alert alert-warning py-2 px-4 d-inline-block fw-bold shadow-sm">OFERTA TERMINADA</div>');
             return;
         }
 
@@ -35,33 +44,18 @@ publicWidget.registry.TecnosoftCountdown = publicWidget.Widget.extend({
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        this.$el.html(`
-            <div class="d-flex gap-2 justify-content-center">
-                ${days > 0 ? this._getHtmlPart(days, 'DÍAS') : ''}
-                ${this._getHtmlPart(hours, 'HORAS')}
-                ${this._getHtmlPart(minutes, 'MIN')}
-                ${this._getHtmlPart(seconds, 'SEG')}
-            </div>
-        `);
-    },
-
-    /**
-     * @private
-     */
-    _getHtmlPart(value, label) {
-        return `
-            <div class="countdown-part bg-dark text-white rounded p-2 text-center shadow-sm" style="min-width: 50px;">
-                <div class="h5 fw-bold mb-0">${value.toString().padStart(2, '0')}</div>
-                <div style="font-size: 0.55rem; opacity: 0.7;">${label}</div>
-            </div>
-        `;
+        // Update Text Content Only to preserve styling structure
+        if (this.$days.length) this.$days.text(days.toString().padStart(2, '0'));
+        if (this.$hours.length) this.$hours.text(hours.toString().padStart(2, '0'));
+        if (this.$minutes.length) this.$minutes.text(minutes.toString().padStart(2, '0'));
+        if (this.$seconds.length) this.$seconds.text(seconds.toString().padStart(2, '0'));
     },
     
     /**
      * @override
      */
     destroy() {
-        clearInterval(this.timer);
+        if (this.timer) clearInterval(this.timer);
         this._super.apply(this, arguments);
     }
 });

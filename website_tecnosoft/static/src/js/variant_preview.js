@@ -1,48 +1,43 @@
 /** @odoo-module **/
 
-import publicWidget from "@web/legacy/js/public/public_widget";
+import publicWidget from 'web.public.widget';
 
 publicWidget.registry.TecnosoftVariantPreview = publicWidget.Widget.extend({
-    selector: '.oe_product_cart',
+    selector: '.product_detail_main',
     events: {
-        'mouseenter .variant-dot': '_onMouseEnterDot',
-        'mouseleave .tecnosoft-variant-preview-dots': '_onMouseLeaveDots',
+        'mouseenter .o_variant_pills_input_value': '_onHoverVariant',
+        'mouseleave .o_variant_pills_input_value': '_onLeaveVariant',
     },
 
-    /**
-     * @override
-     */
-    start() {
-        this.$mainImage = this.$('img.oe_product_image_img');
-        this.originalSrc = this.$mainImage.attr('src');
+    start: function () {
+        this.$mainImage = this.$('#o-carousel-product .carousel-item.active img');
+        if (!this.$mainImage.length) {
+            // Fallback for non-carousel layouts
+            this.$mainImage = this.$('img[itemprop="image"]');
+        }
         return this._super.apply(this, arguments);
     },
 
-    /**
-     * @private
-     */
-    _onMouseEnterDot(ev) {
-        const $dot = $(ev.currentTarget);
-        const newSrc = $dot.data('variant-img');
-        
-        $dot.addClass('active').siblings().removeClass('active');
-        
-        if (newSrc && this.$mainImage.length) {
-            this.$mainImage.attr('src', newSrc);
-            this.$mainImage.addClass('animate__animated animate__fadeIn animate__faster');
-            setTimeout(() => this.$mainImage.removeClass('animate__animated animate__fadeIn animate__faster'), 500);
+    _onHoverVariant: function (ev) {
+        const $target = $(ev.currentTarget);
+        const imageUrl = $target.data('preview-image');
+
+        if (imageUrl) {
+            // Store original source if not already stored
+            if (!this.$mainImage.data('original-src')) {
+                this.$mainImage.data('original-src', this.$mainImage.attr('src'));
+            }
+            // Swap image
+            this.$mainImage.attr('src', imageUrl);
+            this.$mainImage.attr('srcset', imageUrl); // Update srcset as well to prevent high-res overrides
         }
     },
 
-    /**
-     * @private
-     */
-    _onMouseLeaveDots() {
-        this.$('.variant-dot').removeClass('active');
-        if (this.$mainImage.length) {
-            this.$mainImage.attr('src', this.originalSrc);
+    _onLeaveVariant: function (ev) {
+        const originalSrc = this.$mainImage.data('original-src');
+        if (originalSrc) {
+            this.$mainImage.attr('src', originalSrc);
+            this.$mainImage.removeAttr('srcset'); // Remove forced srcset to let browser decide or restore original
         }
-    }
+    },
 });
-
-export default publicWidget.registry.TecnosoftVariantPreview;

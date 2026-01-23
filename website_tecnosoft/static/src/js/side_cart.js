@@ -60,6 +60,9 @@ publicWidget.registry.ZenithSideCart = publicWidget.Widget.extend({
     _renderCart(data) {
         const $content = this.$('.cart-content');
         const $total = this.$('.total-amount');
+        const $shippingBar = this.$('.progress-bar');
+        const $shippingText = this.$('.js_shipping_text');
+        const threshold = 100; // Define progress threshold ($100)
         
         if (data.lines.length === 0) {
             $content.html(`
@@ -69,6 +72,8 @@ publicWidget.registry.ZenithSideCart = publicWidget.Widget.extend({
                 </div>
             `);
             $total.text('$ 0.00');
+            $shippingBar.css('width', '0%').attr('aria-valuenow', 0);
+            $shippingText.text('Añade productos para envío GRATIS');
             return;
         }
 
@@ -76,14 +81,14 @@ publicWidget.registry.ZenithSideCart = publicWidget.Widget.extend({
         data.lines.forEach(line => {
             html += `
                 <div class="cart-item" data-line-id="${line.id}">
-                    <img src="${line.image_url}" alt="${line.name}"/>
+                    <img src="${line.img}" alt="${line.product_name}"/>
                     <div class="item-info">
-                        <h6>${line.name}</h6>
-                        <span class="item-price">${line.price}</span>
+                        <h6>${line.product_name}</h6>
+                        <span class="item-price">${data.currency} ${parseFloat(line.price).toFixed(2)}</span>
                     </div>
                     <div class="item-qty">
                         <span class="qty-btn minus fa fa-minus" data-id="${line.id}"></span>
-                        <input type="text" value="${parseInt(line.qty)}" readonly/>
+                        <input type="text" value="${parseInt(line.quantity)}" readonly/>
                         <span class="qty-btn plus fa fa-plus" data-id="${line.id}"></span>
                     </div>
                 </div>
@@ -91,7 +96,20 @@ publicWidget.registry.ZenithSideCart = publicWidget.Widget.extend({
         });
 
         $content.html(html);
-        $total.text(data.amount_total);
+        $total.text(`${data.currency} ${parseFloat(data.total).toFixed(2)}`);
+
+        // Update Shipping Progress
+        const percent = Math.min((data.total / threshold) * 100, 100);
+        $shippingBar.css('width', `${percent}%`).attr('aria-valuenow', percent);
+        
+        if (percent >= 100) {
+            $shippingText.html('<span class="text-success">¡Genial! Tienes ENVÍO GRATIS <i class="fa fa-check-circle"></i></span>');
+            $shippingBar.addClass('bg-success').removeClass('bg-primary');
+        } else {
+            const remaining = threshold - data.total;
+            $shippingText.text(`¡Solo te faltan ${data.currency} ${remaining.toFixed(2)} para envío GRATIS!`);
+            $shippingBar.addClass('bg-primary').removeClass('bg-success');
+        }
 
         // Update main cart badge too
         const $badge = $('.o_wsale_cart_quantity, .badge.bg-danger');

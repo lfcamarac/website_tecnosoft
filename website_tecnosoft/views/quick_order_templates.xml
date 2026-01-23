@@ -66,9 +66,13 @@
                         </div>
                     </div>
                     
-                    <!-- CSV Import Helper (Future) -->
+                    <!-- CSV Import Helper -->
                     <div class="mt-4 text-center">
-                        <p class="text-muted small">¿Tienes una lista grande? <a href="#" class="text-primary fw-bold text-decoration-none">Sube un archivo CSV</a></p>
+                        <label for="csvUpload" class="btn btn-outline-primary fw-bold rounded-pill px-4 cursor-pointer">
+                            <i class="fa fa-upload me-2"></i> Subir Archivo CSV
+                        </label>
+                        <input type="file" id="csvUpload" class="d-none" accept=".csv"/>
+                        <p class="text-muted small mt-2">Formato esperado: <code>SKU, Cantidad</code><br/>(Ej: IPHONE13, 2)</p>
                     </div>
                 </div>
             </div>

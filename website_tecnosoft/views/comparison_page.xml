@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="product_compare_tecnosoft" inherit_id="website_sale_comparison.product_compare">
+        <!-- Main Container Overhaul -->
+        <xpath expr="//div[hasclass('container')]" position="replace">
+            <div class="container oe_website_sale py-5">
+                <div class="row mb-5">
+                    <div class="col-12 text-center">
+                        <h1 class="fw-bold text-uppercase">Comparativa de Productos</h1>
+                        <p class="text-muted">Analiza las especificaciones y elige la mejor opción para ti.</p>
+                    </div>
+                </div>
+
+                <div class="table-responsive bg-white rounded-3 shadow-sm border overflow-hidden">
+                    <table class="table table-bordered table-hover mb-0" id="o_comparelist_table">
+                        <t t-set="categories" t-value="products._prepare_categories_for_display()"/>
+                        <thead>
+                            <tr class="bg-light">
+                                <td class="align-middle fw-bold td-attribute bg-primary text-white border-primary" style="width: 200px;">Especificaciones</td>
+                                <t t-foreach="products" t-as="product">
+                                    <td class="text-center position-relative product-col px-4 py-4" style="min-width: 250px;">
+                                        <button type="button" t-att-data-product_product_id="product.id" class="btn btn-link text-danger position-absolute top-0 end-0 p-3 o_comparelist_remove">
+                                            <i class="fa fa-trash-o"></i>
+                                        </a>
+                                        <div class="product-img-wrapper mb-3">
+                                            <a t-att-href="product.website_url">
+                                                <img t-att-src="website.image_url(product, 'image_256')" class="img img-fluid rounded mx-auto d-block" style="max-height: 150px; object-fit: contain;"/>
+                                            </a>
+                                        </div>
+                                        <h6 class="fw-bold mb-2">
+                                            <a t-att-href="product.website_url" class="text-dark text-decoration-none" t-field="product.display_name"/>
+                                        </h6>
+                                        <div class="h5 text-primary fw-bold mb-3" t-field="product.list_price" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                                        
+                                        <form action="/shop/cart/update" method="post" class="text-center">
+                                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                            <input name="product_id" t-att-value="product.id" type="hidden"/>
+                                            <button type="submit" class="btn btn-primary rounded-pill w-100">
+                                                <i class="fa fa-shopping-cart me-2"></i> Añadir
+                                            </button>
+                                        </form>
+                                    </td>
+                                </t>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="categories" t-as="category">
+                                <tr class="bg-light">
+                                    <td colspan="100" class="fw-bold text-uppercase py-3 px-3">
+                                        <i class="fa fa-tag me-2 text-primary"></i> <t t-esc="category.name"/>
+                                    </td>
+                                </tr>
+                                <t t-foreach="categories[category]" t-as="attribute">
+                                    <tr>
+                                        <td class="td-attribute text-muted fw-bold px-3">
+                                            <span t-field="attribute.name"/>
+                                        </td>
+                                        <t t-foreach="products" t-as="product">
+                                            <td class="text-center px-3 py-3">
+                                                <t t-set="combination_info" t-value="product._get_combination_info_variant()"/>
+                                                <t t-set="ptal" t-value="product.attribute_line_ids.filtered(lambda l: l.attribute_id == attribute)"/>
+                                                <t t-if="ptal">
+                                                    <t t-esc="', '.join(ptal.value_ids.mapped('name'))"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <span class="text-muted">---</span>
+                                                </t>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

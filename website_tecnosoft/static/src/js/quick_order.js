@@ -151,6 +151,111 @@ publicWidget.registry.TecnosoftQuickOrder = publicWidget.Widget.extend({
             console.error(e);
             $btn.html('<i class="fa fa-shopping-cart me-2"></i> ERROR');
         }
+    },
+
+    /**
+     * CSV Handling
+     */
+    init: function () {
+        this._super.apply(this, arguments);
+        // Bind manually if needed
+    },
+
+    events: Object.assign({}, publicWidget.registry.TecnosoftQuickOrder.prototype.events, {
+        'change #csvUpload': '_onCSVUpload',
+    }),
+
+    _onCSVUpload: function (ev) {
+        const file = ev.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+            const text = e.target.result;
+            this._processCSV(text);
+            ev.target.value = ''; // Reset
+        };
+        reader.readAsText(file);
+    },
+
+    async _processCSV(csvText) {
+        const lines = csvText.split(/\r\n|\n/);
+        const skuMap = {}; // SKU -> Qty
+
+        lines.forEach(line => {
+             const parts = line.split(',');
+             if (parts.length >= 1) {
+                 const sku = parts[0].trim();
+                 let qty = 1;
+                 if (parts.length >= 2) {
+                     qty = parseInt(parts[1].trim()) || 1;
+                 }
+                 if (sku) {
+                     // Aggregate quantity if duplicate SKU in CSV
+                     skuMap[sku] = (skuMap[sku] || 0) + qty;
+                 }
+             }
+        });
+
+        const skus = Object.keys(skuMap);
+        if (skus.length === 0) {
+            alert("No se encontraron SKUs válidos en el archivo.");
+            return;
+        }
+
+        // Fetch Product Data
+        // Show loading state...
+        const $btn = this.$('label[for="csvUpload"]');
+        const originalText = $btn.html();
+        $btn.html('<i class="fa fa-spinner fa-spin"></i> Procesando...');
+
+        try {
+            const result = await this.rpc('/website_tecnosoft/get_products_by_skus', { skus: skus });
+            
+            if (result.not_found && result.not_found.length > 0) {
+                alert(`Advertencia: No se encontraron los siguientes SKUs: ${result.not_found.join(', ')}`);
+            }
+
+            if (result.products && result.products.length > 0) {
+                // Clear existing empty rows if they are untouched? 
+                // Let's just append for now, user can clear manually.
+                
+                result.products.forEach(p => {
+                    const reqQty = skuMap[p.default_code];
+                    this._addPopulatedRow(p, reqQty);
+                });
+                
+                this._updateTotal();
+                // Scroll to table
+                $('html, body').animate({ scrollTop: $('#quick_order_table').offset().top - 100 }, 500);
+            }
+
+        } catch (e) {
+            console.error("CSV Error:", e);
+            alert("Error al verificar los productos. Inténtalo de nuevo.");
+        } finally {
+            $btn.html(originalText);
+        }
+    },
+
+    _addPopulatedRow(product, qty) {
+        // Find existing empty row to reuse
+        let $row = this.$rowsContainer.find('.quick-order-row').filter(function() {
+             return !$(this).data('product-id') && $(this).find('.js_quick_search').val() === '';
+        }).first();
+
+        if (!$row.length) {
+            const $template = this.$rowsContainer.find('.quick-order-row:first').clone();
+            $template.find('.js_remove_row').removeClass('disabled');
+            this.$rowsContainer.append($template);
+            $row = $template;
+        }
+
+        $row.find('.js_quick_search').val(product.name);
+        $row.find('td:nth-child(2)').text(product.stock_msg).removeClass('text-muted').addClass('text-success');
+        $row.find('td:nth-child(3)').html(`<span class="quick-unit-price" data-val="${product.price}">${product.price_formatted}</span>`);
+        $row.find('.js_quick_qty').val(qty);
+        $row.data('product-id', product.id);
     }
 });
 

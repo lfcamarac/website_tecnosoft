@@ -604,6 +604,11 @@
             <!-- Marketing Blocks -->
             <t t-snippet="website_tecnosoft.s_tecnosoft_countdown" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="dynamic"/>
             <t t-snippet="website_tecnosoft.s_tecnosoft_shop_offer" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="dynamic"/>
+            <t t-snippet="website_tecnosoft.s_tecnosoft_flash_sale_hero" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="intro"/>
+            <t t-snippet="website_tecnosoft.s_tecnosoft_instagram" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="social"/>
+            <t t-snippet="website_tecnosoft.s_tecnosoft_mega_menu_dynamic" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="nav_menus"/>
+            <t t-snippet="website_tecnosoft.s_tecnosoft_category_cards" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="structure"/>
+            <t t-snippet="website_tecnosoft.s_tecnosoft_multi_tab_products" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="dynamic"/>
         </xpath>
     </template>
 </odoo>

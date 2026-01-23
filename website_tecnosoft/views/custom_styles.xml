@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="tecnosoft_custom_styles" inherit_id="website.layout">
+        <xpath expr="//head" position="inside">
+            <style id="tecnosoft-dynamic-vars">
+                :root {
+                    --o-color-primary: <t t-esc="website.tecnosoft_primary_color"/>;
+                    --o-color-secondary: <t t-esc="website.tecnosoft_secondary_color"/>;
+                    --tecnosoft-body-font: <t t-if="website.tecnosoft_body_font == 'inter'">'Inter', sans-serif</t>
+                                          <t t-elif="website.tecnosoft_body_font == 'roboto'">'Roboto', sans-serif</t>
+                                          <t t-elif="website.tecnosoft_body_font == 'outfit'">'Outfit', sans-serif</t>
+                                          <t t-elif="website.tecnosoft_body_font == 'montserrat'">'Montserrat', sans-serif</t>
+                                          <t t-else="">'Inter', sans-serif</t>;
+                    
+                    /* Utility RGB versions for opacity effects */
+                    --o-color-primary-rgb: <t t-esc="website.tecnosoft_primary_color.lstrip('#') if website.tecnosoft_primary_color else '007bff'"/>; 
+                }
+                
+                body {
+                    font-family: var(--tecnosoft-body-font) !important;
+                }
+                
+                h1, h2, h3, h4, h5, h6 {
+                    font-family: var(--tecnosoft-body-font) !important;
+                }
+            </style>
+            
+            <!-- Google Fonts Loader -->
+            <link rel="preconnect" href="https://fonts.googleapis.com"/>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&amp;family=Montserrat:wght@400;700;800&amp;family=Outfit:wght@400;700;800&amp;family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+        </xpath>
+    </template>
+</odoo>

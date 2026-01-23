@@ -3,6 +3,7 @@ from odoo import http
 from odoo.http import request
 from odoo.osv import expression
 import collections
+import base64
 
 class TecnosoftController(http.Controller):
 
@@ -64,7 +65,25 @@ class TecnosoftController(http.Controller):
                 'category_name': p.public_categ_ids[0].name if p.public_categ_ids else None,
             })
 
-        return {'products': product_list}
+        # Search Categories
+        categories = []
+        if search:
+            category_domain = [('name', 'ilike', search)]
+            found_categories = request.env['product.public.category'].sudo().search(category_domain, limit=3)
+            for c in found_categories:
+                product_count = request.env['product.template'].sudo().search_count([
+                    ('public_categ_ids', 'child_of', c.id), 
+                    ('website_published', '=', True)
+                ])
+                if product_count > 0:
+                    categories.append({
+                        'id': c.id,
+                        'name': c.name,
+                        'url': f'/shop/category/{c.id}',
+                        'count': product_count
+                    })
+
+        return {'products': product_list, 'categories': categories}
 
     @http.route('/website_tecnosoft/get_branches_locations', type='json', auth='public', website=True)
     def get_branches_locations(self):
@@ -152,6 +171,31 @@ class TecnosoftController(http.Controller):
         categories = request.env['product.public.category'].sudo().browse(category_ids).exists()
         return [{'id': c.id, 'name': c.name} for c in categories]
 
+    @http.route('/website_tecnosoft/get_category_tree', type='json', auth='public', website=True)
+    def get_category_tree(self, parent_id=None, limit=None, **kwargs):
+        """ Fetch category tree for Mega Menu (Parent -> Child -> Grandchild). """
+        domain = [('parent_id', '=', int(parent_id) if parent_id else False)]
+        categories = request.env['product.public.category'].sudo().search(domain, limit=limit)
+        
+        tree = []
+        for c in categories:
+            children = []
+            # Fetch one level of subcategories
+            for child in c.child_id[:6]: # Limit subcategories for UI
+                children.append({
+                    'id': child.id,
+                    'name': child.name,
+                    'url': f'/shop/category/{child.id}',
+                })
+                
+            tree.append({
+                'id': c.id,
+                'name': c.name,
+                'url': f'/shop/category/{c.id}',
+                'children': children
+            })
+        return {'categories': tree}
+
     @http.route('/website_tecnosoft/subscribe_price_tracker', type='json', auth='user', website=True)
     def subscribe_price_tracker(self, product_id, **kwargs):
         """ Subscribe user to price drop notifications. """
@@ -231,3 +275,157 @@ class TecnosoftController(http.Controller):
             'cart_quantity': order.cart_quantity,
             'currency': order.currency_id.symbol,
         }
+
+    @http.route('/website_tecnosoft/get_upsell_products', type='json', auth='public', website=True)
+    def get_upsell_products(self, product_id, **kwargs):
+        """ Fetch suggested products for Upsell Modal. """
+        if not product_id:
+            return {'products': []}
+        
+        # We assume product_id passed from frontend is product.template (from hidden input)
+        # But usually in cart forms it's product_product (product_id input name). 
+        # Let's handle both or assume template if that's what we send.
+        # Actually standard input name="product_id" sends variant ID.
+        
+        # If we receive variant ID, get template
+        variant = request.env['product.product'].sudo().browse(int(product_id))
+        if not variant.exists():
+            return {'products': []}
+        
+        tmpl = variant.product_tmpl_id
+        suggested_tmpls = tmpl.get_frequently_bought_together()
+        
+        results = []
+        pricelist = request.website.get_current_pricelist()
+        currency = pricelist.currency_id
+
+        for t in suggested_tmpls:
+            # Use first variant for simple add
+            target_variant = t.product_variant_id
+            if not target_variant:
+                continue
+
+            price = pricelist._get_product_price(t, 1.0)
+            
+            results.append({
+                'id': t.id,
+                'name': t.name,
+                'price': currency.format(price),
+                'image_url': f'/web/image/product.template/{t.id}/image_512',
+                'variant_id': target_variant.id,
+                'url': t.website_url,
+            })
+            
+        return {'products': results}
+
+    @http.route('/website_tecnosoft/submit_review', type='http', auth='public', website=True, methods=['POST'])
+    def submit_review(self, **post):
+        """ Handle Review Submission with Images. """
+        product_id = int(post.get('product_id', 0))
+        rating_val = float(post.get('rating', 0))
+        comment = post.get('comment', '')
+        # File handling
+        files = request.httprequest.files.getlist('review_images')
+        
+        if not product_id or not rating_val:
+            return request.redirect(request.httprequest.referrer + "?review_error=missing_data")
+
+        product = request.env['product.template'].browse(product_id)
+        if not product.exists():
+            return request.redirect(request.httprequest.referrer + "?review_error=product_not_found")
+
+        # Create Rating
+        # We use standard 'rating.rating' creation flow or manual create
+        # For public user, we might need a partner_id or default to Public User.
+        # Ideally user should be logged in or we capture name/email.
+        
+        partner = request.env.user.partner_id
+        if request.env.user._is_public():
+            # In a real scenario we'd ask for name/email in form and maybe find/create partner
+            pass
+
+        Rating = request.env['rating.rating'].sudo()
+        rating = Rating.create({
+            'res_model_id': request.env['ir.model'].sudo().search([('model', '=', 'product.template')], limit=1).id,
+            'res_id': product.id,
+            'rating': rating_val,
+            'feedback': comment,
+            'partner_id': partner.id,
+            'consumed': True, # Mark as processed
+        })
+
+        # Process Images
+        if files:
+            attachment_ids = []
+            for file in files:
+                if file.filename:
+                    attachment = request.env['ir.attachment'].sudo().create({
+                        'name': file.filename,
+                        'type': 'binary',
+                        'datas': base64.b64encode(file.read()),
+                        'res_model': 'rating.rating',
+                        'res_id': rating.id,
+                        'mimetype': file.content_type,
+                    })
+                    attachment_ids.append(attachment.id)
+            
+            if attachment_ids:
+                rating.review_image_ids = [(6, 0, attachment_ids)]
+
+        return request.redirect(request.httprequest.referrer + "?review_success=true")
+
+    @http.route('/shop/compare_data', type='json', auth='public', website=True)
+    def get_compare_data(self, **kwargs):
+        """ Fetch data for the comparison drawer. """
+        # Odoo stores comparison in session 'compare_product_ids' (list of IDs)
+        # Assuming website_sale_comparison is installed and used.
+        product_ids = request.session.get('compare_product_ids')
+        if not product_ids:
+             return {'products': []}
+        
+        products = request.env['product.product'].sudo().browse(product_ids).exists()
+        res = []
+        for p in products:
+            res.append({
+                'id': p.id,
+                'name': p.name,
+                 # Comparison widget usually works with product.product IDs
+            })
+        return {'products': res}
+
+    @http.route('/website_tecnosoft/get_products_by_skus', type='json', auth='public', website=True)
+    def get_products_by_skus(self, skus):
+        """ Fetch products by a list of Internal References (default_code). """
+        if not skus:
+            return {'products': [], 'not_found': []}
+        
+        # Clean SKUs
+        clean_skus = [s.strip() for s in skus if s.strip()]
+        
+        # Search products
+        products = request.env['product.product'].sudo().search([
+            ('default_code', 'in', clean_skus),
+            ('sale_ok', '=', True),
+            ('website_published', '=', True)
+        ])
+        
+        found_skus = set(products.mapped('default_code'))
+        not_found = list(set(clean_skus) - found_skus)
+        
+        results = []
+        pricelist = request.website.get_current_pricelist()
+        currency = pricelist.currency_id
+
+        for p in products:
+            price = pricelist._get_product_price(p.product_tmpl_id, 1.0)
+            results.append({
+                'id': p.id,
+                'name': p.name,
+                'default_code': p.default_code,
+                'price': price,
+                'price_formatted': currency.format(price),
+                'stock_msg': 'En Stock' if p.qty_available > 0 else 'Agotado', # Simplified stock check
+                'currency': currency.symbol,
+            })
+            
+        return {'products': results, 'not_found': not_found}

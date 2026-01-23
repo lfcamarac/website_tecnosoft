@@ -79,63 +79,69 @@ publicWidget.registry.TecnosoftAjaxFilters = publicWidget.Widget.extend({
         // Update URL bar
         window.history.pushState({ path: newUrl }, '', newUrl);
 
-        // Visual feedback & Scroll (UX)
+        // Show Skeleton before fetch
         const $gridContainer = this.$('#products_grid');
-        $gridContainer.css('opacity', '0.5');
-        // Inject loader
-        if (!this.$('.ajax-loading-overlay').length) {
-             $gridContainer.prepend('<div class="ajax-loading-overlay position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center" style="z-index:10; background: rgba(255,255,255,0.5);"><div class="spinner-border text-primary" role="status"></div></div>');
-        }
+        const $pager = this.$('.products_pager');
         
-        // Smooth scroll to top of products
-        $('html, body').animate({
-            scrollTop: $("#products_grid_before").offset().top - 100
-        }, 500);
+        $gridContainer.css('opacity', '0.5');
+        
+        // Define a simple grid skeleton if we don't want to rely on XML for this specific dynamic injection
+        const skeletonHtml = `
+            <div id="tecnosoft_grid_skeleton" class="row">
+                ${Array(8).fill(`
+                    <div class="col-6 col-md-4 col-lg-3 mb-4">
+                        <div class="tecnosoft-skeleton rounded-3 mb-2" style="height: 250px; width: 100%;"></div>
+                        <div class="tecnosoft-skeleton skeleton-text" style="width: 70%;"></div>
+                        <div class="tecnosoft-skeleton skeleton-text-sm" style="width: 40%;"></div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
 
         try {
+            // Pre-loading state
+            $gridContainer.parent().append(skeletonHtml);
+            $gridContainer.addClass('d-none');
+            $pager.addClass('d-none');
+
             const response = await fetch(newUrl);
+            if (!response.ok) throw new Error('Network response was not ok');
+            
             const text = await response.text();
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(text, 'text/html');
 
             const newGrid = htmlDoc.querySelector('#products_grid');
-            const newSidebar = htmlDoc.querySelector('#products_grid_before'); // Filters sidebar
+            const newSidebar = htmlDoc.querySelector('#products_grid_before');
             const newPager = htmlDoc.querySelector('.products_pager');
 
             if (newGrid) {
                 this.$('#products_grid').replaceWith(newGrid);
             }
             if (newSidebar) {
-                // If sidebar exists (desktop) or mobile drawer content
                 const $currSidebar = this.$('#products_grid_before');
                 if ($currSidebar.length) {
                      $currSidebar.replaceWith(newSidebar);
-                } else {
-                    // Mobile drawer content update might be needed if it's separate
                 }
             }
             if (newPager) {
                 this.$('.products_pager').replaceWith(newPager);
             }
 
-            // Re-initialize widgets (lazy loading images, animations)
-            // Odoo public widgets usually re-scan, but explicit trigger helps
+            // Smooth scroll to top
+            $('html, body').animate({
+                scrollTop: $("#products_grid_before").offset().top - 100
+            }, 500);
+
             $(window).trigger('resize'); 
             
         } catch (error) {
             console.error("Tecnosoft AJAX Filter Error:", error);
-            window.location.href = newUrl; // Fallback to hard reload
-            // Remove loading indicator and update content
-            $('#tecnosoft_skeleton_overlay').remove();
-            $('.tecnosoft-products-grid').removeClass('d-none opacity-50');
+            window.location.href = newUrl; // Fallback
         } finally {
-                if (!$('#tecnosoft_skeleton_overlay').length) {
-                    $('.tecnosoft-products-grid').parent().append('<div id="tecnosoft_skeleton_overlay">' + skeletonHtml + '</div>');
-                    $('.tecnosoft-products-grid').addClass('d-none');
-                }
-            }
-            this.$('#products_grid').css('opacity', '1');
-            this.$('.ajax-loading-overlay').remove();
+            $('#tecnosoft_grid_skeleton').remove();
+            this.$('#products_grid').removeClass('d-none').css('opacity', '1');
+            this.$('.products_pager').removeClass('d-none');
         }
     },
 });

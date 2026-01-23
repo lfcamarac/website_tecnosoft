@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="website_tecnosoft.AIGeneratorDialog" owl="1">
+        <Dialog title="props.title">
+            <div class="p-3">
+                <div t-if="state.status === 'loading'" class="text-center py-4">
+                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-primary mb-3"></i>
+                    <h5 t-esc="state.progressText"/>
+                    <div class="progress mt-3">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" 
+                             t-att-style="'width: ' + state.progress + '%'" 
+                             t-att-aria-valuenow="state.progress" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+
+                <div t-if="state.status !== 'loading'" class="tecnosoft-ai-interface">
+                    <div class="mb-3">
+                        <label class="fw-bold mb-2">Model Status:</label>
+                        <span t-attf-class="badge {{state.status === 'error' ? 'bg-danger' : 'bg-success'}}">
+                            <t t-esc="state.progressText"/>
+                        </span>
+                    </div>
+
+                    <div class="mb-3" t-if="state.status === 'idle' or state.status === 'success' or state.status === 'generating'">
+                        <button class="btn btn-primary w-100 py-2 fw-bold" t-on-click="generate" t-att-disabled="state.status === 'generating'">
+                            <i class="fa fa-magic me-2"></i> <t t-esc="state.status === 'generating' ? 'Generating...' : 'Generate Description'"/>
+                        </button>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="fw-bold mb-2">Generated Content:</label>
+                        <textarea class="form-control" rows="8" t-model="state.result" t-att-readonly="state.status === 'generating'"></textarea>
+                    </div>
+                </div>
+            </div>
+            <t t-set-slot="footer">
+                <button class="btn btn-primary" t-on-click="apply" t-att-disabled="!state.result or state.status === 'generating'">
+                    Apply to Product
+                </button>
+                <button class="btn btn-secondary" t-on-click="props.close">
+                    Close
+                </button>
+            </t>
+        </Dialog>
+    </t>
+</templates>

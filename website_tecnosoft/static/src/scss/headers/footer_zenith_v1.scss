@@ -1,0 +1,67 @@
+/* Footer Zenith V1 SCSS */
+
+.oe_structure_solo section[data-snippet="footer_zenith_v1"] {
+  background-color: #111 !important; /* Deep Dark */
+  color: #b0b0b0;
+
+  a {
+    text-decoration: none;
+    transition:
+      color 0.3s ease,
+      padding-left 0.3s ease;
+
+    &.hover-white:hover {
+      color: #ffffff !important;
+      padding-left: 5px;
+    }
+  }
+
+  .social-links .btn-outline-light {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.7);
+
+    &:hover {
+      background-color: var(--o-color-primary);
+      border-color: var(--o-color-primary);
+      color: #fff;
+      transform: translateY(-3px);
+      transition: all 0.3s ease;
+    }
+  }
+
+  .form-control {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+    height: 50px;
+
+    &:focus {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+      border-color: var(--o-color-primary) !important;
+      box-shadow: none;
+    }
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  .btn-primary {
+    height: 50px;
+    width: 50px;
+    border-radius: 0 5px 5px 0 !important;
+  }
+
+  .payment-methods i {
+    transition: opacity 0.3s ease;
+    &:hover {
+      opacity: 1 !important;
+    }
+  }
+}

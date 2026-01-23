@@ -57,6 +57,11 @@
                                 <t t-set="_badge_class" t-value="'position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary'"/>
                             </t>
                             
+                            <!-- PWA Install Button (Hidden by default) -->
+                            <button class="btn btn-outline-primary btn-sm rounded-pill d-none js_pwa_install me-2">
+                                <i class="fa fa-download me-1"/> Install App
+                            </button>
+
                             <!-- User Menu (Native Dropdown) -->
                             <t t-call="portal.placeholder_user_sign_in">
                                 <t t-set="_link_class" t-valuef="btn btn-primary rounded-pill px-4 fw-bold"/>

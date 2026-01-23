@@ -1,0 +1,96 @@
+# -*- coding: utf-8 -*-
+from odoo import models, fields, api
+from datetime import timedelta
+
+class ProductTemplate(models.Model):
+    _inherit = 'product.template'
+
+    tecnosoft_delivery_min_days = fields.Integer(
+        string="Min Delivery Days", 
+        default=2,
+        help="Minimum number of days for delivery"
+    )
+    tecnosoft_delivery_max_days = fields.Integer(
+        string="Max Delivery Days", 
+        default=5,
+        help="Maximum number of days for delivery"
+    )
+    
+    tecnosoft_estimated_delivery = fields.Char(
+        string="Estimated Delivery",
+        compute='_compute_estimated_delivery',
+        help="Computed string for frontend display: 'Get it by [Date Range]'"
+    )
+
+    @api.depends('tecnosoft_delivery_min_days', 'tecnosoft_delivery_max_days')
+    def _compute_estimated_delivery(self):
+        for record in self:
+            today = fields.Date.today()
+            if record.tecnosoft_delivery_min_days and record.tecnosoft_delivery_max_days:
+                min_date = today + timedelta(days=record.tecnosoft_delivery_min_days)
+                max_date = today + timedelta(days=record.tecnosoft_delivery_max_days)
+                
+                # Format: "Mon, Oct 24 - Wed, Oct 26"
+                min_str = min_date.strftime("%a, %b %d")
+                max_str = max_date.strftime("%a, %b %d")
+                
+                record.tecnosoft_estimated_delivery = f"{min_str} - {max_str}"
+            else:
+                record.tecnosoft_estimated_delivery = False
+
+    def action_generate_seo_description(self):
+        """ 
+        Generates an SEO description using a 'Mock AI' template.
+        Replace this logic with an OpenRouter/OpenAI call in production.
+        """
+        for record in self:
+            currency = record.currency_id.symbol or '$'
+            price = f"{currency} {record.list_price}"
+            
+            # Simple Template-based generation
+            desc = f"Buy {record.name} online. "
+            if record.categ_id:
+                desc += f"Top quality in {record.categ_id.name}. "
+            
+            # Add attributes if any
+            # (Note: accessing attribute_line_ids for display)
+            attrs = record.attribute_line_ids.filtered(lambda l: len(l.value_ids) > 0)
+            if attrs:
+                attr_desc = ", ".join([f"{a.attribute_id.name}" for a in attrs[:3]])
+                desc += f"Available with {attr_desc}. "
+            
+            desc += f"Best price: {price}. Fast shipping available!"
+            
+            record.website_meta_description = desc
+            
+            # Also set title if empty
+            if not record.website_meta_title:
+                record.website_meta_title = f"{record.name} | Best Deal"
+
+    def get_frequently_bought_together(self):
+        """
+        Returns a set of products suggested to be bought with the current one.
+        Logic:
+        1. Accessorios (if configured)
+        2. Alternative Products (if configured)
+        3. Fallback: 3 products from same category
+        """
+        self.ensure_one()
+        # Get accessory products first
+        products = self.accessory_product_ids.mapped('product_tmpl_id')
+        
+        # If less than 3, add alternative products
+        if len(products) < 3:
+            alternatives = self.alternative_product_ids.filtered(lambda p: p.id not in products.ids)
+            products |= alternatives[:3-len(products)]
+            
+        # If still less than 1, add from same category
+        if not products and self.categ_id:
+            fallbacks = self.env['product.template'].sudo().search([
+                ('categ_id', '=', self.categ_id.id),
+                ('id', '!=', self.id),
+                ('website_published', '=', True),
+            ], limit=3)
+            products |= fallbacks
+
+        return products[:4] # Limit to 4 for UI consistency
