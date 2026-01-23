@@ -20,7 +20,8 @@
         </xpath>
     </template>
 
-    <!-- Delivery Tracking Timeline -->
+    <!-- Delivery Tracking Timeline (DISABLED: Missing ID) -->
+    <!--
     <template id="portal_order_page_tracking" inherit_id="website_sale.portal_order_page" name="Tecnosoft Portal Tracking">
         <xpath expr="//div[@id='portal_order_content']" position="before">
             <div class="tecnosoft-tracking-timeline bg-white p-4 rounded-4 shadow-sm mb-4 border border-light">
@@ -62,6 +63,7 @@
             </div>
         </xpath>
     </template>
+    -->
 
     <!-- Custom Portal Home Icons and Cards -->
     <template id="tecnosoft_portal_home_card" inherit_id="portal.portal_my_home" name="Tecnosoft Portal Cards" priority="20">
@@ -78,7 +80,8 @@
         </xpath>
     </template>
 
-    <!-- Highlight Quote Requests in Portal -->
+    <!-- Highlight Quote Requests in Portal (DISABLED: Missing ID) -->
+    <!--
     <template id="portal_my_orders_quote_badge" inherit_id="website_sale.portal_my_orders" name="Tecnosoft Portal Quote Badge">
         <xpath expr="//t[@t-foreach='orders']//span[hasclass('badge')]" position="after">
             <span t-if="order.is_quote_request" class="badge rounded-pill bg-info ms-1">
@@ -86,8 +89,10 @@
             </span>
         </xpath>
     </template>
+    -->
 
-    <!-- Add Reorder Button to Portal Order List -->
+    <!-- Add Reorder Button to Portal Order List (DISABLED: Missing ID) -->
+    <!--
     <template id="portal_my_orders_reorder" inherit_id="website_sale.portal_my_orders" name="Tecnosoft Portal Reorder">
         <xpath expr="//t[@t-foreach='orders']//td[hasclass('text-end')]" position="inside">
             <a t-attf-href="/shop/reorder/#{order.id}" class="btn btn-secondary btn-sm rounded-pill ms-2" title="Volver a pedir">
@@ -95,8 +100,10 @@
             </a>
         </xpath>
     </template>
+    -->
 
-    <!-- Add Reorder Button to Portal Order Detail -->
+    <!-- Add Reorder Button to Portal Order Detail (DISABLED: Missing ID) -->
+    <!--
     <template id="portal_order_page_reorder" inherit_id="website_sale.portal_order_page" name="Tecnosoft Portal Order Reorder">
         <xpath expr="//div[@id='portal_order_content']//h2" position="inside">
             <a t-attf-href="/shop/reorder/#{order.id}" class="btn btn-primary rounded-pill float-end small fw-bold">
@@ -104,4 +111,5 @@
             </a>
         </xpath>
     </template>
+    -->
 </odoo>
