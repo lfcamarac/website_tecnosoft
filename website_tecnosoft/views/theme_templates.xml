@@ -167,7 +167,7 @@
     <!-- Modern Breadcrumbs Override -->
     <template id="tecnosoft_breadcrumbs" inherit_id="website.layout" name="Tecnosoft Breadcrumbs">
         <xpath expr="//main" position="before">
-            <t t-if="not is_homepage and not request.path == '/'">
+            <t t-if="not is_homepage and not request.httprequest.path == '/'">
                 <div class="tecnosoft-breadcrumb-wrapper bg-light py-3 border-bottom">
                     <div class="container d-flex align-items-center justify-content-between">
                         <nav aria-label="breadcrumb">
@@ -176,7 +176,7 @@
                                 <!-- Odoo handles breadcrumbs dynamically normally, 
                                      but we can inject a cleaner version here if needed. 
                                      For now, we style the actual breadcrumbs in SCSS. -->
-                                <t t-if="request.path.startswith('/shop')">
+                                <t t-if="request.httprequest.path.startswith('/shop')">
                                     <li class="breadcrumb-item"><a href="/shop" class="text-decoration-none text-muted">TIENDA</a></li>
                                 </t>
                             </ol>
