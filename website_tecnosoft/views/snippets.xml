@@ -582,6 +582,26 @@
         </section>
     </template>
 
+    <template id="s_recently_viewed" name="Recently Viewed Products">
+        <section class="s_recently_viewed pt-5 pb-5 bg-white" data-snippet="s_recently_viewed">
+            <div class="container">
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h3 class="fw-bold">Visto Recientemente</h3>
+                        <hr class="w-10 border-primary border-3 opacity-100"/>
+                    </div>
+                </div>
+                <div class="row s_recently_viewed_container g-4">
+                    <!-- Dynamic content rendered by JS -->
+                    <div class="col-12 text-center text-muted py-5">
+                       <i class="fa fa-history fa-2x mb-3 opacity-50"></i>
+                       <p>Sus productos visitados aparecerán aquí.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
     <!-- Register Snippet in Editor -->
     <template id="tecnosoft_snippets" inherit_id="website.snippets">
         <xpath expr="//snippets[@id='snippet_structure']" position="inside">
