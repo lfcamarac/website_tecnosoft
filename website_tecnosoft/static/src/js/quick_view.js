@@ -46,9 +46,19 @@ publicWidget.registry.TecnosoftQuickView = publicWidget.Widget.extend({
 
             $('body').append($modal);
 
-            // Initialize bootstrap modal
-            const modalInstance = new window.bootstrap.Modal(document.getElementById('tecnosoft_quick_view_modal'));
-            modalInstance.show();
+            // 2025: Fix for Odoo 17/18 where bootstrap global might be different
+            let Modal = window.bootstrap ? window.bootstrap.Modal : undefined;
+            if (!Modal && $.fn.modal && $.fn.modal.Constructor) {
+                 Modal = $.fn.modal.Constructor;
+            }
+
+            if (Modal) {
+                 const modalInstance = new Modal(document.getElementById('tecnosoft_quick_view_modal'));
+                 modalInstance.show();
+            } else {
+                 // Fallback for older Odoo versions or missing assets
+                 $('#tecnosoft_quick_view_modal').modal('show');
+            }
             
             // Re-bind Odoo events (like add to cart) inside the modal
             // We trigger 'content_changed' so other widgets (like wSaleUtils) can attach to the new content

@@ -1,48 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="tecnosoft_theme_customizer_panel" name="Theme Customizer Panel">
-        <div id="tecnosoft_customizer" class="tecnosoft-theme-customizer closed">
-            <div class="customizer-toggle" title="Personalizar Tema">
-                <i class="fa fa-cog fa-spin-hover"></i>
-            </div>
-            <div class="customizer-panel">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h5 class="mb-0 text-dark">Personalizar</h5>
-                    <button class="btn btn-sm btn-light rounded-circle close-customizer"><i class="fa fa-times"></i></button>
-                </div>
-                
-                <p class="text-muted small mb-4">Prueba diferentes estilos en tiempo real.</p>
-                
-                <!-- Color Config -->
-                <h6 class="fw-bold text-uppercase small text-muted mb-3">Color Primario</h6>
-                <div class="color-palette mb-4">
-                    <div class="color-btn active" data-color="#007bff" style="background-color: #007bff;" title="Blue"></div>
-                    <div class="color-btn" data-color="#e91e63" style="background-color: #e91e63;" title="Pink"></div>
-                    <div class="color-btn" data-color="#28a745" style="background-color: #28a745;" title="Green"></div>
-                    <div class="color-btn" data-color="#6f42c1" style="background-color: #6f42c1;" title="Purple"></div>
-                    <div class="color-btn" data-color="#fd7e14" style="background-color: #fd7e14;" title="Orange"></div>
-                    <div class="color-btn" data-color="#20c997" style="background-color: #20c997;" title="Teal"></div>
-                </div>
-                
-                <div class="divider"></div>
-
-                <!-- Font Config -->
-                <h6 class="fw-bold text-uppercase small text-muted mb-3">Tipografía</h6>
-                <div class="font-selector">
-                    <button class="btn btn-light btn-sm btn-font active" data-font="'Inter', sans-serif" style="font-family: 'Inter', sans-serif;">Inter (Modern)</button>
-                    <button class="btn btn-light btn-sm btn-font" data-font="'Roboto', sans-serif" style="font-family: 'Roboto', sans-serif;">Roboto (Neutral)</button>
-                    <button class="btn btn-light btn-sm btn-font" data-font="'Outfit', sans-serif" style="font-family: 'Outfit', sans-serif;">Outfit (Stylish)</button>
-                </div>
-                
-                <div class="form-check form-switch mt-4">
-                    <input class="form-check-input" type="checkbox" id="darkModeSwitch"/>
-                    <label class="form-check-label small fw-bold" for="darkModeSwitch">Modo Oscuro (Beta)</label>
-                </div>
-                
-                <div class="mt-4 pt-4 border-top text-center">
-                    <button class="btn btn-outline-danger btn-sm rounded-pill w-100 js_reset_theme">Restablecer Todo</button>
-                </div>
-            </div>
+        <div id="tecnosoft_customizer" class="d-none">
+            <!-- Legacy Customizer: Removed in favor of Odoo Native Editor & Dark Mode Toggle -->
         </div>
     </template>
 </odoo>

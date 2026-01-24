@@ -15,6 +15,13 @@
             <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
             <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
         </xpath>
+        <xpath expr="//div[@id='wrapwrap']" position="before">
+             <!-- Dark Mode Toggle (Header/Floating) -->
+             <div class="tecnosoft-dark-mode-container position-fixed d-flex align-items-center justify-content-center bg-white rounded-circle shadow-lg tecnosoft-dark-mode-toggle"
+                  style="bottom: 20px; left: 20px; width: 45px; height: 45px; z-index: 9999; cursor: pointer; border: 1px solid #e0e0e0;">
+                 <i class="fa fa-moon-o text-dark" style="font-size: 20px;"></i>
+             </div>
+        </xpath>
         <xpath expr="//div[@id='wrapwrap']" position="inside">
             <!-- Side Cart (Managed by JS) -->
             <div class="zenith-side-cart-overlay"></div>
@@ -182,28 +189,13 @@
 
     <!-- Modern Breadcrumbs Override (V2) -->
     <!-- We renamed this to V2 to bypass any corrupted/COW views stuck in the database -->
-    <template id="tecnosoft_breadcrumbs_v2" inherit_id="website.layout" name="Tecnosoft Breadcrumbs V2">
+    <!-- Modern Breadcrumbs Override (V2) - REMOVED (Legacy/Obstructive)
+    <template id="tecnosoft_breadcrumbs_v2" inherit_id="website.layout" name="Tecnosoft Breadcrumbs V2" active="False">
         <xpath expr="//main" position="before">
-            <t t-if="not is_homepage and not request.httprequest.path == '/'">
-                <div class="tecnosoft-breadcrumb-wrapper bg-light py-3 border-bottom">
-                    <div class="container d-flex align-items-center justify-content-between">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb mb-0 small fw-bold">
-                                <li class="breadcrumb-item"><a href="/" class="text-decoration-none text-muted">INICIO</a></li>
-                                <!-- Corrected path check -->
-                                <t t-if="request.httprequest.path.startswith('/shop')">
-                                    <li class="breadcrumb-item"><a href="/shop" class="text-decoration-none text-muted">TIENDA</a></li>
-                                </t>
-                            </ol>
-                        </nav>
-                        <div class="breadcrumb-actions d-none d-md-block">
-                             <span class="text-muted small fw-bold">Tecnosoft Theme Zenith</span>
-                        </div>
-                    </div>
-                </div>
-            </t>
+            
         </xpath>
     </template>
+    -->
 
     <!-- Product Item Customization with SEO & Quick View (V2 to bypass COW cache) -->
     <template id="tecnosoft_product_item_v2" inherit_id="website_sale.products_item" name="Tecnosoft Product Item V2">
