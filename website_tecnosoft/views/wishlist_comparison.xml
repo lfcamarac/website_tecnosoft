@@ -103,15 +103,4 @@
         </xpath>
     </template>
 
-    <!-- Add to Mobile Bottom Bar -->
-    <template id="tecnosoft_mobile_bar_wishlist" inherit_id="website_tecnosoft.tecnosoft_layout" name="Mobile Bar Wishlist">
-        <xpath expr="//nav[hasclass('zenith-mobile-bottom-bar')]//a[@href='/my/home']" position="before">
-            <a href="/shop/wishlist" class="nav-item position-relative">
-                <i class="fa fa-heart-o"></i>
-                <span>Deseos</span>
-                <t t-set="wish_count" t-value="len(request.env['product.wishlist'].sudo().search([('partner_id', '=', request.env.user.partner_id.id)]))"/>
-                <span t-if="wish_count" class="cart-badge badge rounded-pill bg-danger" t-esc="wish_count"/>
-            </a>
-        </xpath>
-    </template>
 </odoo>
