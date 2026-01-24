@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="tecnosoft_empty_cart_lottie" inherit_id="website_sale.cart_lines" name="Tecnosoft Empty Cart Animation">
-        -- Replace the default empty cart alert -->
+        <!-- Replace the default empty cart alert -->
         <xpath expr="//div[hasclass('alert-info')]" position="replace">
             <div class="text-center py-5">
-                <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
-                <dotlottie-player 
-                    -- <lottie-player src="https://lottie.host/9725f0ed-3b7c-4740-9721-3965b2110d7a/8X998yqg3f.json" ...> -->
-                    <div class="alert alert-info">Animation Placeholder</div>
-                    background="transparent" 
-                    speed="1" 
-                    style="width: 300px; height: 300px; margin: 0 auto;" 
-                    loop="true" 
-                    autoplay="true">
-                </dotlottie-player>
+                <div class="d-flex justify-content-center mb-4">
+                    <img src="/web_editor/shape/website_sale/happy.svg" style="width: 150px; opacity: 0.5;" alt="Empty Cart"/>
+                </div>
+                <!-- Animation Placeholder for future use -->
+                <div class="alert alert-info d-none">Animation Placeholder</div>
                 <h4 class="mt-4 fw-bold">Your cart is empty!</h4>
                 <p class="text-muted mb-4">Looks like you haven't added any items yet.</p>
                 <a href="/shop" class="btn btn-primary btn-lg rounded-pill px-5">Start Shopping</a>
