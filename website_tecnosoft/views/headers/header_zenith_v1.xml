@@ -1,143 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Zenith Header V1: A high-end header that integrates with Odoo's customization system -->
+    <!-- Zenith Header V1: App-First Unified Navigation (Farmatodo Style) -->
     <template id="header_zenith_v1" inherit_id="website.layout" name="Zenith Header V1" active="False">
         <xpath expr="//header" position="attributes">
             <attribute name="t-attf-class" add="tecnosoft-header-v1" separator=" "/>
         </xpath>
         <xpath expr="//header//nav" position="replace">
             <div id="o_main_nav" class="o_main_nav header_zenith_v1">
-                <!-- Top Bar -->
-                <div class="zenith-top-bar py-1 bg-dark text-white d-none d-lg-block">
+                <!-- =============================================== -->
+                <!-- UNIFIED HEADER: Same structure Mobile + Desktop -->
+                <!-- =============================================== -->
+                
+                <!-- ROW 1: Logo / Location / User Icons -->
+                <div class="zenith-row-1 bg-white border-bottom py-2">
                     <div class="container d-flex justify-content-between align-items-center">
-                        <div class="d-flex align-items-center gap-3">
-                            <span class="small"><i class="fa fa-phone me-1"/> <t t-esc="res_company.phone"/></span>
-                            <span class="small"><i class="fa fa-envelope me-1"/> <t t-esc="res_company.email"/></span>
-                        </div>
-                        <div class="d-flex align-items-center gap-2">
-                            <!-- Native Odoo Selectors (restore editor hooks) -->
-                            <t t-call="website.placeholder_header_language_selector">
-                                <t t-set="_div_classes" t-valuef="position-relative"/>
-                                <t t-set="_btn_class" t-valuef="btn btn-sm text-white dropdown-toggle p-0"/>
-                            </t>
-                            <t t-call="website_sale.pricelist_list">
-                                <t t-set="_classes" t-valuef="text-white ms-2"/>
-                            </t>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Main Header Area -->
-                <nav data-name="Navbar" class="navbar navbar-expand-lg navbar-light bg-white border-bottom py-0 py-lg-3">
-                    <div class="container px-2 px-lg-3">
-                        <!-- Desktop Logo -->
+                        <!-- Logo (Desktop: visible, Mobile: small) -->
                         <t t-call="website.placeholder_header_brand">
-                            <t t-set="_link_class" t-valuef="navbar-brand logo p-0 m-0 d-none d-lg-block"/>
+                            <t t-set="_link_class" t-valuef="navbar-brand logo p-0 m-0"/>
                         </t>
-
-                        <!-- Mobile Header Structure (Farmatodo Style) -->
-                        <div class="d-lg-none w-100 pb-2">
-                             <!-- Row 1: Location & User -->
-                             <div class="d-flex justify-content-between align-items-center py-2 mb-1">
-                                 <div class="d-flex align-items-center text-truncate" style="max-width: 80%;">
-                                     <div class="d-flex flex-column lh-1">
-                                         <span class="text-muted small" style="font-size: 0.75rem;">Ubicación actual</span>
-                                         <div class="fw-bold text-dark text-truncate d-flex align-items-center gap-1" style="font-size: 0.9rem;">
-                                             <span class="text-truncate">Maturin - Avenida Libertador...</span>
-                                             <i class="fa fa-chevron-down text-primary small"></i>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <div class="d-flex gap-3">
-                                     <i class="fa fa-user-o text-muted" style="font-size: 1.2rem;"></i>
-                                     <i class="fa fa-bell-o text-muted" style="font-size: 1.2rem;"></i>
-                                 </div>
-                             </div>
-
-                             <!-- Row 2: Search Bar (Pill) -->
-                             <div class="position-relative w-100">
-                                 <form method="get" action="/shop" class="o_wsale_products_searchbar_form">
-                                     <div class="input-group">
-                                         <span class="input-group-text bg-light border-0 rounded-pill-start ps-3">
-                                             <i class="fa fa-search text-primary"></i>
-                                         </span>
-                                         <input type="text" name="search" class="form-control bg-light border-0 rounded-pill-end py-2" placeholder="Busca en Tecnosoft" style="font-size: 0.95rem;"/>
-                                     </div>
-                                 </form>
-                             </div>
-
-                             <!-- Row 3: Status Chips (Optional) -->
-                             <div class="d-flex gap-2 mt-2 overflow-auto" style="white-space: nowrap; scrollbar-width: none;">
-                                 <div class="d-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-light border">
-                                     <i class="fa fa-heartbeat text-danger"></i>
-                                     <span class="small fw-bold text-dark">Cuidamos tu salud</span>
-                                 </div>
-                                 <div class="d-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-light border">
-                                     <i class="fa fa-heart text-danger"></i>
-                                     <span class="small fw-bold text-dark">Tus Listas</span>
-                                 </div>
-                             </div>
+                        
+                        <!-- Location Selector (Center) -->
+                        <div class="zenith-location-selector d-none d-lg-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-light border cursor-pointer">
+                            <i class="fa fa-map-marker text-primary"></i>
+                            <div class="d-flex flex-column lh-1">
+                                <span class="text-muted" style="font-size: 0.7rem;">Tu ubicación</span>
+                                <span class="fw-bold text-dark" style="font-size: 0.85rem;">Selecciona tu sede <i class="fa fa-chevron-down small"></i></span>
+                            </div>
                         </div>
-
-                        <!-- Desktop Search & Icons (Unchanged) -->
-                        <div class="header-search-center d-none d-lg-block flex-grow-1 mx-5">
-                            <t t-call="website.placeholder_header_search_box">
-                                <t t-set="_form_classes" t-valuef="w-100 position-relative"/>
-                                <t t-set="_input_classes" t-valuef="form-control-lg border-primary rounded-pill bg-light"/>
-                                <t t-set="_submit_classes" t-valuef="btn btn-primary rounded-pill position-absolute end-0 top-0 bottom-0 m-1 px-4"/>
-                            </t>
-                        </div>
-
-                        <!-- Right Icons -->
-                        <div class="header-right-icons d-none d-lg-flex align-items-center gap-3">
+                        
+                        <!-- Right Icons (Both viewports, adapted) -->
+                        <div class="d-flex align-items-center gap-3">
+                            <!-- Wishlist -->
+                            <a href="/shop/wishlist" class="text-dark position-relative d-none d-lg-block" title="Favoritos">
+                                <i class="fa fa-heart-o" style="font-size: 1.3rem;"></i>
+                            </a>
+                            
+                            <!-- Cart -->
                             <t t-call="website_sale.header_cart_link">
                                 <t t-set="_icon" t-value="True"/>
-                                <t t-set="_link_class" t-value="'nav-link text-dark position-relative p-2 h5 mb-0'"/>
+                                <t t-set="_link_class" t-value="'text-dark position-relative p-0'"/>
                                 <t t-set="_badge_class" t-value="'position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary'"/>
                             </t>
                             
-                            <!-- PWA Install Button (Hidden by default) -->
-                            <button class="btn btn-outline-primary btn-sm rounded-pill d-none js_pwa_install me-2">
-                                <i class="fa fa-download me-1"/> Install App
-                            </button>
-
-                            <!-- User Menu (Native Dropdown) -->
-                            <t t-call="portal.placeholder_user_sign_in">
-                                <t t-set="_link_class" t-valuef="btn btn-primary rounded-pill px-4 fw-bold"/>
-                            </t>
-                            <t t-call="portal.user_dropdown">
-                                <t t-set="_user_name" t-value="True"/>
-                                <t t-set="_item_class" t-valuef="dropdown"/>
-                                <t t-set="_link_class" t-valuef="nav-link fw-bold text-dark d-flex align-items-center mb-0"/>
-                                <t t-set="_dropdown_menu_class" t-valuef="dropdown-menu-end shadow border-0 mt-2"/>
-                            </t>
+                            <!-- User (Desktop: Full, Mobile: Icon Only) -->
+                            <div class="d-none d-lg-flex align-items-center gap-2">
+                                <t t-call="portal.placeholder_user_sign_in">
+                                    <t t-set="_link_class" t-valuef="btn btn-primary rounded-pill px-4 fw-bold"/>
+                                </t>
+                                <t t-call="portal.user_dropdown">
+                                    <t t-set="_user_name" t-value="True"/>
+                                    <t t-set="_item_class" t-valuef="dropdown"/>
+                                    <t t-set="_link_class" t-valuef="nav-link fw-bold text-dark d-flex align-items-center mb-0"/>
+                                    <t t-set="_dropdown_menu_class" t-valuef="dropdown-menu-end shadow border-0 mt-2"/>
+                                </t>
+                            </div>
+                            <a href="/my" class="text-dark d-lg-none" title="Mi cuenta">
+                                <i class="fa fa-user-o" style="font-size: 1.3rem;"></i>
+                            </a>
                         </div>
                     </div>
-                </nav>
-
-                <!-- Lower Nav Bar (Menu) -->
-                <div class="zenith-navbar bg-white shadow-sm d-none d-lg-block">
-                    <div class="container d-flex align-items-center">
-                        <!-- Categorías Dropdown -->
-                        <div class="category-dropdown dropdown border-end pe-3 me-3">
-                            <a class="nav-link dropdown-toggle text-dark fw-bold text-uppercase d-flex align-items-center gap-2 py-3" href="#" role="button" data-bs-toggle="dropdown">
-                                <i class="fa fa-bars text-primary"/> Categorías
+                </div>
+                
+                <!-- ROW 2: Full-Width Pill Search Bar -->
+                <div class="zenith-row-2 bg-white py-2">
+                    <div class="container">
+                        <form method="get" action="/shop" class="o_wsale_products_searchbar_form w-100">
+                            <div class="input-group zenith-search-pill">
+                                <span class="input-group-text bg-light border-0 rounded-start-pill ps-4">
+                                    <i class="fa fa-search text-primary"></i>
+                                </span>
+                                <input type="text" name="search" 
+                                       class="form-control bg-light border-0 py-3" 
+                                       placeholder="¿Qué estás buscando hoy?"
+                                       aria-label="Buscar productos"/>
+                                <button class="btn btn-primary rounded-end-pill px-4 fw-bold" type="submit">
+                                    Buscar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- ROW 3: Quick Categories / Status Chips -->
+                <div class="zenith-row-3 bg-white border-bottom shadow-sm">
+                    <div class="container py-2">
+                        <div class="d-flex align-items-center gap-3 overflow-auto zenith-chips-scroll" style="scrollbar-width: none;">
+                            <!-- Categories Dropdown (Desktop) -->
+                            <div class="category-dropdown dropdown d-none d-lg-block">
+                                <a class="btn btn-outline-primary rounded-pill d-flex align-items-center gap-2 px-4 py-2" href="#" role="button" data-bs-toggle="dropdown">
+                                    <i class="fa fa-bars"></i> Categorías
+                                </a>
+                                <ul class="dropdown-menu shadow-lg border-0 p-3 mt-2 rounded-4">
+                                    <li><a class="dropdown-item py-2 rounded" href="/shop">Todos los Productos</a></li>
+                                    <li><hr class="dropdown-divider opacity-50"/></li>
+                                    <t t-set="categories" t-value="request.env['product.public.category'].search([('parent_id', '=', False)], limit=10)"/>
+                                    <t t-foreach="categories" t-as="cat">
+                                        <li><a class="dropdown-item py-2 rounded" t-att-href="'/shop/category/%s' % slug(cat)" t-esc="cat.name"/></li>
+                                    </t>
+                                </ul>
+                            </div>
+                            
+                            <!-- Quick Chips (Both viewports) -->
+                            <a href="/shop?tag=ofertas" class="zenith-chip d-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-light border text-decoration-none flex-shrink-0">
+                                <i class="fa fa-bolt text-warning"></i>
+                                <span class="small fw-bold text-dark">Ofertas</span>
                             </a>
-                            <ul class="dropdown-menu shadow-lg border-0 p-3 mt-0 rounded-bottom-4">
-                                <li><a class="dropdown-item py-2 rounded" href="/shop">Todos los Productos</a></li>
-                                <li><hr class="dropdown-divider opacity-50"/></li>
-                                <t t-set="categories" t-value="request.env['product.public.category'].search([('parent_id', '=', False)], limit=10)"/>
-                                <t t-foreach="categories" t-as="cat">
-                                    <li><a class="dropdown-item py-2 rounded" t-att-href="'/shop/category/%s' % slug(cat)" t-esc="cat.name"/></li>
+                            <a href="/shop?tag=nuevo" class="zenith-chip d-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-light border text-decoration-none flex-shrink-0">
+                                <i class="fa fa-star text-success"></i>
+                                <span class="small fw-bold text-dark">Nuevos</span>
+                            </a>
+                            <a href="/shop?tag=masvendidos" class="zenith-chip d-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-light border text-decoration-none flex-shrink-0">
+                                <i class="fa fa-fire text-danger"></i>
+                                <span class="small fw-bold text-dark">Más Vendidos</span>
+                            </a>
+                            
+                            <!-- Main Menu (Desktop Only) -->
+                            <div class="collapse navbar-collapse d-none d-lg-flex ms-auto" id="top_menu_collapse">
+                                <t t-call="website.navbar_nav">
+                                    <t t-set="_nav_class" t-valuef="navbar-nav"/>
                                 </t>
-                            </ul>
-                        </div>
-
-                        <!-- Main Menu (RESTORED EDITOR HOOKS) -->
-                        <div class="collapse navbar-collapse" id="top_menu_collapse">
-                            <t t-call="website.navbar_nav">
-                                <t t-set="_nav_class" t-valuef="navbar-nav w-100"/>
-                            </t>
+                            </div>
                         </div>
                     </div>
                 </div>
