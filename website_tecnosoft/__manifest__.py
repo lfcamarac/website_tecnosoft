@@ -124,9 +124,6 @@
             'website_tecnosoft/static/src/xml/cart_upsell.xml',
         ],
         'web.assets_frontend_minimal': [
-            'website_tecnosoft/static/src/xml/dynamic_snippets.xml',
-            'website_tecnosoft/static/src/xml/ajax_search.xml',
-            'website_tecnosoft/static/src/xml/cart_upsell.xml',
         ],
         'web.assets_backend': [
             'website_tecnosoft/static/src/js/ai_generator.js',

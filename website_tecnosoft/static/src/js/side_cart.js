@@ -17,7 +17,9 @@ publicWidget.registry.ZenithSideCart = Widget.extend({
     async start() {
         this.$overlay = this.$(".zenith-side-cart-overlay");
         this.$panel = this.$(".zenith-side-cart");
-        this._refreshCart();
+        setTimeout(() => {
+            this._refreshCart();
+        }, 1000);
         return this._super.apply(this, arguments);
     },
 
