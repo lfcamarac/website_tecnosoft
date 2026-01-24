@@ -4,7 +4,7 @@ import publicWidget from "@web/legacy/js/public/public_widget";
 import { session } from "@web/session";
 
 publicWidget.registry.TecnosoftDarkMode = publicWidget.Widget.extend({
-    selector: '#wrapwrap', // Bind to main wrapper to find toggle anywhere
+    selector: 'body', // Bind to body to find toggle anywhere (toggle is outside #wrapwrap)
     events: {
         'click .tecnosoft-dark-mode-toggle': '_onToggleClick',
     },
