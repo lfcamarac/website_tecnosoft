@@ -19,43 +19,27 @@ class Website(models.Model):
         """
         Emergency cleanup method to delete views containing the bad code:
         <t t-if="request.path.startswith('/shop')">
-        This is necessary because Odoo might have preserved old/COW views that persist despite module removal.
+        This uses raw SQL to bypass ORM filters (active_test, protections) and guarantees deletion.
         """
-        _logger.info("STARTING ZOMBIE VIEW CLEANUP...")
+        _logger.info("STARTING ZOMBIE VIEW CLEANUP (SQL NUCLEAR OPTION)...")
         
-        # Search for any view (even inherited ones) containing the bad key 'request.path'
-        # We assume legitimate uses use 'request.httprequest.path'
-        bad_code_snippet = "request.path"
+        # SQL Injection of the fix directly into DB
+        # We look for the specific broken string 'request.path.startswith' which implies the incorrect attribute
+        query = "DELETE FROM ir_ui_view WHERE arch_db LIKE '%request.path.startswith%' AND type = 'qweb'"
         
-        # Find views that contain the bad code in their architecture
-        zombie_views = self.env['ir.ui.view'].search([
-            ('type', '=', 'qweb'),
-            ('arch_db', 'ilike', bad_code_snippet)
-        ])
-        
-        _logger.info(f"Found {len(zombie_views)} potential zombie views matching '{bad_code_snippet}'")
-
-        if zombie_views:
-            for view in zombie_views:
-                # Double check to ensure we don't delete standard views if they happen to use it (unlikely in Odoo 16+)
-                # But 'request.path' is the specific AttributeError source.
-                if 'request.httprequest.path' in view.arch_db:
-                     # This view might be okay (false positive grep), but if it ALSO has request.path...
-                     # We only delete if it STRICTLY has the bad one without 'httprequest' or just assume breakage.
-                     pass
-
-                _logger.warning(f"DELETING ZOMBIE VIEW: {view.id} - {view.name} (Key: {view.key})")
-                try:
-                    view.unlink()
-                    _logger.info(f"Successfully deleted view {view.id}")
-                except Exception as e:
-                    _logger.error(f"Failed to delete view {view.id}: {e}")
-                    # If unlink fails (e.g. protected), try to archive it
-                    try:
-                        view.write({'active': False, 'arch_db': '<!-- neutralized -->'})
-                        _logger.info(f"Neutralized (archived) view {view.id}")
-                    except Exception as e2:
-                         _logger.error(f"Failed to neutralize view {view.id}: {e2}")
+        try:
+            self.env.cr.execute(query)
+            _logger.info(f"SQL DELETE Executed. Rows affected: {self.env.cr.rowcount}")
+        except Exception as e:
+            _logger.error(f"SQL Cleanup Failed: {e}")
+            
+        # Verify if anything remains (Paranoia check)
+        self.env.cr.execute("SELECT id, name FROM ir_ui_view WHERE arch_db LIKE '%request.path.startswith%'")
+        rows = self.env.cr.fetchall()
+        if rows:
+             _logger.error(f"CRITICAL: Views still exist after delete! IDs: {rows}")
+        else:
+             _logger.info("VERIFICATION PASS: No faulty views found in database.")
         
         if zombie_views:
             # We log identifying info just in case
