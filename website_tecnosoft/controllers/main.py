@@ -428,4 +428,42 @@ class TecnosoftController(http.Controller):
                 'currency': currency.symbol,
             })
             
-        return {'products': results, 'not_found': not_found}
+    @http.route('/website_tecnosoft/get_recent_orders', type='json', auth='public', website=True)
+    def get_recent_orders(self):
+        """ Fetch recent sold products for Social Proof notifications. """
+        # We'll fetch the last 10 confirmed orders to keep it realistic
+        # but filter for products that are published.
+        recent_orders = request.env['sale.order.line'].sudo().search([
+            ('order_id.state', 'in', ['sale', 'done']),
+            ('product_id.website_published', '=', True),
+            ('product_id.image_128', '!=', False)
+        ], limit=10, order='create_date desc')
+
+        results = []
+        # Fallback if no real orders yet
+        if not recent_orders:
+            # Fetch some random products to simulate activity for a new store
+            products = request.env['product.template'].sudo().search([('website_published', '=', True)], limit=5)
+            locations = ['Maturín', 'Lechería', 'Caracas', 'Puerto Ordaz', 'Valencia']
+            for i, p in enumerate(products):
+                results.append({
+                    'product_name': p.name,
+                    'product_image': f'/web/image/product.template/{p.id}/image_128',
+                    'location': locations[i % len(locations)],
+                    'time_ago': 'hace poco',
+                })
+            return results
+
+        for line in recent_orders:
+            # Mock or use partner city if available
+            city = line.order_id.partner_id.city or 'Venezuela'
+            results.append({
+                'product_name': line.product_id.name,
+                'product_image': f'/web/image/product.product/{line.product_id.id}/image_128',
+                'location': city,
+                'time_ago': 'hace poco',
+            })
+        
+        # Deduplicate by product to avoid multiple notifications for same item
+        unique_results = {res['product_name']: res for res in results}.values()
+        return list(unique_results)

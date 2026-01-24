@@ -120,7 +120,6 @@
             'website_tecnosoft/static/src/js/quick_order.js',
             'website_tecnosoft/static/src/js/variant_preview.js',
             'website_tecnosoft/static/src/js/branch_stock.js',
-            'website_tecnosoft/static/src/js/branch_stock.js',
             'website_tecnosoft/static/src/xml/dynamic_snippets.xml',
             'website_tecnosoft/static/src/xml/ajax_search.xml',
             'website_tecnosoft/static/src/xml/cart_upsell.xml',

@@ -6,7 +6,7 @@
                 <div class="exit-popup-content animate__animated animate__zoomIn">
                     <button class="close-exit-popup">&amp;times;</button>
                     <div class="row g-0">
-                        <div class="col-md-5 d-none d-md-block exit-popup-img" style="background-image: url('/website_tecnosoft/static/src/img/newsletter_bg.jpg');">
+                        <div class="col-md-5 d-none d-md-block exit-popup-img" style="background-image: url('/web_editor/shape/website/motto.svg'); background-color: var(--o-color-primary); background-blend-mode: overlay;">
                              <div class="h-100 d-flex align-items-center justify-content-center p-4">
                                 <div class="text-white text-center">
                                     <h2 class="fw-bold">-10%</h2>
