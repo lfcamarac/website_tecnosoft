@@ -64,5 +64,10 @@ header.tecnosoft-header.header-variant-glass {
 
 /* Fix for Odoo 18 sticky headers when using variants */
 .tecnosoft-header {
-    z-index: 1030;
+    z-index: 1040;
+}
+
+// Global spacer for fixed headers to prevent overlap
+body:has(.tecnosoft-header) #wrapwrap > main {
+    padding-top: 100px;
 }

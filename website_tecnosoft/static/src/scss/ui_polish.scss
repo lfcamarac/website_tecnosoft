@@ -2,19 +2,25 @@
 
 // 1. Premium "Buy Now" Button
 .btn-zenith-buy-now {
-    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); // Purple-Blue Gradient
-    color: white !important;
+    background: linear-gradient(135deg, var(--o-color-primary) 0%, var(--o-color-primary) 100%); 
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     border: none;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); // Bouncy hover
-    box-shadow: 0 4px 15px rgba(37, 117, 252, 0.3);
+    color: white !important;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(255,255,255,0.1);
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
 
     &:hover {
-        transform: translateY(-3px) scale(1.02);
-        box-shadow: 0 8px 25px rgba(37, 117, 252, 0.5);
-        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        &::before { opacity: 1; }
     }
 
     &:active {
@@ -36,20 +42,19 @@
     position: fixed;
     bottom: 25px;
     left: 50%;
-    transform: translateX(-50%) translateY(150%); // Start hidden below screen
+    transform: translateX(-50%) translateY(150%);
     width: 90%;
-    max-width: 900px; // Slightly wider max width for comfort
-    background: rgba(255, 255, 255, 0.95); // More opaque for readability
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    padding: 15px 30px; // Increased padding
-    border-radius: 100px;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2); // Deeper shadow
-    z-index: 9999;
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    max-width: 800px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 10px 25px;
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    z-index: 1035; 
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     
-    // Explicit Flex Layout
     display: flex !important;
     align-items: center;
     justify-content: space-between;
@@ -71,36 +76,31 @@
     }
     
     .text-primary.fw-bold {
-        font-size: 1.2rem; // Larger price
-        color: #007bff !important; // Enforce vivid blue
+        color: var(--o-color-primary) !important;
     }
     
     // Form Elements
     input[name="add_qty"] {
         border-radius: 50px;
-        border: 1px solid #e0e0e0;
-        padding: 8px 15px; // More padding inside input
-        width: 80px !important; // Wider input
-        font-weight: bold;
-        color: #333;
+        border: 1px solid #ddd;
+        padding: 5px 12px;
+        width: 60px !important;
         
         &:focus {
-            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
-            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(var(--o-color-primary-rgb), 0.2);
+            border-color: var(--o-color-primary);
         }
     }
     
     .btn-primary {
-        padding: 10px 25px; // Larger button
+        padding: 8px 20px;
         border-radius: 50px;
-        font-size: 1rem;
-        background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+        background: var(--o-color-primary);
         border: none;
-        transition: transform 0.2s ease;
         
         &:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+            opacity: 0.9;
+            transform: translateY(-1px);
         }
     }
 
