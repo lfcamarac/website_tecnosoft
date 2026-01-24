@@ -3,26 +3,7 @@
     <template id="tecnosoft_custom_styles" inherit_id="website.layout">
         <xpath expr="//head" position="inside">
             <style id="tecnosoft-dynamic-vars">
-                :root {
-                    --o-color-primary: <t t-esc="website.tecnosoft_primary_color"/>;
-                    --o-color-secondary: <t t-esc="website.tecnosoft_secondary_color"/>;
-                    --tecnosoft-body-font: <t t-if="website.tecnosoft_body_font == 'inter'">'Inter', sans-serif</t>
-                                          <t t-elif="website.tecnosoft_body_font == 'roboto'">'Roboto', sans-serif</t>
-                                          <t t-elif="website.tecnosoft_body_font == 'outfit'">'Outfit', sans-serif</t>
-                                          <t t-elif="website.tecnosoft_body_font == 'montserrat'">'Montserrat', sans-serif</t>
-                                          <t t-else="">'Inter', sans-serif</t>;
-                    
-                    /* Utility RGB versions for opacity effects */
-                    --o-color-primary-rgb: <t t-esc="website.tecnosoft_primary_color.lstrip('#') if website.tecnosoft_primary_color else '007bff'"/>; 
-                }
-                
-                body {
-                    font-family: var(--tecnosoft-body-font) !important;
-                }
-                
-                h1, h2, h3, h4, h5, h6 {
-                    font-family: var(--tecnosoft-body-font) !important;
-                }
+                /* Native Odoo Theme Handling */
             </style>
             
             <!-- Google Fonts Loader -->
