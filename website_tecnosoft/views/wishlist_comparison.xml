@@ -80,7 +80,7 @@
 
     <!-- Add wishlist/compare to Quick View -->
     <template id="tecnosoft_quick_view_buttons" inherit_id="website_tecnosoft.quick_view_modal" name="Quick View Wishlist/Compare">
-        <xpath expr="//a[@role='button'][contains(@class, 'a-submit')]" position="after">
+        <xpath expr="//button[contains(@class, 'a-submit')]" position="after">
             <!-- Wishlist Button in Quick View -->
             <t t-if="request.env['website'].get_current_website().viewref('website_sale_wishlist.add_to_wishlist')">
                 <button type="button" 
