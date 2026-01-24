@@ -7,7 +7,7 @@
     'author': 'Tecnosoft 2025, C.A.',
     'website': 'https://www.tecnosoft.dev',
     'post_init_hook': '_post_init_cleanup',
-    'depends': ['website_sale_stock', 'website_sale_comparison', 'website_sale_wishlist', 'website_sale', 'website', 'web_editor', 'website_sale_cross_selling'],
+    'depends': ['website_sale_stock', 'website_sale_comparison', 'website_sale_wishlist', 'website_sale', 'website', 'web_editor'],
     'data': [
         'security/ir.model.access.csv',
         'data/emergency_fix.xml',
