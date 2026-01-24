@@ -65,3 +65,14 @@ class ProductTemplate(models.Model):
             products |= fallbacks
 
         return products[:4] # Limit to 4 for UI consistency
+    def action_generate_seo_description(self):
+        """
+        Generate SEO Title and Description using AI (Mock logic for now).
+        """
+        for record in self:
+            # Placeholder for AI logic
+            if not record.website_meta_title:
+                record.website_meta_title = f"Comprar {record.name} en Tecnosoft"
+            if not record.website_meta_description:
+                record.website_meta_description = f"Descubre {record.name}. Calidad y rendimiento garantizados en Tecnosoft."
+        return True
