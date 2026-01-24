@@ -169,9 +169,9 @@
                                 <i class="fa fa-star text-success"></i>
                                 <span class="small fw-bold text-dark">Nuevos</span>
                             </a>
-                            <a href="/shop?order=sales_count+desc" class="zenith-chip d-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-light border text-decoration-none flex-shrink-0" title="Productos más vendidos">
-                                <i class="fa fa-fire text-danger"></i>
-                                <span class="small fw-bold text-dark">Más Vendidos</span>
+                            <a href="/shop?order=website_sequence+asc" class="zenith-chip d-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-light border text-decoration-none flex-shrink-0" title="Productos destacados">
+                                <i class="fa fa-star text-warning"></i>
+                                <span class="small fw-medium text-dark">Destacados</span>
                             </a>
                             
                             <!-- Main Menu (Desktop Only) -->
