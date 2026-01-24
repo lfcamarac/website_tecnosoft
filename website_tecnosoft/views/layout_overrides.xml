@@ -277,12 +277,15 @@
                 <button type="button" class="btn btn-link text-primary p-0 small fw-bold text-decoration-none" data-bs-toggle="modal" data-bs-target="#tecnosoft_size_guide">
                     <i class="fa fa-ruler-combined me-1"></i> Guía de Tallas
                 </button>
+                <!-- Video URL removed as field is missing -->
+                <!-- 
                 <t t-if="product.video_url">
                     <span class="text-muted opacity-25">|</span>
                     <button type="button" class="btn btn-link text-danger p-0 small fw-bold text-decoration-none" data-bs-toggle="modal" data-bs-target="#tecnosoft_product_video">
                         <i class="fa fa-play-circle me-1"></i> Ver Video
                     </button>
                 </t>
+                -->
             </div>
             <!-- Flash Offer Countdown -->
             <div t-if="product.validity_date" class="tecnosoft-flash-offer mb-4 p-3 rounded-4 bg-primary-light border border-primary-soft shadow-sm">
@@ -377,8 +380,11 @@
                 </div>
             </div>
 
-            <!-- Product Video Modal -->
+            <!-- Product Video Modal (DISABLED: Missing video_url field) -->
+            <!--
             <div t-if="product.video_url" class="modal fade" id="tecnosoft_product_video" tabindex="-1" aria-hidden="true">
+            -->
+            <div class="d-none">
                 <div class="modal-dialog modal-xl modal-dialog-centered">
                     <div class="modal-content bg-transparent border-0">
                         <div class="modal-header border-0 p-0 mb-2">
@@ -392,6 +398,7 @@
                     </div>
                 </div>
             </div>
+            -->
 
             <div id="tecnosoft_sticky_cart" class="tecnosoft-sticky-cart-bar d-none d-md-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center gap-3">
