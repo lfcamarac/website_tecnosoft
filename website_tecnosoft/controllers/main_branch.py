@@ -12,23 +12,11 @@ class WebsiteSaleBranch(WebsiteSale):
         branches = request.env['tecnosoft.branch'].sudo().search([])
         branch_stock = []
 
-        # 2. Calculate stock per branch
+        # 2. Calculate stock per branch using sudo environment to avoid ACL issues
+        product_sudo = product.with_env(request.env.sudo())
         for branch in branches:
-            total_qty = 0
-            # If the product has variants, we should probably look at the selected variant.
-            # However, _prepare_product_values runs before variant selection on the client side.
-            # Odoo usually passes 'product' as the product.template.
-            
-            # We will calculate for the product template (sum of variants) or specific logic.
-            # For simplicity in this iteration: Sum of stock in associated warehouses.
-            
-            # Optimization: Use with_context(warehouse=...)
-            # But warehouse context usually takes a single ID or list?
-            # Let's manually iterate or use domain.
-            
             if branch.warehouse_ids:
-                # Use sudo() on the product to allow reading quantities without warehouse permissions
-                qty = product.sudo().with_context(warehouse=branch.warehouse_ids.ids).qty_available
+                qty = product_sudo.with_context(warehouse=branch.warehouse_ids.ids).qty_available
                 if qty > 0:
                     branch_stock.append({
                         'name': branch.name,

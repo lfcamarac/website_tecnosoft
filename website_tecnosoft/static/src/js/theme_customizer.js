@@ -15,12 +15,14 @@ publicWidget.registry.TecnosoftThemeCustomizer = publicWidget.Widget.extend({
     },
 
     start: function () {
+        console.log("TecnosoftThemeCustomizer started");
         this.$panel = this.$el;
         this._loadPreferences();
         return this._super.apply(this, arguments);
     },
 
     _togglePanel: function () {
+        console.log("Toggling customizer panel");
         this.$panel.toggleClass('closed');
     },
 
