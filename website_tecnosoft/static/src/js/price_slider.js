@@ -1,68 +1,67 @@
 /** @odoo-module **/
 
-import publicWidget from "@web/legacy/js/public/public_widget";
+import { publicWidget } from "@web/legacy/js/public/public_widget";
+import { registry } from "@web/core/registry";
 
-publicWidget.registry.TecnosoftPriceSlider = publicWidget.Widget.extend({
-    selector: '.o_wsale_products_attributes_collapse, #wsale_products_attributes_collapse',
-    
-    /**
-     * @override
-     */
+export const TecnosoftPriceSlider = publicWidget.Widget.extend({
+    selector: '.tecnosoft-price-filter-wrapper',
+
     start() {
         this._initSlider();
         return this._super.apply(this, arguments);
     },
 
-    /**
-     * @private
-     */
     _initSlider() {
-        const $slider = this.$('.tecnosoft-price-slider');
-        if (!$slider.length) return;
+        const sliderEl = this.el.querySelector('#tecnosoft_price_slider');
+        if (!sliderEl) return;
 
-        const $minInput = this.$('input[name="min_price"]');
-        const $maxInput = this.$('input[name="max_price"]');
-        
-        if (!$minInput.length || !$maxInput.length) return;
+        const minInput = this.el.querySelector('input[name="min_price"]');
+        const maxInput = this.el.querySelector('input[name="max_price"]');
+        const minDisplay = this.el.querySelector('#price_min_display');
+        const maxDisplay = this.el.querySelector('#price_max_display');
 
-        const minVal = parseFloat($minInput.val()) || 0;
-        const maxVal = parseFloat($maxInput.val()) || 10000;
-        
-        // Ranges
-        const rangeMin = parseFloat($slider.data('range-min')) || 0;
-        const rangeMax = parseFloat($slider.data('range-max')) || 10000;
+        // Data attributes
+        const min = parseFloat(sliderEl.dataset.min);
+        const max = parseFloat(sliderEl.dataset.max);
+        const currentMin = parseFloat(sliderEl.dataset.currentMin) || min;
+        const currentMax = parseFloat(sliderEl.dataset.currentMax) || max;
+        const symbol = sliderEl.dataset.currencySymbol || '$';
 
-        const slider = noUiSlider.create($slider[0], {
-            start: [minVal, maxVal],
+        if (typeof noUiSlider === 'undefined') {
+            console.warn("noUiSlider not loaded");
+            return;
+        }
+
+        noUiSlider.create(sliderEl, {
+            start: [currentMin, currentMax],
             connect: true,
             range: {
-                'min': rangeMin,
-                'max': rangeMax
+                'min': min,
+                'max': max
             },
             step: 1,
-            format: {
-                to: (value) => Math.round(value),
-                from: (value) => value
-            }
+            tooltips: false,
         });
 
-        slider.on('update', (values, handle) => {
-            const val = values[handle];
+        sliderEl.noUiSlider.on('update', (values, handle) => {
+            const value = Math.round(values[handle]);
             if (handle === 0) {
-                $minInput.val(val);
-                this.$('.min-price-display').text(val);
+                minDisplay.innerText = symbol + " " + value;
+                minInput.value = value;
             } else {
-                $maxInput.val(val);
-                this.$('.max-price-display').text(val);
+                maxDisplay.innerText = symbol + " " + value;
+                maxInput.value = value;
             }
         });
 
-        slider.on('change', () => {
-            // Trigger Odoo's filter change
-            // Usually Odoo listens for 'change' on the form or inputs.
-            $minInput.trigger('change');
+        sliderEl.noUiSlider.on('change', () => {
+            // Trigger form submission by triggering change on input
+            // The standard Odoo filter form listens for change events on inputs within .js_attributes
+            $(minInput).trigger('change');
         });
     },
 });
 
-export default publicWidget.registry.TecnosoftPriceSlider;
+registry.category("public_widgets").add("TecnosoftPriceSlider", TecnosoftPriceSlider);
+
+export default TecnosoftPriceSlider;
