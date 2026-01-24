@@ -3,7 +3,7 @@
     <!-- Dynamic Popup Template -->
     <template id="tecnosoft_dynamic_popup" inherit_id="website.layout" name="Tecnosoft Dynamic Popup">
         <xpath expr="//div[@id='wrapwrap']" position="inside">
-            <div id="tecnosoft_popup" class="modal fade" tabindex="-1" role="dialog" data-bs-backdrop="static">
+            <div id="tecnosoft_popup" class="modal fade tecnosoft-premium-modal" tabindex="-1" role="dialog" data-bs-backdrop="static">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content border-0 shadow-lg overflow-hidden rounded-4">
                         <div class="row g-0">
