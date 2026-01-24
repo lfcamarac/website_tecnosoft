@@ -267,6 +267,20 @@
                         <i class="fa fa-heart o_heart_icon" role="img" aria-label="Add to wishlist"></i>
                     </button>
                 </t>
+                
+                <!-- Add to List (Shopping Lists Feature) -->
+                <div class="dropdown">
+                    <button type="button" class="btn btn-light rounded-circle shadow-sm js_add_to_list_btn" 
+                            data-bs-toggle="dropdown" aria-expanded="false"
+                            title="Agregar a lista" t-att-data-product-id="product.product_variant_id.id">
+                        <i class="fa fa-list-ul"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3 js_list_dropdown" style="min-width: 220px;">
+                        <div class="js_list_items">
+                            <div class="text-center p-3"><i class="fa fa-spinner fa-spin"></i></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </xpath>
 
