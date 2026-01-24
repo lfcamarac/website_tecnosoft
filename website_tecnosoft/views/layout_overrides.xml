@@ -211,8 +211,8 @@
         <div class="d-none">Obsolete View neutralized to fix 500 error</div>
     </template>
 
-    <!-- Product Item Customization with SEO & Quick View -->
-    <template id="tecnosoft_product_item" inherit_id="website_sale.products_item" name="Tecnosoft Product Item">
+    <!-- Product Item Customization with SEO & Quick View (V2 to bypass COW cache) -->
+    <template id="tecnosoft_product_item_v2" inherit_id="website_sale.products_item" name="Tecnosoft Product Item V2">
         <xpath expr="//form" position="attributes">
             <attribute name="class" add="tecnosoft-product-card h-100 shadow-sm border-0 rounded-3 overflow-hidden position-relative" separator=" "/>
             <attribute name="itemscope" add="itemscope" separator=" "/>
