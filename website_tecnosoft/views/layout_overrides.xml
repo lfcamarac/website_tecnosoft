@@ -236,6 +236,15 @@
 
             <!-- Labels Overlay -->
             <div class="tecnosoft-labels position-absolute top-0 start-0 w-100 p-2 d-flex flex-column gap-1" style="pointer-events: none; z-index: 2;">
+                <!-- Discount Badge (Zenith Style: Yellow Pill) -->
+                <t t-if="product.list_price &gt; product.price">
+                     <t t-set="discount_pct" t-value="round((product.list_price - product.price) * 100 / product.list_price)"/>
+                     <span class="tecnosoft-discount-badge" t-if="discount_pct &gt; 0">
+                         -<t t-esc="discount_pct"/>%
+                     </span>
+                </t>
+
+                <!-- Standard Labels -->
                 <t t-foreach="product.label_ids" t-as="label">
                     <span t-attf-class="badge tecnosoft-label-{{label.style}} tecnosoft-label-{{label.position}} align-self-{{'start' if 'left' in label.position else 'end'}} shadow-sm"
                           t-attf-style="background-color: {{label.bg_color}}; color: {{label.text_color}}; backdrop-filter: blur(5px);">
