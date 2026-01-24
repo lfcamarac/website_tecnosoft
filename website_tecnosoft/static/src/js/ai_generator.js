@@ -132,14 +132,10 @@ export class AIClientAction extends Component {
                 this.openDialog(product);
             }
         });
-    }
-
-    openDialog(product) {
-        this.dialog.add(AIGeneratorDialog, {
-            product: product,
-            title: _t("Generate Description with Local AI"),
-        });
-    }
+        }
 }
+
+AIClientAction.template = "website_tecnosoft.AIClientAction";
+AIClientAction.components = { AIGeneratorDialog };
 
 registry.category("actions").add("website_tecnosoft.ai_generator", AIClientAction);

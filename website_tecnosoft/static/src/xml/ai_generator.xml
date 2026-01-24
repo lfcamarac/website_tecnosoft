@@ -43,4 +43,8 @@
             </t>
         </Dialog>
     </t>
+
+    <t t-name="website_tecnosoft.AIClientAction" owl="1">
+        <div class="o_ai_client_action_placeholder d-none"/>
+    </t>
 </templates>

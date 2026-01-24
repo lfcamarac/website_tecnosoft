@@ -417,7 +417,7 @@
                 "@context": "https://schema.org/",
                 "@type": "Product",
                 "name": "<t t-esc="product.name"/>",
-                "image": "<t t-esc="website.base_url + '/web/image/product.template/' + str(product.id) + '/image_1920'"/>",
+                "image": "<t t-esc="website.get_base_url() + '/web/image/product.template/' + str(product.id) + '/image_1920'"/>",
                 "description": "<t t-esc="product.description_sale or product.name"/>",
                 "sku": "<t t-esc="product.default_code or ''"/>",
                 "brand": {
@@ -426,7 +426,7 @@
                 },
                 "offers": {
                     "@type": "Offer",
-                    "url": "<t t-esc="website.base_url + product.website_url"/>",
+                    "url": "<t t-esc="website.get_base_url() + product.website_url"/>",
                     "priceCurrency": "<t t-esc="website.currency_id.name"/>",
                     "price": "<t t-esc="product.list_price"/>",
                     "availability": "<t t-esc="'https://schema.org/InStock' if product.is_published else 'https://schema.org/OutOfStock'"/>"
@@ -435,7 +435,7 @@
                     "@type": "BuyAction",
                     "target": {
                         "@type": "EntryPoint",
-                        "urlTemplate": "<t t-esc="website.base_url + '/shop/cart/update?product_id=' + str(product.product_variant_id.id) + '&amp;add_qty=1'"/>",
+                        "urlTemplate": "<t t-esc="website.get_base_url() + '/shop/cart/update?product_id=' + str(product.product_variant_id.id) + '&amp;add_qty=1'"/>",
                         "actionPlatform": [
                             "http://schema.org/DesktopWebPlatform",
                             "http://schema.org/MobileWebPlatform"
