@@ -176,6 +176,7 @@
                                 <!-- Odoo handles breadcrumbs dynamically normally, 
                                      but we can inject a cleaner version here if needed. 
                                      For now, we style the actual breadcrumbs in SCSS. -->
+                                <!-- Corrected path check -->
                                 <t t-if="request.httprequest.path.startswith('/shop')">
                                     <li class="breadcrumb-item"><a href="/shop" class="text-decoration-none text-muted">TIENDA</a></li>
                                 </t>
