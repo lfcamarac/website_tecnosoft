@@ -12,11 +12,15 @@ class WebsiteSaleBranch(WebsiteSale):
         branches = request.env['tecnosoft.branch'].sudo().search([])
         branch_stock = []
 
-        # 2. Calculate stock per branch using sudo environment to avoid ACL issues
-        product_sudo = product.with_env(request.env.sudo())
+        # 2. Calculate stock per branch
+        # Use simple sudo() which is standard and safe
+        sudo_product = product.sudo()
+        
         for branch in branches:
             if branch.warehouse_ids:
-                qty = product_sudo.with_context(warehouse=branch.warehouse_ids.ids).qty_available
+                # We use the sudo product to access the computed field 'qty_available'
+                # The context 'warehouse' expects IDs.
+                qty = sudo_product.with_context(warehouse=branch.warehouse_ids.ids).qty_available
                 if qty > 0:
                     branch_stock.append({
                         'name': branch.name,
