@@ -81,14 +81,14 @@
                     </div>
                     <span>Carrito</span>
                 </a>
-                <a href="/my/wishlist" class="nav-item">
+                <a href="/shop/wishlist" class="nav-item">
                     <div class="icon-container">
                         <i class="fa fa-heart-o"></i>
                     </div>
                     <span>Favoritos</span>
                 </a>
                 <!-- Hidden anchor to satisfy legacy database XPaths during upgrade -->
-                <a href="/my/home" class="d-none">Legacy Anchor</a>
+                <a href="/my" class="d-none">Legacy Anchor</a>
             </nav>
         </xpath>
     </template>

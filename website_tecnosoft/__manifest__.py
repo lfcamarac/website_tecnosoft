@@ -105,8 +105,6 @@
             'website_tecnosoft/static/src/js/marketing_snippets.js',
             'website_tecnosoft/static/src/js/ajax_search.js',
             'website_tecnosoft/static/src/js/ajax_filters.js',
-            'website_tecnosoft/static/src/js/recently_viewed.js',
-            'website_tecnosoft/static/src/js/recently_viewed_snippet.js',
             'website_tecnosoft/static/src/js/price_slider.js',
             'website_tecnosoft/static/src/js/infinite_scroll.js',
             'website_tecnosoft/static/src/js/store_locator.js',
@@ -121,13 +119,11 @@
             'website_tecnosoft/static/src/js/variant_preview.js',
             'website_tecnosoft/static/src/js/branch_stock.js',
             'website_tecnosoft/static/src/js/theme_customizer.js',
-        ],
-        'web.assets_frontend_minimal': [
             'website_tecnosoft/static/src/xml/dynamic_snippets.xml',
             'website_tecnosoft/static/src/xml/ajax_search.xml',
             'website_tecnosoft/static/src/xml/cart_upsell.xml',
         ],
-        'web.assets_qweb': [
+        'web.assets_frontend_minimal': [
             'website_tecnosoft/static/src/xml/dynamic_snippets.xml',
             'website_tecnosoft/static/src/xml/ajax_search.xml',
             'website_tecnosoft/static/src/xml/cart_upsell.xml',

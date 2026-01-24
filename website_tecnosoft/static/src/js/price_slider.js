@@ -1,6 +1,6 @@
 /** @odoo-module **/
 
-import { publicWidget } from "@web/legacy/js/public/public_widget";
+import publicWidget from "@web/legacy/js/public/public_widget";
 import { registry } from "@web/core/registry";
 
 export const TecnosoftPriceSlider = publicWidget.Widget.extend({
