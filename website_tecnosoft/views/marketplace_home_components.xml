@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="marketplace_home_main_banner" name="Marketplace Home Main Banner">
+        <section class="s_marketplace_home_main_banner">
+            <div class="relative rounded-2xl overflow-hidden bg-primary shadow-lg min-h-[380px] flex items-center justify-center">
+                <div class="absolute inset-0 bg-cover bg-center z-0 opacity-60 mix-blend-multiply" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDORktETb1cd4k-l_EYKff0w2EelKV1S2apHf4aygEtXQ7J8wpHrjhfjKoh69_1s0W-XF_GRmU5lh4tPduwD1AmO-sKU3wvIeJFwQ2JcY6EE3HZywvG7bAEJ3YueDv2Vmz94sJtA_ziFNuZA_lcoBDoEahy_Pna3xdNDjTxnhr7xjHjkYhCShwd68Ofg1zPZOqfN8d99SKqJiMFH1rMZvgzJjLOS7X52NGYRhD6tJyOy0WlCXuTBZXSK5-YEO_c4Jom_FXmAXAvWvk');"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-blue-900/80 via-transparent to-transparent z-10"></div>
+                <div class="relative z-20 w-full max-w-2xl px-6 flex flex-col items-center text-center gap-8">
+                    <div class="space-y-2">
+                        <h2 class="text-white text-4xl md:text-5xl font-black tracking-tight leading-tight drop-shadow-md">
+                            What do you need today?
+                        </h2>
+                        <p class="text-blue-50 text-lg font-medium drop-shadow">
+                            Ultra-fast delivery for health &amp; tech essentials.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-3 text-sm font-medium text-white/90 mt-4 bg-white/10 backdrop-blur-md p-3 rounded-xl border border-white/20">
+                        <span class="text-white">Trending:</span>
+                        <a class="hover:text-white underline decoration-white/50 underline-offset-4 transition-colors" href="#">Masks</a>
+                        <a class="hover:text-white underline decoration-white/50 underline-offset-4 transition-colors" href="#">Chargers</a>
+                        <a class="hover:text-white underline decoration-white/50 underline-offset-4 transition-colors" href="#">Pain Relief</a>
+                        <a class="hover:text-white underline decoration-white/50 underline-offset-4 transition-colors" href="#">Bluetooth</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="marketplace_quick_actions" name="Marketplace Quick Actions">
+        <section class="s_marketplace_quick_actions">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Quick Actions</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="group relative bg-surface-card rounded-xl p-6 shadow-soft border border-slate-200 hover:shadow-lg hover:border-primary/30 transition-all cursor-pointer overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-[0.03] group-hover:opacity-10 transition-opacity">
+                        <span class="material-symbols-outlined text-primary text-8xl">local_pharmacy</span>
+                    </div>
+                    <div class="relative z-10 flex flex-col h-full justify-between gap-4">
+                        <div class="size-12 rounded-lg bg-cyan-50 text-primary flex items-center justify-center border border-cyan-100">
+                            <span class="material-symbols-outlined">local_pharmacy</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900">Urgent Pharmacy</h3>
+                            <p class="text-slate-500 text-sm mt-1">Meds delivered in &lt;2 hours.</p>
+                        </div>
+                        <div class="flex items-center gap-2 text-primary font-bold text-sm group-hover:translate-x-1 transition-transform">
+                            Order Now <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="group relative bg-surface-card rounded-xl p-6 shadow-soft border border-slate-200 hover:shadow-lg hover:border-blue-500/30 transition-all cursor-pointer overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-[0.03] group-hover:opacity-10 transition-opacity">
+                        <span class="material-symbols-outlined text-blue-600 text-8xl">devices</span>
+                    </div>
+                    <div class="relative z-10 flex flex-col h-full justify-between gap-4">
+                        <div class="size-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100">
+                            <span class="material-symbols-outlined">devices</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900">Tech Deals</h3>
+                            <p class="text-slate-500 text-sm mt-1">Flash sales on gadgets.</p>
+                        </div>
+                        <div class="flex items-center gap-2 text-blue-600 font-bold text-sm group-hover:translate-x-1 transition-transform">
+                            Shop Deals <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="group relative bg-surface-card rounded-xl p-6 shadow-soft border border-slate-200 hover:shadow-lg hover:border-sky-500/30 transition-all cursor-pointer overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-[0.03] group-hover:opacity-10 transition-opacity">
+                        <span class="material-symbols-outlined text-sky-600 text-8xl">medical_services</span>
+                    </div>
+                    <div class="relative z-10 flex flex-col h-full justify-between gap-4">
+                        <div class="size-12 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center border border-sky-100">
+                            <span class="material-symbols-outlined">medical_services</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900">Consultations</h3>
+                            <p class="text-slate-500 text-sm mt-1">Chat with a doctor instantly.</p>
+                        </div>
+                        <div class="flex items-center gap-2 text-sky-600 font-bold text-sm group-hover:translate-x-1 transition-transform">
+                            Book Now <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="marketplace_trending_now" name="Marketplace Trending Now">
+        <section class="s_marketplace_trending_now">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Trending Now</h2>
+                <a class="text-sm font-bold text-primary hover:text-primary-dark flex items-center gap-1" href="#">
+                    View all <span class="material-symbols-outlined text-lg">chevron_right</span>
+                </a>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="group bg-surface-card rounded-xl border border-slate-200 overflow-hidden hover:border-primary/40 hover:shadow-lg transition-all flex flex-col">
+                    <div class="relative aspect-[4/3] bg-white overflow-hidden border-b border-slate-100">
+                        <div class="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded shadow-md z-10">-15%</div>
+                        <img alt="Vitamin Complex" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARxdKLsCoQf_wKn14BHb5wiciYXLbh7UHcL1bQy6wLneRLKokVzXXNu_y0qekM-V3_844GtkvE02sa4-mcfolwE9wsuoY0vWiq9gsNDeuVRBH8cI5XuBXRCUlOPrORGkyyXLndbSpoLSX2yP8hQ6GoiAgpEiBEnxTWAg0DQyycZ5FgqPw4da_detSnBy6SwDr-JtaG0yF3EWVjy4Hdlzq1UFNCbKGLqRzat6BTGeZNjw4eeGB2F0MJ7V2zP3wWZWVnNYv_e_BL7is"/>
+                        <button class="absolute bottom-3 right-3 bg-white text-slate-600 p-2 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-all hover:text-red-500 border border-slate-100">
+                            <span class="material-symbols-outlined">favorite</span>
+                        </button>
+                    </div>
+                    <div class="p-4 flex flex-col flex-1 gap-2">
+                        <div class="flex items-start justify-between gap-2">
+                            <h3 class="font-bold text-slate-800 line-clamp-2">Daily Multi-Vitamin Complex (60 Caps)</h3>
+                        </div>
+                        <div class="flex items-center gap-1 text-yellow-500 text-sm">
+                            <span class="material-symbols-outlined filled text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="font-medium text-slate-700">4.9</span>
+                            <span class="text-slate-400 text-xs ml-1">(1.2k)</span>
+                        </div>
+                        <div class="mt-auto pt-3 flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-black text-slate-900">$14.99</span>
+                                <span class="text-xs text-slate-400 line-through ml-1">$18.00</span>
+                            </div>
+                            <button class="bg-blue-50 hover:bg-primary text-primary hover:text-white h-9 px-4 rounded-lg font-bold text-sm transition-colors flex items-center gap-1">
+                                <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="group bg-surface-card rounded-xl border border-slate-200 overflow-hidden hover:border-primary/40 hover:shadow-lg transition-all flex flex-col">
+                    <div class="relative aspect-[4/3] bg-white overflow-hidden border-b border-slate-100">
+                        <div class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-2 py-1 rounded shadow-md z-10">New</div>
+                        <img alt="Smart Watch" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBexbopy_i_OmN303XIfYctVQRXUcik5k3hI94Q3qcSsIazK6drsUi6_zxP7JuEOXxjpAM9HoixWh7epgzgZD0vEBPv-VABRkw7w3HkUOLJ3d3ZOOqUwKo5yOP-pF9BaMK1NRxKTGOw-paXKdkWwjebLwp-dcs_h8p4--Jau4lZaSn0PjDDuvGo6V1-I1YfeottEUvlxbmfrEcT2tLETYk2IxrXYHhbeDXWAMsYuo1vq-JBh15TwofPe6KhmLXnoOXL_-YnnaJFp3k"/>
+                        <button class="absolute bottom-3 right-3 bg-white text-slate-600 p-2 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-all hover:text-red-500 border border-slate-100">
+                            <span class="material-symbols-outlined">favorite</span>
+                        </button>
+                    </div>
+                    <div class="p-4 flex flex-col flex-1 gap-2">
+                        <div class="flex items-start justify-between gap-2">
+                            <h3 class="font-bold text-slate-800 line-clamp-2">ProFit Smart Watch Series 5 - Midnight</h3>
+                        </div>
+                        <div class="flex items-center gap-1 text-yellow-500 text-sm">
+                            <span class="material-symbols-outlined filled text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="font-medium text-slate-700">4.8</span>
+                            <span class="text-slate-400 text-xs ml-1">(540)</span>
+                        </div>
+                        <div class="mt-auto pt-3 flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-black text-slate-900">$249.00</span>
+                            </div>
+                            <button class="bg-blue-50 hover:bg-primary text-primary hover:text-white h-9 px-4 rounded-lg font-bold text-sm transition-colors flex items-center gap-1">
+                                <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="group bg-surface-card rounded-xl border border-slate-200 overflow-hidden hover:border-primary/40 hover:shadow-lg transition-all flex flex-col">
+                    <div class="relative aspect-[4/3] bg-white overflow-hidden border-b border-slate-100">
+                        <img alt="Bio Oil" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA76wAkuF6cFQ41xJFBUpVGCo9Ga-jylp7-yy-Nf_9YbdikzQh1CdV0UrUluXP0IYjzubmRSKDwOwLmbcGMApPrBpMHElo3jKZcydsPefZOzMnAG0pop64icVayiAiwt-oT9ziQgL5v5RRrtGlx7GwChzUQf8fbS80LGEmrEl_RJ-9SJJnK-KJFQo7xTQaHpwFCa4wLb-TbR1Ubjv2BDREQoMv-F46pvStDLF5G2H-4uyPaV5QQFmzsf9XUm9qIFbC-Re5k7sm7Qzw"/>
+                        <button class="absolute bottom-3 right-3 bg-white text-slate-600 p-2 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-all hover:text-red-500 border border-slate-100">
+                            <span class="material-symbols-outlined">favorite</span>
+                        </button>
+                    </div>
+                    <div class="p-4 flex flex-col flex-1 gap-2">
+                        <div class="flex items-start justify-between gap-2">
+                            <h3 class="font-bold text-slate-800 line-clamp-2">Pure Bio-Oil Skin Care (200ml)</h3>
+                        </div>
+                        <div class="flex items-center gap-1 text-yellow-500 text-sm">
+                            <span class="material-symbols-outlined filled text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="font-medium text-slate-700">5.0</span>
+                            <span class="text-slate-400 text-xs ml-1">(89)</span>
+                        </div>
+                        <div class="mt-auto pt-3 flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-black text-slate-900">$22.50</span>
+                            </div>
+                            <button class="bg-blue-50 hover:bg-primary text-primary hover:text-white h-9 px-4 rounded-lg font-bold text-sm transition-colors flex items-center gap-1">
+                                <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

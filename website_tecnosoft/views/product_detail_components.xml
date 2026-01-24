@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="product_intelligence_view" name="Product Intelligence View">
+        <section class="s_product_intelligence_view">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                <div class="lg:col-span-7 flex flex-col gap-4">
+                    <div class="aspect-[4/3] w-full bg-white rounded-xl overflow-hidden border border-slate-200 relative group shadow-lg">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDqBJRzWBon1xYWRyT2Vd9lSNcG9GaBmSK546usMPx-4xluzIBEIkJ49f18i5b_nCJQ_3meNubGMkhjTn5W1V0ovaplzjUgBZ3gIBIZKJ4NfeOKhYkjQr31nY34o9ECBn-pS_RH-kG5ULAdBBYK5fyFcI1TjuQQjSI0tF7olGz7W4_jmtoO85B-b_wddSWp8Qj-hLjNORVtgNFfyJ6O8AV04W7lHy5sg3q-d2fAGoPcbx2WsqfXifYK6pqi_7V2trGxjD-ogvo-hYk');"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-60"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-green-100/90 text-green-800 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide border border-green-200 backdrop-blur-sm shadow-sm">Best Seller</span>
+                        </div>
+                        <div class="absolute bottom-4 right-4 flex gap-2">
+                            <button class="bg-white/90 p-2 rounded-lg hover:bg-white text-slate-700 hover:text-primary transition-colors backdrop-blur-md border border-slate-200 shadow-sm">
+                                <span class="material-symbols-outlined">zoom_in</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 overflow-x-auto scrollbar-hide pb-2">
+                        <button class="shrink-0 size-20 rounded-lg border-2 border-primary overflow-hidden relative shadow-md bg-white">
+                            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAlC6G-bHKl09qzL0mH2HUuoQGxchKjbSHZ1PLLaGBZ6R1MjKkOvJYH8PaOziv_e0jStbZ2D6_8g8F5FJ_Jc8015_Su9T7sGDd5kj_erkVjoUw57bvl_GOLoa3S6D21s7lGweDqkFniSVp714MR1OteaF5jT3PxsB4UDtv0z5aqCuQ8e7VOGHBJMmimVyPLbhnrt3hAwo6BqdFG2aSeh3Jw0enciXS2QFBfn42au9cLRkkrPmbEi2MMBgOv3u4dsPgS26x6lpgh-Bc');"></div>
+                        </button>
+                        <button class="shrink-0 size-20 rounded-lg border border-slate-200 overflow-hidden relative opacity-70 hover:opacity-100 transition-all hover:border-slate-400 bg-white">
+                            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD_vSfqGvPDMQJfV09K1Q9HNVTbr9aU9omdja9sMM5bgyhGtE7eVtig_5CDkXia9Ou6qtUgtC5HmFJRvSdXQuzC40jzw5_IgLklpq0yoJ9eqSmdrvKL0nOm0qq7C3xYtb55p_ojt3-AyyHeZtnlPBnFSYpKEn32JX4RuaeVNJdCqw8557MzWXb20hsSf3jlaMmYTGq1k9pO5YX_blTswUHsg9E3C-OEU9aQ2rEuoZybRAv9_2TBEx4daEV3znkD4FDBKCpbyJcKx0c');"></div>
+                        </button>
+                        <button class="shrink-0 size-20 rounded-lg border border-slate-200 overflow-hidden relative opacity-70 hover:opacity-100 transition-all hover:border-slate-400 bg-white">
+                            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBeylcWwO6s6FDVSvPLClTgiDlivYn-ipV_L-K0NtHI-kQyYLwKUpXaMx6fg_nnO8baTxZENGdh0Atmb6mdYZuAe1cWUz2RhJR-ndwaixuCezX4BpgHGcEXEd9xCa5ozm687fqnCU2D-1cvxKcfI_YQ-0re-qFQZyp_2HDoqx2He3A6g5x_KKRO2kRaoQ6vDv-5b5Q-EiXLOTJ0wn6Bfy1v5Ae2wNFZRkbtPnT8wUbcKeN6pnqlB5ffC9u-IH4u6UTte0N8vwP-GNs');"></div>
+                        </button>
+                        <button class="shrink-0 size-20 rounded-lg border border-slate-200 overflow-hidden relative opacity-70 hover:opacity-100 transition-all hover:border-slate-400 bg-white">
+                            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBJ_LuCltVUH9Ig0qnBTw7JDgv8pRlyhB_nJP-flRO7EfDhJ4Pg-DrBjP4-8QeM57NKYAAvA1VsnGI0-TCQd-3nEB1hnLoCpKlN6X1xXAjTKMkHT6JfA8ifHJTLVGjI_8NhJeRfX5FM1KsINnCJQpcaC_xMQcVE6Upe6AIKzTGs2fq7NdKC6zMbVWUCnG86xjKfVLp5QMEFXszV0Q6l_tssBABarntxilAAAO5PX9Pb4x1CVq1MXt-Dia0Jy_AEB3Ix16mTkrty2GU');"></div>
+                        </button>
+                    </div>
+                </div>
+                <div class="lg:col-span-5 flex flex-col gap-6">
+                    <div class="space-y-3">
+                        <h1 class="text-3xl md:text-4xl font-black text-slate-900 leading-tight tracking-tight">NeuroFocus Pro - Cognitive Enhancer (30 Caps)</h1>
+                        <div class="flex items-center gap-4 text-sm">
+                            <div class="flex items-center text-amber-400">
+                                <span class="material-symbols-outlined text-[20px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[20px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[20px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[20px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[20px] text-slate-300">star</span>
+                                <span class="ml-2 text-slate-700 font-semibold text-base">4.8</span>
+                            </div>
+                            <a class="text-primary hover:text-primary-dark hover:underline font-medium transition-colors" href="#reviews">1,240 Reviews</a>
+                            <span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+                            <span class="text-slate-400 font-mono text-xs tracking-wider">SKU: NF-2024-X</span>
+                        </div>
+                        <p class="text-slate-600 leading-relaxed text-lg font-light">
+                            Advanced Nootropic Formula for Focus, Memory, and Mental Clarity. Clinically tested ingredients for sustained cognitive performance.
+                        </p>
+                    </div>
+                    <div class="p-6 bg-white border border-slate-200 rounded-xl shadow-xl relative overflow-hidden">
+                        <div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-50 rounded-full blur-3xl pointer-events-none"></div>
+                        <div class="flex items-end gap-3 mb-5 relative z-10">
+                            <span class="text-5xl font-black text-slate-900 tracking-tight">$45.00</span>
+                            <span class="text-lg text-slate-400 line-through mb-2">$55.00</span>
+                            <span class="bg-red-50 text-red-600 border border-red-100 text-xs font-bold px-2 py-1 rounded mb-2.5 ml-1">Save 18%</span>
+                        </div>
+                        <div class="mb-6 relative z-10">
+                            <div class="border-2 border-dashed border-blue-200 bg-blue-50/50 rounded-lg p-4 text-center cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-all group">
+                                <div class="flex flex-col items-center gap-2">
+                                    <span class="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform drop-shadow-sm">upload_file</span>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800">Rx Required: Upload Prescription</p>
+                                        <p class="text-xs text-slate-500 group-hover:text-primary">Drag &amp; drop or click to upload (PDF, JPG)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-3 relative z-10">
+                            <button class="w-full bg-primary hover:bg-blue-600 text-white font-bold text-lg py-4 px-6 rounded-lg shadow-lg hover:shadow-blue-500/30 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+                                <span>Buy Now</span>
+                                <span class="material-symbols-outlined">bolt</span>
+                            </button>
+                            <button class="w-full bg-white border border-slate-300 hover:bg-slate-50 text-slate-800 font-bold text-lg py-4 px-6 rounded-lg transition-all active:scale-[0.98]">
+                                Add to Cart
+                            </button>
+                        </div>
+                        <div class="mt-5 flex items-center justify-center gap-6 text-xs text-slate-500 font-medium">
+                            <div class="flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[18px] text-green-500">verified_user</span>
+                                Secure Payment
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[18px] text-primary">local_shipping</span>
+                                Free Shipping
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-t border-slate-200 pt-5">
+                        <div class="grid grid-cols-2 gap-y-6 gap-x-4">
+                            <div class="flex flex-col gap-1">
+                                <span class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Dosage</span>
+                                <span class="font-medium text-slate-800">1 Capsule/Day</span>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <span class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Format</span>
+                                <span class="font-medium text-slate-800">Vegetarian Caps</span>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <span class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Active Ingredient</span>
+                                <span class="font-medium text-slate-800">Lion's Mane, L-Theanine</span>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <span class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Manufacturer</span>
+                                <span class="font-medium text-slate-800">NeuroLabs Inc.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="product_real_time_inventory" name="Product Real-Time Inventory">
+        <section class="s_product_real_time_inventory">
+            <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+                <h3 class="text-2xl font-bold text-slate-900 flex items-center gap-3">
+                    <span class="p-2 bg-blue-50 rounded-lg text-primary">
+                        <span class="material-symbols-outlined">location_on</span>
+                    </span>
+                    Real-Time Store Inventory
+                </h3>
+                <div class="text-sm text-slate-600 flex items-center gap-2 bg-white py-1.5 px-3 rounded-full border border-slate-200 shadow-sm">
+                    Checking stock near <span class="font-bold text-slate-900 cursor-pointer hover:text-primary transition-colors">San Francisco, CA</span>
+                    <span class="material-symbols-outlined text-[16px] animate-spin text-primary">refresh</span>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-0 border border-slate-200 rounded-xl overflow-hidden shadow-xl bg-white">
+                <div class="lg:col-span-1 border-r border-slate-200 max-h-[500px] overflow-y-auto custom-scrollbar">
+                    <div class="p-4 bg-slate-50 sticky top-0 border-b border-slate-200 z-10">
+                        <h4 class="font-bold text-xs uppercase tracking-widest text-slate-500">Available Locations (5)</h4>
+                    </div>
+                    <div class="divide-y divide-slate-100 bg-white">
+                        <div class="p-4 hover:bg-slate-50 cursor-pointer bg-blue-50/50 border-l-4 border-primary transition-colors group">
+                            <div class="flex justify-between items-start mb-1">
+                                <h5 class="font-bold text-slate-900 group-hover:text-primary transition-colors">Downtown Health Hub</h5>
+                                <span class="text-green-700 text-[10px] font-bold bg-green-100 border border-green-200 px-2 py-0.5 rounded-full uppercase tracking-wider">In Stock</span>
+                            </div>
+                            <p class="text-sm text-slate-500 mb-3">123 Market St, San Francisco • 0.8 mi</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-medium text-slate-700">14 units available</span>
+                                <button class="text-xs text-primary font-bold hover:text-primary-dark hover:underline">Reserve</button>
+                            </div>
+                        </div>
+                        <div class="p-4 hover:bg-slate-50 cursor-pointer transition-colors border-l-4 border-transparent group">
+                            <div class="flex justify-between items-start mb-1">
+                                <h5 class="font-bold text-slate-700 group-hover:text-slate-900">Mission District Pharmacy</h5>
+                                <span class="text-amber-700 text-[10px] font-bold bg-amber-100 border border-amber-200 px-2 py-0.5 rounded-full uppercase tracking-wider">Low Stock</span>
+                            </div>
+                            <p class="text-sm text-slate-500 mb-3">2450 Mission St, San Francisco • 2.1 mi</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-medium text-slate-500 group-hover:text-slate-700">2 units available</span>
+                                <button class="text-xs text-primary font-bold hover:text-primary-dark hover:underline opacity-80 group-hover:opacity-100">Reserve</button>
+                            </div>
+                        </div>
+                        <div class="p-4 hover:bg-slate-50 cursor-pointer transition-colors border-l-4 border-transparent opacity-60 hover:opacity-100">
+                            <div class="flex justify-between items-start mb-1">
+                                <h5 class="font-bold text-slate-600">Sunset Wellness Center</h5>
+                                <span class="text-red-700 text-[10px] font-bold bg-red-100 border border-red-200 px-2 py-0.5 rounded-full uppercase tracking-wider">Out of Stock</span>
+                            </div>
+                            <p class="text-sm text-slate-500 mb-3">1800 Irving St, San Francisco • 4.5 mi</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-medium text-slate-500">Restock in 2 days</span>
+                                <button class="text-xs text-slate-400 font-bold hover:underline">Notify Me</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 h-[400px] lg:h-auto min-h-[400px] bg-slate-100 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-cover bg-center opacity-80" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCOLX6coYDJsj4YWWD6zDGgqesRAZ1Wc0rM3Sa0c5ppg2vRPtqtOaEAoG_9SAMUBRd1bKcrstRxqa55TrRTumKN-fUhjgsv0Duw843AwuGSkEkNGI8ULvX5y7cCpWbZbhjmZp6si3vkfqX4DiLNMIGLnMA33Hak107DZjJzHNfzpLHy_Inc9eq7mJALL33iDfEE2rrb9p7wXHxcONfuE4euWF1RX4QrDnSjyCH3llolEKDlfZf0rNLpkO2gpFboK8COyDUUcRovpk0'); filter: grayscale(20%) contrast(105%) brightness(105%);">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-white/30 pointer-events-none"></div>
+                    <div class="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group cursor-pointer z-20 hover:scale-110 transition-transform">
+                        <div class="bg-white border border-slate-200 text-slate-800 text-xs font-bold px-2 py-1 rounded shadow-lg mb-1 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">14 Units</div>
+                        <span class="material-symbols-outlined text-4xl text-primary drop-shadow-md animate-bounce" style="animation-duration: 2s;">location_on</span>
+                        <div class="w-2 h-1 bg-black/20 blur-sm rounded-full mt-[-2px]"></div>
+                    </div>
+                    <div class="absolute top-1/3 left-2/3 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group cursor-pointer hover:scale-110 transition-transform">
+                        <div class="bg-white border border-slate-200 text-slate-800 text-xs font-bold px-2 py-1 rounded shadow-lg mb-1 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">2 Units</div>
+                        <span class="material-symbols-outlined text-4xl text-amber-500 drop-shadow-md">location_on</span>
+                    </div>
+                    <div class="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group cursor-pointer grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all">
+                        <span class="material-symbols-outlined text-4xl text-red-500 drop-shadow-md">location_on</span>
+                    </div>
+                    <div class="absolute bottom-4 right-4 bg-white/90 backdrop-blur border border-slate-200 p-2 rounded-lg shadow-lg">
+                        <div class="flex gap-2">
+                            <button class="size-8 flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-600 rounded transition-colors"><span class="material-symbols-outlined text-sm">add</span></button>
+                            <button class="size-8 flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-600 rounded transition-colors"><span class="material-symbols-outlined text-sm">remove</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="product_smart_alternatives" name="Product Smart Alternatives">
+        <section class="s_product_smart_alternatives">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row md:items-center gap-4 mb-10">
+                    <span class="p-3 bg-indigo-50 border border-indigo-100 text-indigo-500 rounded-xl w-fit">
+                        <span class="material-symbols-outlined text-2xl">auto_awesome</span>
+                    </span>
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-900">Smart Alternatives</h3>
+                        <p class="text-sm text-slate-500 mt-1">AI-suggested products based on efficacy and value</p>
+                    </div>
+                </div>
+                <div class="overflow-x-auto pb-6 scrollbar-hide">
+                    <div class="min-w-[900px] grid grid-cols-4 gap-6 px-1">
+                        <div class="flex flex-col gap-4 border-2 border-primary bg-white rounded-xl p-5 shadow-xl relative transform scale-105 z-10 origin-top h-full">
+                            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wide shadow-md border border-primary-light">Your Pick</div>
+                            <div class="absolute top-0 left-0 right-0 h-24 bg-blue-50/50 rounded-t-lg -z-0"></div>
+                            <div class="relative z-10">
+                                <div class="aspect-square bg-white rounded-lg bg-cover bg-center mb-2 border border-slate-200 shadow-sm" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAsDHX9eMp-ar5SGkzpUwJA2lwkcT7klmWbhX5T1OYivCfnY2OpgG_QYJQIuADckejo_l9gei25LFsQP9FKRp_KMrZQVHRUg3kY9wgW6ePxT6ixHpb-q3h5JuWm_ULq9PGNSHBjYR_IvxTWULrqfPnJvq22_lMvaksURTlAmkW-nWXRrHJAOxlnwwHW7b0N1XGOExiWrtcBX_Q7YpC8wOfBIRf_AX5fndRFbAMyPEBBGrC6r4_3nckdY55-Z4WRa2d2vjXWFq7Uo5s');"></div>
+                                <h4 class="font-bold text-slate-900 text-sm line-clamp-2 min-h-[2.5rem] mt-2">NeuroFocus Pro</h4>
+                                <div class="text-3xl font-black text-primary mt-1">$45.00</div>
+                            </div>
+                            <div class="space-y-3 text-sm border-t border-slate-100 pt-4 mt-auto relative z-10">
+                                <div class="flex justify-between"><span class="text-slate-500">Rating</span> <span class="font-bold flex items-center gap-1 text-slate-800">4.8 <span class="material-symbols-outlined text-[14px] text-amber-400 fill-current">star</span></span></div>
+                                <div class="flex justify-between"><span class="text-slate-500">Onset</span> <span class="font-semibold text-slate-800">30 mins</span></div>
+                                <div class="flex justify-between"><span class="text-slate-500">Type</span> <span class="font-semibold text-slate-800">Natural</span></div>
+                            </div>
+                            <button class="mt-4 w-full bg-slate-100 text-slate-400 font-bold py-3 rounded-lg cursor-default text-xs uppercase tracking-wide border border-slate-200 relative z-10">Selected</button>
+                        </div>
+                        <div class="flex flex-col gap-4 bg-white rounded-xl p-5 border border-slate-200 hover:border-slate-300 transition-all hover:shadow-lg h-full relative overflow-hidden">
+                            <div class="absolute top-0 left-0 right-0 h-20 bg-green-50/50 -z-0"></div>
+                            <div class="relative z-10">
+                                <div class="bg-green-100 text-green-700 border border-green-200 text-xs font-bold px-2 py-1 rounded w-fit mb-2">Best Value</div>
+                                <div class="aspect-square bg-slate-50 rounded-lg bg-cover bg-center mb-2 border border-slate-200" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAZ70ItYQdRfez_hguGa7duiw36fTiIghf48ZVRI_RFIblw3wlahicMnxCz_HUv-K52lZXvkGWqJU6j0B_hKXdW3-3-7GpchjuCBRWBRZaUMDyfm0R-TwYyweNbIm3KK-UdPhhtoXAtmbM1VrKos2pJ89Q9fd4kkweZv7zZzje0fOz72uUKh-gPkQVHVOg-e1YbTbsaEp01W8UA0Hbg4xL3dIg1LGQOjqQbRXMqVeoZ7TFqZtw7pyTAjb3jfbsQDVGs9Ssqnb7mOVc');"></div>
+                                <h4 class="font-bold text-slate-800 text-sm line-clamp-2 min-h-[2.5rem]">Generic Cognition Aid</h4>
+                                <div class="text-2xl font-black text-slate-900">$28.50</div>
+                            </div>
+                            <div class="space-y-3 text-sm border-t border-slate-100 pt-4 mt-auto relative z-10">
+                                <div class="flex justify-between"><span class="text-slate-500">Rating</span> <span class="font-bold flex items-center gap-1 text-slate-700">4.2 <span class="material-symbols-outlined text-[14px] text-amber-400 fill-current">star</span></span></div>
+                                <div class="flex justify-between"><span class="text-slate-500">Onset</span> <span class="font-semibold text-slate-700">45 mins</span></div>
+                                <div class="flex justify-between"><span class="text-slate-500">Type</span> <span class="font-semibold text-slate-700">Synthetic</span></div>
+                            </div>
+                            <button class="mt-4 w-full border border-primary text-primary hover:bg-primary hover:text-white font-bold py-3 rounded-lg text-xs transition-all uppercase tracking-wide relative z-10">Switch</button>
+                        </div>
+                        <div class="flex flex-col gap-4 bg-white rounded-xl p-5 border border-slate-200 hover:border-slate-300 transition-all hover:shadow-lg h-full relative overflow-hidden">
+                            <div class="absolute top-0 left-0 right-0 h-20 bg-amber-50/50 -z-0"></div>
+                            <div class="relative z-10">
+                                <div class="bg-amber-100 text-amber-700 border border-amber-200 text-xs font-bold px-2 py-1 rounded w-fit mb-2">Top Rated</div>
+                                <div class="aspect-square bg-slate-50 rounded-lg bg-cover bg-center mb-2 border border-slate-200" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBXwQs_aKaWwRxqclplCxUPyFdyAbMlAc_OunIQjQK5xXSS9lhYEN9J92bEeZS_bnJXy0OnL5NYNbofJeKx9u-ileJobUb9-5iJ97cuyW-SZhesCns2jcm--nb7AvsnTwNhwQzBfVQ4kFv0Z2tmN9rTkatBsyK6cdxRqaI47KDXj0od9zn2KScZhsyH72wHAn9fcBe93_OOXSZPKIfM7IoNZovyRFdJMBkFO75SiLhe0l9LD8LEFx_8hJ_AYB4GC6apGQkkL6bxp0g');"></div>
+                                <h4 class="font-bold text-slate-800 text-sm line-clamp-2 min-h-[2.5rem]">MindMaster Elite</h4>
+                                <div class="text-2xl font-black text-slate-900">$62.00</div>
+                            </div>
+                            <div class="space-y-3 text-sm border-t border-slate-100 pt-4 mt-auto relative z-10">
+                                <div class="flex justify-between"><span class="text-slate-500">Rating</span> <span class="font-bold flex items-center gap-1 text-slate-700">4.9 <span class="material-symbols-outlined text-[14px] text-amber-400 fill-current">star</span></span></div>
+                                <div class="flex justify-between"><span class="text-slate-500">Onset</span> <span class="font-semibold text-slate-700">20 mins</span></div>
+                                <div class="flex justify-between"><span class="text-slate-500">Type</span> <span class="font-semibold text-slate-700">Hybrid</span></div>
+                            </div>
+                            <button class="mt-4 w-full border border-primary text-primary hover:bg-primary hover:text-white font-bold py-3 rounded-lg text-xs transition-all uppercase tracking-wide relative z-10">Switch</button>
+                        </div>
+                        <div class="flex flex-col gap-4 bg-white rounded-xl p-5 border border-slate-200 hover:border-slate-300 transition-all hover:shadow-lg h-full opacity-70 hover:opacity-100 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 right-0 h-20 bg-slate-50 -z-0"></div>
+                            <div class="relative z-10">
+                                <div class="text-slate-600 bg-slate-100 border border-slate-200 text-xs font-bold px-2 py-1 rounded w-fit mb-2">Also Popular</div>
+                                <div class="aspect-square bg-slate-50 rounded-lg bg-cover bg-center mb-2 border border-slate-200" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAUDY3X9rMUf_8fsNYqe5RqW2ShIR5I05-8vJD4gfCHc2JAL1MOPYlILKLVe_8oJkpe3pyWXaB_egt5Mu-NFMzA4wNAvYNEtYSwIoQ_aGE8jwO153V_DFdDBXd_qDdYn8_A8Hm00LwmVslGjgBlIGcmj0fCdEYbURAqNM402ycymxgmb0w5nB724l-otV4eaeJ1y6hr-LU_36hVVKqQHf_kZbcdAxEyHzR5hVpCfXjvpRCKXDpBrs47YGYNJUvbYs3AMu-Xt9DQoOg');"></div>
+                                <h4 class="font-bold text-slate-800 text-sm line-clamp-2 min-h-[2.5rem]">Focus Daily</h4>
+                                <div class="text-2xl font-black text-slate-900">$40.00</div>
+                            </div>
+                            <div class="space-y-3 text-sm border-t border-slate-100 pt-4 mt-auto relative z-10">
+                                <div class="flex justify-between"><span class="text-slate-500">Rating</span> <span class="font-bold flex items-center gap-1 text-slate-700">4.5 <span class="material-symbols-outlined text-[14px] text-amber-400 fill-current">star</span></span></div>
+                                <div class="flex justify-between"><span class="text-slate-500">Onset</span> <span class="font-semibold text-slate-700">40 mins</span></div>
+                                <div class="flex justify-between"><span class="text-slate-500">Type</span> <span class="font-semibold text-slate-700">Natural</span></div>
+                            </div>
+                            <button class="mt-4 w-full border border-slate-200 text-slate-400 hover:bg-slate-50 hover:text-slate-600 font-bold py-3 rounded-lg text-xs transition-colors uppercase tracking-wide relative z-10">Switch</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="product_customer_reviews" name="Product Customer Reviews">
+        <section class="s_product_customer_reviews" id="reviews">
+            <h3 class="text-2xl font-bold text-slate-900 mb-6">Customer Reviews</h3>
+            <div class="flex flex-wrap gap-x-12 gap-y-6">
+                <div class="flex flex-col gap-2 min-w-[200px]">
+                    <div class="flex items-end gap-3">
+                        <p class="text-slate-900 text-6xl font-black leading-none tracking-tight">4.8</p>
+                        <div class="flex flex-col mb-1">
+                            <div class="flex text-amber-400">
+                                <span class="material-symbols-outlined fill-current">star</span>
+                                <span class="material-symbols-outlined fill-current">star</span>
+                                <span class="material-symbols-outlined fill-current">star</span>
+                                <span class="material-symbols-outlined fill-current">star</span>
+                                <span class="material-symbols-outlined fill-current text-slate-300">star</span>
+                            </div>
+                            <span class="text-sm text-slate-500">Based on 1,240 reviews</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid min-w-[300px] max-w-[500px] flex-1 grid-cols-[30px_1fr_40px] items-center gap-y-3 gap-x-2">
+                    <p class="text-slate-500 text-sm font-medium">5 <span class="text-[10px] align-top">★</span></p>
+                    <div class="flex h-2 flex-1 overflow-hidden rounded-full bg-slate-200"><div class="rounded-full bg-primary shadow-sm" style="width: 75%;"></div></div>
+                    <p class="text-slate-600 text-xs font-medium text-right">75%</p>
+                    <p class="text-slate-500 text-sm font-medium">4 <span class="text-[10px] align-top">★</span></p>
+                    <div class="flex h-2 flex-1 overflow-hidden rounded-full bg-slate-200"><div class="rounded-full bg-primary/80" style="width: 15%;"></div></div>
+                    <p class="text-slate-600 text-xs font-medium text-right">15%</p>
+                    <p class="text-slate-500 text-sm font-medium">3 <span class="text-[10px] align-top">★</span></p>
+                    <div class="flex h-2 flex-1 overflow-hidden rounded-full bg-slate-200"><div class="rounded-full bg-primary/60" style="width: 5%;"></div></div>
+                    <p class="text-slate-600 text-xs font-medium text-right">5%</p>
+                    <p class="text-slate-500 text-sm font-medium">2 <span class="text-[10px] align-top">★</span></p>
+                    <div class="flex h-2 flex-1 overflow-hidden rounded-full bg-slate-200"><div class="rounded-full bg-primary/40" style="width: 3%;"></div></div>
+                    <p class="text-slate-600 text-xs font-medium text-right">3%</p>
+                    <p class="text-slate-500 text-sm font-medium">1 <span class="text-[10px] align-top">★</span></p>
+                    <div class="flex h-2 flex-1 overflow-hidden rounded-full bg-slate-200"><div class="rounded-full bg-primary/20" style="width: 2%;"></div></div>
+                    <p class="text-slate-600 text-xs font-medium text-right">2%</p>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

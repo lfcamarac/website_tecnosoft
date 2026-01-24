@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="express_checkout_summary" name="Express Checkout Summary">
+        <section class="s_express_checkout_summary">
+            <div class="lg:sticky lg:top-24 flex flex-col gap-6">
+                <div class="flex items-center gap-3 border-b border-slate-200 pb-2">
+                    <span class="flex items-center justify-center size-8 rounded-full bg-slate-900 text-white text-sm font-bold shadow-md">3</span>
+                    <h2 class="text-xl font-bold text-slate-900">Summary</h2>
+                </div>
+                <div class="bg-surface-light rounded-xl shadow-card border border-slate-200/60 overflow-hidden flex flex-col">
+                    <div class="max-h-[350px] overflow-y-auto p-5 space-y-5 border-b border-slate-100">
+                        <div class="flex gap-4">
+                            <div class="w-16 h-16 rounded-lg bg-white flex-shrink-0 overflow-hidden border border-slate-200 shadow-sm p-1">
+                                <img alt="Smart Thermometer device" class="w-full h-full object-cover rounded-md" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDBx-EWSSEXXqlACCYnaUqJJFhSfQ-9tzdQmUdN3LFJCoTIisUsTgIBpU8r-GnCEsOoZL_5iZwtQJHm2zYg7nCX_p1d-673kkkLgIm-2cyUfso10Me4u7_MsCqp76lc--VTsZ-Y-zWQ1WqbDeEV-XpslA2Od3hpK2ZSNqs694UV4i3RG9l5DPr6JaVI9_t5eTgCpwfj-38IDDYQb7LZ50L8csImHtSWaqzm--oj9XUJioYbPAyORdZ7wEfyHSyBkrgdoIwfOE0bkA"/>
+                            </div>
+                            <div class="flex-1 flex flex-col justify-center">
+                                <h4 class="text-sm font-bold text-slate-900 leading-tight">Digital Smart Thermometer</h4>
+                                <p class="text-xs text-slate-500 mt-1 font-medium">Tech Series • White</p>
+                            </div>
+                            <div class="flex flex-col items-end justify-center">
+                                <span class="text-sm font-bold text-slate-900">$45.00</span>
+                                <span class="text-xs text-slate-500 font-medium bg-slate-100 px-1.5 py-0.5 rounded">x1</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-16 h-16 rounded-lg bg-white flex-shrink-0 overflow-hidden border border-slate-200 shadow-sm p-1">
+                                <img alt="Vitamin C Bottle" class="w-full h-full object-cover rounded-md" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgHPxxKaZS_7SBlWRqjmmjz0idxvxtPhMr4WlknLbdwfg_XMKuW5IaUOe5g3JGBU78QQj--BSKuzcWPHpQuHYNz0rT3Funw-x_xe6gXyTP0yRxPPI9E6HVpIyDmLHHO61GclBvbUV4ygPsOOnvCCKgsACmYbwJbqEjQnoUa_dZyF63mjetGZ_I138jm9RCLnOaPQHv1FQW2wypkIXPjokxnwrk9Jk_4MOKSPoCybK_6BqPKDBdf90aWfzUxzEDf4cnBgm0FfNe4PM"/>
+                            </div>
+                            <div class="flex-1 flex flex-col justify-center">
+                                <h4 class="text-sm font-bold text-slate-900 leading-tight">Vitamin C Complex</h4>
+                                <p class="text-xs text-slate-500 mt-1 font-medium">Health Basics • 500mg</p>
+                            </div>
+                            <div class="flex flex-col items-end justify-center">
+                                <span class="text-sm font-bold text-slate-900">$12.50</span>
+                                <span class="text-xs text-slate-500 font-medium bg-slate-100 px-1.5 py-0.5 rounded">x2</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-16 h-16 rounded-lg bg-white flex-shrink-0 overflow-hidden border border-slate-200 shadow-sm p-1">
+                                <img alt="Smart Watch Black" class="w-full h-full object-cover rounded-md" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_OzYl1GQBYCdl2ZLFotN8_M1ys4S8J61jcpNLoqp8tRdbEEVtDzDunGb56OQe4PPwdTvu0X6fWVthCWlsirwHoEFSbi5GlUWVQ_Oqm8MVI69TWFhK5BAArchIU28VBjljJ1vJj3s-GW2o6OYu9vK7mHtvdfUu75SbVfJ0x6zzS9WqMwI2-sQRYz5vj2O3ztRTl4jMYytqIzS0FlQ0dq9YrU1rmYil3OlKm_MDEhCfZXm5ufNS1PEinP75v8VRvTk0ppGI8E_5ACU"/>
+                            </div>
+                            <div class="flex-1 flex flex-col justify-center">
+                                <h4 class="text-sm font-bold text-slate-900 leading-tight">Pulse Oximeter Pro</h4>
+                                <p class="text-xs text-slate-500 mt-1 font-medium">Tech Series • Black</p>
+                            </div>
+                            <div class="flex flex-col items-end justify-center">
+                                <span class="text-sm font-bold text-slate-900">$89.00</span>
+                                <span class="text-xs text-slate-500 font-medium bg-slate-100 px-1.5 py-0.5 rounded">x1</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 space-y-3 bg-slate-50">
+                        <div class="flex justify-between text-sm text-slate-600">
+                            <span>Subtotal</span>
+                            <span class="font-bold text-slate-900">$159.00</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-slate-600">
+                            <span>Tax (8%)</span>
+                            <span class="font-bold text-slate-900">$12.72</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-slate-600">
+                            <span>Shipping</span>
+                            <span class="font-bold text-emerald-600">Free</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-primary">
+                            <span>Rewards Discount</span>
+                            <span class="font-bold">-$0.00</span>
+                        </div>
+                        <div class="h-px bg-slate-200 my-2"></div>
+                        <div class="flex justify-between items-end">
+                            <span class="text-base font-bold text-slate-900">Total</span>
+                            <span class="text-2xl font-black text-slate-900 tracking-tight">$171.72</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <button class="group relative w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 px-6 rounded-lg shadow-lg shadow-emerald-200 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 overflow-hidden ring-1 ring-emerald-400/50">
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
+                        <span class="material-symbols-outlined">check_circle</span>
+                        <span class="text-lg">Confirm Purchase</span>
+                    </button>
+                    <p class="text-xs text-center text-slate-500">
+                        By confirming, you agree to our <a class="underline hover:text-slate-800 font-medium" href="#">Terms of Service</a>.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="express_checkout_fulfillment" name="Express Checkout Fulfillment">
+        <section class="s_express_checkout_fulfillment">
+            <div class="flex items-center gap-3 border-b border-slate-200 pb-2">
+                <span class="flex items-center justify-center size-8 rounded-full bg-slate-900 text-white text-sm font-bold shadow-md">1</span>
+                <h2 class="text-xl font-bold text-slate-900">Fulfillment</h2>
+            </div>
+            <div class="bg-surface-light p-5 rounded-xl shadow-card border border-slate-200/60">
+                <label class="text-sm font-bold text-slate-700 mb-3 block">Choose method</label>
+                <div class="flex bg-slate-100 p-1 rounded-lg border border-slate-200">
+                    <label class="flex-1 cursor-pointer">
+                        <input checked="checked" class="peer sr-only" name="delivery_type" type="radio" value="delivery"/>
+                        <div class="flex items-center justify-center py-2 px-4 rounded-md text-sm font-bold text-slate-500 peer-checked:bg-white peer-checked:text-primary peer-checked:shadow-sm transition-all">
+                            <span class="material-symbols-outlined text-[18px] mr-2">local_shipping</span>
+                            Delivery
+                        </div>
+                    </label>
+                    <label class="flex-1 cursor-pointer">
+                        <input class="peer sr-only" name="delivery_type" type="radio" value="pickup"/>
+                        <div class="flex items-center justify-center py-2 px-4 rounded-md text-sm font-bold text-slate-500 peer-checked:bg-white peer-checked:text-primary peer-checked:shadow-sm transition-all">
+                            <span class="material-symbols-outlined text-[18px] mr-2">storefront</span>
+                            Pickup
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="bg-surface-light p-5 rounded-xl shadow-card border border-slate-200/60 flex flex-col gap-4">
+                <div class="flex justify-between items-center">
+                    <h3 class="font-bold text-slate-900">Shipping Address</h3>
+                    <button class="text-primary text-sm font-bold hover:text-primary-dark hover:underline">Edit</button>
+                </div>
+                <div class="w-full h-40 rounded-lg overflow-hidden relative group cursor-pointer border border-slate-200 shadow-inner">
+                    <div class="absolute inset-0 bg-cover bg-center opacity-90" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDOCHTSvojQgmK8Ys2euh598qcEXIWnpX0b0sfGwrjLC4VrzLTqM7vZyxoomSTXJSBAAwlpSsd7iXkcGNV0oT0wuAyBg8Q9kxcvyTlpRgDUu57Mh6rKp3MwKXtKbtRR5kKhudB_givsQ14hrsk5XsFn2hQFAo7d1aqr0ujJZD8RSgUuXePslIFR_jFPEW9RqnYYh7uPmB17P_U05ib8ekVEYDeXrUJqHV38EeHcyonuNnfsTnrJ9g5AMOmonMH_ajQxXt7FmhqL2gY');"></div>
+                    <div class="absolute inset-0 bg-white/20 group-hover:bg-white/10 transition-colors flex items-center justify-center backdrop-blur-[1px]">
+                        <div class="bg-white text-slate-900 px-4 py-2 rounded-full shadow-lg text-xs font-bold flex items-center gap-1.5 border border-slate-100 transform group-hover:scale-105 transition-transform">
+                            <span class="material-symbols-outlined text-[18px] text-red-500">location_on</span>
+                            Confirm Location
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1.5">Street Address</label>
+                        <input class="w-full bg-slate-50 border border-slate-200 rounded-lg text-slate-900 text-sm p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary placeholder-slate-400 transition-shadow" type="text" value="124 Conch Street, Bikini Bottom"/>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1.5">City</label>
+                            <input class="w-full bg-slate-50 border border-slate-200 rounded-lg text-slate-900 text-sm p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-shadow" type="text" value="Pacific Ocean"/>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1.5">ZIP Code</label>
+                            <input class="w-full bg-slate-50 border border-slate-200 rounded-lg text-slate-900 text-sm p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-shadow" type="text" value="90210"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-surface-light p-5 rounded-xl shadow-card border border-slate-200/60">
+                <h3 class="font-bold text-slate-900 mb-3 text-sm">Preferred Time</h3>
+                <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+                    <button class="flex-shrink-0 px-4 py-2.5 rounded-lg border border-primary bg-primary/5 text-primary text-sm font-bold whitespace-nowrap shadow-sm">
+                        Today, 2PM - 4PM
+                    </button>
+                    <button class="flex-shrink-0 px-4 py-2.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 text-sm font-medium whitespace-nowrap transition-colors">
+                        Today, 6PM - 8PM
+                    </button>
+                    <button class="flex-shrink-0 px-4 py-2.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 text-sm font-medium whitespace-nowrap transition-colors">
+                        Tomorrow, 9AM
+                    </button>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="express_checkout_payment" name="Express Checkout Payment">
+        <section class="s_express_checkout_payment">
+            <div class="flex items-center gap-3 border-b border-slate-200 pb-2">
+                <span class="flex items-center justify-center size-8 rounded-full bg-slate-900 text-white text-sm font-bold shadow-md">2</span>
+                <h2 class="text-xl font-bold text-slate-900">Payment</h2>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <button class="flex items-center justify-center gap-2 bg-black text-white h-12 rounded-lg font-bold hover:opacity-80 transition-all shadow-md">
+                    <span class="material-symbols-outlined">ios</span> Pay
+                </button>
+                <button class="flex items-center justify-center gap-2 bg-white border border-slate-200 text-slate-900 h-12 rounded-lg font-bold hover:bg-slate-50 transition-colors shadow-sm">
+                    <span class="font-display font-bold text-slate-600">G</span> Pay
+                </button>
+            </div>
+            <div class="bg-surface-light p-5 rounded-xl shadow-card border border-slate-200/60">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-bold text-slate-900">Credit &amp; Debit Cards</h3>
+                    <button class="text-primary text-sm font-bold hover:text-primary-dark hover:underline flex items-center">
+                        <span class="material-symbols-outlined text-sm mr-1">add</span> New
+                    </button>
+                </div>
+                <div class="space-y-3">
+                    <label class="flex items-center p-3.5 rounded-lg border-2 border-primary bg-primary/5 cursor-pointer transition-all shadow-sm">
+                        <input checked="checked" class="text-primary w-5 h-5 focus:ring-primary border-slate-300" name="payment_method" type="radio"/>
+                        <div class="ml-3 flex-1">
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-slate-900">Visa ending in 4242</span>
+                                <span class="material-symbols-outlined text-[#1434CB] text-2xl" style="font-variation-settings: 'FILL' 1;">credit_card</span>
+                            </div>
+                            <p class="text-xs text-slate-500 font-medium">Expires 12/25</p>
+                        </div>
+                    </label>
+                    <label class="flex items-center p-3.5 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all">
+                        <input class="text-primary w-5 h-5 focus:ring-primary border-slate-300" name="payment_method" type="radio"/>
+                        <div class="ml-3 flex-1">
+                            <div class="flex items-center justify-between">
+                                <span class="font-medium text-slate-700">Mastercard ending in 8899</span>
+                                <span class="material-symbols-outlined text-[#EB001B] text-2xl" style="font-variation-settings: 'FILL' 1;">credit_card</span>
+                            </div>
+                            <p class="text-xs text-slate-500 font-medium">Expires 08/24</p>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="bg-gradient-to-br from-blue-900 to-indigo-900 p-5 rounded-xl shadow-lg text-white relative overflow-hidden border border-blue-800 ring-1 ring-white/20">
+                <div class="absolute -right-4 -top-4 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
+                <div class="flex items-start justify-between mb-5 relative z-10">
+                    <div>
+                        <h3 class="font-bold text-lg">Health Rewards</h3>
+                        <p class="text-blue-200 text-sm">Balance: <span class="font-bold text-white">2,450 pts</span></p>
+                    </div>
+                    <span class="material-symbols-outlined text-white/30 text-4xl">loyalty</span>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md p-3.5 rounded-lg border border-white/20 relative z-10">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-medium text-blue-50">Use 500 pts</span>
+                        <span class="font-bold text-sm text-green-300">-$5.00</span>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input class="sr-only peer" type="checkbox" value=""/>
+                        <div class="w-11 h-6 bg-slate-900/40 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
+                        <span class="ms-3 text-xs font-bold text-blue-100">Apply discount</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>
