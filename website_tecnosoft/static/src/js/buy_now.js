@@ -1,8 +1,10 @@
 /** @odoo-module **/
 
 import publicWidget from "@web/legacy/js/public/public_widget";
+import { rpc } from "@web/core/network/rpc_service";
+import Widget from "@web/legacy/js/core/widget";
 
-publicWidget.registry.TecnosoftBuyNow = publicWidget.Widget.extend({
+publicWidget.registry.TecnosoftBuyNow = Widget.extend({
     selector: '.js_buy_now',
     events: {
         'click': '_onBuyNow',

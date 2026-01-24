@@ -1,10 +1,12 @@
 /** @odoo-module **/
 
 import publicWidget from "@web/legacy/js/public/public_widget";
+import { rpc } from "@web/core/network/rpc_service";
+import Widget from "@web/legacy/js/core/widget";
 import { jsonrpc } from "@web/core/network/rpc";
 import { renderToElement } from "@web/core/utils/render";
 
-publicWidget.registry.DynamicMegaMenu = publicWidget.Widget.extend({
+publicWidget.registry.DynamicMegaMenu = Widget.extend({
     selector: '.s_tecnosoft_mega_menu_dynamic',
     
     /**

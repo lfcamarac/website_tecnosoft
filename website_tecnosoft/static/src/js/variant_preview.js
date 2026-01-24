@@ -2,7 +2,7 @@
 
 import publicWidget from 'web.public.widget';
 
-publicWidget.registry.TecnosoftVariantPreview = publicWidget.Widget.extend({
+publicWidget.registry.TecnosoftVariantPreview = Widget.extend({
     selector: '.product_detail_main',
     events: {
         'mouseenter .o_variant_pills_input_value': '_onHoverVariant',

@@ -1,9 +1,11 @@
 /** @odoo-module **/
 
 import publicWidget from "@web/legacy/js/public/public_widget";
+import { rpc } from "@web/core/network/rpc_service";
+import Widget from "@web/legacy/js/core/widget";
 import { jsonrpc } from "@web/core/network/rpc";
 
-publicWidget.registry.TecnosoftQuickView = publicWidget.Widget.extend({
+publicWidget.registry.TecnosoftQuickView = Widget.extend({
     selector: '.tecnosoft-product-card',
     events: {
         'click .o_quick_view': '_onQuickViewClick',

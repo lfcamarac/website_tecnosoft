@@ -1,8 +1,10 @@
 /** @odoo-module **/
 
 import publicWidget from "@web/legacy/js/public/public_widget";
+import { rpc } from "@web/core/network/rpc_service";
+import Widget from "@web/legacy/js/core/widget";
 
-publicWidget.registry.TecnosoftExitPopup = publicWidget.Widget.extend({
+publicWidget.registry.TecnosoftExitPopup = Widget.extend({
     selector: '#wrapwrap',
     events: {
         'click .close-exit-popup': '_onClose',

@@ -2,7 +2,7 @@
 
 import publicWidget from 'web.public.widget';
 
-publicWidget.registry.PwaInstall = publicWidget.Widget.extend({
+publicWidget.registry.PwaInstall = Widget.extend({
     selector: '#wrapwrap',
     events: {
         'click .js_pwa_install': '_onInstallClick',

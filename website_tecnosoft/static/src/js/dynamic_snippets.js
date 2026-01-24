@@ -1,10 +1,13 @@
 /** @odoo-module **/
 
 import publicWidget from "@web/legacy/js/public/public_widget";
-import { rpc } from "@web/core/network/rpc";
+import { rpc } from "@web/core/network/rpc_service";
+import Widget from "@web/legacy/js/core/widget";
+import { rpc } from "@web/core/network/rpc_service";
+import Widget from "@web/legacy/js/core/widget";
 import { renderToElement } from "@web/core/utils/render";
 
-publicWidget.registry.TecnosoftDynamicSnippet = publicWidget.Widget.extend({
+publicWidget.registry.TecnosoftDynamicSnippet = Widget.extend({
     selector: '.s_tecnosoft_dynamic',
 
     /**
@@ -220,7 +223,7 @@ publicWidget.registry.TecnosoftDynamicSnippet = publicWidget.Widget.extend({
     },
 });
 
-publicWidget.registry.TecnosoftHeroHotspots = publicWidget.Widget.extend({
+publicWidget.registry.TecnosoftHeroHotspots = Widget.extend({
     selector: '.s_tecnosoft_hero',
 
     /**

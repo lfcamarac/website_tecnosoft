@@ -1,8 +1,10 @@
 /** @odoo-module **/
 
 import publicWidget from "@web/legacy/js/public/public_widget";
+import { rpc } from "@web/core/network/rpc_service";
+import Widget from "@web/legacy/js/core/widget";
 
-publicWidget.registry.TecnosoftCompleteLook = publicWidget.Widget.extend({
+publicWidget.registry.TecnosoftCompleteLook = Widget.extend({
     selector: '.tecnosoft-complete-look',
     events: {
         'change .js_together_check': '_updateTotal',

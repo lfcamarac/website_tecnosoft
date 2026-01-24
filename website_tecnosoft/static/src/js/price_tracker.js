@@ -1,9 +1,12 @@
 /** @odoo-module **/
 
 import publicWidget from "@web/legacy/js/public/public_widget";
-import { rpc } from "@web/core/network/rpc";
+import { rpc } from "@web/core/network/rpc_service";
+import Widget from "@web/legacy/js/core/widget";
+import { rpc } from "@web/core/network/rpc_service";
+import Widget from "@web/legacy/js/core/widget";
 
-publicWidget.registry.TecnosoftPriceTracker = publicWidget.Widget.extend({
+publicWidget.registry.TecnosoftPriceTracker = Widget.extend({
     selector: '.tecnosoft-price-tracker-trigger',
     events: {
         'click': '_onSubscribeClick',

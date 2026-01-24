@@ -1,10 +1,13 @@
 /** @odoo-module **/
 
 import publicWidget from "@web/legacy/js/public/public_widget";
-import { rpc } from "@web/core/network/rpc";
+import { rpc } from "@web/core/network/rpc_service";
+import Widget from "@web/legacy/js/core/widget";
+import { rpc } from "@web/core/network/rpc_service";
+import Widget from "@web/legacy/js/core/widget";
 import { renderToElement } from "@web/core/utils/render";
 
-publicWidget.registry.TecnosoftAjaxSearch = publicWidget.Widget.extend({
+publicWidget.registry.TecnosoftAjaxSearch = Widget.extend({
     selector: '.tecnosoft-ajax-search',
     events: {
         'input #tecnosoft_search_input': '_onInput',

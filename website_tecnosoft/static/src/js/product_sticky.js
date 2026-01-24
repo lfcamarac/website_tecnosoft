@@ -1,8 +1,10 @@
 /** @odoo-module **/
 
 import publicWidget from "@web/legacy/js/public/public_widget";
+import { rpc } from "@web/core/network/rpc_service";
+import Widget from "@web/legacy/js/core/widget";
 
-publicWidget.registry.TecnosoftStickyCart = publicWidget.Widget.extend({
+publicWidget.registry.TecnosoftStickyCart = Widget.extend({
     selector: '#product_details',
     events: {
         'change input[name="add_qty"]': '_onQtyChange',

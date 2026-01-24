@@ -1,8 +1,10 @@
 /** @odoo-module **/
 
 import publicWidget from "@web/legacy/js/public/public_widget";
+import { rpc } from "@web/core/network/rpc_service";
+import Widget from "@web/legacy/js/core/widget";
 
-publicWidget.registry.TecnosoftQuickOrder = publicWidget.Widget.extend({
+publicWidget.registry.TecnosoftQuickOrder = Widget.extend({
     selector: '.tecnosoft-quick-order-page',
     events: {
         'keyup .js_quick_search': '_onQuickSearch',

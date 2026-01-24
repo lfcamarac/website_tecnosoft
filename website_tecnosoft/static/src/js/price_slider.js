@@ -1,9 +1,11 @@
 /** @odoo-module **/
 
 import publicWidget from "@web/legacy/js/public/public_widget";
+import { rpc } from "@web/core/network/rpc_service";
+import Widget from "@web/legacy/js/core/widget";
 import { registry } from "@web/core/registry";
 
-export const TecnosoftPriceSlider = publicWidget.Widget.extend({
+export const TecnosoftPriceSlider = Widget.extend({
     selector: '.tecnosoft-price-filter-wrapper',
 
     start() {

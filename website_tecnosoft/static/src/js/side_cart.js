@@ -1,10 +1,13 @@
 /** @odoo-module **/
 
 import publicWidget from "@web/legacy/js/public/public_widget";
-import { rpc } from "@web/core/network/rpc";
+import { rpc } from "@web/core/network/rpc_service";
+import Widget from "@web/legacy/js/core/widget";
+import { rpc } from "@web/core/network/rpc_service";
+import Widget from "@web/legacy/js/core/widget";
 import { renderToElement } from "@web/core/utils/render";
 
-publicWidget.registry.ZenithSideCart = publicWidget.Widget.extend({
+publicWidget.registry.ZenithSideCart = Widget.extend({
     selector: "#wrapwrap",
     events: {
         "click .close-cart": "_onCloseCart",
