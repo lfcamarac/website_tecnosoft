@@ -16,21 +16,32 @@ publicWidget.registry.ZenithSideCart = publicWidget.Widget.extend({
     async start() {
         this.$overlay = this.$(".zenith-side-cart-overlay");
         this.$panel = this.$(".zenith-side-cart");
+        
+        // Listen to native Odoo cart changes if possible
+        $(document).on("shop_cart_changed", () => this._refreshCart());
+        
         setTimeout(() => {
             this._refreshCart();
-        }, 1000);
+        }, 500);
         return this._super.apply(this, arguments);
     },
 
     _onCloseCart() {
         this.$panel.removeClass("open");
         this.$overlay.removeClass("open");
+        $("body").removeClass("side-cart-open");
     },
 
     _onAddToCart(ev) {
+        // Show side cart immediately on add to cart
+        this.$panel.addClass("open");
+        this.$overlay.addClass("open");
+        $("body").addClass("side-cart-open");
+        
         setTimeout(() => {
+            this._refreshCart();
             this._showUpsellModal();
-        }, 800);
+        }, 500);
     },
 
     async _showUpsellModal() {

@@ -436,7 +436,6 @@ class TecnosoftController(http.Controller):
         recent_orders = request.env['sale.order.line'].sudo().search([
             ('order_id.state', 'in', ['sale', 'done']),
             ('product_id.website_published', '=', True),
-            ('product_id.image_1920', '!=', False)
         ], limit=10, order='create_date desc')
 
         results = []

@@ -205,12 +205,6 @@
         </xpath>
     </template>
 
-    <!-- NEUTRALIZED OLD VIEW - DO NOT USE OR INHERIT -->
-    <!-- Detached from website.layout to stop 500 errors if it persists in DB -->
-    <template id="tecnosoft_breadcrumbs" name="OBSOLETE Breadcrumbs" active="False">
-        <div class="d-none">Obsolete View neutralized to fix 500 error</div>
-    </template>
-
     <!-- Product Item Customization with SEO & Quick View (V2 to bypass COW cache) -->
     <template id="tecnosoft_product_item_v2" inherit_id="website_sale.products_item" name="Tecnosoft Product Item V2">
         <xpath expr="//form" position="before">

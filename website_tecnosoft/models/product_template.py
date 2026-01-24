@@ -38,35 +38,6 @@ class ProductTemplate(models.Model):
             else:
                 record.tecnosoft_estimated_delivery = False
 
-    def action_generate_seo_description(self):
-        """ 
-        Generates an SEO description using a 'Mock AI' template.
-        Replace this logic with an OpenRouter/OpenAI call in production.
-        """
-        for record in self:
-            currency = record.currency_id.symbol or '$'
-            price = f"{currency} {record.list_price}"
-            
-            # Simple Template-based generation
-            desc = f"Buy {record.name} online. "
-            if record.categ_id:
-                desc += f"Top quality in {record.categ_id.name}. "
-            
-            # Add attributes if any
-            # (Note: accessing attribute_line_ids for display)
-            attrs = record.attribute_line_ids.filtered(lambda l: len(l.value_ids) > 0)
-            if attrs:
-                attr_desc = ", ".join([f"{a.attribute_id.name}" for a in attrs[:3]])
-                desc += f"Available with {attr_desc}. "
-            
-            desc += f"Best price: {price}. Fast shipping available!"
-            
-            record.website_meta_description = desc
-            
-            # Also set title if empty
-            if not record.website_meta_title:
-                record.website_meta_title = f"{record.name} | Best Deal"
-
     def get_frequently_bought_together(self):
         """
         Returns a set of products suggested to be bought with the current one.
