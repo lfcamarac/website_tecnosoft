@@ -113,7 +113,8 @@
     </template>
     -->
 
-    <!-- Extended User Dropdown (Farmatodo Style) -->
+    <!-- Extended User Dropdown (Farmatodo Style) - DISABLED: XPath incompatible with Odoo 18 -->
+    <!--
     <template id="tecnosoft_user_dropdown_extended" inherit_id="portal.user_dropdown" name="Tecnosoft Extended User Dropdown">
         <xpath expr="//ul[hasclass('dropdown-menu')]" position="inside">
             <li><hr class="dropdown-divider"/></li>
@@ -139,4 +140,5 @@
             </li>
         </xpath>
     </template>
+    -->
 </odoo>
