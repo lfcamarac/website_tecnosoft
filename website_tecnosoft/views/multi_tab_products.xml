@@ -32,7 +32,7 @@
                                 <div class="col-6 col-lg-3">
                                     <t t-set="td_product" t-value="{'x': 1, 'y': 1}"/>
                                     <t t-set="ppr" t-value="4"/>
-                                    <t t-call="website_sale.products_item"/>
+                                    <t t-call="website_tecnosoft.tecnosoft_simple_product_card"/>
                                 </div>
                             </t>
                         </div>
@@ -45,7 +45,7 @@
                                 <div class="col-6 col-lg-3">
                                     <t t-set="td_product" t-value="{'x': 1, 'y': 1}"/>
                                     <t t-set="ppr" t-value="4"/>
-                                    <t t-call="website_sale.products_item"/>
+                                    <t t-call="website_tecnosoft.tecnosoft_simple_product_card"/>
                                 </div>
                             </t>
                         </div>
@@ -58,13 +58,57 @@
                                 <div class="col-6 col-lg-3">
                                     <t t-set="td_product" t-value="{'x': 1, 'y': 1}"/>
                                     <t t-set="ppr" t-value="4"/>
-                                    <t t-call="website_sale.products_item"/>
+                                    <t t-call="website_tecnosoft.tecnosoft_simple_product_card"/>
                                 </div>
                             </t>
                         </div>
                     </div>
                 </div>
             </div>
+                </div>
+            </div>
         </section>
+    </template>
+
+    <!-- Standalone Product Card for Snippets (Bypasses website_sale fragile context) -->
+    <template id="tecnosoft_simple_product_card" name="Tecnosoft Simple Card">
+        <form action="/shop/cart/update" method="post" class="tecnosoft-product-card h-100 shadow-sm border-0 rounded-3 overflow-hidden position-relative" itemscope="itemscope" itemtype="http://schema.org/Product">
+            <t t-set="td_product" t-value="{'x': 1, 'y': 1}"/>
+            <t t-set="ppr" t-value="4"/>
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+            <input type="hidden" name="product_id" t-att-value="product.product_variant_id.id"/>
+            
+            <div class="oe_product_image border-bottom-0 position-relative overflow-hidden">
+                <a t-att-href="product.website_url" class="d-block h-100" itemprop="url">
+                    <img t-att-src="website.image_url(product, 'image_1920')" class="img img-fluid w-100 placeholder-glow" loading="lazy" t-att-alt="product.name"/>
+                </a>
+                <!-- Discount Badge -->
+                <t t-set="combination_info" t-value="product._get_combination_info(product_id=product.product_variant_id.id, add_qty=1)"/>
+                <t t-if="combination_info['has_discounted_price']">
+                     <t t-set="discount_pct" t-value="round((combination_info['list_price'] - combination_info['price']) * 100 / combination_info['list_price'])"/>
+                     <span class="tecnosoft-discount-badge position-absolute top-0 end-0 m-2 badge rounded-pill bg-danger shadow-sm" t-if="discount_pct &gt; 0">
+                         -<t t-esc="discount_pct"/>%
+                     </span>
+                </t>
+            </div>
+            
+            <div class="p-3 bg-white h-100 d-flex flex-column">
+                <h6 class="mb-2 fw-bold text-truncate">
+                    <a t-att-href="product.website_url" class="text-decoration-none text-dark" itemprop="name" t-field="product.name"/>
+                </h6>
+                <div class="product_price mb-3" itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer">
+                     <span class="h5 fw-bold text-primary" t-if="combination_info['price']" t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                     <del t-if="combination_info['has_discounted_price']" class="text-muted small ms-2" t-esc="combination_info['list_price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                </div>
+                <div class="mt-auto d-flex gap-2">
+                     <a role="button" class="btn btn-outline-primary w-100 rounded-pill small fw-bold a-submit" aria-label="Añadir">
+                        Añadir
+                     </a>
+                     <a t-att-href="product.website_url" class="btn btn-primary w-100 rounded-pill small fw-bold">
+                        Ver
+                     </a>
+                </div>
+            </div>
+        </form>
     </template>
 </odoo>
