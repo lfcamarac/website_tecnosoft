@@ -14,9 +14,10 @@ publicWidget.registry.ZenithSideCart = Widget.extend({
         "click .qty-btn": "_onUpdateQty",
     },
 
-    start() {
+    async start() {
         this.$overlay = this.$(".zenith-side-cart-overlay");
         this.$panel = this.$(".zenith-side-cart");
+        this._refreshCart();
         return this._super.apply(this, arguments);
     },
 
