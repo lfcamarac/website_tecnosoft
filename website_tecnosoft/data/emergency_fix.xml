@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Emergency deletion of the broken view to force full recreation -->
+        <!-- We use 'search' to find it by key/xml_id if possible, or by ID if it was an external ID -->
+        <!-- Since we want to clear the 'website_tecnosoft.tecnosoft_breadcrumbs' view specifically: -->
+        
+        <delete model="ir.ui.view" search="[('key', '=', 'website_tecnosoft.tecnosoft_breadcrumbs')]"/>
+        
+    </data>
+</odoo>

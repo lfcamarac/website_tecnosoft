@@ -9,6 +9,7 @@
     'depends': ['website', 'website_sale', 'website_sale_comparison', 'website_sale_wishlist'],
     'data': [
         'security/ir.model.access.csv',
+        'data/emergency_fix.xml',
         'views/theme_templates.xml',
         'views/res_config_settings_views.xml',
         'views/custom_styles.xml',
