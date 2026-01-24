@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- Zenith Header V1: App-First Unified Navigation (Farmatodo Style) -->
-    <template id="header_zenith_v1" inherit_id="website.layout" name="Zenith Header V1" active="False">
+    <template id="header_zenith_v1" inherit_id="website.layout" name="Zenith Header V1" active="True" priority="99">
         <xpath expr="//header" position="attributes">
             <attribute name="t-attf-class" add="tecnosoft-header-v1" separator=" "/>
         </xpath>
