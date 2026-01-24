@@ -3,5 +3,5 @@ from odoo import models, fields
 
 class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
-
-    tecnosoft_dark_mode_default = fields.Boolean(related='website_id.tecnosoft_dark_mode_default', readonly=False)
+    # All theme settings now rely on Odoo's native Website Editor.
+    # Dark Mode uses localStorage (client-side), no backend field needed.

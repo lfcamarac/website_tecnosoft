@@ -18,9 +18,7 @@ class Website(models.Model):
     _inherit = 'website'
 
     tecnosoft_primary_color = fields.Char(string="Color Primario", default="#007bff", help="Deprecated: Use native Odoo theme colors.")
-    # Removed other deprecated fields to rely on Odoo native editor
-    
-    tecnosoft_dark_mode_default = fields.Boolean(string="Dark Mode Default", default=False)
+    # Dark Mode uses localStorage (client-side), no backend field needed.
 
     def _clean_zombie_views(self):
         """
