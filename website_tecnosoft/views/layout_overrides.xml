@@ -103,11 +103,13 @@
                         <!-- Branding & Contact -->
                         <div class="col-lg-4">
                             <h5 class="text-primary fw-bold mb-4" t-field="website.name"/>
-                            <p class="text-muted small">
-                                Tecnosoft es tu socio estratégico en soluciones de eCommerce y tecnología empresarial. 
-                                Innovación y robustez en cada proyecto.
-                            </p>
-                            <div class="mt-4">
+                            <div class="oe_structure">
+                                <p class="text-muted small">
+                                    Tecnosoft es tu socio estratégico en soluciones de eCommerce y tecnología empresarial. 
+                                    Innovación y robustez en cada proyecto.
+                                </p>
+                            </div>
+                            <div class="mt-4 oe_structure">
                                 <p class="mb-1"><i class="fa fa-map-marker text-primary me-2"></i> Calle Tecnología 123, Ciudad IT</p>
                                 <p class="mb-1"><i class="fa fa-phone text-primary me-2"></i> +1 234 567 890</p>
                                 <p class="mb-1"><i class="fa fa-envelope text-primary me-2"></i> hola@tecnosoft.com</p>
@@ -136,7 +138,9 @@
                         <!-- Newsletter -->
                         <div class="col-lg-3 col-md-4">
                             <h6 class="text-uppercase fw-bold mb-4">Newsletter</h6>
-                            <p class="text-muted small mb-3">Recibe las últimas noticias y ofertas de Tecnosoft.</p>
+                            <div class="oe_structure">
+                                <p class="text-muted small mb-3">Recibe las últimas noticias y ofertas de Tecnosoft.</p>
+                            </div>
                             <form action="/website/newsletter" method="post" class="js_subscribe">
                                 <div class="input-group">
                                     <input type="email" class="form-control bg-transparent border-primary text-white" placeholder="Tu email" aria-label="Email"/>

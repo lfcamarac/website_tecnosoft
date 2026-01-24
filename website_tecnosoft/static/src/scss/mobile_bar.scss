@@ -35,7 +35,7 @@
         }
 
         &.active, &:hover {
-            color: var(--primary);
+            color: var(--o-color-primary);
             i { transform: translateY(-2px); }
         }
 
