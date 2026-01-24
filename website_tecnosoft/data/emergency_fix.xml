@@ -7,8 +7,12 @@
         
         <!-- Clean slate for V2 just in case -->
         <delete id="website_tecnosoft.tecnosoft_breadcrumbs_v2" model="ir.ui.view"/>
-        <!-- Kill the old zombie view -->
+        <!-- Kill the old zombie view (ID deletion) -->
         <delete id="website_tecnosoft.tecnosoft_breadcrumbs" model="ir.ui.view"/>
+        
+        <!-- FORCE EXECUTE PYTHON CLEANUP - The Nuclear Option -->
+        <!-- This finds ANY view with the bad code and destroys it -->
+        <function model="website" name="_clean_zombie_views"/>
         
     </data>
 </odoo>
