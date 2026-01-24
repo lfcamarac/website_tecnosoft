@@ -2,7 +2,6 @@
 
 import publicWidget from "@web/legacy/js/public/public_widget";
 import { rpc } from "@web/core/network/rpc";
-import { rpc } from "@web/core/network/rpc";
 import { renderToElement } from "@web/core/utils/render";
 
 publicWidget.registry.DynamicMegaMenu = publicWidget.Widget.extend({
@@ -25,7 +24,7 @@ publicWidget.registry.DynamicMegaMenu = publicWidget.Widget.extend({
     _fetchAndRender: async function () {
         try {
             // Fetch top-level categories and their children
-            const data = await jsonrpc('/website_tecnosoft/get_category_tree', {
+            const data = await rpc('/website_tecnosoft/get_category_tree', {
                 limit: 6 // Limit top level cols
             });
 

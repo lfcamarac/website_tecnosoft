@@ -2,7 +2,6 @@
 
 import publicWidget from "@web/legacy/js/public/public_widget";
 import { rpc } from "@web/core/network/rpc";
-import { rpc } from "@web/core/network/rpc";
 
 publicWidget.registry.TecnosoftBranchStock = publicWidget.Widget.extend({
     selector: '.tecnosoft-product-page', // We need to add this class to the product page wrapper if not present, or target generic
@@ -49,7 +48,7 @@ publicWidget.registry.TecnosoftBranchStock = publicWidget.Widget.extend({
         $container.addClass('opacity-50');
 
         try {
-            const result = await jsonrpc('/shop/get_branch_stock', {
+            const result = await rpc('/shop/get_branch_stock', {
                 product_id: parseInt(productId)
             });
             this._renderStockTable(result);
