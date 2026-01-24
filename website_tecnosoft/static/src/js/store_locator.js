@@ -2,9 +2,8 @@
 
 import publicWidget from "@web/legacy/js/public/public_widget";
 import { rpc } from "@web/core/network/rpc";
-import Widget from "@web/legacy/js/core/widget";
 
-publicWidget.registry.TecnosoftStoreLocator = Widget.extend({
+publicWidget.registry.TecnosoftStoreLocator = publicWidget.Widget.extend({
     selector: '.s_tecnosoft_store_locator',
     
     /**

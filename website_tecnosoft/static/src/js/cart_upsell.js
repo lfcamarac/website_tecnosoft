@@ -2,12 +2,11 @@
 
 import publicWidget from "@web/legacy/js/public/public_widget";
 import { rpc } from "@web/core/network/rpc";
-import Widget from "@web/legacy/js/core/widget";
 import { renderToElement } from "@web/core/utils/render";
 // We might need to listen to the website_sale generic events or extend the widget.
 // A looser coupling is better for compatibility.
 
-publicWidget.registry.TecnosoftCartUpsell = Widget.extend({
+publicWidget.registry.TecnosoftCartUpsell = publicWidget.Widget.extend({
     selector: '#wrapwrap',
     events: {
         // We catch the event triggered by standard Odoo JS

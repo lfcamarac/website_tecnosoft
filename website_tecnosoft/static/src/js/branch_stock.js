@@ -2,10 +2,9 @@
 
 import publicWidget from "@web/legacy/js/public/public_widget";
 import { rpc } from "@web/core/network/rpc";
-import Widget from "@web/legacy/js/core/widget";
 import { jsonrpc } from "@web/core/network/rpc";
 
-publicWidget.registry.TecnosoftBranchStock = Widget.extend({
+publicWidget.registry.TecnosoftBranchStock = publicWidget.Widget.extend({
     selector: '.tecnosoft-product-page', // We need to add this class to the product page wrapper if not present, or target generic
     // Actually, 'website_sale' triggers events on the window or specific containers.
     // Let's target the wrap that contains the variant selector.

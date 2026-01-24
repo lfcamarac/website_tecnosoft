@@ -2,10 +2,9 @@
 
 import publicWidget from "@web/legacy/js/public/public_widget";
 import { rpc } from "@web/core/network/rpc";
-import Widget from "@web/legacy/js/core/widget";
 import { renderToElement } from "@web/core/utils/render";
 
-publicWidget.registry.TecnosoftDynamicSnippet = Widget.extend({
+publicWidget.registry.TecnosoftDynamicSnippet = publicWidget.Widget.extend({
     selector: '.s_tecnosoft_dynamic',
 
     /**
@@ -221,7 +220,7 @@ publicWidget.registry.TecnosoftDynamicSnippet = Widget.extend({
     },
 });
 
-publicWidget.registry.TecnosoftHeroHotspots = Widget.extend({
+publicWidget.registry.TecnosoftHeroHotspots = publicWidget.Widget.extend({
     selector: '.s_tecnosoft_hero',
 
     /**

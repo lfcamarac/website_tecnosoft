@@ -2,10 +2,9 @@
 
 import publicWidget from "@web/legacy/js/public/public_widget";
 import { rpc } from "@web/core/network/rpc";
-import Widget from "@web/legacy/js/core/widget";
 import { renderToElement } from "@web/core/utils/render";
 
-publicWidget.registry.ZenithSideCart = Widget.extend({
+publicWidget.registry.ZenithSideCart = publicWidget.Widget.extend({
     selector: "#wrapwrap",
     events: {
         "click .close-cart": "_onCloseCart",

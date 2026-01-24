@@ -2,9 +2,8 @@
 
 import publicWidget from "@web/legacy/js/public/public_widget";
 import { rpc } from "@web/core/network/rpc";
-import Widget from "@web/legacy/js/core/widget";
 
-publicWidget.registry.TecnosoftBuyNow = Widget.extend({
+publicWidget.registry.TecnosoftBuyNow = publicWidget.Widget.extend({
     selector: '.js_buy_now',
     events: {
         'click': '_onBuyNow',

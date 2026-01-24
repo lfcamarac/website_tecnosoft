@@ -2,9 +2,8 @@
 
 import publicWidget from "@web/legacy/js/public/public_widget";
 import { rpc } from "@web/core/network/rpc";
-import Widget from "@web/legacy/js/core/widget";
 
-publicWidget.registry.TecnosoftInfiniteScroll = Widget.extend({
+publicWidget.registry.TecnosoftInfiniteScroll = publicWidget.Widget.extend({
     selector: '.tecnosoft-products-grid',
     
     /**

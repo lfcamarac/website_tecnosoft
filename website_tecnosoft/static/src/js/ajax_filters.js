@@ -2,13 +2,12 @@
 
 import publicWidget from "@web/legacy/js/public/public_widget";
 import { rpc } from "@web/core/network/rpc";
-import Widget from "@web/legacy/js/core/widget";
 
 /**
  * Tecnosoft AJAX Filters
  * Intercepts category and attribute selection to update results without page reload.
  */
-publicWidget.registry.TecnosoftAjaxFilters = Widget.extend({
+publicWidget.registry.TecnosoftAjaxFilters = publicWidget.Widget.extend({
     selector: '.oe_website_sale',
     events: {
         'change .js_attributes input, .js_attributes select': '_onFilterChange',

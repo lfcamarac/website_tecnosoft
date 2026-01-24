@@ -2,11 +2,10 @@
 
 import publicWidget from "@web/legacy/js/public/public_widget";
 import { rpc } from "@web/core/network/rpc";
-import Widget from "@web/legacy/js/core/widget";
 import { _t } from "@web/core/l10n/translation";
 import { renderToElement } from "@web/core/utils/render";
 
-publicWidget.registry.TecnosoftCompareDrawer = Widget.extend({
+publicWidget.registry.TecnosoftCompareDrawer = publicWidget.Widget.extend({
     selector: '#wrapwrap',
     events: {
         'click .close-compare-drawer': '_onCloseDrawer',

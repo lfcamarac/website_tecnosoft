@@ -2,9 +2,8 @@
 
 import publicWidget from "@web/legacy/js/public/public_widget";
 import { rpc } from "@web/core/network/rpc";
-import Widget from "@web/legacy/js/core/widget";
 
-publicWidget.registry.TecnosoftStickyCart = Widget.extend({
+publicWidget.registry.TecnosoftStickyCart = publicWidget.Widget.extend({
     selector: '#product_details',
     events: {
         'change input[name="add_qty"]': '_onQtyChange',

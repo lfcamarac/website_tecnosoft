@@ -2,9 +2,8 @@
 
 import publicWidget from "@web/legacy/js/public/public_widget";
 import { rpc } from "@web/core/network/rpc";
-import Widget from "@web/legacy/js/core/widget";
 
-publicWidget.registry.TecnosoftPopups = Widget.extend({
+publicWidget.registry.TecnosoftPopups = publicWidget.Widget.extend({
     selector: '#wrapwrap',
 
     /**
