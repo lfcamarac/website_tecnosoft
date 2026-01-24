@@ -72,6 +72,7 @@
     <!-- Standalone Product Card for Snippets (Bypasses website_sale fragile context) -->
     <template id="tecnosoft_simple_product_card" name="Tecnosoft Simple Card">
         <form action="/shop/cart/update" method="post" class="tecnosoft-product-card h-100 shadow-sm border-0 rounded-3 overflow-hidden position-relative" itemscope="itemscope" itemtype="http://schema.org/Product">
+            <t t-set="website" t-value="request.website"/>
             <t t-set="td_product" t-value="{'x': 1, 'y': 1}"/>
             <t t-set="ppr" t-value="4"/>
             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
