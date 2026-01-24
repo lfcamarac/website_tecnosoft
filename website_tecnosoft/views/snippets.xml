@@ -618,4 +618,23 @@
             <t t-snippet="website_tecnosoft.s_tecnosoft_multi_tab_products" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png" group="dynamic"/>
         </xpath>
     </template>
+
+    <template id="tecnosoft_marketplace_snippets" inherit_id="website.snippets">
+        <xpath expr="//div[@id='snippet_structure']" position="inside">
+            <div class="o_panel_header">
+                <i class="fa fa-shopping-cart"/>
+                <span>Marketplace</span>
+            </div>
+            <t t-snippet="website_tecnosoft.marketplace_home_main_banner" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png"/>
+            <t t-snippet="website_tecnosoft.marketplace_quick_actions" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png"/>
+            <t t-snippet="website_tecnosoft.marketplace_trending_now" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png"/>
+            <t t-snippet="website_tecnosoft.product_intelligence_view" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png"/>
+            <t t-snippet="website_tecnosoft.product_real_time_inventory" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png"/>
+            <t t-snippet="website_tecnosoft.product_smart_alternatives" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png"/>
+            <t t-snippet="website_tecnosoft.product_customer_reviews" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png"/>
+            <t t-snippet="website_tecnosoft.express_checkout_summary" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png"/>
+            <t t-snippet="website_tecnosoft.express_checkout_fulfillment" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png"/>
+            <t t-snippet="website_tecnosoft.express_checkout_payment" t-thumbnail="/website_tecnosoft/static/description/tecnosoft_snippet_thumb.png"/>
+        </xpath>
+    </template>
 </odoo>
