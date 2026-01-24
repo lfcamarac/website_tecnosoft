@@ -28,7 +28,7 @@
 
     <template id="tecnosoft_snippet_options" inherit_id="website.snippet_options">
         <xpath expr="." position="inside">
-            <div data-js="tecnosoft_dynamic_options" data-selector=".s_tecnosoft_dynamic, .s_tecnosoft_tabs">
+            <div data-js="TecnosoftDynamicOptions" data-selector=".s_tecnosoft_dynamic, .s_tecnosoft_tabs">
                 <we-row string="Configuración">
                     <we-select string="Límite" data-attribute-name="limit" data-no-preview="true">
                         <we-button data-select-data-attribute="4">4 Productos</we-button>
@@ -49,7 +49,7 @@
             </div>
 
             <!-- Hotspot Options -->
-            <div data-js="tecnosoft_hotspot_options" data-selector=".tecnosoft_hotspot">
+            <div data-selector=".tecnosoft_hotspot">
                 <we-row string="Posición">
                     <we-range string="Horizontal (%)" data-attribute-name="pos_x" data-min="0" data-max="100" data-step="1"/>
                     <we-range string="Vertical (%)" data-attribute-name="pos_y" data-min="0" data-max="100" data-step="1"/>
@@ -60,7 +60,7 @@
             </div>
 
             <!-- Global Style Engine -->
-            <div data-js="tecnosoft_style_options" data-selector="#wrapwrap">
+            <div data-selector="#wrapwrap">
                 <we-row string="Estilo Zenith">
                     <we-select string="Tema" data-attribute-name="zenith_style" data-no-preview="true">
                         <we-button data-select-data-attribute="">Moderno (Default)</we-button>
@@ -73,7 +73,7 @@
             </div>
 
             <!-- Header Variants -->
-            <div data-js="tecnosoft_header_options" data-selector="header.tecnosoft-header-v1">
+            <div data-selector="header.tecnosoft-header-v1">
                 <we-row string="Diseño Header">
                     <we-select string="Variante" data-attribute-name="header_variant" data-no-preview="true">
                         <we-button data-select-data-attribute="">Estándar</we-button>
@@ -85,21 +85,21 @@
             </div>
 
             <!-- Timeline Options -->
-            <div data-js="tecnosoft_timeline_options" data-selector="section.s_tecnosoft_timeline">
+            <div data-js="TecnosoftTimelineOptions" data-selector="section.s_tecnosoft_timeline">
                 <we-row string="Contenido">
                     <we-button data-add-item="true" data-no-preview="true" class="fa fa-plus"> Añadir Hito</we-button>
                 </we-row>
             </div>
 
             <!-- Pricing Table Options -->
-            <div data-js="tecnosoft_pricing_options" data-selector="section.s_tecnosoft_pricing">
+            <div data-js="TecnosoftPricingOptions" data-selector="section.s_tecnosoft_pricing">
                 <we-row string="Contenido">
                     <we-button data-add-card="true" data-no-preview="true" class="fa fa-plus"> Añadir Plan</we-button>
                 </we-row>
             </div>
 
             <!-- Pricing Card Sub-options -->
-            <div data-js="tecnosoft_pricing_card_options" data-selector=".tecnosoft-pricing-card">
+            <div data-js="TecnosoftPricingCardOptions" data-selector=".tecnosoft-pricing-card">
                 <we-row string="Plan">
                     <we-checkbox string="Más Popular" data-toggle-popular="true" data-no-preview="true"/>
                     <we-button data-remove-card="true" data-no-preview="true" class="fa fa-trash text-danger"> Borrar</we-button>
@@ -107,7 +107,7 @@
             </div>
 
             <!-- Timeline Item Sub-options -->
-            <div data-js="tecnosoft_timeline_item_options" data-selector=".tecnosoft-timeline-item">
+            <div data-js="TecnosoftTimelineItemOptions" data-selector=".tecnosoft-timeline-item">
                 <we-row string="Hito">
                     <we-button data-remove-item="true" data-no-preview="true" class="fa fa-trash text-danger"> Borrar</we-button>
                 </we-row>
@@ -257,7 +257,7 @@
     </template>
 
     <template id="s_tecnosoft_timeline" name="Tecnosoft Timeline">
-        <section class="s_tecnosoft_timeline pt-5 pb-5" data-js="tecnosoft_timeline_options">
+        <section class="s_tecnosoft_timeline pt-5 pb-5" data-js="TecnosoftTimelineOptions">
             <div class="container">
                 <div class="timeline-wrapper position-relative">
                     <div class="timeline-line position-absolute top-0 bottom-0 start-50 translate-middle-x bg-primary opacity-25" style="width: 4px;"></div>
@@ -279,7 +279,7 @@
     </template>
 
     <template id="s_tecnosoft_pricing" name="Tecnosoft Pricing Table">
-        <section class="s_tecnosoft_pricing pt-5 pb-5 bg-light" data-js="tecnosoft_pricing_options">
+        <section class="s_tecnosoft_pricing pt-5 pb-5 bg-light" data-js="TecnosoftPricingOptions">
             <div class="container">
                 <div class="row g-4 justify-content-center pricing-container">
                     <div class="col-lg-4 col-md-6 tecnosoft-pricing-card">

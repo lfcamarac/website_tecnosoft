@@ -6,7 +6,8 @@
             <div class="text-center py-5">
                 <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
                 <dotlottie-player 
-                    src="https://lottie.host/9725f0ed-3b7c-4740-9721-3965b2110d7a/8X998yqg3f.json" 
+                    <!-- <lottie-player src="https://lottie.host/9725f0ed-3b7c-4740-9721-3965b2110d7a/8X998yqg3f.json" ...> -->
+                    <div class="alert alert-info">Animation Placeholder</div>
                     background="transparent" 
                     speed="1" 
                     style="width: 300px; height: 300px; margin: 0 auto;" 

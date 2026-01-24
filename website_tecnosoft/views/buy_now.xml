@@ -2,14 +2,14 @@
 <odoo>
     <template id="tecnosoft_buy_now_button" inherit_id="website_sale.product" name="Tecnosoft Buy Now Button">
         <xpath expr="//div[@id='add_to_cart_wrap']" position="inside">
-            <a role="button" id="buy_now" class="btn btn-outline-primary btn-lg ms-2 py-3 px-4 fw-bold rounded-pill js_buy_now" href="#">
+            <a role="button" id="buy_now" class="btn btn-zenith-buy-now btn-lg ms-2 py-3 px-4 fw-bold rounded-pill js_buy_now" href="#">
                 <i class="fa fa-bolt me-2"></i>COMPRAR YA
             </a>
         </xpath>
         
         <!-- Also for sticky CTA if present -->
         <xpath expr="//div[hasclass('tecnosoft-sticky-cta')]//div[hasclass('d-flex')][2]" position="inside">
-             <a role="button" class="btn btn-outline-primary btn-lg ms-2 fw-bold js_buy_now" href="#">
+             <a role="button" class="btn btn-zenith-buy-now btn-lg ms-2 fw-bold js_buy_now" href="#">
                 COMPRAR YA
             </a>
         </xpath>

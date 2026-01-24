@@ -3,10 +3,10 @@
     'summary': 'The Ultimate High-Performance eCommerce Theme',
     'description': 'Advanced eCommerce theme for Tecnosoft.',
     'category': 'Theme/Ecommerce',
-    'version': '18.0.2.0.23',
+    'version': '18.0.2.0.31',
     'author': 'Tecnosoft 2025, C.A.',
     'website': 'https://www.tecnosoft.dev',
-    'depends': ['website', 'website_sale', 'website_sale_comparison', 'website_sale_wishlist'],
+    'depends': ['website_sale_stock', 'website_sale_comparison', 'website_sale_wishlist', 'website_sale', 'website'],
     'data': [
         'security/ir.model.access.csv',
         'data/emergency_fix.xml',
@@ -59,6 +59,7 @@
     'assets': {
         'web.assets_frontend': [
             'website_tecnosoft/static/src/scss/primary_variables.scss',
+            'website_tecnosoft/static/src/scss/ui_polish.scss',
             'website_tecnosoft/static/src/scss/bootstrap_overridden.scss',
             'website_tecnosoft/static/src/scss/ecommerce.scss',
             'website_tecnosoft/static/src/scss/dynamic_snippets.scss',
@@ -90,7 +91,7 @@
             'website_tecnosoft/static/src/scss/theme_customizer.scss',
             'website_tecnosoft/static/src/js/dynamic_snippets.js',
             'website_tecnosoft/static/src/js/options.js',
-            'website_tecnosoft/static/src/js/side_cart.js',
+            # 'website_tecnosoft/static/src/js/side_cart.js',
             'website_tecnosoft/static/src/js/product_sticky.js',
             'website_tecnosoft/static/src/js/animations.js',
             'website_tecnosoft/static/src/js/pwa_install.js',

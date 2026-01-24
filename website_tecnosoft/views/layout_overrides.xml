@@ -390,7 +390,7 @@
             </div>
             -->
 
-            <div id="tecnosoft_sticky_cart" class="tecnosoft-sticky-cart-bar d-none d-md-flex align-items-center justify-content-between">
+            <div id="tecnosoft_sticky_cart" class="tecnosoft-sticky-cart-bar align-items-center justify-content-between">
                 <div class="d-flex align-items-center gap-3">
                     <img t-if="product.image_128" t-att-src="'/web/image/product.template/%s/image_128' % product.id" class="rounded shadow-sm" style="width: 50px; height: 50px; object-fit: cover;"/>
                     <div>
@@ -509,7 +509,8 @@
     <template id="tecnosoft_empty_cart_lottie" inherit_id="website_sale.cart" name="Tecnosoft Empty Cart Lottie">
         <xpath expr="//div[hasclass('oe_cart')]//div[hasclass('text-center')][1]" position="replace">
             <div class="text-center py-5">
-                <lottie-player src="https://lottie.host/78620245-5684-4841-923c-f9e4e0473a21/7Y1G0ySg6l.json" 
+                <!-- <lottie-player src="https://lottie.host/78620245-5684-4841-923c-f9e4e0473a21/7Y1G0ySg6l.json" ...> -->
+                <div class="alert alert-info d-none">Animation Placeholder</div>
                                background="transparent" speed="1" style="width: 300px; height: 300px; margin: 0 auto;" loop="loop" autoplay="autoplay"></lottie-player>
                 <h3 class="fw-bold mt-4">Tu carrito está vacío</h3>
                 <p class="text-muted mb-4">Parece que aún no has añadido nada a tu selección técnica.</p>

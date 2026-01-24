@@ -24,13 +24,16 @@
                 </div>
 
                 <div class="tab-content" id="zenithTabsContent">
-                    <!-- NEW PRODUCTS TAB -->
+                     <!-- NEW PRODUCTS TAB -->
                     <div class="tab-pane fade show active" id="new-prods" role="tabpanel">
                         <div class="row g-4">
                             <t t-set="new_list" t-value="request.env['product.template'].sudo().search([('website_published','=',True)], order='create_date desc', limit=4)"/>
                             <t t-foreach="new_list" t-as="product">
                                 <div class="col-6 col-lg-3">
-                                    <t t-call="website_sale.products_item"/>
+                                    <t t-call="website_sale.products_item">
+                                        <t t-set="td_product" t-value="{'x': 1, 'y': 1}"/>
+                                        <t t-set="ppr" t-value="4"/>
+                                    </t>
                                 </div>
                             </t>
                         </div>
@@ -38,10 +41,13 @@
                     <!-- POPULAR PRODUCTS TAB -->
                     <div class="tab-pane fade" id="pop-prods" role="tabpanel">
                          <div class="row g-4">
-                            <t t-set="pop_list" t-value="request.env['product.template'].sudo().search([('website_published','=',True)], limit=100).sorted(key=lambda r: r.sales_count, reverse=True)[:4]"/>
+                            <t t-set="pop_list" t-value="request.env['product.template'].sudo().search([('website_published','=',True)], limit=100].sorted(key=lambda r: r.sales_count, reverse=True)[:4]"/>
                             <t t-foreach="pop_list" t-as="product">
                                 <div class="col-6 col-lg-3">
-                                    <t t-call="website_sale.products_item"/>
+                                    <t t-call="website_sale.products_item">
+                                        <t t-set="td_product" t-value="{'x': 1, 'y': 1}"/>
+                                        <t t-set="ppr" t-value="4"/>
+                                    </t>
                                 </div>
                             </t>
                         </div>
@@ -52,7 +58,10 @@
                             <t t-set="sale_list" t-value="request.env['product.template'].sudo().search([('website_published','=',True)], limit=4)"/> <!-- Filter should be for actual discount if possible -->
                             <t t-foreach="sale_list" t-as="product">
                                 <div class="col-6 col-lg-3">
-                                    <t t-call="website_sale.products_item"/>
+                                    <t t-call="website_sale.products_item">
+                                        <t t-set="td_product" t-value="{'x': 1, 'y': 1}"/>
+                                        <t t-set="ppr" t-value="4"/>
+                                    </t>
                                 </div>
                             </t>
                         </div>
