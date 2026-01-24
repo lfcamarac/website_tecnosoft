@@ -5,6 +5,9 @@
         <!-- We use 'search' to find it by key/xml_id if possible, or by ID if it was an external ID -->
         <!-- Since we want to clear the 'website_tecnosoft.tecnosoft_breadcrumbs' view specifically: -->
         
+        <!-- Clean slate for V2 just in case -->
+        <delete id="website_tecnosoft.tecnosoft_breadcrumbs_v2" model="ir.ui.view"/>
+        <!-- Kill the old zombie view -->
         <delete id="website_tecnosoft.tecnosoft_breadcrumbs" model="ir.ui.view"/>
         
     </data>

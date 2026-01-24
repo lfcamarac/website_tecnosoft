@@ -164,8 +164,9 @@
         </xpath>
     </template>
 
-    <!-- Modern Breadcrumbs Override -->
-    <template id="tecnosoft_breadcrumbs" inherit_id="website.layout" name="Tecnosoft Breadcrumbs">
+    <!-- Modern Breadcrumbs Override (V2) -->
+    <!-- We renamed this to V2 to bypass any corrupted/COW views stuck in the database -->
+    <template id="tecnosoft_breadcrumbs_v2" inherit_id="website.layout" name="Tecnosoft Breadcrumbs V2">
         <xpath expr="//main" position="before">
             <t t-if="not is_homepage and not request.httprequest.path == '/'">
                 <div class="tecnosoft-breadcrumb-wrapper bg-light py-3 border-bottom">
@@ -173,9 +174,6 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb mb-0 small fw-bold">
                                 <li class="breadcrumb-item"><a href="/" class="text-decoration-none text-muted">INICIO</a></li>
-                                <!-- Odoo handles breadcrumbs dynamically normally, 
-                                     but we can inject a cleaner version here if needed. 
-                                     For now, we style the actual breadcrumbs in SCSS. -->
                                 <!-- Corrected path check -->
                                 <t t-if="request.httprequest.path.startswith('/shop')">
                                     <li class="breadcrumb-item"><a href="/shop" class="text-decoration-none text-muted">TIENDA</a></li>
@@ -189,6 +187,12 @@
                 </div>
             </t>
         </xpath>
+    </template>
+
+    <!-- NEUTRALIZED OLD VIEW - DO NOT USE OR INHERIT -->
+    <!-- Detached from website.layout to stop 500 errors if it persists in DB -->
+    <template id="tecnosoft_breadcrumbs" name="OBSOLETE Breadcrumbs" active="False">
+        <div class="d-none">Obsolete View neutralized to fix 500 error</div>
     </template>
 
     <!-- Product Item Customization with SEO & Quick View -->
