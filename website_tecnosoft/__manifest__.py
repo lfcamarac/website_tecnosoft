@@ -3,7 +3,7 @@
     'summary': 'The Ultimate High-Performance eCommerce Theme',
     'description': 'Advanced eCommerce theme for Tecnosoft.',
     'category': 'Theme/Ecommerce',
-    'version': '18.0.2.0.17',
+    'version': '18.0.2.0.18',
     'author': 'Tecnosoft 2025, C.A.',
     'website': 'https://www.tecnosoft.dev',
     'depends': ['website', 'website_sale', 'website_sale_comparison', 'website_sale_wishlist'],
