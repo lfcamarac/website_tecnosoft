@@ -11,102 +11,95 @@
                 <!-- UNIFIED HEADER: Same structure Mobile + Desktop -->
                 <!-- =============================================== -->
                 
-                <!-- ROW 1: Logo / Location / User Icons -->
+                <!-- SINGLE ROW: Logo + Search + Icons (Farmatodo Style) -->
                 <div class="zenith-row-1 bg-white border-bottom py-2">
-                    <div class="container d-flex justify-content-between align-items-center">
-                        <!-- Logo (Desktop: visible, Mobile: small) -->
-                        <t t-call="website.placeholder_header_brand">
-                            <t t-set="_link_class" t-valuef="navbar-brand logo p-0 m-0"/>
-                        </t>
-                        
-                        <!-- Currency/Pricelist Selector (Farmatodo Style) -->
-                        <div class="zenith-currency-selector d-none d-lg-flex align-items-center gap-2 ms-3">
-                            <!-- Venezuela Flag -->
-                            <span class="fi fi-ve" style="font-size: 1.2rem;" title="Venezuela"></span>
-                            <!-- Pricelist Dropdown -->
-                            <t t-call="website_sale.pricelist_list">
-                                <t t-set="_btn_class" t-valuef="btn btn-sm btn-outline-secondary dropdown-toggle px-3 py-1 rounded-pill"/>
-                            </t>
-                        </div>
-                        
-                        <!-- Location Selector (Center) -->
-                        <div class="zenith-location-selector d-none d-lg-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-light border cursor-pointer">
-                            <i class="fa fa-map-marker text-primary"></i>
-                            <div class="d-flex flex-column lh-1">
-                                <span class="text-muted" style="font-size: 0.7rem;">Tu ubicación</span>
-                                <span class="fw-bold text-dark" style="font-size: 0.85rem;">Selecciona tu sede <i class="fa fa-chevron-down small"></i></span>
-                            </div>
-                        </div>
-                        
-                        <!-- Right Icons (Both viewports, adapted) -->
-                        <div class="d-flex align-items-center gap-3">
-                            <!-- Wishlist -->
-                            <a href="/shop/wishlist" class="text-dark position-relative d-none d-lg-block" title="Favoritos">
-                                <i class="fa fa-heart-o" style="font-size: 1.3rem;"></i>
-                            </a>
-                            
-                            <!-- Cart -->
-                            <t t-call="website_sale.header_cart_link">
-                                <t t-set="_icon" t-value="True"/>
-                                <t t-set="_link_class" t-value="'text-dark position-relative p-0'"/>
-                                <t t-set="_badge_class" t-value="'position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary'"/>
-                            </t>
-                            
-                            <!-- User (Desktop: Full, Mobile: Icon Only) -->
-                            <div class="d-none d-lg-flex align-items-center gap-2">
-                                <t t-call="portal.placeholder_user_sign_in">
-                                    <t t-set="_link_class" t-valuef="btn btn-primary rounded-pill px-4 fw-bold"/>
+                    <div class="container">
+                        <div class="d-flex justify-content-between align-items-center gap-3">
+                            <!-- LEFT: Logo + Flag -->
+                            <div class="d-flex align-items-center gap-2 flex-shrink-0">
+                                <t t-call="website.placeholder_header_brand">
+                                    <t t-set="_link_class" t-valuef="navbar-brand logo p-0 m-0"/>
                                 </t>
-                                <!-- Custom Extended User Dropdown -->
-                                <t t-nocache="The user dropdown may vary and depends on the user.">
-                                    <div t-if="user_id._is_public()" class="dropdown">
-                                        <a class="nav-link fw-bold text-dark d-flex align-items-center mb-0 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="fa fa-user-o me-2"></i> Mi Cuenta
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2 rounded-3">
-                                            <li><a class="dropdown-item py-2" href="/web/login"><i class="fa fa-sign-in me-2 text-muted"></i> Iniciar Sesión</a></li>
-                                            <li><a class="dropdown-item py-2" href="/web/signup"><i class="fa fa-user-plus me-2 text-muted"></i> Registrarse</a></li>
-                                        </ul>
-                                    </div>
-                                    <div t-else="" class="dropdown">
-                                        <a class="nav-link fw-bold text-dark d-flex align-items-center mb-0 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="fa fa-user-o me-2"></i>
-                                            <span t-esc="user_id.name.split(' ')[0]"/>
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2 rounded-3 py-2" style="min-width: 220px;">
-                                            <li><a class="dropdown-item py-2" href="/my/home"><i class="fa fa-user me-2 text-muted"></i> Mi Cuenta</a></li>
-                                            <li><a class="dropdown-item py-2" href="/my/orders"><i class="fa fa-shopping-bag me-2 text-muted"></i> Mis Compras</a></li>
-                                            <li><a class="dropdown-item py-2" href="/shop/wishlist"><i class="fa fa-heart me-2 text-muted"></i> Mis Favoritos</a></li>
-                                            <li><a class="dropdown-item py-2" href="/my/lists"><i class="fa fa-list-ul me-2 text-muted"></i> Mis Listas</a></li>
-                                            <li><a class="dropdown-item py-2" href="/my/addresses"><i class="fa fa-map-marker me-2 text-muted"></i> Mis Direcciones</a></li>
-                                            <li><hr class="dropdown-divider my-2"/></li>
-                                            <li><a class="dropdown-item py-2" href="/contactus"><i class="fa fa-envelope me-2 text-muted"></i> Contáctenos</a></li>
-                                            <li><hr class="dropdown-divider my-2"/></li>
-                                            <li><a class="dropdown-item py-2 text-danger" href="/web/session/logout?redirect=/"><i class="fa fa-sign-out me-2"></i> Cerrar Sesión</a></li>
-                                        </ul>
-                                    </div>
-                                </t>
+                                <!-- Flag (Desktop only) -->
+                                <span class="fi fi-ve d-none d-lg-block" style="font-size: 1.1rem;" title="Venezuela"></span>
                             </div>
-                            <a href="/my" class="text-dark d-lg-none" title="Mi cuenta">
-                                <i class="fa fa-user-o" style="font-size: 1.3rem;"></i>
-                            </a>
+                            
+                            <!-- CENTER: Location Selector (Desktop only) -->
+                            <div class="zenith-location-selector d-none d-lg-flex align-items-center gap-2 px-2 py-1 rounded-pill bg-primary text-white border-0 cursor-pointer flex-shrink-0" style="font-size: 0.8rem;">
+                                <i class="fa fa-map-marker"></i>
+                                <div class="d-flex flex-column lh-1">
+                                    <span style="font-size: 0.6rem; opacity: 0.8;">Tu ubicación</span>
+                                    <span class="fw-bold" style="font-size: 0.75rem;">Selecciona tu sede <i class="fa fa-chevron-down" style="font-size: 0.6rem;"></i></span>
+                                </div>
+                            </div>
+                            
+                            <!-- RIGHT: Icons + User -->
+                            <div class="d-flex align-items-center gap-2 flex-shrink-0">
+                                <!-- Wishlist (Desktop) -->
+                                <a href="/shop/wishlist" class="text-dark position-relative d-none d-lg-block px-1" title="Favoritos">
+                                    <i class="fa fa-heart-o" style="font-size: 1.15rem;"></i>
+                                </a>
+                                
+                                <!-- Cart -->
+                                <t t-call="website_sale.header_cart_link">
+                                    <t t-set="_icon" t-value="True"/>
+                                    <t t-set="_link_class" t-value="'text-dark position-relative p-0 px-1'"/>
+                                    <t t-set="_badge_class" t-value="'position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary'"/>
+                                </t>
+                                
+                                <!-- User (Desktop: Dropdown, Mobile: Icon) -->
+                                <div class="d-none d-lg-flex align-items-center">
+                                    <t t-nocache="The user dropdown may vary and depends on the user.">
+                                        <div t-if="user_id._is_public()" class="dropdown">
+                                            <a class="nav-link text-dark d-flex align-items-center mb-0 dropdown-toggle px-1 py-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 0.85rem;">
+                                                <i class="fa fa-user-o me-1"></i> <span class="d-none d-xl-inline">Mi Cuenta</span>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2 rounded-3">
+                                                <li><a class="dropdown-item py-2" href="/web/login"><i class="fa fa-sign-in me-2 text-muted"></i> Iniciar Sesión</a></li>
+                                                <li><a class="dropdown-item py-2" href="/web/signup"><i class="fa fa-user-plus me-2 text-muted"></i> Registrarse</a></li>
+                                            </ul>
+                                        </div>
+                                        <div t-else="" class="dropdown">
+                                            <a class="nav-link text-dark d-flex align-items-center mb-0 dropdown-toggle px-1 py-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 0.85rem;">
+                                                <i class="fa fa-user-o me-1"></i>
+                                                <span class="d-none d-xl-inline" t-esc="user_id.name.split(' ')[0]"/>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2 rounded-3 py-2" style="min-width: 200px;">
+                                                <li><a class="dropdown-item py-2" href="/my/home"><i class="fa fa-user me-2 text-muted"></i> Mi Cuenta</a></li>
+                                                <li><a class="dropdown-item py-2" href="/my/orders"><i class="fa fa-shopping-bag me-2 text-muted"></i> Mis Compras</a></li>
+                                                <li><a class="dropdown-item py-2" href="/shop/wishlist"><i class="fa fa-heart me-2 text-muted"></i> Mis Favoritos</a></li>
+                                                <li><a class="dropdown-item py-2" href="/my/lists"><i class="fa fa-list-ul me-2 text-muted"></i> Mis Listas</a></li>
+                                                <li><a class="dropdown-item py-2" href="/my/addresses"><i class="fa fa-map-marker me-2 text-muted"></i> Mis Direcciones</a></li>
+                                                <li><hr class="dropdown-divider my-1"/></li>
+                                                <li><a class="dropdown-item py-2" href="/contactus"><i class="fa fa-envelope me-2 text-muted"></i> Contáctenos</a></li>
+                                                <li><hr class="dropdown-divider my-1"/></li>
+                                                <li><a class="dropdown-item py-2 text-danger" href="/web/session/logout?redirect=/"><i class="fa fa-sign-out me-2"></i> Cerrar Sesión</a></li>
+                                            </ul>
+                                        </div>
+                                    </t>
+                                </div>
+                                <a href="/my" class="text-dark d-lg-none px-1" title="Mi cuenta">
+                                    <i class="fa fa-user-o" style="font-size: 1.15rem;"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- ROW 2: Full-Width Pill Search Bar -->
-                <div class="zenith-row-2 bg-white py-2">
+                <!-- ROW 2: Full-Width Search Bar (Compact) -->
+                <div class="zenith-row-2 bg-white py-1">
                     <div class="container">
                         <form method="get" action="/shop" class="o_wsale_products_searchbar_form w-100">
                             <div class="input-group zenith-search-pill">
-                                <span class="input-group-text bg-light border-0 rounded-start-pill ps-4">
-                                    <i class="fa fa-search text-primary"></i>
+                                <span class="input-group-text bg-light border-0 rounded-start-pill ps-3">
+                                    <i class="fa fa-search text-muted"></i>
                                 </span>
                                 <input type="text" name="search" 
-                                       class="form-control bg-light border-0 py-3" 
+                                       class="form-control bg-light border-0 py-2" 
                                        placeholder="¿Qué estás buscando hoy?"
+                                       style="font-size: 0.9rem;"
                                        aria-label="Buscar productos"/>
-                                <button class="btn btn-primary rounded-end-pill px-4 fw-bold" type="submit">
+                                <button class="btn btn-primary rounded-end-pill px-3" type="submit" style="font-size: 0.85rem;">
                                     Buscar
                                 </button>
                             </div>
