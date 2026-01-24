@@ -28,19 +28,58 @@
                 </div>
 
                 <!-- Main Header Area -->
-                <nav data-name="Navbar" class="navbar navbar-expand-lg navbar-light bg-white border-bottom py-3">
-                    <div class="container">
-                        <!-- Logo (Using Odoo's native component for editor compatibility) -->
+                <nav data-name="Navbar" class="navbar navbar-expand-lg navbar-light bg-white border-bottom py-0 py-lg-3">
+                    <div class="container px-2 px-lg-3">
+                        <!-- Desktop Logo -->
                         <t t-call="website.placeholder_header_brand">
-                            <t t-set="_link_class" t-valuef="navbar-brand logo p-0 m-0"/>
+                            <t t-set="_link_class" t-valuef="navbar-brand logo p-0 m-0 d-none d-lg-block"/>
                         </t>
 
-                        <!-- Mobile Toggler -->
-                        <t t-call="website.navbar_toggler">
-                            <t t-set="_toggler_class" t-valuef="ms-auto"/>
-                        </t>
+                        <!-- Mobile Header Structure (Farmatodo Style) -->
+                        <div class="d-lg-none w-100 pb-2">
+                             <!-- Row 1: Location & User -->
+                             <div class="d-flex justify-content-between align-items-center py-2 mb-1">
+                                 <div class="d-flex align-items-center text-truncate" style="max-width: 80%;">
+                                     <div class="d-flex flex-column lh-1">
+                                         <span class="text-muted small" style="font-size: 0.75rem;">Ubicación actual</span>
+                                         <div class="fw-bold text-dark text-truncate d-flex align-items-center gap-1" style="font-size: 0.9rem;">
+                                             <span class="text-truncate">Maturin - Avenida Libertador...</span>
+                                             <i class="fa fa-chevron-down text-primary small"></i>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="d-flex gap-3">
+                                     <i class="fa fa-user-o text-muted" style="font-size: 1.2rem;"></i>
+                                     <i class="fa fa-bell-o text-muted" style="font-size: 1.2rem;"></i>
+                                 </div>
+                             </div>
 
-                        <!-- Search Bar (Center) -->
+                             <!-- Row 2: Search Bar (Pill) -->
+                             <div class="position-relative w-100">
+                                 <form method="get" action="/shop" class="o_wsale_products_searchbar_form">
+                                     <div class="input-group">
+                                         <span class="input-group-text bg-light border-0 rounded-pill-start ps-3">
+                                             <i class="fa fa-search text-primary"></i>
+                                         </span>
+                                         <input type="text" name="search" class="form-control bg-light border-0 rounded-pill-end py-2" placeholder="Busca en Tecnosoft" style="font-size: 0.95rem;"/>
+                                     </div>
+                                 </form>
+                             </div>
+
+                             <!-- Row 3: Status Chips (Optional) -->
+                             <div class="d-flex gap-2 mt-2 overflow-auto" style="white-space: nowrap; scrollbar-width: none;">
+                                 <div class="d-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-light border">
+                                     <i class="fa fa-heartbeat text-danger"></i>
+                                     <span class="small fw-bold text-dark">Cuidamos tu salud</span>
+                                 </div>
+                                 <div class="d-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-light border">
+                                     <i class="fa fa-heart text-danger"></i>
+                                     <span class="small fw-bold text-dark">Tus Listas</span>
+                                 </div>
+                             </div>
+                        </div>
+
+                        <!-- Desktop Search & Icons (Unchanged) -->
                         <div class="header-search-center d-none d-lg-block flex-grow-1 mx-5">
                             <t t-call="website.placeholder_header_search_box">
                                 <t t-set="_form_classes" t-valuef="w-100 position-relative"/>
@@ -50,7 +89,7 @@
                         </div>
 
                         <!-- Right Icons -->
-                        <div class="header-right-icons d-flex align-items-center gap-3">
+                        <div class="header-right-icons d-none d-lg-flex align-items-center gap-3">
                             <t t-call="website_sale.header_cart_link">
                                 <t t-set="_icon" t-value="True"/>
                                 <t t-set="_link_class" t-value="'nav-link text-dark position-relative p-2 h5 mb-0'"/>
