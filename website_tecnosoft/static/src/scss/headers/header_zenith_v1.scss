@@ -1,15 +1,17 @@
-/* Zenith Header V1 SCSS - App-First Unified Design */
+/* Zenith Header V1 SCSS - Compact Design (Farmatodo-style) */
 
 .header_zenith_v1 {
     font-family: 'Inter', 'Outfit', sans-serif;
 
-    /* ROW 1: Logo / Location / Icons */
+    /* ROW 1: Logo / Location / Icons - COMPACT */
     .zenith-row-1 {
+        padding: 0.4rem 0 !important; /* Reduced from default */
+        
         .navbar-brand {
-            max-height: 40px;
+            max-height: 32px; /* Smaller logo */
             
             img {
-                max-height: 40px;
+                max-height: 32px;
                 width: auto;
             }
         }
@@ -17,31 +19,48 @@
         .zenith-location-selector {
             cursor: pointer;
             transition: all 0.2s ease;
+            padding: 0.3rem 0.6rem !important; /* Tighter padding */
             
             &:hover {
                 background-color: #e9ecef !important;
                 border-color: var(--o-color-primary) !important;
             }
+            
+            .lh-1 span:first-child {
+                font-size: 0.6rem !important; /* Smaller label */
+            }
+            .lh-1 span:last-child {
+                font-size: 0.75rem !important; /* Smaller text */
+            }
         }
         
         .fa-heart-o, .fa-user-o, .my_cart_quantity {
-            font-size: 1.3rem;
+            font-size: 1.1rem; /* Slightly smaller icons */
             transition: color 0.2s;
             
             &:hover {
                 color: var(--o-color-primary) !important;
             }
         }
+        
+        /* Compact user dropdown */
+        .dropdown-toggle {
+            font-size: 0.85rem !important;
+            padding: 0.25rem 0.5rem !important;
+        }
     }
 
-    /* ROW 2: Search Bar */
+    /* ROW 2: Search Bar - COMPACT */
     .zenith-row-2 {
+        padding: 0.3rem 0 !important; /* Reduced padding */
+        
         .zenith-search-pill {
-            max-width: 800px;
+            max-width: 700px; /* Slightly narrower */
             margin: 0 auto;
             
             .form-control {
-                font-size: 1rem;
+                font-size: 0.9rem; /* Smaller font */
+                padding: 0.5rem 0.75rem !important; /* Tighter padding */
                 
                 &:focus {
                     box-shadow: none;
@@ -50,20 +69,25 @@
             }
             
             .input-group-text {
-                font-size: 1.1rem;
+                font-size: 1rem;
+                padding: 0.5rem 0.75rem !important;
             }
             
             .btn-primary {
-                font-size: 0.95rem;
+                font-size: 0.85rem;
+                padding: 0.5rem 1rem !important;
             }
         }
     }
 
-    /* ROW 3: Chips & Categories */
+    /* ROW 3: Chips & Categories - COMPACT */
     .zenith-row-3 {
+        padding: 0.25rem 0 !important; /* Minimal padding */
+        
         .zenith-chips-scroll {
             -ms-overflow-style: none;
             scrollbar-width: none;
+            gap: 0.4rem !important; /* Tighter gap */
             
             &::-webkit-scrollbar {
                 display: none;
@@ -71,7 +95,17 @@
         }
         
         .zenith-chip {
+            padding: 0.3rem 0.65rem !important; /* Smaller chips */
+            font-size: 0.8rem;
             transition: all 0.2s ease;
+            
+            .fa {
+                font-size: 0.85rem;
+            }
+            
+            .small {
+                font-size: 0.75rem !important;
+            }
             
             &:hover {
                 background-color: #e9ecef !important;
@@ -103,12 +137,12 @@
         }
         
         .dropdown-menu {
-            min-width: 250px;
+            min-width: 220px;
         }
         
         .nav-link {
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
+            padding: 0.35rem 0.75rem; /* Tighter nav links */
+            font-size: 0.85rem;
             font-weight: 500;
             color: #333;
             
@@ -123,37 +157,41 @@
 @media (max-width: 991.98px) {
     .header_zenith_v1 {
         .zenith-row-1 {
+            padding: 0.3rem 0 !important;
+            
             .navbar-brand {
-                max-height: 32px;
+                max-height: 28px;
                 
                 img {
-                    max-height: 32px;
+                    max-height: 28px;
                 }
             }
         }
         
         .zenith-row-2 {
+            padding: 0.25rem 0 !important;
+            
             .zenith-search-pill {
                 .form-control {
-                    font-size: 0.9rem;
-                    padding: 0.6rem 0;
+                    font-size: 0.85rem;
+                    padding: 0.4rem 0.6rem !important;
                 }
                 
                 .btn-primary {
-                    padding: 0.6rem 1rem;
-                    font-size: 0.85rem;
+                    padding: 0.4rem 0.75rem;
+                    font-size: 0.8rem;
                 }
             }
         }
         
         .zenith-row-3 {
-            padding: 0.5rem 0;
+            padding: 0.2rem 0 !important;
             
             .zenith-chip {
-                padding: 0.4rem 0.75rem !important;
+                padding: 0.25rem 0.5rem !important;
                 
                 .small {
-                    font-size: 0.75rem !important;
+                    font-size: 0.7rem !important;
                 }
             }
         }
@@ -162,5 +200,5 @@
 
 /* Ensure header doesn't overlap content */
 body:has(.header_zenith_v1) #wrapwrap > main {
-    padding-top: 0; /* Remove old spacer, header is not fixed by default */
+    padding-top: 0;
 }
