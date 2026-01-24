@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Portal: Shopping Lists Page -->
+    <template id="portal_shopping_lists" name="My Shopping Lists">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-set="no_breadcrumbs" t-value="True"/>
+            
+            <div class="container py-4">
+                <!-- Header -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="fw-bold mb-0">
+                        <i class="fa fa-list-ul text-primary me-2"></i> Mis Listas de Compra
+                    </h2>
+                    <button type="button" class="btn btn-primary rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#createListModal">
+                        <i class="fa fa-plus me-2"></i> Nueva Lista
+                    </button>
+                </div>
+                
+                <!-- Lists Grid -->
+                <div class="row g-4">
+                    <t t-if="shopping_lists">
+                        <t t-foreach="shopping_lists" t-as="lst">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden hover-lift">
+                                    <div class="card-body d-flex flex-column">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
+                                                <i t-attf-class="fa #{lst.icon} fa-2x text-primary"></i>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h5 class="fw-bold mb-1" t-esc="lst.name"/>
+                                                <span class="text-muted small">
+                                                    <t t-esc="lst.product_count"/> producto(s)
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mt-auto d-flex gap-2">
+                                            <a t-attf-href="/my/lists/#{lst.id}" class="btn btn-outline-primary btn-sm rounded-pill flex-grow-1">
+                                                <i class="fa fa-eye me-1"></i> Ver
+                                            </a>
+                                            <form t-attf-action="/my/lists/#{lst.id}/add-to-cart" method="post" class="flex-grow-1">
+                                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                                <button type="submit" class="btn btn-primary btn-sm rounded-pill w-100" t-att-disabled="lst.product_count == 0">
+                                                    <i class="fa fa-shopping-cart me-1"></i> Agregar al Carrito
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <div class="col-12">
+                            <div class="text-center py-5">
+                                <i class="fa fa-list-ul fa-4x text-muted mb-4"></i>
+                                <h4 class="text-muted">No tienes listas de compra aún</h4>
+                                <p class="text-muted">Crea tu primera lista para guardar productos que compras frecuentemente.</p>
+                                <button type="button" class="btn btn-primary rounded-pill px-4 mt-3" data-bs-toggle="modal" data-bs-target="#createListModal">
+                                    <i class="fa fa-plus me-2"></i> Crear mi primera lista
+                                </button>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+            
+            <!-- Create List Modal -->
+            <div class="modal fade" id="createListModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content rounded-4 border-0 shadow">
+                        <form action="/my/lists/create" method="post">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="modal-header border-0 pb-0">
+                                <h5 class="modal-title fw-bold">
+                                    <i class="fa fa-plus-circle text-primary me-2"></i> Nueva Lista de Compra
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold">Nombre de la lista</label>
+                                    <input type="text" name="name" class="form-control form-control-lg rounded-3" placeholder="Ej: Compra semanal" required="required"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Elige un icono</label>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <t t-foreach="icon_options" t-as="icon_opt">
+                                            <div class="form-check form-check-inline p-0">
+                                                <input type="radio" name="icon" t-att-value="icon_opt[0]" 
+                                                       t-att-id="'icon_' + icon_opt[0]" 
+                                                       class="btn-check" t-att-checked="icon_opt_first"/>
+                                                <label t-attf-for="icon_#{icon_opt[0]}" class="btn btn-outline-primary rounded-3 p-3" title="icon_opt[1]">
+                                                    <i t-attf-class="fa #{icon_opt[0]} fa-lg"></i>
+                                                </label>
+                                            </div>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer border-0 pt-0">
+                                <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary rounded-pill px-4">
+                                    <i class="fa fa-check me-2"></i> Crear Lista
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+    
+    <!-- Portal: Single List Detail Page -->
+    <template id="portal_shopping_list_detail" name="Shopping List Detail">
+        <t t-call="portal.portal_layout">
+            <t t-set="no_breadcrumbs" t-value="True"/>
+            
+            <div class="container py-4">
+                <!-- Header -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="d-flex align-items-center gap-3">
+                        <a href="/my/lists" class="btn btn-outline-secondary rounded-pill">
+                            <i class="fa fa-arrow-left"></i>
+                        </a>
+                        <div class="rounded-circle bg-primary bg-opacity-10 p-3">
+                            <i t-attf-class="fa #{shopping_list.icon} fa-2x text-primary"></i>
+                        </div>
+                        <div>
+                            <h2 class="fw-bold mb-0" t-esc="shopping_list.name"/>
+                            <span class="text-muted">
+                                <t t-esc="shopping_list.product_count"/> producto(s)
+                            </span>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <form t-attf-action="/my/lists/#{shopping_list.id}/add-to-cart" method="post">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <button type="submit" class="btn btn-primary rounded-pill px-4" t-att-disabled="shopping_list.product_count == 0">
+                                <i class="fa fa-shopping-cart me-2"></i> Agregar Todo al Carrito
+                            </button>
+                        </form>
+                        <form t-attf-action="/my/lists/#{shopping_list.id}/delete" method="post" onsubmit="return confirm('¿Estás seguro de eliminar esta lista?');">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <button type="submit" class="btn btn-outline-danger rounded-pill">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Products List -->
+                <div class="card shadow-sm border-0 rounded-4">
+                    <div class="card-body p-0">
+                        <t t-if="shopping_list.line_ids">
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th style="width: 80px;">Imagen</th>
+                                            <th>Producto</th>
+                                            <th class="text-center" style="width: 100px;">Cantidad</th>
+                                            <th class="text-end" style="width: 120px;">Precio</th>
+                                            <th style="width: 60px;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="shopping_list.line_ids" t-as="line">
+                                            <tr>
+                                                <td>
+                                                    <img t-if="line.product_id.image_128" 
+                                                         t-att-src="'/web/image/product.product/%s/image_128' % line.product_id.id"
+                                                         class="rounded" style="width: 60px; height: 60px; object-fit: cover;"/>
+                                                    <div t-else="" class="bg-light rounded d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                                                        <i class="fa fa-image text-muted"></i>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a t-att-href="line.product_id.website_url" class="text-dark text-decoration-none fw-medium" t-esc="line.product_id.name"/>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-light text-dark fs-6 px-3 py-2" t-esc="int(line.quantity)"/>
+                                                </td>
+                                                <td class="text-end fw-bold">
+                                                    <t t-esc="line.product_price" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                                                </td>
+                                                <td>
+                                                    <form t-attf-action="/my/lists/#{shopping_list.id}/remove-product/#{line.id}" method="post" class="mb-0">
+                                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                                        <button type="submit" class="btn btn-sm btn-outline-danger rounded-circle" title="Eliminar">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </t>
+                        <t t-else="">
+                            <div class="text-center py-5">
+                                <i class="fa fa-inbox fa-4x text-muted mb-4"></i>
+                                <h5 class="text-muted">Esta lista está vacía</h5>
+                                <p class="text-muted">Navega la tienda y agrega productos a esta lista.</p>
+                                <a href="/shop" class="btn btn-primary rounded-pill px-4 mt-3">
+                                    <i class="fa fa-shopping-bag me-2"></i> Ir a la Tienda
+                                </a>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+    
+    <!-- Add hover effect style -->
+    <template id="shopping_list_styles" inherit_id="website.layout" name="Shopping List Styles">
+        <xpath expr="//head" position="inside">
+            <style>
+                .hover-lift {
+                    transition: transform 0.2s ease, box-shadow 0.2s ease;
+                }
+                .hover-lift:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 1rem 2rem rgba(0,0,0,0.1) !important;
+                }
+            </style>
+        </xpath>
+    </template>
+</odoo>

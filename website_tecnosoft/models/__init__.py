@@ -11,3 +11,4 @@ from . import website
 from . import res_config_settings
 from . import flash_sale
 from . import product_review
+from . import shopping_list
