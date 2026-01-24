@@ -509,9 +509,7 @@
     <template id="tecnosoft_empty_cart_lottie" inherit_id="website_sale.cart" name="Tecnosoft Empty Cart Lottie">
         <xpath expr="//div[hasclass('oe_cart')]//div[hasclass('text-center')][1]" position="replace">
             <div class="text-center py-5">
-                <!-- <lottie-player src="https://lottie.host/78620245-5684-4841-923c-f9e4e0473a21/7Y1G0ySg6l.json" ...> -->
                 <div class="alert alert-info d-none">Animation Placeholder</div>
-                               background="transparent" speed="1" style="width: 300px; height: 300px; margin: 0 auto;" loop="loop" autoplay="autoplay"></lottie-player>
                 <h3 class="fw-bold mt-4">Tu carrito está vacío</h3>
                 <p class="text-muted mb-4">Parece que aún no has añadido nada a tu selección técnica.</p>
                 <a href="/shop" class="btn btn-primary btn-lg rounded-pill px-5 fw-bold">EMPEZAR A COMPRAR</a>
