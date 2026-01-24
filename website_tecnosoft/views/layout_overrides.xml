@@ -384,22 +384,9 @@
             </div>
 
             <!-- Product Video Modal (DISABLED: Missing video_url field) -->
-            <!--
-            <div t-if="product.video_url" class="modal fade" id="tecnosoft_product_video" tabindex="-1" aria-hidden="true">
-            -->
-            <div class="d-none">
-                <div class="modal-dialog modal-xl modal-dialog-centered">
-                    <div class="modal-content bg-transparent border-0">
-                        <div class="modal-header border-0 p-0 mb-2">
-                             <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body p-0">
-                            <div class="ratio ratio-16x9 shadow-lg rounded overflow-hidden">
-                                <iframe t-att-src="product.video_url" allowfullscreen="true"></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <!-- 
+            <div t-if="False" class="d-none">
+                Video modal removed due to missing field.
             </div>
             -->
 
