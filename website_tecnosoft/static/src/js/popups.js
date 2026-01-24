@@ -20,20 +20,29 @@ publicWidget.registry.TecnosoftPopups = publicWidget.Widget.extend({
     async _initExitIntentPopup() {
         // Wait for bootstrap.Modal to be available (up to 5 seconds)
         let tries = 0;
-        while ((!window.bootstrap || !window.bootstrap.Modal) && tries < 50) {
+        while ((!window.bootstrap || !window.bootstrap.Modal) && (!window.$ || !window.$.fn || !window.$.fn.modal) && tries < 50) {
             await new Promise(resolve => setTimeout(resolve, 100));
             tries++;
-        }
-
-        if (!window.bootstrap || !window.bootstrap.Modal) {
-            console.warn("Tecnosoft: Bootstrap or Bootstrap Modal not found, skipping popup init.");
-            return;
         }
 
         const popupEl = document.getElementById('tecnosoft_popup');
         if (!popupEl) return;
 
-        const modal = new window.bootstrap.Modal(popupEl);
+        let modal = null;
+
+        if (window.bootstrap && window.bootstrap.Modal) {
+             modal = new window.bootstrap.Modal(popupEl);
+        } else if (window.$ && window.$.fn && window.$.fn.modal) {
+             // Fallback to jQuery
+             const $popup = $(popupEl);
+             modal = {
+                 show: () => $popup.modal('show'),
+                 hide: () => $popup.modal('hide')
+             };
+        } else {
+            console.warn("Tecnosoft: Bootstrap or Bootstrap Modal not found, skipping popup init.");
+            return;
+        }
 
         // Check if already shown in this session
         if (sessionStorage.getItem('tecnosoft_popup_shown')) return;
@@ -54,7 +63,9 @@ publicWidget.registry.TecnosoftPopups = publicWidget.Widget.extend({
     },
 
     _showPopup(modal) {
-        modal.show();
-        sessionStorage.setItem('tecnosoft_popup_shown', 'true');
+        if (modal) {
+            modal.show();
+            sessionStorage.setItem('tecnosoft_popup_shown', 'true');
+        }
     },
 });
