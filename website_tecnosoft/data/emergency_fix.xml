@@ -12,7 +12,7 @@
         
         <!-- FORCE EXECUTE PYTHON CLEANUP - The Nuclear Option -->
         <!-- This finds ANY view with the bad code and destroys it -->
-        <function model="website" name="_clean_zombie_views"/>
+        <!-- <function model="website" name="_clean_zombie_views"/> -->
         
     </data>
 </odoo>

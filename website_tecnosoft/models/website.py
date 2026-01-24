@@ -52,14 +52,4 @@ class Website(models.Model):
         else:
              _logger.info("VERIFICATION PASS: No faulty views found in database.")
         
-        if zombie_views:
-            # We log identifying info just in case
-            for view in zombie_views:
-                # Force delete. Note: if it's a base view, this might be risky, 
-                # but 'request.path' is NOT standard Odoo 18 code for website.layout, 
-                # so it must be our faulty code or a bad custom copy.
-                try:
-                    view.unlink()
-                except Exception:
-                    # If unlink fails (e.g. protected), try to archive it
-                    view.write({'active': False})
+
