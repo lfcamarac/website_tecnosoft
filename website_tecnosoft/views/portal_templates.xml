@@ -112,4 +112,31 @@
         </xpath>
     </template>
     -->
+
+    <!-- Extended User Dropdown (Farmatodo Style) -->
+    <template id="tecnosoft_user_dropdown_extended" inherit_id="portal.user_dropdown" name="Tecnosoft Extended User Dropdown">
+        <xpath expr="//ul[hasclass('dropdown-menu')]" position="inside">
+            <li><hr class="dropdown-divider"/></li>
+            <li>
+                <a class="dropdown-item py-2" href="/my/orders">
+                    <i class="fa fa-shopping-bag me-2 text-muted"></i> Mis Compras
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item py-2" href="/shop/wishlist">
+                    <i class="fa fa-heart me-2 text-muted"></i> Mis Favoritos
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item py-2" href="/my/addresses">
+                    <i class="fa fa-map-marker me-2 text-muted"></i> Mis Direcciones
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item py-2" href="/contactus">
+                    <i class="fa fa-envelope me-2 text-muted"></i> Contáctenos
+                </a>
+            </li>
+        </xpath>
+    </template>
 </odoo>

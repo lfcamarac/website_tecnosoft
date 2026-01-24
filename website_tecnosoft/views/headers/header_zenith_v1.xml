@@ -19,6 +19,16 @@
                             <t t-set="_link_class" t-valuef="navbar-brand logo p-0 m-0"/>
                         </t>
                         
+                        <!-- Currency/Pricelist Selector (Farmatodo Style) -->
+                        <div class="zenith-currency-selector d-none d-lg-flex align-items-center gap-2 ms-3">
+                            <!-- Venezuela Flag -->
+                            <span class="fi fi-ve" style="font-size: 1.2rem;" title="Venezuela"></span>
+                            <!-- Pricelist Dropdown -->
+                            <t t-call="website_sale.pricelist_list">
+                                <t t-set="_btn_class" t-valuef="btn btn-sm btn-outline-secondary dropdown-toggle px-3 py-1 rounded-pill"/>
+                            </t>
+                        </div>
+                        
                         <!-- Location Selector (Center) -->
                         <div class="zenith-location-selector d-none d-lg-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-light border cursor-pointer">
                             <i class="fa fa-map-marker text-primary"></i>
@@ -100,16 +110,16 @@
                                 </ul>
                             </div>
                             
-                            <!-- Quick Chips (Both viewports) -->
-                            <a href="/shop?tag=ofertas" class="zenith-chip d-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-light border text-decoration-none flex-shrink-0">
+                            <!-- Quick Chips (Both viewports) - Dynamic Filters -->
+                            <a href="/shop?sale=1" class="zenith-chip d-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-light border text-decoration-none flex-shrink-0" title="Productos en oferta">
                                 <i class="fa fa-bolt text-warning"></i>
                                 <span class="small fw-bold text-dark">Ofertas</span>
                             </a>
-                            <a href="/shop?tag=nuevo" class="zenith-chip d-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-light border text-decoration-none flex-shrink-0">
+                            <a href="/shop?order=create_date+desc" class="zenith-chip d-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-light border text-decoration-none flex-shrink-0" title="Productos más recientes">
                                 <i class="fa fa-star text-success"></i>
                                 <span class="small fw-bold text-dark">Nuevos</span>
                             </a>
-                            <a href="/shop?tag=masvendidos" class="zenith-chip d-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-light border text-decoration-none flex-shrink-0">
+                            <a href="/shop?order=sales_count+desc" class="zenith-chip d-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-light border text-decoration-none flex-shrink-0" title="Productos más vendidos">
                                 <i class="fa fa-fire text-danger"></i>
                                 <span class="small fw-bold text-dark">Más Vendidos</span>
                             </a>

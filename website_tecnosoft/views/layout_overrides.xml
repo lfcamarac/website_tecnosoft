@@ -14,6 +14,8 @@
             <!-- Leaflet (OpenStreetMap) -->
             <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
             <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+            <!-- Flag Icons (Country Flags) -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css"/>
         </xpath>
         <xpath expr="//div[@id='wrapwrap']" position="before">
              <!-- Dark Mode Toggle (Header/Floating) -->
