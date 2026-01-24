@@ -16,15 +16,16 @@ publicWidget.registry.TecnosoftSocialProof = publicWidget.Widget.extend({
         return this._super.apply(this, arguments);
     },
 
-    _fetchOrders: function () {
-        this._rpc({
-            route: '/website_tecnosoft/get_recent_orders',
-        }).then((res) => {
+    _fetchOrders: async function () {
+        try {
+            const res = await rpc('/website_tecnosoft/get_recent_orders');
             if (res && res.length > 0) {
                 this.orders = res;
                 this._startCycle();
             }
-        });
+        } catch (e) {
+            console.error("Social Proof Fetch Error", e);
+        }
     },
 
     _startCycle: function () {

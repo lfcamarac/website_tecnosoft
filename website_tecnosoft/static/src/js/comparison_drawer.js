@@ -21,7 +21,8 @@ publicWidget.registry.TecnosoftCompareDrawer = publicWidget.Widget.extend({
         this.$count = this.$drawer.find('.compare-count');
         
         // Listen to Odoo's native comparison events
-        this.call('bus', 'subscribe', 'product_comparison_updated', (data) => {
+        // Safer event listener for Odoo 18
+        $(window).on('product_comparison_updated', (ev, data) => {
             this._refreshDrawer(data);
         });
 
@@ -31,20 +32,18 @@ publicWidget.registry.TecnosoftCompareDrawer = publicWidget.Widget.extend({
         return this._super.apply(this, arguments);
     },
 
-    _refreshDrawer: function (data) {
-        // If no data provided, try to fetch from Odoo's comparison widget if available
-        const comparisonWidget = publicWidget.registry.ProductComparison && publicWidget.registry.ProductComparison.prototype;
-        
-        this._rpc({
-            route: '/shop/compare_data',
-        }).then((res) => {
+    _refreshDrawer: async function (data) {
+        try {
+            const res = await rpc('/shop/compare_data');
             if (res && res.products && res.products.length > 0) {
                 this._renderItems(res.products);
                 this.$drawer.removeClass('d-none').addClass('active');
             } else {
                 this.$drawer.removeClass('active').addClass('d-none');
             }
-        });
+        } catch (e) {
+            console.error("Comparison Drawer Error", e);
+        }
     },
 
     _renderItems: function (products) {
@@ -72,13 +71,10 @@ publicWidget.registry.TecnosoftCompareDrawer = publicWidget.Widget.extend({
 
     _onRemoveItem: function (ev) {
         const productId = $(ev.currentTarget).data('product-id');
-        this._rpc({
-            route: '/shop/compare',
-            params: {
+        rpc('/shop/compare', {
                 product_id: productId,
                 action: 'remove',
-            }
-        }).then(() => {
+            }).then(() => {
             // Trigger Odoo's native refresh if possible, or just refresh ourselves
             this._refreshDrawer();
         });
