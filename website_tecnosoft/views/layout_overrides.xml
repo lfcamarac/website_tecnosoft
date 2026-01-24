@@ -255,14 +255,14 @@
                 
                 <!-- Quick View -->
                 <button type="button" class="btn btn-light rounded-circle shadow-sm o_quick_view tecnosoft-quick-view-btn" 
-                        t-att-data-product-template-id="product.id"
+                        t-att-data-product-id="product.id"
                         aria-label="Vista Rápida" title="Vista Rápida">
                     <i class="fa fa-eye"></i>
                 </button>
                 
                 <!-- Add to Cart (Icon only for clean look) -->
                 <t t-if="product._is_add_to_cart_possible()">
-                    <a role="button" class="btn btn-primary rounded-circle shadow-sm a-submit" aria-label="Añadir">
+                    <a role="button" class="btn btn-primary rounded-circle shadow-sm a-submit" t-att-data-product-id="product.product_variant_id.id" aria-label="Añadir">
                         <i class="fa fa-shopping-cart"></i>
                     </a>
                 </t>

@@ -19,7 +19,8 @@
                     <!-- Dynamic Items will be injected here -->
                 </div>
             </div>
-            
+        </xpath>
+        <xpath expr="//div[@id='wrapwrap']" position="inside">
             <!-- Theme Customizer Panel -->
             <t t-call="website_tecnosoft.tecnosoft_theme_customizer_panel"/>
         </xpath>
