@@ -93,7 +93,6 @@
             'website_tecnosoft/static/src/scss/theme_customizer.scss',
             'website_tecnosoft/static/src/scss/zenith_cards.scss',
             'website_tecnosoft/static/src/js/dynamic_snippets.js',
-            'website_tecnosoft/static/src/js/options.js',
             'website_tecnosoft/static/src/js/side_cart.js',
             'website_tecnosoft/static/src/js/product_sticky.js',
             'website_tecnosoft/static/src/js/animations.js',
@@ -120,7 +119,7 @@
             'website_tecnosoft/static/src/js/quick_order.js',
             'website_tecnosoft/static/src/js/variant_preview.js',
             'website_tecnosoft/static/src/js/branch_stock.js',
-            'website_tecnosoft/static/src/js/theme_customizer.js',
+            'website_tecnosoft/static/src/js/branch_stock.js',
             'website_tecnosoft/static/src/xml/dynamic_snippets.xml',
             'website_tecnosoft/static/src/xml/ajax_search.xml',
             'website_tecnosoft/static/src/xml/cart_upsell.xml',
@@ -130,6 +129,10 @@
         'web.assets_backend': [
             'website_tecnosoft/static/src/js/ai_generator.js',
             'website_tecnosoft/static/src/xml/ai_generator.xml',
+        ],
+        'website.assets_wysiwyg': [
+            'website_tecnosoft/static/src/js/options.js',
+            'website_tecnosoft/static/src/js/theme_customizer.js',
         ],
     },
     'images': [

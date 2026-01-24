@@ -12,6 +12,7 @@ publicWidget.registry.TecnosoftQuickOrder = publicWidget.Widget.extend({
         'click .js_remove_row': '_onRemoveRow',
         'click .js_bulk_add_cart': '_onBulkAddToCart',
         'change .js_quick_qty': '_updateTotal',
+        'change #csvUpload': '_onCSVUpload',
     },
 
     /**
@@ -162,9 +163,7 @@ publicWidget.registry.TecnosoftQuickOrder = publicWidget.Widget.extend({
         // Bind manually if needed
     },
 
-    events: Object.assign({}, publicWidget.registry.TecnosoftQuickOrder.prototype.events, {
-        'change #csvUpload': '_onCSVUpload',
-    }),
+
 
     _onCSVUpload: function (ev) {
         const file = ev.target.files[0];
