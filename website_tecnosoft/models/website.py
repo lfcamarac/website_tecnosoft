@@ -1,7 +1,18 @@
 import logging
 from odoo import models, fields
+from odoo.http import Request
 
 _logger = logging.getLogger(__name__)
+
+# --- MONKEYPATCH FOR COMPATIBILITY ---
+# Fixes "AttributeError: 'Request' object has no attribute 'path'"
+# caused by old/custom views still using the Odoo 16/17 syntax.
+if not hasattr(Request, 'path'):
+    def _get_path(self):
+        return self.httprequest.path
+    Request.path = property(_get_path)
+    _logger.info("MONKEYPATCH APPLIED: Request.path restored for backward compatibility.")
+# -------------------------------------
 
 class Website(models.Model):
     _inherit = 'website'
