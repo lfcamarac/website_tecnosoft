@@ -1,7 +1,7 @@
 /** @odoo-module **/
 
 import publicWidget from "@web/legacy/js/public/public_widget";
-import { jsonrpc } from "@web/core/network/rpc_service";
+import { rpc } from "@web/core/network/rpc";
 import { renderToElement } from "@web/core/utils/render";
 // We might need to listen to the website_sale generic events or extend the widget.
 // A looser coupling is better for compatibility.
@@ -61,7 +61,7 @@ publicWidget.registry.TecnosoftCartUpsell = publicWidget.Widget.extend({
     _fetchUpsellProducts: async function (productId) {
         try {
             // Fetch related products (Accessories or Alternatives)
-            const result = await jsonrpc('/website_tecnosoft/get_upsell_products', {
+            const result = await rpc('/website_tecnosoft/get_upsell_products', {
                 product_id: parseInt(productId)
             });
 
@@ -134,7 +134,7 @@ publicWidget.registry.TecnosoftCartUpsell = publicWidget.Widget.extend({
         // Bind simplistic add to cart for these items
         $(modalEl).find('.js_add_cart_upsell').on('click', async (ev) => {
             const $form = $(ev.currentTarget).closest('form');
-            await jsonrpc('/shop/cart/update', {
+            await rpc('/shop/cart/update', {
                 product_id: parseInt($form.find('input[name="product_id"]').val()),
                 add_qty: 1
             });

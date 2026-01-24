@@ -1,6 +1,6 @@
 /** @odoo-module **/
 
-import { publicWidget } from "@web/legacy/js/public/public_widget";
+import publicWidget from "@web/legacy/js/public/public_widget";
 
 publicWidget.registry.ZenithScrollReveal = publicWidget.Widget.extend({
     selector: '#wrapwrap',
