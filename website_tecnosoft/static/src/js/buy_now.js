@@ -40,7 +40,7 @@ publicWidget.registry.TecnosoftBuyNow = Widget.extend({
         try {
             // Use bulk_add_cart or simple cart update
             // Using rpc directly for simplicity
-            const res = await this.rpc('/website_tecnosoft/bulk_add_cart', {
+            const res = await rpc('/website_tecnosoft/bulk_add_cart', {
                 products: [{ 'product_id': productId, 'qty': qty }]
             });
 

@@ -39,7 +39,7 @@ publicWidget.registry.TecnosoftQuickOrder = Widget.extend({
 
         try {
             // Reusing existing search logic but for dropdown
-            const data = await this.rpc('/website_tecnosoft/get_products_data', {
+            const data = await rpc('/website_tecnosoft/get_products_data', {
                 search: query,
                 limit: 5
             });
@@ -145,7 +145,7 @@ publicWidget.registry.TecnosoftQuickOrder = Widget.extend({
         $btn.html('<i class="fa fa-circle-o-notch fa-spin me-2"></i> AÑADIENDO...');
         
         try {
-            const res = await this.rpc('/website_tecnosoft/bulk_add_cart', { products: products });
+            const res = await rpc('/website_tecnosoft/bulk_add_cart', { products: products });
             if (res.success) {
                 window.location.href = '/shop/cart';
             }
@@ -212,7 +212,7 @@ publicWidget.registry.TecnosoftQuickOrder = Widget.extend({
         $btn.html('<i class="fa fa-spinner fa-spin"></i> Procesando...');
 
         try {
-            const result = await this.rpc('/website_tecnosoft/get_products_by_skus', { skus: skus });
+            const result = await rpc('/website_tecnosoft/get_products_by_skus', { skus: skus });
             
             if (result.not_found && result.not_found.length > 0) {
                 alert(`Advertencia: No se encontraron los siguientes SKUs: ${result.not_found.join(', ')}`);

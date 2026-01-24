@@ -52,7 +52,7 @@ publicWidget.registry.TecnosoftCompleteLook = Widget.extend({
         $btn.html('<i class="fa fa-circle-o-notch fa-spin me-2"></i> COMPRANDO...');
         
         try {
-            const res = await this.rpc('/website_tecnosoft/bulk_add_cart', { products: products });
+            const res = await rpc('/website_tecnosoft/bulk_add_cart', { products: products });
             if (res.success) {
                 window.location.href = '/shop/cart';
             }

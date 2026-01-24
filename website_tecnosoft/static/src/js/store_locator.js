@@ -25,7 +25,7 @@ publicWidget.registry.TecnosoftStoreLocator = Widget.extend({
      */
     async _initLocator() {
         try {
-            const data = await this.rpc('/website_tecnosoft/get_branches_locations');
+            const data = await rpc('/website_tecnosoft/get_branches_locations');
             if (data && data.branches && data.branches.length > 0) {
                 this.branches = data.branches;
                 this._renderMap();
