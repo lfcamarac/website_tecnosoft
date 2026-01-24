@@ -87,6 +87,8 @@
                     </div>
                     <span>Favoritos</span>
                 </a>
+                <!-- Hidden anchor to satisfy legacy database XPaths during upgrade -->
+                <a href="/my/home" class="d-none">Legacy Anchor</a>
             </nav>
         </xpath>
     </template>
