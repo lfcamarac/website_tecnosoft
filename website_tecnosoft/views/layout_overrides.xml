@@ -239,8 +239,9 @@
             <!-- Labels Overlay -->
             <div class="tecnosoft-labels position-absolute top-0 start-0 w-100 p-2 d-flex flex-column gap-1" style="pointer-events: none; z-index: 2;">
                 <!-- Discount Badge (Zenith Style: Yellow Pill) -->
-                <t t-if="product.list_price &gt; product.price">
-                     <t t-set="discount_pct" t-value="round((product.list_price - product.price) * 100 / product.list_price)"/>
+                <t t-set="combination_info" t-value="product._get_combination_info(combination, product_id, add_qty or 1)"/>
+                <t t-if="combination_info['has_discounted_price']">
+                     <t t-set="discount_pct" t-value="round((combination_info['list_price'] - combination_info['price']) * 100 / combination_info['list_price'])"/>
                      <span class="tecnosoft-discount-badge" t-if="discount_pct &gt; 0">
                          -<t t-esc="discount_pct"/>%
                      </span>
