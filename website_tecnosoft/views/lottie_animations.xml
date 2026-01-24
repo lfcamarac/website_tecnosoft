@@ -5,7 +5,7 @@
         <xpath expr="//div[hasclass('alert-info')]" position="replace">
             <div class="text-center py-5">
                 <div class="d-flex justify-content-center mb-4">
-                    <img src="/web_editor/shape/website_sale/happy.svg" style="width: 150px; opacity: 0.5;" alt="Empty Cart"/>
+                    <i class="fa fa-shopping-basket fa-5x text-muted opacity-25"></i>
                 </div>
                 <!-- Animation Placeholder for future use -->
                 <div class="alert alert-info d-none">Animation Placeholder</div>
