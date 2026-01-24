@@ -95,19 +95,46 @@
                 <div class="zenith-row-3 bg-white border-bottom shadow-sm">
                     <div class="container py-2">
                         <div class="d-flex align-items-center gap-3 overflow-auto zenith-chips-scroll" style="scrollbar-width: none;">
-                            <!-- Categories Dropdown (Desktop) -->
-                            <div class="category-dropdown dropdown d-none d-lg-block">
-                                <a class="btn btn-outline-primary rounded-pill d-flex align-items-center gap-2 px-4 py-2" href="#" role="button" data-bs-toggle="dropdown">
+                            <!-- Mega Menu Categories (Desktop) -->
+                            <div class="tecnosoft-mega-menu dropdown d-none d-lg-block">
+                                <a class="btn btn-outline-primary rounded-pill d-flex align-items-center gap-2 px-4 py-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa fa-bars"></i> Categorías
                                 </a>
-                                <ul class="dropdown-menu shadow-lg border-0 p-3 mt-2 rounded-4">
-                                    <li><a class="dropdown-item py-2 rounded" href="/shop">Todos los Productos</a></li>
-                                    <li><hr class="dropdown-divider opacity-50"/></li>
-                                    <t t-set="categories" t-value="request.env['product.public.category'].search([('parent_id', '=', False)], limit=10)"/>
-                                    <t t-foreach="categories" t-as="cat">
-                                        <li><a class="dropdown-item py-2 rounded" t-att-href="'/shop/category/%s' % slug(cat)" t-esc="cat.name"/></li>
-                                    </t>
-                                </ul>
+                                <div class="dropdown-menu mega-menu-content shadow-lg border-0 p-4 mt-2 rounded-4" style="min-width: 700px;">
+                                    <div class="row g-4">
+                                        <t t-set="parent_categories" t-value="request.env['product.public.category'].search([('parent_id', '=', False)], limit=6)"/>
+                                        <t t-foreach="parent_categories" t-as="parent_cat">
+                                            <div class="col-4">
+                                                <!-- Parent Category Header -->
+                                                <a t-att-href="'/shop/category/%s' % slug(parent_cat)" 
+                                                   class="fw-bold text-primary text-decoration-none d-block mb-2 pb-2 border-bottom">
+                                                    <t t-esc="parent_cat.name"/>
+                                                </a>
+                                                <!-- Subcategories -->
+                                                <ul class="list-unstyled mb-0">
+                                                    <t t-set="child_categories" t-value="request.env['product.public.category'].search([('parent_id', '=', parent_cat.id)], limit=5)"/>
+                                                    <t t-foreach="child_categories" t-as="child_cat">
+                                                        <li class="mb-1">
+                                                            <a t-att-href="'/shop/category/%s' % slug(child_cat)" 
+                                                               class="text-muted text-decoration-none small d-block py-1 hover-primary">
+                                                                <t t-esc="child_cat.name"/>
+                                                            </a>
+                                                        </li>
+                                                    </t>
+                                                    <li t-if="len(child_categories) == 0" class="text-muted small fst-italic">
+                                                        Sin subcategorías
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </t>
+                                    </div>
+                                    <!-- View All Link -->
+                                    <div class="text-center mt-4 pt-3 border-top">
+                                        <a href="/shop" class="btn btn-sm btn-primary rounded-pill px-4">
+                                            <i class="fa fa-th-large me-2"></i> Ver Todos los Productos
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                             
                             <!-- Quick Chips (Both viewports) - Dynamic Filters -->

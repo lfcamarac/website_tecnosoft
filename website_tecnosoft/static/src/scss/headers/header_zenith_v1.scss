@@ -79,6 +79,29 @@
             }
         }
         
+        /* Mega Menu Styles */
+        .tecnosoft-mega-menu {
+            .mega-menu-content {
+                animation: fadeInDown 0.2s ease;
+                
+                @keyframes fadeInDown {
+                    from {
+                        opacity: 0;
+                        transform: translateY(-10px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+                
+                .hover-primary:hover {
+                    color: var(--o-color-primary) !important;
+                    padding-left: 0.5rem !important;
+                }
+            }
+        }
+        
         .dropdown-menu {
             min-width: 250px;
         }
