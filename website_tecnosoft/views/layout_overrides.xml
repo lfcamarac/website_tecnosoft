@@ -164,7 +164,7 @@
 
     <!-- Shop Page Customization -->
     <template id="tecnosoft_products" inherit_id="website_sale.products" name="Tecnosoft Products">
-        <xpath expr="//div[@id='products_grid']" position="before">
+        <xpath expr="//div[hasclass('oe_website_sale')]" position="before">
             <!-- Mobile Filter Button (Safer target) -->
             <div class="d-lg-none mb-3">
                 <button type="button" class="btn btn-primary-light w-100 fw-bold tecnosoft-mobile-filter-toggle">
@@ -173,10 +173,6 @@
             </div>
             <!-- Mobile Sidebar Overlay -->
             <div class="tecnosoft-shop-sidebar-overlay d-lg-none"></div>
-        </xpath>
-        
-        <xpath expr="//div[@id='products_grid']" position="attributes">
-            <attribute name="class" add="tecnosoft-products-grid" separator=" "/>
         </xpath>
     </template>
 
@@ -207,15 +203,7 @@
 
     <!-- Product Item Customization with SEO & Quick View (V2 to bypass COW cache) -->
     <template id="tecnosoft_product_item_v2" inherit_id="website_sale.products_item" name="Tecnosoft Product Item V2">
-        <xpath expr="//form" position="before">
-            <t t-set="td_product" t-value="td_product or {'x': 1, 'y': 1}"/>
-            <t t-set="ppr" t-value="ppr or 4"/>
-        </xpath>
-        <xpath expr="//form/*[1]" position="before">
-            <t t-set="td_product" t-value="td_product or {'x': 1, 'y': 1}"/>
-            <t t-set="ppr" t-value="ppr or 4"/>
-        </xpath>
-        <xpath expr="//form" position="attributes">
+        <xpath expr="//*[hasclass('oe_product_cart')]" position="attributes">
             <attribute name="class" add="tecnosoft-product-card h-100 shadow-sm border-0 rounded-3 overflow-hidden position-relative" separator=" "/>
             <attribute name="itemscope" add="itemscope" separator=" "/>
             <attribute name="itemtype" add="http://schema.org/Product" separator=" "/>

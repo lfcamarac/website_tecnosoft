@@ -37,18 +37,4 @@
         </xpath>
     </template>
 
-    <!-- Social Proof Notification (Fake/Demo trigger) -->
-    <template id="tecnosoft_social_proof" inherit_id="website.layout" name="Tecnosoft Social Proof">
-        <xpath expr="//div[@id='wrapwrap']" position="inside">
-            <div class="tecnosoft-social-proof shadow rounded-pill bg-white p-2 px-3 border d-flex align-items-center position-fixed translate-x-n100 transition-all d-none" style="bottom: 20px; left: 20px; z-index: 1050;">
-                <div class="bg-primary-light rounded-circle p-2 me-2">
-                    <i class="fa fa-shopping-bag text-primary"></i>
-                </div>
-                <div class="small">
-                    <span class="fw-bold">Juan de Madrid</span> acaba de comprar este producto.
-                    <div class="text-muted" style="font-size: 0.7rem;">hace 5 minutos</div>
-                </div>
-            </div>
-        </xpath>
-    </template>
 </odoo>

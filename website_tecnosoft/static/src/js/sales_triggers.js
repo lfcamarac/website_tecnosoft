@@ -11,7 +11,6 @@ publicWidget.registry.TecnosoftSalesTriggers = publicWidget.Widget.extend({
      */
     start() {
         this._initStickyCTA();
-        this._initSocialProof();
         return this._super.apply(this, arguments);
     },
 
