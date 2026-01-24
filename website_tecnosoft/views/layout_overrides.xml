@@ -213,6 +213,10 @@
 
     <!-- Product Item Customization with SEO & Quick View (V2 to bypass COW cache) -->
     <template id="tecnosoft_product_item_v2" inherit_id="website_sale.products_item" name="Tecnosoft Product Item V2">
+        <xpath expr="//form" position="before">
+            <t t-set="td_product" t-value="td_product or {'x': 1, 'y': 1}"/>
+            <t t-set="ppr" t-value="ppr or 4"/>
+        </xpath>
         <xpath expr="//form" position="attributes">
             <attribute name="class" add="tecnosoft-product-card h-100 shadow-sm border-0 rounded-3 overflow-hidden position-relative" separator=" "/>
             <attribute name="itemscope" add="itemscope" separator=" "/>
