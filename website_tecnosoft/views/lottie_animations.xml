@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="tecnosoft_empty_cart_lottie" inherit_id="website_sale.cart_lines" name="Tecnosoft Empty Cart Animation">
-        <!-- Replace the default empty cart alert -->
+        -- Replace the default empty cart alert -->
         <xpath expr="//div[hasclass('alert-info')]" position="replace">
             <div class="text-center py-5">
                 <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
                 <dotlottie-player 
-                    <!-- <lottie-player src="https://lottie.host/9725f0ed-3b7c-4740-9721-3965b2110d7a/8X998yqg3f.json" ...> -->
+                    -- <lottie-player src="https://lottie.host/9725f0ed-3b7c-4740-9721-3965b2110d7a/8X998yqg3f.json" ...> -->
                     <div class="alert alert-info">Animation Placeholder</div>
                     background="transparent" 
                     speed="1" 
