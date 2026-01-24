@@ -22,28 +22,35 @@ class Website(models.Model):
 
     def _clean_zombie_views(self):
         """
-        Emergency cleanup method to delete views containing the bad code:
-        <t t-if="request.path.startswith('/shop')">
-        This uses raw SQL to bypass ORM filters (active_test, protections) and guarantees deletion.
+        Emergency cleanup method to delete views containing deprecated code.
+        Uses raw SQL to bypass ORM filters (active_test, protections) and guarantees deletion.
         """
-        _logger.info("STARTING ZOMBIE VIEW CLEANUP (SQL NUCLEAR OPTION)...")
+        _logger.info("STARTING COMPREHENSIVE ZOMBIE VIEW CLEANUP...")
         
-        # SQL Injection of the fix directly into DB
-        # We look for the specific broken string 'request.path.startswith' which implies the incorrect attribute
-        query = "DELETE FROM ir_ui_view WHERE arch_db LIKE '%request.path.startswith%' AND type = 'qweb'"
+        # Patterns to clean up (all legacy code that may be cached in DB)
+        patterns = [
+            '%request.path.startswith%',
+            '%tecnosoft_secondary_color%',
+            '%tecnosoft_body_font%',
+            '%tecnosoft_dark_mode_default%',
+        ]
         
-        try:
-            self.env.cr.execute(query)
-            _logger.info(f"SQL DELETE Executed. Rows affected: {self.env.cr.rowcount}")
-        except Exception as e:
-            _logger.error(f"SQL Cleanup Failed: {e}")
-            
-        # Verify if anything remains (Paranoia check)
-        self.env.cr.execute("SELECT id, name FROM ir_ui_view WHERE arch_db LIKE '%request.path.startswith%'")
-        rows = self.env.cr.fetchall()
-        if rows:
-             _logger.error(f"CRITICAL: Views still exist after delete! IDs: {rows}")
-        else:
-             _logger.info("VERIFICATION PASS: No faulty views found in database.")
+        total_deleted = 0
+        for pattern in patterns:
+            try:
+                query = f"DELETE FROM ir_ui_view WHERE arch_db LIKE %s AND type = 'qweb'"
+                self.env.cr.execute(query, (pattern,))
+                deleted = self.env.cr.rowcount
+                total_deleted += deleted
+                if deleted:
+                    _logger.info(f"Cleaned {deleted} views matching: {pattern}")
+            except Exception as e:
+                _logger.error(f"Cleanup failed for pattern {pattern}: {e}")
         
+        _logger.info(f"ZOMBIE VIEW CLEANUP COMPLETE. Total views deleted: {total_deleted}")
+        return total_deleted
 
+
+def _post_init_cleanup(env):
+    """Called after module install/upgrade to clean zombie views."""
+    env['website']._clean_zombie_views()
