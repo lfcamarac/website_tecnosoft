@@ -92,6 +92,7 @@
             'website_tecnosoft/static/src/scss/local_review.scss',
             'website_tecnosoft/static/src/scss/theme_customizer.scss',
             'website_tecnosoft/static/src/scss/zenith_cards.scss',
+            'website_tecnosoft/static/src/js/emergency_hardening.js',
             'website_tecnosoft/static/src/js/dynamic_snippets.js',
             'website_tecnosoft/static/src/js/side_cart.js',
             'website_tecnosoft/static/src/js/product_sticky.js',
