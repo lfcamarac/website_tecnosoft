@@ -27,18 +27,8 @@ class WebsiteSaleBranch(WebsiteSale):
             # Let's manually iterate or use domain.
             
             if branch.warehouse_ids:
-                # Get quants for this product in these warehouses
-                # This is "On Hand" (qty_available). For "Available" (virtual_available), 
-                # we need to consider reservations.
-                
-                # Using context is the standard Odoo way for virtual_available
-                # But we have multiple warehouses per branch.
-                
-                # A robust way:
-                # qty = product.with_context(warehouse=branch.warehouse_ids.ids).virtual_available
-                # Note: 'warehouse' context key in stock usually filters availability.
-                
-                qty = product.with_context(warehouse=branch.warehouse_ids.ids).qty_available
+                # Use sudo() on the product to allow reading quantities without warehouse permissions
+                qty = product.sudo().with_context(warehouse=branch.warehouse_ids.ids).qty_available
                 if qty > 0:
                     branch_stock.append({
                         'name': branch.name,
@@ -55,26 +45,28 @@ class WebsiteSaleBranch(WebsiteSale):
         if not product_id:
             return []
 
-        # Ensure product exists
-        product = request.env['product.product'].browse(int(product_id))
+        # Access registry with sudo to bypass ACLs for public users
+        Product = request.env['product.product'].sudo()
+        product = Product.browse(int(product_id))
+        
         if not product.exists():
             return []
 
+        # Fetch branches with sudo
         branches = request.env['tecnosoft.branch'].sudo().search([])
         branch_stock = []
 
         for branch in branches:
             if branch.warehouse_ids:
-                # Get available qty for this SPECIFIC variant in the branch's warehouses
+                # Use sudo product to access quantities in restricted warehouses
                 qty = product.with_context(warehouse=branch.warehouse_ids.ids).qty_available
-                # Start showing even if 0? Or only if > 0? Let's match initial load logic (>0).
-                # User might want to see 'Out of stock' at specific branch too?
-                # For now stick to > 0 to be cleaner.
                 if qty > 0:
                     branch_stock.append({
                         'name': branch.name,
                         'qty': qty,
                         'desc': branch.description or ''
                     })
+        
+        return branch_stock
         
         return branch_stock
