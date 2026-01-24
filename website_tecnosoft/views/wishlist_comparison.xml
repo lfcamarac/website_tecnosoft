@@ -103,4 +103,10 @@
         </xpath>
     </template>
 
+    <!-- Neutralizing broken DB view that causes ParseError -->
+    <template id="tecnosoft_mobile_bar_wishlist" inherit_id="website_tecnosoft.tecnosoft_layout" name="Mobile Bar Wishlist" active="False">
+        <xpath expr="//nav[hasclass('zenith-mobile-bottom-bar')]" position="inside">
+            <!-- Do nothing, just to allow successful validation and overwrite broken DB view -->
+        </xpath>
+    </template>
 </odoo>
