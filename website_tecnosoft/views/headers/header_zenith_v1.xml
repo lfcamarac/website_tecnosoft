@@ -164,7 +164,7 @@
                                 <t t-call="website_sale.header_cart_link">
                                     <t t-set="_icon" t-value="True"/>
                                     <t t-set="_link_class" t-value="'text-dark position-relative p-0 px-1'"/>
-                                    <t t-set="_badge_class" t-value="'position-absolute top-0 start-100 translate-middle-x badge rounded-pill bg-primary'"/>
+                                    <t t-set="_badge_class" t-value="'position-absolute top-0 start-100 translate-middle-x mt-1 badge rounded-pill bg-primary'"/>
                                 </t>
                                 
                                 <!-- User Dropdown -->
@@ -260,7 +260,7 @@
                             <t t-call="website_sale.header_cart_link">
                                 <t t-set="_icon" t-value="True"/>
                                 <t t-set="_link_class" t-value="'text-dark position-relative p-0'"/>
-                                <t t-set="_badge_class" t-value="'position-absolute top-0 start-100 translate-middle-x badge rounded-pill bg-primary'"/>
+                                <t t-set="_badge_class" t-value="'position-absolute top-0 start-100 translate-middle-x mt-1 badge rounded-pill bg-primary'"/>
                             </t>
                         </div>
                     </div>

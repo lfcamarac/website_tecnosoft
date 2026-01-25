@@ -282,11 +282,13 @@
                 </t>
                 
                 <!-- Wishlist (Native Hook - Safe for RPC context) -->
+                <!-- Wishlist (Native Hook - Safe for RPC context) -->
                 <t t-set="_wishlist_active" t-value="False"/>
-                <t t-try="">
-                    <t t-set="_wishlist_active" t-value="getattr(request, 'website', False) and request.website.viewref('website_sale_wishlist.add_to_wishlist').active"/>
+                <t t-set="website_safe" t-value="request.env['website'].get_current_website()"/>
+                <t t-if="website_safe">
+                    <t t-set="_wishlist_active" t-value="website_safe.viewref('website_sale_wishlist.add_to_wishlist').active"/>
                 </t>
-                <t t-except=""><!-- No website context --></t>
+                
                 <t t-if="_wishlist_active">
                     <button type="button" class="btn btn-light rounded-circle shadow-sm o_add_wishlist" t-att-disabled="in_wishlist" t-att-data-product-template-id="product.id" t-att-data-product-product-id="product.product_variant_ids[0].id if product.product_variant_ids else False" title="Add to Wishlist">
                         <i class="fa fa-heart o_heart_icon" role="img" aria-label="Add to wishlist"></i>
