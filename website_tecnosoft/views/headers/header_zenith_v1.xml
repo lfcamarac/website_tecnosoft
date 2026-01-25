@@ -114,6 +114,11 @@
                                 <a href="/shop/wishlist" class="text-dark position-relative d-none d-lg-block px-1" title="Favoritos">
                                     <i class="fa fa-heart-o" style="font-size: 1.15rem;"></i>
                                 </a>
+
+                                <!-- Lists (Restored) -->
+                                <a href="/my/lists" class="text-dark position-relative d-none d-lg-block px-1" title="Mis Listas">
+                                    <i class="fa fa-list-ul" style="font-size: 1.15rem;"></i>
+                                </a>
                                 
                                 <!-- Cart -->
                                 <t t-call="website_sale.header_cart_link">
@@ -126,12 +131,14 @@
                                 <div class="d-none d-lg-flex align-items-center border-start ps-3 ms-1">
                                     <t t-nocache="The user dropdown">
                                         <div t-if="user_id._is_public()" class="dropdown">
-                                            <a class="nav-link text-dark d-flex align-items-center mb-0 dropdown-toggle px-1 py-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 0.85rem;">
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <i class="fa fa-user-circle fs-4 text-muted"></i>
-                                                    <div class="d-flex flex-column text-start lh-1">
-                                                        <span class="small text-muted" style="font-size: 0.7rem;">Hola!</span>
-                                                        <span class="fw-bold text-primary" style="font-size: 0.8rem;">Ingresar</span>
+                                            <a class="nav-link text-dark d-flex align-items-center mb-0 dropdown-toggle px-1 py-0 border-0 bg-transparent shadow-none" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <div class="d-flex align-items-center gap-2 text-start">
+                                                    <div class="d-flex align-items-center justify-content-center bg-light rounded-circle text-muted" style="width: 32px; height: 32px;">
+                                                        <i class="fa fa-user" style="font-size: 1rem;"></i>
+                                                    </div>
+                                                    <div class="d-flex flex-column lh-1">
+                                                        <span class="small text-muted" style="font-size: 0.65rem;">Hola!</span>
+                                                        <span class="fw-bold text-dark" style="font-size: 0.8rem;">Ingresar</span>
                                                     </div>
                                                 </div>
                                             </a>
@@ -141,19 +148,25 @@
                                             </ul>
                                         </div>
                                         <div t-else="" class="dropdown">
-                                            <a class="nav-link text-dark d-flex align-items-center mb-0 dropdown-toggle px-1 py-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 0.85rem;">
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <i class="fa fa-user-circle fs-4 text-primary"></i>
-                                                    <div class="d-flex flex-column text-start lh-1">
-                                                        <span class="small text-muted" style="font-size: 0.7rem;">Hola,</span>
-                                                        <span class="fw-bold" style="font-size: 0.8rem;" t-esc="user_id.name.split(' ')[0]"/>
+                                            <a class="nav-link text-dark d-flex align-items-center mb-0 dropdown-toggle px-1 py-0 border-0 bg-transparent shadow-none" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <div class="d-flex align-items-center gap-2 text-start">
+                                                    <!-- Avatar/Initial -->
+                                                    <div class="d-flex align-items-center justify-content-center bg-primary text-white rounded-circle fw-bold" style="width: 32px; height: 32px; font-size: 0.9rem;">
+                                                        <t t-esc="user_id.name[0].upper()"/>
+                                                    </div>
+                                                    <div class="d-flex flex-column lh-1">
+                                                        <span class="small text-muted" style="font-size: 0.65rem;">Hola,</span>
+                                                        <span class="fw-bold text-dark" style="font-size: 0.8rem; max-width: 80px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" t-esc="user_id.name.split(' ')[0]"/>
                                                     </div>
                                                 </div>
                                             </a>
                                             <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2 rounded-3 py-2" style="min-width: 200px;">
+                                                <li><div class="dropdown-header text-truncate"><t t-esc="user_id.name"/></div></li>
+                                                <li><hr class="dropdown-divider my-1"/></li>
                                                 <li><a class="dropdown-item py-2" href="/my/home"><i class="fa fa-user me-2 text-muted"></i> Mi Cuenta</a></li>
                                                 <li><a class="dropdown-item py-2" href="/my/orders"><i class="fa fa-shopping-bag me-2 text-muted"></i> Mis Compras</a></li>
                                                 <li><a class="dropdown-item py-2" href="/shop/wishlist"><i class="fa fa-heart me-2 text-muted"></i> Mis Favoritos</a></li>
+                                                <li><a class="dropdown-item py-2" href="/my/lists"><i class="fa fa-list-ul me-2 text-muted"></i> Mis Listas</a></li>
                                                 <li><hr class="dropdown-divider my-1"/></li>
                                                 <li><a class="dropdown-item py-2 text-danger" href="/web/session/logout?redirect=/"><i class="fa fa-sign-out me-2"></i> Salir</a></li>
                                             </ul>
