@@ -112,11 +112,16 @@
                         <i class="fa fa-shopping-cart"></i>
                     </button>
                     
-                    <!-- Wishlist -->
-                    <t t-if="request.website.viewref('website_sale_wishlist.add_to_wishlist').active">
+                    <!-- Wishlist (only if website context exists and wishlist is active) -->
+                    <t t-set="_show_wishlist" t-value="False"/>
+                    <t t-try="">
+                        <t t-set="_show_wishlist" t-value="getattr(request, 'website', False) and request.website.viewref('website_sale_wishlist.add_to_wishlist').active"/>
+                    </t>
+                    <t t-except=""><!-- No website context --></t>
+                    <t t-if="_show_wishlist">
                         <button type="button" class="btn btn-light o_add_wishlist" 
                                 t-att-data-product-template-id="product.id" 
-                                t-att-data-product-product-id="product.product_variant_ids[0].id" 
+                                t-att-data-product-product-id="product.product_variant_ids[0].id if product.product_variant_ids else False" 
                                 title="Favoritos">
                             <i class="fa fa-heart"></i>
                         </button>
