@@ -54,6 +54,7 @@
         'views/theme_customizer.xml',
         'views/product_backend.xml',
         'views/shopping_list_templates.xml',
+        'views/portal_addresses.xml',
     ],
     'demo': [
         'data/demo_data.xml',

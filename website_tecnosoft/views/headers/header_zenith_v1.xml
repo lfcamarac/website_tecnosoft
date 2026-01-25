@@ -283,17 +283,25 @@
                             </div>
                         </div>
                         
-                        <!-- Currency Button (Mobile) -->
-                        <t t-set="curr_pl" t-value="website.get_current_pricelist()" />
-                        <t t-set="website_sale_pricelists" t-value="website.get_pricelist_available(show_visible=True)" />
-                        <button t-if="website_sale_pricelists and len(website_sale_pricelists) > 1" 
+                        <!-- Currency Button (Mobile) - Only if website_sale is available -->
+                        <t t-set="show_currency" t-value="False"/>
+                        <t t-try="">
+                            <t t-set="curr_pl" t-value="request.website.get_current_pricelist()"/>
+                            <t t-set="website_sale_pricelists" t-value="request.website.get_pricelist_available(show_visible=True)"/>
+                            <t t-if="website_sale_pricelists and len(website_sale_pricelists) > 1">
+                                <t t-set="show_currency" t-value="True"/>
+                            </t>
+                        </t>
+                        <t t-except=""><!-- website_sale not installed or method not available --></t>
+                        <button t-if="show_currency" 
                                 type="button" 
                                 class="btn rounded-pill px-3 py-1 d-flex align-items-center gap-1 shadow-sm ms-2" 
                                 style="background: var(--o-color-primary, #007bff); color: white; font-size: 0.85rem;"
                                 data-bs-toggle="modal" data-bs-target="#TecnosoftCurrencyModal">
-                            <span class="fw-bold"><t t-esc="curr_pl.currency_id.symbol"/></span>
+                            <span class="fw-bold"><t t-esc="curr_pl.currency_id.symbol if curr_pl else '$'"/></span>
                             <i class="fa fa-chevron-right" style="font-size: 0.6rem;"></i>
                         </button>
+
                     </div>
                 </div>
             
