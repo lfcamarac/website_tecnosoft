@@ -2,11 +2,9 @@
 <odoo>
     <!-- Zenith Header V1: App-First Unified Navigation (Farmatodo Style) -->
     <template id="header_zenith_v1" inherit_id="website.layout" name="Zenith Header V1" active="True" priority="99">
-        <xpath expr="//header" position="attributes">
-            <attribute name="t-attf-class" add="tecnosoft-header-v1" separator=" "/>
-        </xpath>
-        <xpath expr="//header//nav" position="replace">
-            <div id="o_main_nav" class="o_main_nav header_zenith_v1">
+        <xpath expr="//header" position="replace">
+            <header id="top" data-anchor="true" t-attf-class="tecnosoft-header-v1 o_header_standard o_top_fixed_element">
+                <div id="o_main_nav" class="o_main_nav header_zenith_v1">
                 <!-- =============================================== -->
                 <!-- UNIFIED HEADER: Same structure Mobile + Desktop -->
                 <!-- =============================================== -->
@@ -396,12 +394,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- Dark Mode Toggle (Floating Bottom-Left) -->
-                <div class="tecnosoft-dark-mode-container position-fixed d-flex align-items-center justify-content-center bg-white rounded-circle shadow-lg tecnosoft-dark-mode-toggle"
-                     style="bottom: 20px; left: 20px; width: 45px; height: 45px; z-index: 9999; cursor: pointer; border: 1px solid #e0e0e0;">
-                    <i class="fa fa-moon-o text-dark" style="font-size: 20px;"></i>
                 </div>
-            </div>
+            </header>
         </xpath>
     </template>
 </odoo>
