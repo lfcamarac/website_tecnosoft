@@ -224,32 +224,91 @@
                             </div>
                         </form>
                         
-                        <!-- Mobile Address Bar (Farmatodo Style) -->
-                        <div class="zenith-address-selector-widget d-flex align-items-center justify-content-between px-3 py-1 rounded bg-light border position-relative">
-                            <div class="d-flex align-items-center gap-2 text-truncate cursor-pointer js_address_selector_toggle" role="button" style="max-width: 90%;">
-                                <i class="fa fa-map-marker text-primary"></i>
-                                <span class="small text-muted">Enviar a:</span>
-                                <span class="fw-bold small text-truncate js_current_address_label">
-                                    <t t-if="not user_id._is_public() and website.sale_get_order() and website.sale_get_order().partner_shipping_id">
-                                        <t t-esc="website.sale_get_order().partner_shipping_id.name"/>
-                                    </t>
-                                    <t t-else="">
-                                        Seleccionar ubicación
-                                    </t>
-                                </span>
-                            </div>
-                            <i class="fa fa-chevron-down text-muted" style="font-size: 0.7rem;"></i>
-                            
-                            <!-- Dropdown Container -->
-                            <div class="zenith-address-dropdown dropdown-menu shadow border-0 mt-2 rounded-3 p-0 w-100" style="z-index: 1050;">
-                                <div class="p-3 text-center">
-                                    <i class="fa fa-spinner fa-spin text-primary"></i>
-                                    <span class="small text-muted ms-2">Cargando...</span>
+                        <!-- Mobile Address Bar + Currency (Farmatodo Style) -->
+                        <div class="d-flex align-items-center gap-2">
+                             <!-- Address Selector (Flex Grow) -->
+                            <div class="zenith-address-selector-widget d-flex align-items-center justify-content-between px-3 py-1 rounded bg-light border position-relative flex-grow-1">
+                                <div class="d-flex align-items-center gap-2 text-truncate cursor-pointer js_address_selector_toggle" role="button" style="max-width: 90%;">
+                                    <i class="fa fa-map-marker text-primary"></i>
+                                    <span class="small text-muted">Enviar a:</span>
+                                    <span class="fw-bold small text-truncate js_current_address_label">
+                                        <t t-if="not user_id._is_public() and website.sale_get_order() and website.sale_get_order().partner_shipping_id">
+                                            <t t-esc="website.sale_get_order().partner_shipping_id.name"/>
+                                        </t>
+                                        <t t-else="">
+                                            Seleccionar ubicación
+                                        </t>
+                                    </span>
+                                </div>
+                                <i class="fa fa-chevron-down text-muted" style="font-size: 0.7rem;"></i>
+                                
+                                <!-- Dropdown Container -->
+                                <div class="zenith-address-dropdown dropdown-menu shadow border-0 mt-2 rounded-3 p-0 w-100" style="z-index: 1050;">
+                                    <div class="p-3 text-center">
+                                        <i class="fa fa-spinner fa-spin text-primary"></i>
+                                        <span class="small text-muted ms-2">Cargando...</span>
+                                    </div>
                                 </div>
                             </div>
+
+                            <!-- Currency Trigger Button (Mobile) -->
+                            <t t-set="curr_pl" t-value="website.get_current_pricelist()" />
+                            <button type="button" class="btn btn-primary rounded-pill px-3 py-1 d-flex align-items-center gap-1 shadow-sm" 
+                                    data-bs-toggle="modal" data-bs-target="#TecnosoftCurrencyModal"
+                                    style="font-size: 0.85rem; height: 38px;">
+                                <span class="fw-bold"><t t-esc="curr_pl.currency_id.symbol"/></span>
+                                <i class="fa fa-chevron-right" style="font-size: 0.7rem;"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
+
+                <!-- ROW 3: Status Chips Only (Slim) -->
+                ... (omitted for brevity)
+            </div>
+            
+            <!-- Currency Selection Modal -->
+            <div class="modal fade" id="TecnosoftCurrencyModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content rounded-4 border-0 shadow">
+                        <div class="modal-header border-bottom-0 pb-0">
+                            <h5 class="modal-title fw-bold text-center w-100">Selecciona una moneda</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body pt-2">
+                             <t t-set="website_sale_pricelists" t-value="website.get_pricelist_available(show_visible=True)" />
+                             <t t-set="curr_pl" t-value="website.get_current_pricelist()" />
+                             
+                             <!-- Ref Rate Display (Simplistic: 1 USD conversion if available) -->
+                             <div class="text-center mb-4">
+                                <t t-foreach="website_sale_pricelists" t-as="pl">
+                                    <t t-if="pl.currency_id.name == 'VES' and curr_pl.currency_id.name == 'USD'">
+                                        <!-- If currently USD, show VES rate if possible -->
+                                         <p class="text-muted fw-bold mb-0">Ref. 1 = <t t-esc="pl.currency_id.symbol"/> <t t-esc="'%.2f' % (1 / pl.currency_id.rate)"/></p>
+                                    </t>
+                                </t>
+                             </div>
+
+                             <form action="/shop/change_pricelist" method="POST" class="d-flex flex-column gap-2">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                <t t-foreach="website_sale_pricelists" t-as="pl">
+                                    <label class="d-flex align-items-center justify-content-between p-3 rounded-3 border cursor-pointer hover-bg-light">
+                                        <div class="d-flex align-items-center gap-3">
+                                            <span class="fw-bold"><t t-esc="pl.currency_id.name == 'VES' and 'Bolívares' or (pl.currency_id.name == 'USD' and 'Dólar estadoun.' or pl.name)"/></span>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="pl_id" t-att-value="pl.id" t-att-checked="pl.id == curr_pl.id" onchange="this.form.submit()"/>
+                                        </div>
+                                    </label>
+                                </t>
+                             </form>
+                        </div>
+                        <div class="modal-footer border-top-0 justify-content-center pt-0 pb-4">
+                            <button type="button" class="btn btn-primary rounded-pill px-5 w-100" data-bs-dismiss="modal">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
                 <!-- ROW 3: Status Chips Only (Slim) -->
                 <div class="zenith-row-3 bg-white border-bottom shadow-sm py-1">
