@@ -323,6 +323,9 @@
 
     <!-- Product Page Customization -->
     <template id="tecnosoft_product" inherit_id="website_sale.product" name="Tecnosoft Product Page">
+        <xpath expr="//div[@id='product_details']" position="before">
+            <t t-set="product" t-value="product.sudo()"/>
+        </xpath>
         <xpath expr="//div[@id='product_details']" position="attributes">
             <attribute name="class" add="ps-lg-5" separator=" "/>
         </xpath>
