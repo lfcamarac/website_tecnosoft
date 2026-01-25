@@ -118,9 +118,9 @@
                                     </button>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <a role="button" id="add_to_cart" class="btn btn-primary btn-lg rounded-pill w-100 fw-bold shadow-sm a-submit text-white" href="#">
+                                    <button type="submit" id="add_to_cart" class="btn btn-primary btn-lg rounded-pill w-100 fw-bold shadow-sm a-submit text-white">
                                         <i class="fa fa-shopping-cart me-2"></i> Añadir
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         </form>
