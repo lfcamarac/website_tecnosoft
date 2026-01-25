@@ -11,31 +11,52 @@
                 <!-- UNIFIED HEADER: Same structure Mobile + Desktop -->
                 <!-- =============================================== -->
                 
-                <!-- SINGLE ROW: Logo + Search + Icons (Farmatodo Style) -->
+                <!-- SINGLE ROW: Logo + Location + Search + Icons (Farmatodo Style) -->
                 <div class="zenith-row-1 bg-white border-bottom py-2">
                     <div class="container">
-                        <div class="d-flex justify-content-between align-items-center gap-3">
-                            <!-- LEFT: Logo + Flag -->
-                            <div class="d-flex align-items-center gap-2 flex-shrink-0">
+                        <div class="d-flex align-items-center gap-3">
+                            <!-- LEFT: Logo + Flag + Location -->
+                            <div class="d-flex align-items-center gap-3 flex-shrink-0">
+                                <!-- Logo -->
                                 <t t-call="website.placeholder_header_brand">
                                     <t t-set="_link_class" t-valuef="navbar-brand logo p-0 m-0"/>
                                 </t>
-                                <!-- Flag (Desktop only) -->
+                                
+                                <!-- Flag (Desktop) -->
                                 <span class="fi fi-ve d-none d-lg-block" style="font-size: 1.1rem;" title="Venezuela"></span>
-                            </div>
-                            
-                            <!-- CENTER: Location Selector (Desktop only) -->
-                            <div class="zenith-location-selector d-none d-lg-flex align-items-center gap-2 px-2 py-1 rounded-pill bg-primary text-white border-0 cursor-pointer flex-shrink-0" style="font-size: 0.8rem;">
-                                <i class="fa fa-map-marker"></i>
-                                <div class="d-flex flex-column lh-1">
-                                    <span style="font-size: 0.6rem; opacity: 0.8;">Tu ubicación</span>
-                                    <span class="fw-bold" style="font-size: 0.75rem;">Selecciona tu sede <i class="fa fa-chevron-down" style="font-size: 0.6rem;"></i></span>
+                                
+                                <!-- Location Selector (Desktop) -->
+                                <div class="zenith-location-selector d-none d-xl-flex align-items-center gap-2 px-2 py-1 rounded-pill bg-primary text-white border-0 cursor-pointer flex-shrink-0" style="font-size: 0.8rem;">
+                                    <i class="fa fa-map-marker"></i>
+                                    <div class="d-flex flex-column lh-1">
+                                        <span style="font-size: 0.6rem; opacity: 0.8;">Tu ubicación</span>
+                                        <span class="fw-bold" style="font-size: 0.75rem; white-space: nowrap;">Selecciona tu sede <i class="fa fa-chevron-down" style="font-size: 0.6rem;"></i></span>
+                                    </div>
                                 </div>
                             </div>
                             
+                            <!-- CENTER: Search Bar (Flex Grow) -->
+                            <div class="flex-grow-1 mx-2">
+                                <form method="get" action="/shop" class="o_wsale_products_searchbar_form w-100">
+                                    <div class="input-group zenith-search-pill">
+                                        <span class="input-group-text bg-light border-0 rounded-start-pill ps-3 py-1">
+                                            <i class="fa fa-search text-muted"></i>
+                                        </span>
+                                        <input type="text" name="search" 
+                                               class="form-control bg-light border-0 py-1" 
+                                               placeholder="¿Qué buscas hoy?"
+                                               style="font-size: 0.9rem;"
+                                               aria-label="Buscar"/>
+                                        <button class="btn btn-primary rounded-end-pill px-3 py-1" type="submit" style="font-size: 0.85rem;">
+                                            Buscar
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            
                             <!-- RIGHT: Icons + User -->
-                            <div class="d-flex align-items-center gap-2 flex-shrink-0">
-                                <!-- Wishlist (Desktop) -->
+                            <div class="d-flex align-items-center gap-3 flex-shrink-0">
+                                <!-- Wishlist -->
                                 <a href="/shop/wishlist" class="text-dark position-relative d-none d-lg-block px-1" title="Favoritos">
                                     <i class="fa fa-heart-o" style="font-size: 1.15rem;"></i>
                                 </a>
@@ -47,12 +68,18 @@
                                     <t t-set="_badge_class" t-value="'position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary'"/>
                                 </t>
                                 
-                                <!-- User (Desktop: Dropdown, Mobile: Icon) -->
-                                <div class="d-none d-lg-flex align-items-center">
+                                <!-- User Dropdown (No redundant button) -->
+                                <div class="d-none d-lg-flex align-items-center border-start ps-3 ms-1">
                                     <t t-nocache="The user dropdown may vary and depends on the user.">
                                         <div t-if="user_id._is_public()" class="dropdown">
                                             <a class="nav-link text-dark d-flex align-items-center mb-0 dropdown-toggle px-1 py-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 0.85rem;">
-                                                <i class="fa fa-user-o me-1"></i> <span class="d-none d-xl-inline">Mi Cuenta</span>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <i class="fa fa-user-circle fs-4 text-muted"></i>
+                                                    <div class="d-flex flex-column text-start lh-1">
+                                                        <span class="small text-muted" style="font-size: 0.7rem;">Hola!</span>
+                                                        <span class="fw-bold text-primary" style="font-size: 0.8rem;">Ingresa aquí</span>
+                                                    </div>
+                                                </div>
                                             </a>
                                             <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2 rounded-3">
                                                 <li><a class="dropdown-item py-2" href="/web/login"><i class="fa fa-sign-in me-2 text-muted"></i> Iniciar Sesión</a></li>
@@ -61,8 +88,13 @@
                                         </div>
                                         <div t-else="" class="dropdown">
                                             <a class="nav-link text-dark d-flex align-items-center mb-0 dropdown-toggle px-1 py-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 0.85rem;">
-                                                <i class="fa fa-user-o me-1"></i>
-                                                <span class="d-none d-xl-inline" t-esc="user_id.name.split(' ')[0]"/>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <i class="fa fa-user-circle fs-4 text-primary"></i>
+                                                    <div class="d-flex flex-column text-start lh-1">
+                                                        <span class="small text-muted" style="font-size: 0.7rem;">Hola,</span>
+                                                        <span class="fw-bold" style="font-size: 0.8rem;" t-esc="user_id.name.split(' ')[0]"/>
+                                                    </div>
+                                                </div>
                                             </a>
                                             <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2 rounded-3 py-2" style="min-width: 200px;">
                                                 <li><a class="dropdown-item py-2" href="/my/home"><i class="fa fa-user me-2 text-muted"></i> Mi Cuenta</a></li>
@@ -78,32 +110,12 @@
                                         </div>
                                     </t>
                                 </div>
+                                
                                 <a href="/my" class="text-dark d-lg-none px-1" title="Mi cuenta">
                                     <i class="fa fa-user-o" style="font-size: 1.15rem;"></i>
                                 </a>
                             </div>
                         </div>
-                    </div>
-                </div>
-                
-                <!-- ROW 2: Full-Width Search Bar (Compact) -->
-                <div class="zenith-row-2 bg-white py-1">
-                    <div class="container">
-                        <form method="get" action="/shop" class="o_wsale_products_searchbar_form w-100">
-                            <div class="input-group zenith-search-pill">
-                                <span class="input-group-text bg-light border-0 rounded-start-pill ps-3">
-                                    <i class="fa fa-search text-muted"></i>
-                                </span>
-                                <input type="text" name="search" 
-                                       class="form-control bg-light border-0 py-2" 
-                                       placeholder="¿Qué estás buscando hoy?"
-                                       style="font-size: 0.9rem;"
-                                       aria-label="Buscar productos"/>
-                                <button class="btn btn-primary rounded-end-pill px-3" type="submit" style="font-size: 0.85rem;">
-                                    Buscar
-                                </button>
-                            </div>
-                        </form>
                     </div>
                 </div>
                 
