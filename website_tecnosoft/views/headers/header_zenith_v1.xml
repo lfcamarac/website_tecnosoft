@@ -225,7 +225,7 @@
                         </form>
                         
                         <!-- Mobile Address Bar (Farmatodo Style) -->
-                        <div class="d-flex align-items-center justify-content-between px-3 py-1 rounded bg-light border">
+                        <div class="zenith-address-selector-widget d-flex align-items-center justify-content-between px-3 py-1 rounded bg-light border position-relative">
                             <div class="d-flex align-items-center gap-2 text-truncate cursor-pointer js_address_selector_toggle" role="button" style="max-width: 90%;">
                                 <i class="fa fa-map-marker text-primary"></i>
                                 <span class="small text-muted">Enviar a:</span>
@@ -239,6 +239,14 @@
                                 </span>
                             </div>
                             <i class="fa fa-chevron-down text-muted" style="font-size: 0.7rem;"></i>
+                            
+                            <!-- Dropdown Container -->
+                            <div class="zenith-address-dropdown dropdown-menu shadow border-0 mt-2 rounded-3 p-0 w-100" style="z-index: 1050;">
+                                <div class="p-3 text-center">
+                                    <i class="fa fa-spinner fa-spin text-primary"></i>
+                                    <span class="small text-muted ms-2">Cargando...</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

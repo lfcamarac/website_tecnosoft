@@ -105,17 +105,18 @@ publicWidget.registry.TecnosoftAddressSelector = publicWidget.Widget.extend({
         if (!this.addressData) return;
 
         if (this.addressData.public) {
-            this.$city.text("Selecciona tu sede");
+            this.$city.text("Enviar a");
             return;
         }
 
         const current = this.addressData.addresses.find(a => a.id === this.addressData.current_id);
         if (current) {
             // Show City if available, else name
-            this.$city.text(current.city || "Mi Dirección");
+            this.$city.text("Enviar a:");
             this.$label.html(`${current.name} <i class="fa fa-chevron-down ms-1" style="font-size: 0.6rem;"></i>`);
         } else {
-            this.$city.text("Agregar dirección");
+            this.$city.text("Enviar a");
+            this.$label.html(`Seleccionar ubicación <i class="fa fa-chevron-down ms-1" style="font-size: 0.6rem;"></i>`);
         }
     },
 
