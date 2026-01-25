@@ -114,10 +114,14 @@
                     
                     <!-- Wishlist (only if website context exists and wishlist is active) -->
                     <t t-set="_show_wishlist" t-value="False"/>
-                    <t t-try="">
-                        <t t-set="_show_wishlist" t-value="getattr(request, 'website', False) and request.website.viewref('website_sale_wishlist.add_to_wishlist').active"/>
+                    <t t-if="website">
+                        <t t-try="">
+                            <!-- Use local website variable instead of request.website which may fail in RPC -->
+                            <t t-set="_show_wishlist" t-value="website.viewref('website_sale_wishlist.add_to_wishlist').active"/>
+                        </t>
+                        <t t-except=""><!-- Fail silently --></t>
                     </t>
-                    <t t-except=""><!-- No website context --></t>
+                    
                     <t t-if="_show_wishlist">
                         <button type="button" class="btn btn-light o_add_wishlist" 
                                 t-att-data-product-template-id="product.id" 

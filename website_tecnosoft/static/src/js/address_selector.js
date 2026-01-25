@@ -131,17 +131,35 @@ publicWidget.registry.TecnosoftAddressSelector = publicWidget.Widget.extend({
      * Toggle dropdown visibility
      * @private
      */
+    /**
+     * Toggle dropdown visibility
+     * @private
+     */
     _onToggleClick(ev) {
-        ev.stopPropagation();
-        this.$dropdown.toggleClass('show');
+        // Only stop propagation if we are NOT clicking a selectable item or link
+        // This allows the 'click .js_select_address' handler (delegated to root) to fire
+        if (!$(ev.target).closest('.js_select_address, a').length) {
+            ev.stopPropagation();
+        }
         
-        // Close on clicking outside
-        $(document).one('click', () => {
-             this.$dropdown.removeClass('show');
+        // If clicking the toggle itself (and not inside the dropdown already), toggle visibility
+        if ($(ev.target).closest('.js_address_selector_toggle').length) {
+            this.$dropdown.toggleClass('show');
+            
+            if (this.$dropdown.hasClass('show')) {
+                // Close on clicking outside
+                $(document).one('click', () => {
+                     this.$dropdown.removeClass('show');
+                });
+            }
+        }
+        
+        // Prevent closing when clicking inside dropdown (unless it's a link/action)
+        this.$dropdown.off('click').on('click', (e) => {
+             if (!$(e.target).closest('.js_select_address, a').length) {
+                e.stopPropagation();
+             }
         });
-        
-        // Prevent closing when clicking inside dropdown
-        this.$dropdown.on('click', (e) => e.stopPropagation());
     },
 
     /**
