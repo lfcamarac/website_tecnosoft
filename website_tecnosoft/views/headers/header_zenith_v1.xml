@@ -338,12 +338,13 @@
                         </div>
                         <div class="modal-body pt-2">
                              <t t-set="modal_pricelist_ok" t-value="False"/>
-                             <t t-try="">
-                                 <t t-set="website_sale_pricelists" t-value="request.website.get_pricelist_available(show_visible=True)"/>
-                                 <t t-set="curr_pl" t-value="request.website.get_current_pricelist()"/>
-                                 <t t-set="modal_pricelist_ok" t-value="True"/>
+                             <t t-if="website">
+                                 <t t-set="website_sale_pricelists" t-value="website.get_pricelist_available(show_visible=True)"/>
+                                 <t t-set="curr_pl" t-value="website.get_current_pricelist()"/>
+                                 <t t-if="website_sale_pricelists">
+                                     <t t-set="modal_pricelist_ok" t-value="True"/>
+                                 </t>
                              </t>
-                             <t t-except=""><!-- website_sale not available --></t>
                              
                              <t t-if="modal_pricelist_ok">
                              <!-- Ref Rate Display (Simplistic: 1 USD conversion if available) -->
