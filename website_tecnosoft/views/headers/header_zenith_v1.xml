@@ -15,22 +15,43 @@
                 <div class="zenith-row-1 bg-white border-bottom py-2">
                     <div class="container">
                         <div class="d-flex align-items-center gap-3">
-                            <!-- LEFT: Logo + Flag + Location -->
+                            <!-- LEFT: Logo + Currency + Address -->
                             <div class="d-flex align-items-center gap-3 flex-shrink-0">
                                 <!-- Logo -->
                                 <t t-call="website.placeholder_header_brand">
                                     <t t-set="_link_class" t-valuef="navbar-brand logo p-0 m-0"/>
                                 </t>
                                 
-                                <!-- Flag (Desktop) -->
-                                <span class="fi fi-ve d-none d-lg-block" style="font-size: 1.1rem;" title="Venezuela"></span>
+                                <!-- Currency/Pricelist (Restored) -->
+                                <div class="d-none d-lg-flex align-items-center gap-1">
+                                    <span class="fi fi-ve rounded-1" style="font-size: 1rem;" title="Venezuela"></span>
+                                    <t t-call="website_sale.pricelist_list">
+                                        <t t-set="_btn_class" t-valuef="btn btn-sm btn-link text-dark dropdown-toggle p-0 fw-bold border-0 text-decoration-none"/>
+                                    </t>
+                                </div>
                                 
-                                <!-- Location Selector (Desktop) -->
-                                <div class="zenith-location-selector d-none d-xl-flex align-items-center gap-2 px-2 py-1 rounded-pill bg-primary text-white border-0 cursor-pointer flex-shrink-0" style="font-size: 0.8rem;">
-                                    <i class="fa fa-map-marker"></i>
-                                    <div class="d-flex flex-column lh-1">
-                                        <span style="font-size: 0.6rem; opacity: 0.8;">Tu ubicación</span>
-                                        <span class="fw-bold" style="font-size: 0.75rem; white-space: nowrap;">Selecciona tu sede <i class="fa fa-chevron-down" style="font-size: 0.6rem;"></i></span>
+                                <!-- Address Selector Widget -->
+                                <div class="zenith-address-selector-widget d-none d-xl-flex position-relative">
+                                    <div class="d-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-primary text-white border-0 cursor-pointer js_address_selector_toggle" role="button" style="font-size: 0.8rem;">
+                                        <i class="fa fa-map-marker"></i>
+                                        <div class="d-flex flex-column lh-1 text-start">
+                                            <span class="js_current_city" style="font-size: 0.65rem; opacity: 0.9;">Selecciona tu sede</span>
+                                            <span class="js_current_address_label fw-bold font-monospace" style="font-size: 0.75rem;">
+                                                <t t-if="not user_id._is_public() and website.sale_get_order() and website.sale_get_order().partner_shipping_id">
+                                                    <t t-esc="website.sale_get_order().partner_shipping_id.name"/>
+                                                </t>
+                                                <t t-else="">
+                                                    Agregar dirección <i class="fa fa-chevron-down ms-1" style="font-size: 0.6rem;"></i>
+                                                </t>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <!-- Dropdown Container -->
+                                    <div class="zenith-address-dropdown dropdown-menu shadow border-0 mt-2 rounded-3 p-0" style="min-width: 250px; z-index: 1050;">
+                                        <div class="p-3 text-center">
+                                            <i class="fa fa-spinner fa-spin text-primary"></i>
+                                            <span class="small text-muted ms-2">Cargando...</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

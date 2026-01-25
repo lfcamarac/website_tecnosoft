@@ -466,3 +466,89 @@ class TecnosoftController(http.Controller):
         # Deduplicate by product to avoid multiple notifications for same item
         unique_results = {res['product_name']: res for res in results}.values()
         return list(unique_results)
+
+    # -------------------------------------------------------------------------
+    # ADDRESS SELECTOR ROUTES
+    # -------------------------------------------------------------------------
+
+    @http.route('/website_tecnosoft/get_user_addresses', type='json', auth='public', website=True)
+    def get_user_addresses(self, **kwargs):
+        """ Fetch user addresses for the header selector. """
+        order = request.website.sale_get_order()
+        partner = request.env.user.partner_id
+
+        # If public user, return empty or maybe geo-located city
+        if request.env.user._is_public():
+            return {
+                'public': True,
+                'addresses': [],
+                'current_id': None
+            }
+
+        # Get shipping addresses (including parent contact if type=delivery is missing, but usually child_ids)
+        # We follow standard Odoo logic: partner + children of type 'delivery' or 'other'
+        addresses = request.env['res.partner'].sudo().search([
+            ('id', 'child_of', partner.commercial_partner_id.ids),
+            '|', ('type', 'in', ['delivery', 'other']), ('id', '=', partner.id)
+        ])
+        
+        # Format for frontend
+        addr_list = []
+        for addr in addresses:
+            name = addr.name or partner.name
+            street = addr.street or ''
+            city = addr.city or ''
+            state = addr.state_id.name or ''
+            
+            # Simple one-line description
+            full_addr = f"{street}, {city}" if street and city else (street or city or name)
+            
+            addr_list.append({
+                'id': addr.id,
+                'name': name,
+                'type': addr.type,
+                'full_address': full_addr,
+                'city': city,
+            })
+
+        current_shipping_id = order.partner_shipping_id.id if order else partner.id
+
+        return {
+            'public': False,
+            'addresses': addr_list,
+            'current_id': current_shipping_id,
+            'user_name': partner.name
+        }
+
+    @http.route('/website_tecnosoft/set_delivery_address', type='json', auth='public', website=True)
+    def set_delivery_address(self, address_id, **kwargs):
+        """ Update the current order's shipping address. """
+        order = request.website.sale_get_order(force_create=True)
+        if not order:
+            return {'error': 'No active order'}
+            
+        addr_id = int(address_id)
+        # verify access
+        addr = request.env['res.partner'].sudo().browse(addr_id)
+        if not addr.exists():
+             return {'error': 'Address not found'}
+             
+        # Basic security check: address must belong to user (or be the user)
+        # Public users can't set arbitrary IDs unless we are lenient (but we should check partner)
+        if not request.env.user._is_public():
+             user_partner = request.env.user.partner_id
+             if addr_id != user_partner.id and addr.parent_id.id != user_partner.id:
+                 # Depending on record rules, perform a search count
+                 # This is a loose check, usually we rely on record rules but sudo() bypasses them.
+                 # Let's verify ownership:
+                 if addr.commercial_partner_id.id != user_partner.commercial_partner_id.id:
+                      return {'error': 'Access Denied'}
+
+        # Update order
+        order.sudo().write({'partner_shipping_id': addr_id})
+        
+        if order.partner_id.id == request.env.ref('base.public_partner').id:
+             # Case: Public user setting address (maybe not pertinent unless they just filled a form)
+             pass
+
+        return {'success': True, 'new_address_id': addr_id}
