@@ -56,12 +56,12 @@
                                 </div>
                             </div>
                             
-                            <!-- CENTER: Search Bar + Categories (Flex Grow) -->
-                            <div class="flex-grow-1 mx-3">
+                            <!-- CENTER: Search Bar + Categories (Desktop Only) -->
+                            <div class="flex-grow-1 mx-3 d-none d-lg-block">
                                 <form method="get" action="/shop" class="o_wsale_products_searchbar_form w-100">
                                     <div class="input-group zenith-search-pill border rounded-pill bg-light overflow-hidden">
                                         <!-- Categories Dropdown (Integrated) -->
-                                        <div class="tecnosoft-mega-menu dropdown d-none d-lg-block border-end">
+                                        <div class="tecnosoft-mega-menu dropdown border-end">
                                             <a class="btn btn-light rounded-0 d-flex align-items-center gap-2 px-3 py-2 bg-transparent border-0 h-100" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 0.85rem;">
                                                 <i class="fa fa-bars text-muted"></i> <span class="d-none d-xl-inline">Todo</span>
                                             </a>
@@ -182,12 +182,46 @@
                     </div>
                 </div>
                 
+                <!-- ROW 2: MOBILE ONLY (Search + Address) -->
+                <div class="zenith-row-mobile bg-white border-bottom pb-2 d-lg-none">
+                    <div class="container">
+                        <!-- Mobile Search -->
+                        <form method="get" action="/shop" class="o_wsale_products_searchbar_form w-100 mb-2">
+                            <div class="input-group border rounded-pill bg-light overflow-hidden">
+                                <input type="text" name="search" 
+                                       class="form-control border-0 py-2 bg-transparent shadow-none" 
+                                       placeholder="Buscar..."
+                                       style="font-size: 0.9rem;"
+                                       aria-label="Buscar"/>
+                                <button class="btn btn-light border-0 px-3 text-muted" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <!-- Mobile Address Bar (Farmatodo Style) -->
+                        <div class="d-flex align-items-center justify-content-between px-3 py-1 rounded bg-light border">
+                            <div class="d-flex align-items-center gap-2 text-truncate cursor-pointer js_address_selector_toggle" role="button" style="max-width: 90%;">
+                                <i class="fa fa-map-marker text-primary"></i>
+                                <span class="small text-muted">Enviar a:</span>
+                                <span class="fw-bold small text-truncate js_current_address_label">
+                                    <t t-if="not user_id._is_public() and website.sale_get_order() and website.sale_get_order().partner_shipping_id">
+                                        <t t-esc="website.sale_get_order().partner_shipping_id.name"/>
+                                    </t>
+                                    <t t-else="">
+                                        Seleccionar ubicación
+                                    </t>
+                                </span>
+                            </div>
+                            <i class="fa fa-chevron-down text-muted" style="font-size: 0.7rem;"></i>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- ROW 3: Status Chips Only (Slim) -->
                 <div class="zenith-row-3 bg-white border-bottom shadow-sm py-1">
                     <div class="container">
                         <div class="d-flex align-items-center justify-content-center gap-3 overflow-auto zenith-chips-scroll" style="scrollbar-width: none;">
-                            <!-- Removed Mega Menu from here -->
-                            
                             <!-- Quick Chips - Dynamic Filters -->
                             <a href="/shop?sale=1" class="zenith-chip d-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-white border text-decoration-none flex-shrink-0 hover-scale" style="font-size: 0.8rem;">
                                 <i class="fa fa-bolt text-warning"></i> <span>Ofertas</span>
