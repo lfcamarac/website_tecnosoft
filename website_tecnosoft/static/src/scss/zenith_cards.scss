@@ -1,115 +1,249 @@
-// Zenith Style Product Cards
-// Matches the "White Card / Soft Shadow / Yellow Badge" aesthetic
+// ==========================================================================
+// ZENITH PRODUCT CARDS - Multi-Style System
+// ==========================================================================
+// Styles: minimal, classic, overlay, horizontal
+// Usage: Add .card-style-{name} to .tecnosoft-product-card
 
-.o_wsale_products_grid_table_wrapper {
-    // Ensure grid gap is cleaner
-    padding: 0.5rem !important;
-}
-
-.oe_product_cart {
+// Base Card Styling (Shared)
+.tecnosoft-product-card {
     border: none !important;
     border-radius: 16px !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     background: white;
     overflow: hidden;
-    margin-bottom: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     
     &:hover {
         transform: translateY(-4px);
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
     }
+}
 
-    // Image Area
-    .oe_product_image {
-        padding: 1rem;
-        height: 200px !important; // Fixed height for uniformity
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        
-        img {
-            max-height: 100%;
-            object-fit: contain;
-        }
+// Product Image Area
+.tecnosoft-product-card .oe_product_image,
+.tecnosoft-product-card .tecnosoft-card-image {
+    position: relative;
+    padding: 1rem;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #fafafa;
+    
+    img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+        transition: transform 0.3s ease;
     }
+}
 
-    // Detail Body
-    .o_wsale_product_information {
-        background: transparent !important;
-        padding: 1rem !important;
-        text-align: left !important;
-    }
+// Discount Badge
+.tecnosoft-discount-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: #ffd900;
+    color: #333;
+    font-weight: 800;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 50px;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
-    // Discount Badge (Yellow Pill)
-    .tecnosoft-discount-badge {
+// ==========================================================================
+// STYLE 1: MINIMAL (Default - Buttons slide up on hover)
+// ==========================================================================
+.card-style-minimal,
+.tecnosoft-product-card:not([class*="card-style-"]) {
+    .tecnosoft-action-bar {
         position: absolute;
-        top: 12px;
-        left: 12px;
-        background-color: #ffd900; // Accent Yellow
-        color: #333;
-        font-weight: 800;
-        font-size: 0.8rem;
-        padding: 4px 10px;
-        border-radius: 50px;
-        z-index: 10;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 0.75rem;
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+        transform: translateY(100%);
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: 15;
     }
     
-    // Price Styling
-    .product_price {
-        color: #333 !important;
-        
-        .h5 {
-           font-weight: 800 !important;
-           font-size: 1.1rem;
-           color: #007bff; // Primary Price Color
-        }
-        
-        .text-muted {
-            font-size: 0.85rem;
-            text-decoration: line-through;
-            opacity: 0.6;
-        }
+    &:hover .tecnosoft-action-bar {
+        transform: translateY(0);
+        opacity: 1;
     }
     
-    // Title
-    .o_wsale_products_item_title {
-        a {
-            color: #333 !important;
-            font-weight: 600;
-            font-size: 0.95rem;
-            text-decoration: none;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            line-height: 1.3;
-            min-height: 2.6em; // Ensure lines align
-        }
-    }
-
-    // Add to Cart Button (Minimalist Circle or Pill)
-    .tecnosoft-add-btn {
-        width: 36px;
-        height: 36px;
+    .tecnosoft-action-bar .btn {
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
-        background-color: #007bff;
-        color: white;
         display: flex;
         align-items: center;
         justify-content: center;
-        border: none;
-        box-shadow: 0 4px 6px rgba(0,123,255,0.3);
-        transition: transform 0.2s, background 0.2s;
+        padding: 0;
+        font-size: 1rem;
         
-        &:hover {
-            transform: scale(1.1);
-            background-color: #0056b3;
+        &.btn-primary {
+            background: var(--o-color-primary, #007bff);
         }
-        
-        i {
-            font-size: 1rem;
+        &.btn-light {
+            background: white;
+            color: #333;
         }
     }
+}
+
+// ==========================================================================
+// STYLE 2: CLASSIC (Buttons always visible at bottom)
+// ==========================================================================
+.card-style-classic {
+    .tecnosoft-action-bar {
+        display: none !important; // Hide hover bar
+    }
+    
+    .tecnosoft-card-buttons {
+        display: flex !important;
+        gap: 0.5rem;
+        margin-top: auto;
+        padding: 1rem;
+        padding-top: 0;
+        
+        .btn {
+            flex: 1;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+        }
+    }
+}
+
+// ==========================================================================
+// STYLE 3: OVERLAY (Full dark overlay on hover)
+// ==========================================================================
+.card-style-overlay {
+    .tecnosoft-card-image {
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+    }
+    
+    &:hover .tecnosoft-card-image::after {
+        opacity: 1;
+    }
+    
+    .tecnosoft-action-bar {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: 20;
+        gap: 1rem;
+        
+        .btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+    }
+    
+    &:hover .tecnosoft-action-bar {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+// ==========================================================================
+// STYLE 4: HORIZONTAL (List view - image left, details right)
+// ==========================================================================
+.card-style-horizontal {
+    flex-direction: row !important;
+    max-height: 180px;
+    
+    .tecnosoft-card-image {
+        width: 180px;
+        min-width: 180px;
+        height: 100%;
+        padding: 0.75rem;
+    }
+    
+    .tecnosoft-card-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 1rem;
+    }
+    
+    .tecnosoft-action-bar {
+        position: static;
+        opacity: 1;
+        transform: none;
+        background: transparent;
+        justify-content: flex-start;
+        padding: 0.5rem 0 0 0;
+        gap: 0.5rem;
+        
+        .btn {
+            width: auto;
+            height: auto;
+            border-radius: 50px;
+            padding: 0.4rem 1rem;
+            font-size: 0.8rem;
+        }
+    }
+}
+
+// ==========================================================================
+// Responsive Adjustments
+// ==========================================================================
+@media (max-width: 768px) {
+    // On mobile, always show action bar (no hover)
+    .card-style-minimal .tecnosoft-action-bar,
+    .tecnosoft-product-card:not([class*="card-style-"]) .tecnosoft-action-bar {
+        transform: translateY(0);
+        opacity: 1;
+        background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+    }
+    
+    .card-style-horizontal {
+        flex-direction: column !important;
+        max-height: none;
+        
+        .tecnosoft-card-image {
+            width: 100%;
+            height: 150px;
+        }
+    }
+}
+
+// ==========================================================================
+// Legacy Support - Map old classes to new system
+// ==========================================================================
+.oe_product_cart {
+    @extend .tecnosoft-product-card;
 }

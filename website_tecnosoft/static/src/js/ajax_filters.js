@@ -25,7 +25,7 @@ publicWidget.registry.TecnosoftAjaxFilters = publicWidget.Widget.extend({
         this.$grid = this.$('#products_grid');
         this.$sidebar = this.$('.tecnosoft-shop-sidebar');
         this.$overlay = this.$('.tecnosoft-shop-sidebar-overlay');
-        return this._super.apply(this, arguments);
+        return this._super ? this._super(...arguments) : Promise.resolve();
     },
 
     /**

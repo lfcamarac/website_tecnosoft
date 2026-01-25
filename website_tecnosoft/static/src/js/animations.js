@@ -22,7 +22,7 @@ publicWidget.registry.ZenithScrollReveal = publicWidget.Widget.extend({
         }, observerOptions);
 
         this._initReveal();
-        return this._super.apply(this, arguments);
+        return this._super ? this._super(...arguments) : Promise.resolve();
     },
 
     _initReveal() {

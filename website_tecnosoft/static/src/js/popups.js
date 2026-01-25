@@ -11,7 +11,7 @@ publicWidget.registry.TecnosoftPopups = publicWidget.Widget.extend({
      */
     start() {
         this._initExitIntentPopup();
-        return this._super.apply(this, arguments);
+        return this._super ? this._super(...arguments) : Promise.resolve();
     },
 
     /**

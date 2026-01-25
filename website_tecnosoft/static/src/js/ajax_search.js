@@ -24,7 +24,7 @@ publicWidget.registry.TecnosoftAjaxSearch = publicWidget.Widget.extend({
         this.searchTimeout = null;
         this.history = JSON.parse(localStorage.getItem('tecnosoft_search_history') || '[]');
         this.trending = ['iPhone 13', 'Laptop Gamer', 'Ofertas', 'Auriculares', 'Smartwatch']; // Mock data
-        return this._super.apply(this, arguments);
+        return this._super ? this._super(...arguments) : Promise.resolve();
     },
 
     /**

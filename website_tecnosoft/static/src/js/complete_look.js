@@ -17,7 +17,7 @@ publicWidget.registry.TecnosoftCompleteLook = publicWidget.Widget.extend({
         this.$totalDisplay = this.$('#together_pack_total');
         this.basePrice = parseFloat($('span.oe_price .oe_currency_value').text().replace(/[^0-9,.]/g, '').replace(',', '.')) || 0;
         this._updateTotal();
-        return this._super.apply(this, arguments);
+        return this._super ? this._super(...arguments) : Promise.resolve();
     },
 
     /**

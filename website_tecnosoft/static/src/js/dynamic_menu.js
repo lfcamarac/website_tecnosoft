@@ -15,7 +15,7 @@ publicWidget.registry.DynamicMegaMenu = publicWidget.Widget.extend({
         if (this.$content.length) {
             await this._fetchAndRender();
         }
-        return this._super.apply(this, arguments);
+        return this._super ? this._super(...arguments) : Promise.resolve();
     },
 
     /**

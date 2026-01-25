@@ -18,7 +18,7 @@ publicWidget.registry.TecnosoftThemeCustomizer = publicWidget.Widget.extend({
         console.log("TecnosoftThemeCustomizer started");
         this.$panel = this.$el;
         this._loadPreferences();
-        return this._super.apply(this, arguments);
+        return this._super ? this._super(...arguments) : Promise.resolve();
     },
 
     _togglePanel: function () {

@@ -4,7 +4,7 @@ import options from "@web_editor/js/editor/snippets.options";
 
 options.registry.TecnosoftDynamicOptions = options.Class.extend({
     start() {
-        this._super.apply(this, arguments);
+        if (this._super) this._super(...arguments);
         this.uiConfig = this._getUIConfig();
     },
 

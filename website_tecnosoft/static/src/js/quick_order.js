@@ -21,7 +21,7 @@ publicWidget.registry.TecnosoftQuickOrder = publicWidget.Widget.extend({
     start() {
         this.$rowsContainer = this.$('#quick_order_rows');
         this.$totalDisplay = this.$('#quick_order_total_display');
-        return this._super.apply(this, arguments);
+        return this._super ? this._super(...arguments) : Promise.resolve();
     },
 
     /**
@@ -159,7 +159,7 @@ publicWidget.registry.TecnosoftQuickOrder = publicWidget.Widget.extend({
      * CSV Handling
      */
     init: function () {
-        this._super.apply(this, arguments);
+        if (this._super) this._super(...arguments);
         // Bind manually if needed
     },
 

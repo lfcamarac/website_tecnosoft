@@ -21,7 +21,7 @@ const StickyCart = publicWidget.Widget.extend({
             $(this.el).on('website_sale:update_combination_info', this._onCombinationUpdate.bind(this));
         }
         
-        return this._super.apply(this, arguments);
+        return this._super ? this._super(...arguments) : Promise.resolve();
     },
 
     /**

@@ -9,7 +9,7 @@ export const TecnosoftPriceSlider = publicWidget.Widget.extend({
 
     start() {
         this._initSlider();
-        return this._super.apply(this, arguments);
+        return this._super ? this._super(...arguments) : Promise.resolve();
     },
 
     _initSlider() {

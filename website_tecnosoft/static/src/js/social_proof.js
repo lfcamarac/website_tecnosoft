@@ -13,7 +13,7 @@ publicWidget.registry.TecnosoftSocialProof = publicWidget.Widget.extend({
         this.orders = [];
         this.currentIndex = 0;
         this._fetchOrders();
-        return this._super.apply(this, arguments);
+        return this._super ? this._super(...arguments) : Promise.resolve();
     },
 
     _fetchOrders: async function () {

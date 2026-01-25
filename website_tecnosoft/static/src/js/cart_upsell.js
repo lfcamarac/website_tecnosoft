@@ -22,7 +22,7 @@ publicWidget.registry.TecnosoftCartUpsell = publicWidget.Widget.extend({
         // We will intercept the custom event dispatched by our own override or Odoo's native 'add_to_cart_animation'.
         // To be safe and non-intrusive, we'll listen to the specific button click if the option is enabled.
         this.$el.on('click', '.a-submit, .js_check_product', this._onAddToCartClick.bind(this));
-        return this._super.apply(this, arguments);
+        return this._super ? this._super(...arguments) : Promise.resolve();
     },
 
     /**

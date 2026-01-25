@@ -16,7 +16,7 @@ publicWidget.registry.TecnosoftStoreLocator = publicWidget.Widget.extend({
         if (this.$mapContainer.length) {
             await this._initLocator();
         }
-        return this._super.apply(this, arguments);
+        return this._super ? this._super(...arguments) : Promise.resolve();
     },
 
     /**

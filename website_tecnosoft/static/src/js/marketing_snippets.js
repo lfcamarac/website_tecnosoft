@@ -14,7 +14,7 @@ publicWidget.registry.TecnosoftCountdown = publicWidget.Widget.extend({
         if (this.date) {
             this._startTimer();
         }
-        return this._super.apply(this, arguments);
+        return this._super ? this._super(...arguments) : Promise.resolve();
     },
 
     _startTimer() {

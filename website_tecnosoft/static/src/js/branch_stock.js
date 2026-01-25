@@ -28,7 +28,7 @@ publicWidget.registry.TecnosoftBranchStock = publicWidget.Widget.extend({
         // Listen to the custom event triggered by Odoo's core website_sale mechanism
         $(this.el).on('website_sale:update_combination_info', this._onCombinationUpdate.bind(this));
         
-        return this._super.apply(this, arguments);
+        return this._super ? this._super(...arguments) : Promise.resolve();
     },
 
     /**

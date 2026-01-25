@@ -15,7 +15,7 @@ publicWidget.registry.TecnosoftVariantPreview = publicWidget.Widget.extend({
             // Fallback for non-carousel layouts
             this.$mainImage = this.$('img[itemprop="image"]');
         }
-        return this._super.apply(this, arguments);
+        return this._super ? this._super(...arguments) : Promise.resolve();
     },
 
     _onHoverVariant: function (ev) {

@@ -24,7 +24,7 @@ publicWidget.registry.TecnosoftCountdown = publicWidget.Widget.extend({
             this._updateTimer();
             this.timer = setInterval(() => this._updateTimer(), 1000);
         }
-        return this._super.apply(this, arguments);
+        return this._super ? this._super(...arguments) : Promise.resolve();
     },
 
     /**
@@ -57,7 +57,7 @@ publicWidget.registry.TecnosoftCountdown = publicWidget.Widget.extend({
      */
     destroy() {
         if (this.timer) clearInterval(this.timer);
-        this._super.apply(this, arguments);
+        if (this._super) this._super(...arguments);
     }
 });
 

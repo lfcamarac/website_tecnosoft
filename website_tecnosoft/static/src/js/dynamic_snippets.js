@@ -33,7 +33,7 @@ publicWidget.registry.TecnosoftDynamicSnippet = publicWidget.Widget.extend({
             await this._renderProducts(container, uiConfig);
         }
 
-        return this._super.apply(this, arguments);
+        return this._super ? this._super(...arguments) : Promise.resolve();
     },
 
     /**
@@ -231,7 +231,7 @@ publicWidget.registry.TecnosoftHeroHotspots = publicWidget.Widget.extend({
         hotspots.forEach(hotspot => {
             this._initHotspot(hotspot);
         });
-        return this._super.apply(this, arguments);
+        return this._super ? this._super(...arguments) : Promise.resolve();
     },
 
     /**

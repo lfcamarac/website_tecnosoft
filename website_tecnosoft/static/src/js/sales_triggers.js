@@ -11,7 +11,7 @@ publicWidget.registry.TecnosoftSalesTriggers = publicWidget.Widget.extend({
      */
     start() {
         this._initStickyCTA();
-        return this._super.apply(this, arguments);
+        return this._super ? this._super(...arguments) : Promise.resolve();
     },
 
     /**

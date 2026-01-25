@@ -13,7 +13,7 @@ publicWidget.registry.TecnosoftDarkMode = publicWidget.Widget.extend({
      * @override
      */
     start: function () {
-        this._super.apply(this, arguments);
+        if (this._super) this._super(...arguments);
         this._applyTheme();
     },
 
