@@ -22,12 +22,37 @@
                                     <t t-set="_link_class" t-valuef="navbar-brand logo p-0 m-0"/>
                                 </t>
                                 
-                                <!-- Currency/Pricelist (Restored) -->
-                                <div class="d-none d-lg-flex align-items-center gap-1">
-                                    <span class="fi fi-ve rounded-1" style="font-size: 1rem;" title="Venezuela"></span>
-                                    <t t-call="website_sale.pricelist_list">
-                                        <t t-set="_btn_class" t-valuef="btn btn-sm btn-link text-dark dropdown-toggle p-0 fw-bold border-0 text-decoration-none"/>
-                                    </t>
+                                <!-- Currency/Pricelist (Dynamic) -->
+                                <t t-set="website_sale_pricelists" t-value="website.get_pricelist_available(show_visible=True)" />
+                                <div t-if="website_sale_pricelists and len(website_sale_pricelists) > 1" class="d-none d-lg-flex align-items-center gap-1 dropdown ms-2">
+                                    <t t-set="curr_pl" t-value="website.get_current_pricelist()" />
+                                    <a role="button" href="#" class="dropdown-toggle text-dark text-decoration-none fw-bold d-flex align-items-center gap-1 small" data-bs-toggle="dropdown">
+                                        <!-- Dynamic Flag Mapping -->
+                                        <t t-set="flag_code" t-value="'ve'" />
+                                        <t t-if="curr_pl.currency_id.name == 'USD'"><t t-set="flag_code" t-value="'us'"/></t>
+                                        <t t-elif="curr_pl.currency_id.name == 'EUR'"><t t-set="flag_code" t-value="'eu'"/></t>
+                                        <t t-elif="curr_pl.currency_id.name == 'COP'"><t t-set="flag_code" t-value="'co'"/></t>
+                                        
+                                        <span t-attf-class="fi fi-{{flag_code}} rounded-1" style="font-size: 1rem;"></span>
+                                        <span t-esc="curr_pl.currency_id.symbol"/>
+                                    </a>
+                                    <ul class="dropdown-menu shadow border-0 mt-2 rounded-3" style="min-width: 100px;">
+                                        <t t-foreach="website_sale_pricelists" t-as="pl">
+                                            <li>
+                                                <a t-att-href="'/shop/change_pricelist/%s' % pl.id" class="dropdown-item d-flex align-items-center justify-content-between py-2" style="font-size: 0.85rem;">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <t t-set="pl_flag" t-value="'ve'" />
+                                                        <t t-if="pl.currency_id.name == 'USD'"><t t-set="pl_flag" t-value="'us'"/></t>
+                                                        <t t-elif="pl.currency_id.name == 'EUR'"><t t-set="pl_flag" t-value="'eu'"/></t>
+                                                        <t t-elif="pl.currency_id.name == 'COP'"><t t-set="pl_flag" t-value="'co'"/></t>
+                                                        <span t-attf-class="fi fi-{{pl_flag}} rounded-1"></span>
+                                                        <span t-esc="pl.name or pl.currency_id.name"/>
+                                                    </div>
+                                                    <span t-if="pl.id == curr_pl.id" class="text-primary"><i class="fa fa-check"></i></span>
+                                                </a>
+                                            </li>
+                                        </t>
+                                    </ul>
                                 </div>
                                 
                                 <!-- Address Selector Widget -->
