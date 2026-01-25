@@ -3,39 +3,135 @@
     <!-- QUICK VIEW MODAL CONTENT -->
     <template id="quick_view_modal" name="Quick View Content">
         <div class="product-quick-view-container position-relative bg-white rounded-4 shadow-lg overflow-hidden border-0">
-            <button type="button" class="btn-close position-absolute top-0 end-0 m-4 z-index-10 shadow-sm bg-white rounded-circle p-2" data-bs-dismiss="modal" aria-label="Close" style="width: 32px; height: 32px;"></button>
+            <button type="button" class="btn-close position-absolute top-0 end-0 m-4 z-index-10 shadow-sm bg-white rounded-circle p-2" data-bs-dismiss="modal" aria-label="Close" style="width: 32px; height: 32px; z-index: 1050;"></button>
             <div class="row g-0">
-                <!-- Product Image Gallery Section -->
-                <div class="col-md-7 bg-light d-flex align-items-center justify-content-center border-end overflow-hidden position-relative">
-                    <div class="p-4 w-100 text-center">
-                        <img t-if="product.image_1920" 
-                             t-att-src="'/web/image/product.template/%s/image_1024' % product.id" 
-                             class="img-fluid object-contain main-quick-view-img" 
-                             style="max-height: 550px;" 
-                             alt="Product Image"/>
-                    </div>
+                <!-- Product Image Gallery Section (Left) -->
+                <div class="col-md-6 bg-light d-flex align-items-center justify-content-center border-end overflow-hidden position-relative">
+                    <t t-if="len(product.product_template_image_ids) > 0">
+                        <!-- Simple Carousel for multiple images -->
+                        <div id="quickViewCarousel" class="carousel slide w-100 h-100" data-bs-ride="carousel">
+                            <div class="carousel-inner h-100">
+                                <div class="carousel-item active h-100">
+                                    <div class="d-flex align-items-center justify-content-center h-100 p-4">
+                                        <img t-att-src="'/web/image/product.template/%s/image_1024' % product.id" class="img-fluid object-contain" style="max-height: 500px;" alt="Product Image"/>
+                                    </div>
+                                </div>
+                                <t t-foreach="product.product_template_image_ids" t-as="pimg">
+                                    <div class="carousel-item h-100">
+                                        <div class="d-flex align-items-center justify-content-center h-100 p-4">
+                                            <img t-att-src="'/web/image/product.image/%s/image_1024' % pimg.id" class="img-fluid object-contain" style="max-height: 500px;" t-att-alt="pimg.name"/>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#quickViewCarousel" data-bs-slide="prev" style="width: 50px;">
+                                <i class="fa fa-chevron-left text-dark fs-4"></i>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#quickViewCarousel" data-bs-slide="next" style="width: 50px;">
+                                <i class="fa fa-chevron-right text-dark fs-4"></i>
+                            </button>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div class="p-4 w-100 text-center h-100 d-flex align-items-center justify-content-center">
+                            <img t-if="product.image_1920" 
+                                 t-att-src="'/web/image/product.template/%s/image_1024' % product.id" 
+                                 class="img-fluid object-contain main-quick-view-img" 
+                                 style="max-height: 500px;" 
+                                 alt="Product Image"/>
+                             <span t-else="" class="text-muted fa fa-camera fa-4x"></span>
+                        </div>
+                    </t>
                 </div>
-                <!-- Product Details -->
-                <div class="col-md-5 d-flex flex-column">
-                    <div class="p-5 flex-grow-1 overflow-auto" style="max-height: 80vh;">
+                
+                <!-- Product Details (Right) -->
+                <div class="col-md-6 d-flex flex-column bg-white">
+                    <div class="p-4 p-lg-5 flex-grow-1 overflow-auto" style="max-height: 85vh;">
+                        
+                        <!-- Header -->
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                             <!-- Brand if available -->
+                            <span t-if="product.brand_id" class="text-primary fw-bold text-uppercase small ls-1" t-field="product.brand_id.name"/>
+                            <span t-else="" class="text-muted text-uppercase small ls-1">Producto</span>
+                            
+                            <!-- Stock Indicator -->
+                            <t t-if="product.detailed_type == 'product'">
+                                <span t-if="product.qty_available > 0" class="badge bg-success-light text-success rounded-pill px-3">
+                                    <i class="fa fa-check-circle me-1"></i> En Stock
+                                </span>
+                                <span t-else="" class="badge bg-danger-light text-danger rounded-pill px-3">
+                                    <i class="fa fa-times-circle me-1"></i> Agotado
+                                </span>
+                            </t>
+                        </div>
+                        
                         <h2 class="fw-bold mb-3 text-dark lh-sm" t-field="product.name"/>
-                        <div class="d-flex align-items-center gap-3 mb-4 border-bottom pb-4">
+                        
+                        <!-- Price -->
+                        <div class="d-flex align-items-center gap-3 mb-4 pb-3 border-bottom">
                             <h3 class="text-primary fw-bold mb-0" t-field="product.list_price" 
                                 t-options="{'widget': 'monetary', 'display_currency': product.currency_id}"/>
+                            <span t-if="product.compare_list_price and product.compare_list_price > product.list_price" 
+                                  class="text-decoration-line-through text-muted fs-5"
+                                  t-field="product.compare_list_price"
+                                  t-options="{'widget': 'monetary', 'display_currency': product.currency_id}"/>
                         </div>
-                        <div class="text-muted mb-4 small lh-base" t-field="product.description_sale"/>
                         
-                        <!-- Actions Placeholder (Simplification to pass validation) -->
-                        <form t-if="product._is_add_to_cart_possible()" action="/shop/cart/update" method="POST" class="js_add_cart_variants">
+                        <!-- Short Description -->
+                        <div class="text-muted mb-4 lh-base" t-if="product.description_sale">
+                            <p t-field="product.description_sale" class="mb-0"/>
+                        </div>
+                        
+                        <!-- Selection Form -->
+                        <form t-if="product._is_add_to_cart_possible()" action="/shop/cart/update" method="POST" class="js_add_cart_variants js_product">
                             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                             <input type="hidden" name="product_id" t-att-value="product.product_variant_id.id"/>
-                            <div class="d-grid gap-3 mb-4">
-                                <!-- The inheriting view looks for .a-submit class to inject buttons after -->
-                                <button type="submit" class="btn btn-primary btn-lg rounded-pill flex-grow-1 fw-bold shadow-sm a-submit">
-                                    <i class="fa fa-shopping-cart"></i> Añadir al Carrito
-                                </button>
+                            
+                            <!-- Variants (Use Odoo Standard Template if possible, simplified here for reliability) -->
+                            <div t-if="product.attribute_line_ids" class="mb-4">
+                                <t t-foreach="product.attribute_line_ids" t-as="variant_id">
+                                    <div class="mb-3">
+                                        <strong class="d-block mb-2 text-dark"><span t-field="variant_id.attribute_id.name"/>:</strong>
+                                        <div class="d-flex flex-wrap gap-2">
+                                            <t t-foreach="variant_id.value_ids" t-as="value_id">
+                                                <label class="btn btn-outline-secondary btn-sm rounded-pill border-0 bg-light text-dark mb-0">
+                                                    <span t-field="value_id.name"/>
+                                                </label>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </t>
+                                <div class="alert alert-info small py-2">
+                                    <i class="fa fa-info-circle me-1"></i> Selecciona las opciones en el detalle completo.
+                                </div>
+                            </div>
+                            
+                            <!-- Quantity & Buttons -->
+                            <div class="d-flex gap-3 mb-4 align-items-center">
+                                <div class="css_quantity input-group rounded-pill border" style="max-width: 140px;">
+                                    <button type="button" class="btn btn-link js_add_cart_json d-flex align-items-center justify-content-center text-dark" aria-label="Remove one" title="Remove one">
+                                        <i class="fa fa-minus small"></i>
+                                    </button>
+                                    <input type="text" class="form-control quantity text-center border-0 p-0 fs-5 fw-bold text-dark" data-min="1" name="add_qty" value="1"/>
+                                    <button type="button" class="btn btn-link float_left js_add_cart_json d-flex align-items-center justify-content-center text-dark" aria-label="Add one" title="Add one">
+                                        <i class="fa fa-plus small"></i>
+                                    </button>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <a role="button" id="add_to_cart" class="btn btn-primary btn-lg rounded-pill w-100 fw-bold shadow-sm a-submit text-white" href="#">
+                                        <i class="fa fa-shopping-cart me-2"></i> Añadir
+                                    </a>
+                                </div>
                             </div>
                         </form>
+                        
+                        <!-- View Full Details Link -->
+                        <div class="text-center mt-3 pt-3 border-top">
+                            <a t-att-href="product.website_url" class="btn btn-link text-primary fw-bold text-decoration-none">
+                                Ver detalles completos <i class="fa fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
