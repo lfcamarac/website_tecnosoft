@@ -56,20 +56,53 @@
                                 </div>
                             </div>
                             
-                            <!-- CENTER: Search Bar (Flex Grow) -->
-                            <div class="flex-grow-1 mx-2">
+                            <!-- CENTER: Search Bar + Categories (Flex Grow) -->
+                            <div class="flex-grow-1 mx-3">
                                 <form method="get" action="/shop" class="o_wsale_products_searchbar_form w-100">
-                                    <div class="input-group zenith-search-pill">
-                                        <span class="input-group-text bg-light border-0 rounded-start-pill ps-3 py-1">
-                                            <i class="fa fa-search text-muted"></i>
-                                        </span>
+                                    <div class="input-group zenith-search-pill border rounded-pill bg-light overflow-hidden">
+                                        <!-- Categories Dropdown (Integrated) -->
+                                        <div class="tecnosoft-mega-menu dropdown d-none d-lg-block border-end">
+                                            <a class="btn btn-light rounded-0 d-flex align-items-center gap-2 px-3 py-2 bg-transparent border-0 h-100" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 0.85rem;">
+                                                <i class="fa fa-bars text-muted"></i> <span class="d-none d-xl-inline">Todo</span>
+                                            </a>
+                                            <div class="dropdown-menu mega-menu-content shadow-lg border-0 p-4 mt-2 rounded-4" style="min-width: 700px;">
+                                                <div class="row g-4">
+                                                    <t t-set="parent_categories" t-value="request.env['product.public.category'].search([('parent_id', '=', False)], limit=6)"/>
+                                                    <t t-foreach="parent_categories" t-as="parent_cat">
+                                                        <div class="col-4">
+                                                            <a t-att-href="'/shop/category/%s' % slug(parent_cat)" 
+                                                               class="fw-bold text-primary text-decoration-none d-block mb-2 pb-2 border-bottom">
+                                                                <t t-esc="parent_cat.name"/>
+                                                            </a>
+                                                            <ul class="list-unstyled mb-0">
+                                                                <t t-set="child_categories" t-value="request.env['product.public.category'].search([('parent_id', '=', parent_cat.id)], limit=5)"/>
+                                                                <t t-foreach="child_categories" t-as="child_cat">
+                                                                    <li class="mb-1">
+                                                                        <a t-att-href="'/shop/category/%s' % slug(child_cat)" 
+                                                                           class="text-muted text-decoration-none small d-block py-1 hover-primary">
+                                                                            <t t-esc="child_cat.name"/>
+                                                                        </a>
+                                                                    </li>
+                                                                </t>
+                                                            </ul>
+                                                        </div>
+                                                    </t>
+                                                </div>
+                                                <div class="text-center mt-4 pt-3 border-top">
+                                                    <a href="/shop" class="btn btn-sm btn-primary rounded-pill px-4">
+                                                        <i class="fa fa-th-large me-2"></i> Ver Todo
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
                                         <input type="text" name="search" 
-                                               class="form-control bg-light border-0 py-1" 
-                                               placeholder="¿Qué buscas hoy?"
+                                               class="form-control border-0 py-2 bg-transparent shadow-none" 
+                                               placeholder="Buscar en Tecnosoft..."
                                                style="font-size: 0.9rem;"
                                                aria-label="Buscar"/>
-                                        <button class="btn btn-primary rounded-end-pill px-3 py-1" type="submit" style="font-size: 0.85rem;">
-                                            Buscar
+                                        <button class="btn btn-primary px-4 border-0" type="submit" style="font-size: 0.85rem;">
+                                            <i class="fa fa-search"></i>
                                         </button>
                                     </div>
                                 </form>
@@ -89,16 +122,16 @@
                                     <t t-set="_badge_class" t-value="'position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary'"/>
                                 </t>
                                 
-                                <!-- User Dropdown (No redundant button) -->
+                                <!-- User Dropdown -->
                                 <div class="d-none d-lg-flex align-items-center border-start ps-3 ms-1">
-                                    <t t-nocache="The user dropdown may vary and depends on the user.">
+                                    <t t-nocache="The user dropdown">
                                         <div t-if="user_id._is_public()" class="dropdown">
                                             <a class="nav-link text-dark d-flex align-items-center mb-0 dropdown-toggle px-1 py-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 0.85rem;">
                                                 <div class="d-flex align-items-center gap-2">
                                                     <i class="fa fa-user-circle fs-4 text-muted"></i>
                                                     <div class="d-flex flex-column text-start lh-1">
                                                         <span class="small text-muted" style="font-size: 0.7rem;">Hola!</span>
-                                                        <span class="fw-bold text-primary" style="font-size: 0.8rem;">Ingresa aquí</span>
+                                                        <span class="fw-bold text-primary" style="font-size: 0.8rem;">Ingresar</span>
                                                     </div>
                                                 </div>
                                             </a>
@@ -121,12 +154,8 @@
                                                 <li><a class="dropdown-item py-2" href="/my/home"><i class="fa fa-user me-2 text-muted"></i> Mi Cuenta</a></li>
                                                 <li><a class="dropdown-item py-2" href="/my/orders"><i class="fa fa-shopping-bag me-2 text-muted"></i> Mis Compras</a></li>
                                                 <li><a class="dropdown-item py-2" href="/shop/wishlist"><i class="fa fa-heart me-2 text-muted"></i> Mis Favoritos</a></li>
-                                                <li><a class="dropdown-item py-2" href="/my/lists"><i class="fa fa-list-ul me-2 text-muted"></i> Mis Listas</a></li>
-                                                <li><a class="dropdown-item py-2" href="/my/addresses"><i class="fa fa-map-marker me-2 text-muted"></i> Mis Direcciones</a></li>
                                                 <li><hr class="dropdown-divider my-1"/></li>
-                                                <li><a class="dropdown-item py-2" href="/contactus"><i class="fa fa-envelope me-2 text-muted"></i> Contáctenos</a></li>
-                                                <li><hr class="dropdown-divider my-1"/></li>
-                                                <li><a class="dropdown-item py-2 text-danger" href="/web/session/logout?redirect=/"><i class="fa fa-sign-out me-2"></i> Cerrar Sesión</a></li>
+                                                <li><a class="dropdown-item py-2 text-danger" href="/web/session/logout?redirect=/"><i class="fa fa-sign-out me-2"></i> Salir</a></li>
                                             </ul>
                                         </div>
                                     </t>
@@ -140,71 +169,28 @@
                     </div>
                 </div>
                 
-                <!-- ROW 3: Quick Categories / Status Chips -->
-                <div class="zenith-row-3 bg-white border-bottom shadow-sm">
-                    <div class="container py-2">
-                        <div class="d-flex align-items-center gap-3 overflow-auto zenith-chips-scroll" style="scrollbar-width: none;">
-                            <!-- Mega Menu Categories (Desktop) -->
-                            <div class="tecnosoft-mega-menu dropdown d-none d-lg-block">
-                                <a class="btn btn-outline-primary rounded-pill d-flex align-items-center gap-2 px-4 py-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa fa-bars"></i> Categorías
-                                </a>
-                                <div class="dropdown-menu mega-menu-content shadow-lg border-0 p-4 mt-2 rounded-4" style="min-width: 700px;">
-                                    <div class="row g-4">
-                                        <t t-set="parent_categories" t-value="request.env['product.public.category'].search([('parent_id', '=', False)], limit=6)"/>
-                                        <t t-foreach="parent_categories" t-as="parent_cat">
-                                            <div class="col-4">
-                                                <!-- Parent Category Header -->
-                                                <a t-att-href="'/shop/category/%s' % slug(parent_cat)" 
-                                                   class="fw-bold text-primary text-decoration-none d-block mb-2 pb-2 border-bottom">
-                                                    <t t-esc="parent_cat.name"/>
-                                                </a>
-                                                <!-- Subcategories -->
-                                                <ul class="list-unstyled mb-0">
-                                                    <t t-set="child_categories" t-value="request.env['product.public.category'].search([('parent_id', '=', parent_cat.id)], limit=5)"/>
-                                                    <t t-foreach="child_categories" t-as="child_cat">
-                                                        <li class="mb-1">
-                                                            <a t-att-href="'/shop/category/%s' % slug(child_cat)" 
-                                                               class="text-muted text-decoration-none small d-block py-1 hover-primary">
-                                                                <t t-esc="child_cat.name"/>
-                                                            </a>
-                                                        </li>
-                                                    </t>
-                                                    <li t-if="len(child_categories) == 0" class="text-muted small fst-italic">
-                                                        Sin subcategorías
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </t>
-                                    </div>
-                                    <!-- View All Link -->
-                                    <div class="text-center mt-4 pt-3 border-top">
-                                        <a href="/shop" class="btn btn-sm btn-primary rounded-pill px-4">
-                                            <i class="fa fa-th-large me-2"></i> Ver Todos los Productos
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                <!-- ROW 3: Status Chips Only (Slim) -->
+                <div class="zenith-row-3 bg-white border-bottom shadow-sm py-1">
+                    <div class="container">
+                        <div class="d-flex align-items-center justify-content-center gap-3 overflow-auto zenith-chips-scroll" style="scrollbar-width: none;">
+                            <!-- Removed Mega Menu from here -->
                             
-                            <!-- Quick Chips (Both viewports) - Dynamic Filters -->
-                            <a href="/shop?sale=1" class="zenith-chip d-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-light border text-decoration-none flex-shrink-0" title="Productos en oferta">
-                                <i class="fa fa-bolt text-warning"></i>
-                                <span class="small fw-bold text-dark">Ofertas</span>
+                            <!-- Quick Chips - Dynamic Filters -->
+                            <a href="/shop?sale=1" class="zenith-chip d-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-white border text-decoration-none flex-shrink-0 hover-scale" style="font-size: 0.8rem;">
+                                <i class="fa fa-bolt text-warning"></i> <span>Ofertas</span>
                             </a>
-                            <a href="/shop?order=create_date+desc" class="zenith-chip d-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-light border text-decoration-none flex-shrink-0" title="Productos más recientes">
-                                <i class="fa fa-star text-success"></i>
-                                <span class="small fw-bold text-dark">Nuevos</span>
+                            <a href="/shop?order=create_date+desc" class="zenith-chip d-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-white border text-decoration-none flex-shrink-0 hover-scale" style="font-size: 0.8rem;">
+                                <i class="fa fa-star text-success"></i> <span>Nuevos</span>
                             </a>
-                            <a href="/shop?order=website_sequence+asc" class="zenith-chip d-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-light border text-decoration-none flex-shrink-0" title="Productos destacados">
-                                <i class="fa fa-star text-warning"></i>
-                                <span class="small fw-medium text-dark">Destacados</span>
+                            <a href="/shop?order=website_sequence+asc" class="zenith-chip d-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-white border text-decoration-none flex-shrink-0 hover-scale" style="font-size: 0.8rem;">
+                                <i class="fa fa-fire text-danger"></i> <span>Destacados</span>
                             </a>
                             
-                            <!-- Main Menu (Desktop Only) -->
-                            <div class="collapse navbar-collapse d-none d-lg-flex ms-auto" id="top_menu_collapse">
-                                <t t-call="website.navbar_nav">
-                                    <t t-set="_nav_class" t-valuef="navbar-nav"/>
-                                </t>
+                            <!-- Simple Links -->
+                            <div class="d-none d-md-flex align-items-center gap-3 ms-3 border-start ps-3">
+                                <a href="/shop" class="text-muted text-decoration-none small hover-primary">Tienda</a>
+                                <a href="/contactus" class="text-muted text-decoration-none small hover-primary">Contacto</a>
+                                <a href="/help" class="text-muted text-decoration-none small hover-primary">Ayuda</a>
                             </div>
                         </div>
                     </div>
