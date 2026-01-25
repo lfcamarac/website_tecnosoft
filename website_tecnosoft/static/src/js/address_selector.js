@@ -15,13 +15,15 @@ publicWidget.registry.TecnosoftAddressSelector = publicWidget.Widget.extend({
      * @override
      */
     async start() {
-        // this.$el.removeClass('d-none'); // REMOVED: Let XML classes control visibility
         this.$dropdown = this.$('.zenith-address-dropdown');
         this.$label = this.$('.js_current_address_label');
         this.$city = this.$('.js_current_city');
         
-        await this._fetchAddresses();
-        return this._super.apply(this, arguments);
+        if (this.$dropdown.length) {
+            await this._fetchAddresses();
+        }
+        // Safe super call
+        return this._super ? this._super(...arguments) : Promise.resolve();
     },
 
     /**
