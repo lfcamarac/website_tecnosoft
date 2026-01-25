@@ -11,8 +11,8 @@
                 <!-- UNIFIED HEADER: Same structure Mobile + Desktop -->
                 <!-- =============================================== -->
                 
-                <!-- SINGLE ROW: Logo + Location + Search + Icons (Farmatodo Style) -->
-                <div class="zenith-row-1 bg-white border-bottom py-2">
+                <!-- DESKTOP ROW: Logo + Location + Search + Icons (Hidden on Mobile) -->
+                <div class="zenith-row-1 bg-white border-bottom py-2 d-none d-lg-block">
                     <div class="container">
                         <div class="d-flex align-items-center gap-3">
                             <!-- LEFT: Logo + Currency + Address -->
@@ -207,65 +207,95 @@
                     </div>
                 </div>
                 
-                <!-- ROW 2: MOBILE ONLY (Search + Address) -->
-                <div class="zenith-row-mobile bg-white border-bottom pb-2 d-lg-none">
-                    <div class="container">
-                        <!-- Mobile Search -->
-                        <form method="get" action="/shop" class="o_wsale_products_searchbar_form w-100 mb-2">
+                <!-- =============================================== -->
+                <!-- MOBILE HEADER (d-lg-none) - Farmatodo Style    -->
+                <!-- =============================================== -->
+                <div class="zenith-mobile-header d-lg-none bg-white">
+                    <!-- Mobile Row 1: Profile | Logo (Centered) | Cart -->
+                    <div class="d-flex align-items-center justify-content-between px-3 py-2 border-bottom">
+                        <!-- Left: Profile Icon -->
+                        <a href="/my" class="text-dark" title="Mi cuenta" style="width: 40px;">
+                            <i class="fa fa-user-o" style="font-size: 1.3rem;"></i>
+                        </a>
+                        
+                        <!-- Center: Logo -->
+                        <div class="flex-grow-1 text-center">
+                            <t t-call="website.placeholder_header_brand">
+                                <t t-set="_link_class" t-valuef="navbar-brand logo p-0 m-0"/>
+                            </t>
+                        </div>
+                        
+                        <!-- Right: Notifications + Cart -->
+                        <div class="d-flex align-items-center gap-3" style="width: auto;">
+                            <!-- Notifications (placeholder) -->
+                            <a href="/my/notifications" class="text-dark position-relative d-none" title="Notificaciones">
+                                <i class="fa fa-bell-o" style="font-size: 1.3rem;"></i>
+                            </a>
+                            <!-- Cart -->
+                            <t t-call="website_sale.header_cart_link">
+                                <t t-set="_icon" t-value="True"/>
+                                <t t-set="_link_class" t-value="'text-dark position-relative p-0'"/>
+                                <t t-set="_badge_class" t-value="'position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary'"/>
+                            </t>
+                        </div>
+                    </div>
+                    
+                    <!-- Mobile Row 2: Full-Width Search -->
+                    <div class="px-3 py-2">
+                        <form method="get" action="/shop" class="o_wsale_products_searchbar_form w-100">
                             <div class="input-group border rounded-pill bg-light overflow-hidden">
+                                <span class="input-group-text bg-transparent border-0 ps-3">
+                                    <i class="fa fa-search text-muted"></i>
+                                </span>
                                 <input type="text" name="search" 
                                        class="form-control border-0 py-2 bg-transparent shadow-none" 
-                                       placeholder="Buscar..."
+                                       placeholder="Busca aquí tu producto"
                                        style="font-size: 0.9rem;"
                                        aria-label="Buscar"/>
-                                <button class="btn btn-light border-0 px-3 text-muted" type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>
                             </div>
                         </form>
-                        
-                        <!-- Mobile Address Bar + Currency (Farmatodo Style) -->
-                        <div class="d-flex align-items-center gap-2">
-                             <!-- Address Selector (Flex Grow) -->
-                            <div class="zenith-address-selector-widget d-flex align-items-center justify-content-between px-3 py-1 rounded bg-light border position-relative flex-grow-1">
-                                <div class="d-flex align-items-center gap-2 text-truncate cursor-pointer js_address_selector_toggle" role="button" style="max-width: 90%;">
-                                    <i class="fa fa-map-marker text-primary"></i>
-                                    <span class="small text-muted">Enviar a:</span>
-                                    <span class="fw-bold small text-truncate js_current_address_label">
+                    </div>
+                    
+                    <!-- Mobile Row 3: Address + Currency (Farmatodo Style) -->
+                    <div class="d-flex align-items-center justify-content-between px-3 py-2 border-bottom bg-light">
+                        <!-- Address Selector -->
+                        <div class="zenith-address-selector-widget d-flex align-items-center gap-2 flex-grow-1 cursor-pointer" role="button">
+                            <div class="d-flex align-items-center gap-2 text-truncate js_address_selector_toggle">
+                                <i class="fa fa-map-marker" style="color: var(--o-color-primary, #007bff);"></i>
+                                <div class="d-flex flex-column lh-1 text-truncate">
+                                    <span class="small text-muted" style="font-size: 0.7rem;">Enviar a:</span>
+                                    <span class="fw-bold text-dark small text-truncate js_current_address_label" style="max-width: 200px;">
                                         <t t-if="not user_id._is_public() and website.sale_get_order() and website.sale_get_order().partner_shipping_id">
-                                            <t t-esc="website.sale_get_order().partner_shipping_id.name"/>
+                                            <t t-esc="website.sale_get_order().partner_shipping_id.city if website.sale_get_order().partner_shipping_id.city else website.sale_get_order().partner_shipping_id.name"/>
                                         </t>
                                         <t t-else="">
                                             Seleccionar ubicación
                                         </t>
                                     </span>
                                 </div>
-                                <i class="fa fa-chevron-down text-muted" style="font-size: 0.7rem;"></i>
-                                
-                                <!-- Dropdown Container -->
-                                <div class="zenith-address-dropdown dropdown-menu shadow border-0 mt-2 rounded-3 p-0 w-100" style="z-index: 1050;">
-                                    <div class="p-3 text-center">
-                                        <i class="fa fa-spinner fa-spin text-primary"></i>
-                                        <span class="small text-muted ms-2">Cargando...</span>
-                                    </div>
+                            </div>
+                            <!-- Dropdown Container -->
+                            <div class="zenith-address-dropdown dropdown-menu shadow border-0 mt-2 rounded-3 p-0 w-100" style="z-index: 1050;">
+                                <div class="p-3 text-center">
+                                    <i class="fa fa-spinner fa-spin" style="color: var(--o-color-primary, #007bff);"></i>
+                                    <span class="small text-muted ms-2">Cargando...</span>
                                 </div>
                             </div>
-
-                            <!-- Currency Trigger Button (Mobile) -->
-                            <t t-set="curr_pl" t-value="website.get_current_pricelist()" />
-                            <button type="button" class="btn btn-primary rounded-pill px-3 py-1 d-flex align-items-center gap-1 shadow-sm" 
-                                    data-bs-toggle="modal" data-bs-target="#TecnosoftCurrencyModal"
-                                    style="font-size: 0.85rem; height: 38px;">
-                                <span class="fw-bold"><t t-esc="curr_pl.currency_id.symbol"/></span>
-                                <i class="fa fa-chevron-right" style="font-size: 0.7rem;"></i>
-                            </button>
                         </div>
+                        
+                        <!-- Currency Button (Mobile) -->
+                        <t t-set="curr_pl" t-value="website.get_current_pricelist()" />
+                        <t t-set="website_sale_pricelists" t-value="website.get_pricelist_available(show_visible=True)" />
+                        <button t-if="website_sale_pricelists and len(website_sale_pricelists) > 1" 
+                                type="button" 
+                                class="btn rounded-pill px-3 py-1 d-flex align-items-center gap-1 shadow-sm ms-2" 
+                                style="background: var(--o-color-primary, #007bff); color: white; font-size: 0.85rem;"
+                                data-bs-toggle="modal" data-bs-target="#TecnosoftCurrencyModal">
+                            <span class="fw-bold"><t t-esc="curr_pl.currency_id.symbol"/></span>
+                            <i class="fa fa-chevron-right" style="font-size: 0.6rem;"></i>
+                        </button>
                     </div>
                 </div>
-
-                <!-- ROW 3: Status Chips Only (Slim) -->
-                ... (omitted for brevity)
-            </div>
             
             <!-- Currency Selection Modal -->
             <div class="modal fade" id="TecnosoftCurrencyModal" tabindex="-1" aria-hidden="true">
