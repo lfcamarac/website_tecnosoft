@@ -18,11 +18,22 @@
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css"/>
         </xpath>
         <xpath expr="//div[@id='wrapwrap']" position="before">
-             <!-- Dark Mode Toggle (Header/Floating) -->
+             <!-- Dark Mode Toggle (Floating Button) -->
              <div class="tecnosoft-dark-mode-container position-fixed d-flex align-items-center justify-content-center bg-white rounded-circle shadow-lg tecnosoft-dark-mode-toggle"
-                  style="bottom: 20px; left: 20px; width: 45px; height: 45px; z-index: 9999; cursor: pointer; border: 1px solid #e0e0e0;">
-                 <i class="fa fa-moon-o text-dark" style="font-size: 20px;"></i>
+                  style="bottom: 80px; left: 20px; width: 50px; height: 50px; z-index: 99999; cursor: pointer; border: 2px solid #007bff;"
+                  onclick="document.body.classList.toggle('o_dark_mode'); localStorage.setItem('tecnosoft_dark_mode', document.body.classList.contains('o_dark_mode') ? 'true' : 'false'); var icon = this.querySelector('i'); if (document.body.classList.contains('o_dark_mode')) { icon.classList.remove('fa-moon-o'); icon.classList.add('fa-sun-o'); this.style.background='#333'; icon.style.color='#fff'; } else { icon.classList.remove('fa-sun-o'); icon.classList.add('fa-moon-o'); this.style.background='#fff'; icon.style.color='#333'; }">
+                 <i class="fa fa-moon-o" style="font-size: 22px; color: #333;"></i>
              </div>
+             <!-- Apply saved dark mode on page load -->
+             <script>
+                 (function() {
+                     if (localStorage.getItem('tecnosoft_dark_mode') === 'true') {
+                         document.body.classList.add('o_dark_mode');
+                         var t = document.querySelector('.tecnosoft-dark-mode-toggle');
+                         if (t) { t.style.background = '#333'; var i = t.querySelector('i'); if(i) { i.classList.remove('fa-moon-o'); i.classList.add('fa-sun-o'); i.style.color = '#fff'; } }
+                     }
+                 })();
+             </script>
         </xpath>
         <xpath expr="//div[@id='wrapwrap']" position="inside">
             <!-- Side Cart (Managed by JS) -->
