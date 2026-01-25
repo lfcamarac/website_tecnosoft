@@ -19,8 +19,13 @@ publicWidget.registry.TecnosoftAddressSelector = publicWidget.Widget.extend({
         this.$label = this.$('.js_current_address_label');
         this.$city = this.$('.js_current_city');
         
-        if (this.$dropdown.length) {
-            await this._fetchAddresses();
+        // Only fetch addresses if we have the dropdown element
+        if (this.$dropdown && this.$dropdown.length) {
+            try {
+                await this._fetchAddresses();
+            } catch (e) {
+                console.warn("TecnosoftAddressSelector: Could not fetch addresses", e);
+            }
         }
         // Safe super call
         return this._super ? this._super(...arguments) : Promise.resolve();
@@ -63,7 +68,7 @@ publicWidget.registry.TecnosoftAddressSelector = publicWidget.Widget.extend({
              this.$dropdown.html(`
                 <div class="p-3 text-center">
                     <p class="small text-muted mb-2">No tienes direcciones guardadas.</p>
-                    <a href="/my/address" class="btn btn-outline-primary btn-sm rounded-pill w-100">Agregar Dirección</a>
+                    <a href="/my/addresses" class="btn btn-outline-primary btn-sm rounded-pill w-100">Agregar Dirección</a>
                 </div>
             `);
             return;
@@ -90,7 +95,7 @@ publicWidget.registry.TecnosoftAddressSelector = publicWidget.Widget.extend({
         html += '</ul>';
         html += `
             <div class="p-2 border-top bg-light">
-                <a href="/my/address" class="btn btn-link btn-sm text-decoration-none w-100 text-primary fw-bold">
+                <a href="/my/addresses" class="btn btn-link btn-sm text-decoration-none w-100 text-primary fw-bold">
                     <i class="fa fa-plus-circle me-1"></i> Nueva Dirección
                 </a>
             </div>
@@ -107,18 +112,18 @@ publicWidget.registry.TecnosoftAddressSelector = publicWidget.Widget.extend({
         if (!this.addressData) return;
 
         if (this.addressData.public) {
-            this.$city.text("Enviar a");
+            if (this.$city && this.$city.length) this.$city.text("Enviar a");
             return;
         }
 
         const current = this.addressData.addresses.find(a => a.id === this.addressData.current_id);
         if (current) {
             // Show City if available, else name
-            this.$city.text("Enviar a:");
-            this.$label.html(`${current.name} <i class="fa fa-chevron-down ms-1" style="font-size: 0.6rem;"></i>`);
+            if (this.$city && this.$city.length) this.$city.text("Enviar a:");
+            if (this.$label && this.$label.length) this.$label.html(`${current.name} <i class="fa fa-chevron-down ms-1" style="font-size: 0.6rem;"></i>`);
         } else {
-            this.$city.text("Enviar a");
-            this.$label.html(`Seleccionar ubicación <i class="fa fa-chevron-down ms-1" style="font-size: 0.6rem;"></i>`);
+            if (this.$city && this.$city.length) this.$city.text("Enviar a");
+            if (this.$label && this.$label.length) this.$label.html(`Seleccionar ubicación <i class="fa fa-chevron-down ms-1" style="font-size: 0.6rem;"></i>`);
         }
     },
 
