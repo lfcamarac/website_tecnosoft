@@ -125,6 +125,7 @@
             'website_tecnosoft/static/src/js/theme_customizer.js',
             'website_tecnosoft/static/src/js/add_to_list.js',
             'website_tecnosoft/static/src/js/dark_mode.js',
+            'website_tecnosoft/static/src/js/address_selector.js',
             'website_tecnosoft/static/src/xml/dynamic_snippets.xml',
             'website_tecnosoft/static/src/xml/ajax_search.xml',
             'website_tecnosoft/static/src/xml/cart_upsell.xml',
