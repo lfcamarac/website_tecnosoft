@@ -9,6 +9,16 @@
                 <!-- UNIFIED HEADER: Same structure Mobile + Desktop -->
                 <!-- =============================================== -->
                 
+                <!-- HIDDEN: Standard Odoo Menu Structure to prevent JS errors -->
+                <nav class="navbar navbar-expand-lg d-none">
+                    <div class="collapse navbar-collapse" id="top_nav_collapse">
+                        <t t-call="website.navbar_nav">
+                            <t t-set="_nav_class" t-value="'flex-grow-1'"/>
+                            <t t-set="_id" t-value="'top_menu'"/>
+                        </t>
+                    </div>
+                </nav>
+                
                 <!-- DESKTOP ROW: Logo + Location + Search + Icons (Hidden on Mobile) -->
                 <div class="zenith-row-1 bg-white border-bottom py-2 d-none d-lg-block">
                     <div class="container">
