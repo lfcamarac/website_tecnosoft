@@ -2,7 +2,8 @@
 
 // 1. Premium "Buy Now" Button
 .btn-zenith-buy-now {
-    background: linear-gradient(135deg, var(--o-color-primary) 0%, var(--o-color-primary) 100%); 
+    background: #007bff; // Fallback
+    background: linear-gradient(135deg, var(--o-color-primary, #007bff) 0%, var(--o-color-primary, #0056b3) 100%); 
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     border: none;
