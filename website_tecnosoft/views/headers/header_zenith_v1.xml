@@ -30,16 +30,15 @@
                                     <t t-set="_link_class" t-valuef="navbar-brand logo p-0 m-0"/>
                                 </t>
                                 
-                                <!-- Currency/Pricelist (Dynamic) - Wrapped in try for safety -->
+                                <!-- Currency/Pricelist (Dynamic) - Safe check -->
                                 <t t-set="desktop_pricelist_available" t-value="False"/>
-                                <t t-try="">
-                                    <t t-set="website_sale_pricelists" t-value="request.website.get_pricelist_available(show_visible=True)"/>
-                                    <t t-set="curr_pl" t-value="request.website.get_current_pricelist()"/>
+                                <t t-if="website">
+                                    <t t-set="website_sale_pricelists" t-value="website.get_pricelist_available(show_visible=True)"/>
+                                    <t t-set="curr_pl" t-value="website.get_current_pricelist()"/>
                                     <t t-if="website_sale_pricelists and len(website_sale_pricelists) > 1">
                                         <t t-set="desktop_pricelist_available" t-value="True"/>
                                     </t>
                                 </t>
-                                <t t-except=""><!-- website_sale methods not available --></t>
                                 <div t-if="desktop_pricelist_available" class="d-none d-lg-flex align-items-center gap-1 dropdown ms-2">
                                     <a role="button" href="#" class="dropdown-toggle text-dark text-decoration-none fw-bold d-flex align-items-center gap-1 small" data-bs-toggle="dropdown">
                                         <!-- Dynamic Flag Mapping -->
@@ -310,14 +309,13 @@
                         
                         <!-- Currency Button (Mobile) - Only if website_sale is available -->
                         <t t-set="show_currency" t-value="False"/>
-                        <t t-try="">
-                            <t t-set="curr_pl" t-value="request.website.get_current_pricelist()"/>
-                            <t t-set="website_sale_pricelists" t-value="request.website.get_pricelist_available(show_visible=True)"/>
+                        <t t-if="website">
+                            <t t-set="curr_pl" t-value="website.get_current_pricelist()"/>
+                            <t t-set="website_sale_pricelists" t-value="website.get_pricelist_available(show_visible=True)"/>
                             <t t-if="website_sale_pricelists and len(website_sale_pricelists) > 1">
                                 <t t-set="show_currency" t-value="True"/>
                             </t>
                         </t>
-                        <t t-except=""><!-- website_sale not installed or method not available --></t>
                         <button t-if="show_currency" 
                                 type="button" 
                                 class="btn rounded-pill px-3 py-1 d-flex align-items-center gap-1 shadow-sm ms-2" 
