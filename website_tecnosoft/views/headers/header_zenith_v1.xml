@@ -225,21 +225,21 @@
                 <!-- =============================================== -->
                 <!-- MOBILE HEADER (d-lg-none) - Farmatodo Style    -->
                 <!-- =============================================== -->
-                <div class="zenith-mobile-header d-lg-none bg-white">
+                <div class="zenith-mobile-header d-lg-none bg-white position-relative" style="z-index: 1060;">
                     <!-- Mobile Row 1: Profile | Logo (Centered) | Cart -->
-                    <div class="d-flex align-items-center justify-content-between px-3 py-2 border-bottom">
+                    <div class="d-flex align-items-center justify-content-between px-3 py-2 border-bottom shadow-sm" style="min-height: 54px; background: white;">
                         <!-- Left: Profile Icon -->
-                        <a href="/my" class="text-dark" title="Mi cuenta" style="width: 40px;">
-                            <i class="fa fa-user-o" style="font-size: 1.3rem;"></i>
+                        <a href="/my" class="text-dark d-flex align-items-center justify-content-center" title="Mi cuenta" style="width: 40px; height: 40px;">
+                            <i class="fa fa-user-o" style="font-size: 1.4rem;"></i>
                         </a>
                         
                         <!-- Center: Logo with Fallback -->
-                        <div class="flex-grow-1 text-center">
-                            <a href="/" class="navbar-brand logo p-0 m-0">
+                        <div class="flex-grow-1 text-center d-flex justify-content-center align-items-center">
+                            <a href="/" class="navbar-brand logo p-0 m-0 d-flex align-items-center">
                                 <t t-if="website and website.logo">
                                     <img t-att-src="'/web/image/website/%s/logo' % website.id" 
                                          alt="Logo" 
-                                         style="max-height: 36px; width: auto;"
+                                         style="max-height: 40px; width: auto; object-fit: contain;"
                                          loading="eager"/>
                                 </t>
                                 <t t-else="">
