@@ -202,3 +202,98 @@
 body:has(.header_zenith_v1) #wrapwrap > main {
     padding-top: 0;
 }
+
+/* =================================================================== */
+/* MOBILE HEADER - Farmatodo Style                                     */
+/* =================================================================== */
+.zenith-mobile-header {
+    /* Row 1: Logo + Icons */
+    .navbar-brand {
+        max-height: 36px;
+        
+        img {
+            max-height: 36px;
+            width: auto;
+        }
+    }
+    
+    /* Icons styling */
+    .fa-user-o, .fa-bell-o, .fa-shopping-cart,
+    [href="/my"] i, [href*="cart"] i {
+        font-size: 1.3rem;
+        color: #333;
+        transition: color 0.2s ease;
+        
+        &:hover {
+            color: var(--o-color-primary, #007bff);
+        }
+    }
+    
+    /* Search bar */
+    .o_wsale_products_searchbar_form {
+        .form-control {
+            font-size: 0.9rem;
+            
+            &::placeholder {
+                color: #888;
+            }
+            
+            &:focus {
+                box-shadow: 0 0 0 2px var(--o-color-primary-light, rgba(0,123,255,0.25));
+            }
+        }
+        
+        .input-group-text {
+            color: var(--o-color-primary, #007bff);
+        }
+    }
+    
+    /* Address bar */
+    .js_address_selector_toggle {
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+    
+    /* Address dropdown styling */
+    .zenith-address-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        max-height: 300px;
+        overflow-y: auto;
+        
+        .list-group-item {
+            cursor: pointer;
+            border: none;
+            border-bottom: 1px solid #f0f0f0;
+            
+            &:hover {
+                background-color: #f8f9fa;
+            }
+            
+            &.active-address {
+                background-color: rgba(var(--o-color-primary-rgb, 0,123,255), 0.1);
+            }
+        }
+    }
+}
+
+/* Cart badge positioning fix for mobile */
+@media (max-width: 991.98px) {
+    .header_zenith_v1 {
+        .my_cart_quantity {
+            font-size: 0.65rem !important;
+            padding: 0.15rem 0.4rem !important;
+            min-width: 18px;
+            height: 18px;
+            line-height: 1;
+        }
+    }
+    
+    /* Hide desktop elements on mobile */
+    .zenith-row-1 {
+        display: none !important;
+    }
+}
