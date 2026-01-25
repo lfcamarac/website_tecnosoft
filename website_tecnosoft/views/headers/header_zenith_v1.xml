@@ -56,17 +56,17 @@
                                 </div>
                                 
                                 <!-- Address Selector Widget -->
-                                <div class="zenith-address-selector-widget d-none d-xl-flex position-relative">
+                                <div class="zenith-address-selector-widget d-none d-lg-flex position-relative">
                                     <div class="d-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-primary text-white border-0 cursor-pointer js_address_selector_toggle" role="button" style="font-size: 0.8rem;">
                                         <i class="fa fa-map-marker"></i>
                                         <div class="d-flex flex-column lh-1 text-start">
-                                            <span class="js_current_city" style="font-size: 0.65rem; opacity: 0.9;">Selecciona tu sede</span>
+                                            <span class="js_current_city" style="font-size: 0.65rem; opacity: 0.9;">Enviar a</span>
                                             <span class="js_current_address_label fw-bold font-monospace" style="font-size: 0.75rem;">
                                                 <t t-if="not user_id._is_public() and website.sale_get_order() and website.sale_get_order().partner_shipping_id">
                                                     <t t-esc="website.sale_get_order().partner_shipping_id.name"/>
                                                 </t>
                                                 <t t-else="">
-                                                    Agregar dirección <i class="fa fa-chevron-down ms-1" style="font-size: 0.6rem;"></i>
+                                                    Seleccionar ubicación <i class="fa fa-chevron-down ms-1" style="font-size: 0.6rem;"></i>
                                                 </t>
                                             </span>
                                         </div>
@@ -82,7 +82,7 @@
                             </div>
                             
                             <!-- CENTER: Search Bar + Categories (Desktop Only) -->
-                            <div class="flex-grow-1 mx-3 d-none d-lg-block">
+                            <div class="flex-grow-1 mx-2 d-none d-lg-block">
                                 <form method="get" action="/shop" class="o_wsale_products_searchbar_form w-100">
                                     <div class="input-group zenith-search-pill border rounded-pill bg-light overflow-hidden">
                                         <!-- Categories Dropdown (Integrated) -->
