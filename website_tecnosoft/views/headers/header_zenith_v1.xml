@@ -242,6 +242,11 @@
                         </div>
                     </div>
                 </div>
+                <!-- Dark Mode Toggle (Floating Bottom-Left) -->
+                <div class="tecnosoft-dark-mode-container position-fixed d-flex align-items-center justify-content-center bg-white rounded-circle shadow-lg tecnosoft-dark-mode-toggle"
+                     style="bottom: 20px; left: 20px; width: 45px; height: 45px; z-index: 9999; cursor: pointer; border: 1px solid #e0e0e0;">
+                    <i class="fa fa-moon-o text-dark" style="font-size: 20px;"></i>
+                </div>
             </div>
         </xpath>
     </template>

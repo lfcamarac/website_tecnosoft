@@ -1,37 +1,22 @@
-#tecnosoft_sticky_cart {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(0,0,0,0.05);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
-    z-index: 1035;
-
-    &.transform-translate-y-100 {
-        transform: translateY(100%);
-    }
-
-    &.visible, &.is-visible {
-        transform: translateY(0) !important;
-    }
-    
-    img {
-        border: 1px solid rgba(0,0,0,0.1);
-    }
-    
-    h6 {
-        font-size: 0.95rem;
-    }
-    
-    .btn-primary {
-        padding-left: 2rem;
-        padding-right: 2rem;
-    }
+/* Hiding Sticky Add to Cart Bar as per user request */
+#tecnosoft_sticky_cart,
+.product_details_sticky {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
-// Mobile padding adjustment to prevent overlaying content
-@include media-breakpoint-only(xs) {
-    body.has-sticky-cart {
-        padding-bottom: 80px;
-    }
+/* Fix Z-Index for product image buttons (zoom/fullscreen) to be clickable */
+#o-carousel-product .carousel-indicators,
+#o-carousel-product .o_product_video_button,
+#o-carousel-product .o_product_fullscreen_button {
+  z-index: 100 !important;
+}
+
+/* Ensure wish/compare duplicate buttons are hidden if any remain */
+.o_add_wishlist_dyn,
+.o_add_compare_dyn {
+  display: none !important;
 }

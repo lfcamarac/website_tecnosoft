@@ -37,32 +37,8 @@
         </xpath>
     </template>
 
-    <!-- Override product card to add wishlist/compare buttons -->
-    <template id="tecnosoft_product_card_buttons" inherit_id="website_sale.products_item" name="Tecnosoft Product Card Buttons">
-        <xpath expr="//div[hasclass('oe_product_image')]" position="inside">
-            <!-- Wishlist Button -->
-            <t t-if="request.env['website'].get_current_website().viewref('website_sale_wishlist.add_to_wishlist')">
-                <button type="button" 
-                        class="btn o_add_wishlist js_add_wishlist" 
-                        t-att-data-product-product-id="product.product_variant_id.id"
-                        t-att-data-product-template-id="product.id"
-                        title="Añadir a Lista de Deseos"
-                        aria-label="Añadir a Lista de Deseos">
-                    <i class="fa fa-heart-o"></i>
-                </button>
-            </t>
-            <!-- Compare Button -->
-            <t t-if="request.env['website'].get_current_website().viewref('website_sale_comparison.add_to_compare')">
-                <button type="button" 
-                        class="btn o_add_compare js_add_cart_json" 
-                        t-att-data-product-product-id="product.product_variant_id.id"
-                        title="Comparar"
-                        aria-label="Añadir a Comparar">
-                    <i class="fa fa-exchange"></i>
-                </button>
-            </t>
-        </xpath>
-    </template>
+    <!-- Override removed to use standard Odoo buttons and avoid duplication -->
+    <!-- <template id="tecnosoft_product_card_buttons" ...> REMOVED </template> -->
 
     <!-- Custom Wishlist Page Template -->
     <template id="tecnosoft_wishlist_page" inherit_id="website_sale_wishlist.product_wishlist" name="Tecnosoft Wishlist Page">
