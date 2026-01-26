@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="zenith_product_delivery" inherit_id="website_sale.product" name="Zenith Product Delivery">
+    <!-- DISABLED: Redundant with ENVÍO PRIORITARIO in layout_overrides.xml -->
+    <template id="zenith_product_delivery" inherit_id="website_sale.product" name="Zenith Product Delivery" active="False">
         <xpath expr="//div[@id='add_to_cart_wrap']" position="after">
             <div class="zenith-delivery-info mt-3 p-3 bg-light rounded d-flex align-items-center" 
                  t-if="product.zenith_estimated_delivery">
