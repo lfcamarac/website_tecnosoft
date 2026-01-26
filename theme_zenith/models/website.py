@@ -1,5 +1,5 @@
 import logging
-from odoo import models, fields
+from odoo import models, fields, api
 from odoo.http import Request
 
 _logger = logging.getLogger(__name__)
@@ -20,6 +20,7 @@ class Website(models.Model):
     zenith_primary_color = fields.Char(string="Color Primario", default="#007bff", help="Deprecated: Use native Odoo theme colors.")
     # Dark Mode uses localStorage (client-side), no backend field needed.
 
+    @api.model
     def _clean_zombie_views(self):
         """
         Emergency cleanup method to delete views containing deprecated code.
