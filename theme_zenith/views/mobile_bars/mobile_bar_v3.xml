@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="mobile_bar_v3" inherit_id="website.layout" name="Mobile Bar V3 (Action FAB)" active="False" customize_show="True">
+        <xpath expr="//div[@id='wrapwrap']" position="inside">
+            <!-- Mobile Bottom Bar V3: Action FAB -->
+             <div class="zenith-mobile-bar-v3-container d-md-none fixed-bottom pointer-events-none" style="z-index: 9999;">
+                <!-- Main Bar -->
+                <nav class="zenith-mobile-bar-v3 bg-white border-top d-flex align-items-center justify-content-between px-3 pb-2 pt-2 shadow-lg w-100 pointer-events-auto" style="height: 60px;">
+                    <!-- Left Actions -->
+                    <div class="d-flex align-items-center justify-content-around flex-grow-1 me-4">
+                        <a href="/" class="nav-item text-muted">
+                            <i class="fa fa-home fs-4"></i>
+                        </a>
+                        <a href="/shop" class="nav-item text-muted">
+                            <i class="fa fa-th-large fs-4"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- FAB Wrapper (Absolute Center) -->
+                    <div class="zenith-fab-wrapper position-absolute start-50 translate-middle-x bottom-0 mb-4">
+                         <a href="/shop/cart" class="btn btn-primary rounded-circle shadow-lg d-flex align-items-center justify-content-center hover-scale position-relative" style="width: 56px; height: 56px;">
+                            <i class="fa fa-shopping-cart text-white fs-3"></i>
+                             <t t-set="website_sale_cart_quantity" t-value="request.website.sale_get_order().cart_quantity or 0"/>
+                            <span t-if="website_sale_cart_quantity" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-white" style="font-size: 0.7rem;">
+                                <t t-esc="website_sale_cart_quantity"/>
+                            </span>
+                        </a>
+                    </div>
+                    
+                    <!-- Right Actions -->
+                    <div class="d-flex align-items-center justify-content-around flex-grow-1 ms-4">
+                        <a href="/shop/wishlist" class="nav-item text-muted">
+                            <i class="fa fa-heart-o fs-4"></i>
+                        </a>
+                        <a href="/my" class="nav-item text-muted">
+                            <i class="fa fa-user-o fs-4"></i>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </xpath>
+    </template>
+</odoo>

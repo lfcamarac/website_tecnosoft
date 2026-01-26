@@ -112,3 +112,55 @@ body.o_dark_mode {
         }
     }
 }
+
+/* 
+=========================================================
+MOBILE BAR VARIATIONS
+=========================================================
+*/
+
+/* V2: Floating Pill */
+.zenith-mobile-bar-v2 {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    max-width: 90%;
+    margin: 0 auto;
+    width: 350px;
+    z-index: 9999;
+}
+
+.zenith-mobile-bar-v2 .nav-item {
+    transition: transform 0.2s ease;
+    opacity: 0.7;
+}
+
+.zenith-mobile-bar-v2 .nav-item.active,
+.zenith-mobile-bar-v2 .nav-item:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+    color: var(--o-color-primary) !important;
+}
+
+.zenith-mobile-bar-v2 .scale-110 {
+    transform: scale(1.1);
+}
+
+/* V3: Action FAB */
+.zenith-fab-wrapper {
+    z-index: 10000;
+}
+
+.zenith-mobile-bar-v3-container {
+    /* Ensures click-through for transparent areas if needed, 
+       but we set pointer-events-none on container and auto on children in XML 
+    */
+}
+
+.zenith-mobile-bar-v3 .nav-item i {
+    transition: color 0.2s ease;
+}
+
+.zenith-mobile-bar-v3 .nav-item:hover i {
+    color: var(--o-color-primary) !important;
+}

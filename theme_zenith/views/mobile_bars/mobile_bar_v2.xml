@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="mobile_bar_v2" inherit_id="website.layout" name="Mobile Bar V2 (Floating Pill)" active="False" customize_show="True">
+        <xpath expr="//div[@id='wrapwrap']" position="inside">
+            <!-- Mobile Bottom Bar V2: Floating Pill (Icons Only) -->
+            <div class="zenith-mobile-bar-v2-container d-md-none fixed-bottom pb-4 d-flex justify-content-center pointer-events-none">
+                <nav class="zenith-mobile-bar-v2 bg-white shadow-lg rounded-pill d-flex align-items-center justify-content-around px-4 py-2 pointer-events-auto border">
+                    <a href="/" class="nav-item text-dark">
+                        <i class="fa fa-home fs-4"></i>
+                    </a>
+                    <a href="/shop" class="nav-item text-dark">
+                        <i class="fa fa-th-large fs-4"></i>
+                    </a>
+                    
+                    <!-- Search Trigger (Center) -->
+                    <a href="#" class="nav-item text-primary mx-2 scale-110" data-bs-toggle="modal" data-bs-target="#ZenithSearchModalV3">
+                        <div class="bg-primary-light rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                            <i class="fa fa-search fs-4 text-primary"></i>
+                        </div>
+                    </a>
+
+                    <a href="/shop/cart" class="nav-item position-relative text-dark">
+                        <i class="fa fa-shopping-cart fs-4"></i>
+                        <t t-set="website_sale_cart_quantity" t-value="request.website.sale_get_order().cart_quantity or 0"/>
+                         <span t-if="website_sale_cart_quantity" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-light p-1" style="font-size: 0.6rem;">
+                            <t t-esc="website_sale_cart_quantity"/>
+                        </span>
+                    </a>
+                    <a href="/my" class="nav-item text-dark">
+                        <i class="fa fa-user-o fs-4"></i>
+                    </a>
+                </nav>
+            </div>
+            
+             <!-- Re-use Search Modal if V3 header not present -->
+             <!-- Simple Search Modal for Mobile Bar V2 -->
+             <div class="modal fade" id="ZenithSearchModalV3" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content border-0 shadow">
+                        <div class="modal-body p-4">
+                             <form method="get" action="/shop" class="w-100">
+                                <div class="input-group">
+                                    <input type="text" name="search" class="form-control" placeholder="Buscar..."/>
+                                    <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </xpath>
+    </template>
+</odoo>

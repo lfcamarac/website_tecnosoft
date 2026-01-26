@@ -98,45 +98,7 @@
                 </div>
             </div>
 
-            <!-- Mobile Bottom Bar -->
-            <nav class="zenith-mobile-bottom-bar d-flex d-md-none">
-                <a href="/" class="nav-item active">
-                    <div class="icon-container">
-                        <i class="fa fa-home"></i>
-                    </div>
-                    <span>Inicio</span>
-                </a>
-                <a href="/shop" class="nav-item">
-                    <div class="icon-container">
-                        <i class="fa fa-th-large"></i>
-                    </div>
-                    <span>Categorías</span>
-                </a>
-                <a href="/shop" class="nav-item">
-                    <div class="icon-container">
-                        <i class="fa fa-tag"></i>
-                    </div>
-                    <span>Ofertas</span>
-                </a>
-                <a href="/shop/cart" class="nav-item position-relative">
-                    <div class="icon-container">
-                        <i class="fa fa-shopping-cart"></i>
-                        <t t-set="website_sale_cart_quantity" t-value="request.website.sale_get_order().cart_quantity or 0"/>
-                        <span t-if="website_sale_cart_quantity" class="cart-badge badge rounded-pill bg-danger">
-                            <t t-esc="website_sale_cart_quantity"/>
-                        </span>
-                    </div>
-                    <span>Carrito</span>
-                </a>
-                <a href="/shop/wishlist" class="nav-item">
-                    <div class="icon-container">
-                        <i class="fa fa-heart-o"></i>
-                    </div>
-                    <span>Favoritos</span>
-                </a>
-                <!-- Hidden anchor to satisfy legacy database XPaths during upgrade -->
-                <a href="/my" class="d-none">Legacy Anchor</a>
-            </nav>
+
         </xpath>
     </template>
 
