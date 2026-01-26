@@ -10,9 +10,10 @@
         <!-- Kill the old zombie view (ID deletion) -->
         <delete id="website_tecnosoft.tecnosoft_breadcrumbs" model="ir.ui.view"/>
         
-        <!-- FORCE EXECUTE PYTHON CLEANUP - The Nuclear Option -->
-        <!-- This finds ANY view with the bad code and destroys it -->
-        <!-- <function model="website" name="_clean_zombie_views"/> -->
+        <!-- Fix for the persistent sticky cta / buy now button error -->
+        <!-- We delete them to force Odoo to recreate them from the files without database overrides -->
+        <delete id="website_tecnosoft.tecnosoft_sticky_cta" model="ir.ui.view"/>
+        <delete id="website_tecnosoft.tecnosoft_buy_now_button" model="ir.ui.view"/>
         
     </data>
 </odoo>
