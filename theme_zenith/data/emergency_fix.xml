@@ -5,18 +5,15 @@
         <!-- We use 'search' to find it by key/xml_id if possible, or by ID if it was an external ID -->
         <!-- Since we want to clear the 'theme_zenith.zenith_breadcrumbs' view specifically: -->
         
-        <!-- Clean slate for V2 just in case -->
-        <delete id="theme_zenith.zenith_breadcrumbs_v2" model="ir.ui.view"/>
-        <!-- Kill the old zombie view (ID deletion) -->
-        <delete id="theme_zenith.zenith_breadcrumbs" model="ir.ui.view"/>
+        <!-- Clean slate for V2 just in case (Keep if they actually existed as Zenith before, but safer to skip if not sure) -->
+        <!-- <delete id="theme_zenith.zenith_breadcrumbs_v2" model="ir.ui.view"/> -->
+        <!-- <delete id="theme_zenith.zenith_breadcrumbs" model="ir.ui.view"/> -->
         
-        <!-- Fix for the persistent sticky cta / buy now button error -->
-        <!-- We delete them to force Odoo to recreate them from the files without database overrides -->
-        <!-- FIX PERSISTENT BRANDING (Nuclear Option) -->
-        <!-- This finds ANY view or website name with 'tecnosoft' and destroys/fixes it -->
+        <!-- FIX PERSISTENT BRANDING & CORRUPTED VIEWS (Deep Cleanup) -->
+        <!-- This finds ANY view or website name with 'tecnosoft' and fixes it.
+             It also handles the sticky cta and buy now button by cleaning up 
+             customized database overrides. -->
         <function model="website" name="_clean_zombie_views"/>
-        <delete id="theme_zenith.zenith_sticky_cta" model="ir.ui.view"/>
-        <delete id="theme_zenith.zenith_buy_now_button" model="ir.ui.view"/>
         
     </data>
 </odoo>

@@ -29,34 +29,47 @@ class Website(models.Model):
         
         # Patterns to clean up (all legacy code that may be cached in DB)
         patterns = [
-            '%request.path.startswith%',
+            '%tecnosoft%',
+            '%Tecnosoft%',
             '%zenith_secondary_color%',
             '%zenith_body_font%',
             '%zenith_dark_mode_default%',
-            '%tecnosoft%',
-            '%Tecnosoft%',
         ]
         
         total_deleted = 0
         for pattern in patterns:
             try:
-                query = f"DELETE FROM ir_ui_view WHERE arch_db LIKE %s AND type = 'qweb'"
-                self.env.cr.execute(query, (pattern,))
-                deleted = self.env.cr.rowcount
-                total_deleted += deleted
-                if deleted:
-                    _logger.info(f"Cleaned {deleted} views matching: {pattern}")
+                with self.env.cr.savepoint():
+                    # Search for views matching the pattern in their architecture
+                    views = self.env['ir.ui.view'].search([('arch_db', 'like', pattern), ('type', '=', 'qweb')])
+                    if views:
+                        count = len(views)
+                        views.unlink()
+                        total_deleted += count
+                        _logger.info(f"Cleaned {count} views matching: {pattern}")
             except Exception as e:
                 _logger.error(f"Cleanup failed for pattern {pattern}: {e}")
         
-        _logger.info(f"ZOMBIE VIEW CLEANUP COMPLETE. Total views deleted: {total_deleted}")
-        
         # Also update website name if it contains Tecnosoft
-        websites = self.search([('name', 'ilike', 'tecnosoft')])
-        for ws in websites:
-            ws.name = ws.name.replace('Tecnosoft', 'Zenith').replace('tecnosoft', 'zenith')
-            _logger.info(f"Website name updated to: {ws.name}")
-        
+        try:
+            with self.env.cr.savepoint():
+                websites = self.search([('name', 'ilike', 'tecnosoft')])
+                for ws in websites:
+                    ws.name = ws.name.replace('Tecnosoft', 'Zenith').replace('tecnosoft', 'zenith')
+                    _logger.info(f"Website name updated to: {ws.name}")
+        except Exception as e:
+            _logger.error(f"Website name update failed: {e}")
+
+        # Attempt to rename the module in the database if it's still registered as 'website_tecnosoft'
+        try:
+            with self.env.cr.savepoint():
+                self.env.cr.execute("UPDATE ir_module_module SET name = 'theme_zenith' WHERE name = 'website_tecnosoft'")
+                if self.env.cr.rowcount:
+                    _logger.info("REBRANDING: Renamed 'website_tecnosoft' module to 'theme_zenith' in database.")
+        except Exception as e:
+            _logger.info(f"Module rename skipped (likely already renamed or permission denied): {e}")
+
+        _logger.info(f"ZOMBIE VIEW CLEANUP COMPLETE. Total views deleted: {total_deleted}")
         return total_deleted
 
 
