@@ -216,10 +216,18 @@
                 <div class="zenith-mobile-header d-lg-none bg-white position-relative" style="z-index: 1060;">
                     <!-- Mobile Row 1: Profile | Logo (Centered) | Cart -->
                     <div class="d-flex align-items-center justify-content-between px-3 py-2 border-bottom shadow-sm" style="min-height: 54px; background: white;">
-                        <!-- Left: Profile Icon -->
-                        <a href="/my" class="text-dark d-flex align-items-center justify-content-center" title="Mi cuenta" style="width: 40px; height: 40px;">
-                            <i class="fa fa-user-o" style="font-size: 1.4rem;"></i>
-                        </a>
+                        <!-- Left: Menu + Profile -->
+                        <div class="d-flex align-items-center gap-2">
+                             <!-- Hamburger Menu Trigger -->
+                            <button class="btn btn-link text-dark p-0 border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#ZenithMobileMenu" aria-controls="ZenithMobileMenu">
+                                <i class="fa fa-bars" style="font-size: 1.4rem;"></i>
+                            </button>
+                            
+                            <!-- Profile Icon -->
+                            <a href="/my" class="text-dark d-flex align-items-center justify-content-center" title="Mi cuenta" style="width: 40px; height: 40px;">
+                                <i class="fa fa-user-o" style="font-size: 1.3rem;"></i>
+                            </a>
+                        </div>
                         
                         <!-- Center: Logo with Fallback -->
                         <div class="flex-grow-1 text-center d-flex justify-content-center align-items-center">
@@ -314,6 +322,63 @@
                             <i class="fa fa-chevron-right" style="font-size: 0.6rem;"></i>
                         </button>
 
+                    </div>
+
+                    <!-- OFFCANVAS MOBILE MENU -->
+                    <div class="offcanvas offcanvas-start" tabindex="-1" id="ZenithMobileMenu" aria-labelledby="ZenithMobileMenuLabel" style="z-index: 1061;">
+                        <div class="offcanvas-header border-bottom">
+                            <h5 class="offcanvas-title fw-bold" id="ZenithMobileMenuLabel">Menú</h5>
+                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body p-0">
+                            <!-- Main Navigation Links -->
+                            <div class="list-group list-group-flush border-bottom-0">
+                                <t t-foreach="website.menu_id.child_id" t-as="submenu">
+                                    <a t-att-href="submenu.url" class="list-group-item list-group-item-action py-3 fw-bold d-flex justify-content-between align-items-center">
+                                        <span t-esc="submenu.name"/>
+                                        <i class="fa fa-chevron-right text-muted" style="font-size: 0.8rem;"></i>
+                                    </a>
+                                </t>
+                            </div>
+                            
+                            <!-- Categories Header -->
+                            <div class="p-3 bg-light border-top border-bottom">
+                                <span class="text-uppercase text-muted fw-bold" style="font-size: 0.75rem; letter-spacing: 1px;">Categorías</span>
+                            </div>
+                            
+                            <!-- Top Categories -->
+                            <div class="list-group list-group-flush">
+                                <t t-set="mobile_cats" t-value="request.env['product.public.category'].search([('parent_id', '=', False)], limit=8)"/>
+                                <t t-foreach="mobile_cats" t-as="m_cat">
+                                    <a t-att-href="'/shop/category/%s' % slug(m_cat)" class="list-group-item list-group-item-action py-3 d-flex justify-content-between align-items-center">
+                                        <span t-esc="m_cat.name"/>
+                                    </a>
+                                </t>
+                                <a href="/shop" class="list-group-item list-group-item-action py-3 text-primary fw-bold text-center">
+                                    Ver todas las categorías
+                                </a>
+                            </div>
+                            
+                            <!-- User Actions -->
+                            <div class="p-3 mt-4 bg-light border-top">
+                                <t t-if="user_id._is_public()">
+                                    <a href="/web/login" class="btn btn-primary w-100 rounded-pill mb-2">Iniciar Sesión</a>
+                                    <a href="/web/signup" class="btn btn-outline-primary w-100 rounded-pill">Registrarse</a>
+                                </t>
+                                <t t-else="">
+                                    <div class="d-flex align-items-center gap-3 mb-3">
+                                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                            <span class="fw-bold"><t t-esc="user_id.name[0].upper()"/></span>
+                                        </div>
+                                        <div>
+                                            <div class="fw-bold"><t t-esc="user_id.name"/></div>
+                                            <div class="small text-muted"><t t-esc="user_id.email"/></div>
+                                        </div>
+                                    </div>
+                                    <a href="/web/session/logout?redirect=/" class="btn btn-outline-danger w-100 rounded-pill btn-sm">Cerrar Sesión</a>
+                                </t>
+                            </div>
+                        </div>
                     </div>
                 </div>
             
