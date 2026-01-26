@@ -44,7 +44,7 @@ class ZenithController(http.Controller):
         
         products = request.env['product.template'].sudo().search(final_domain, limit=limit, order=order)
         
-        pricelist = request.website.get_current_pricelist()
+        pricelist = request.website._get_current_pricelist()
         currency = pricelist.currency_id
         
         product_list = []
@@ -296,7 +296,7 @@ class ZenithController(http.Controller):
         suggested_tmpls = tmpl.get_frequently_bought_together()
         
         results = []
-        pricelist = request.website.get_current_pricelist()
+        pricelist = request.website._get_current_pricelist()
         currency = pricelist.currency_id
 
         for t in suggested_tmpls:

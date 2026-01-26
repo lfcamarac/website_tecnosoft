@@ -18,7 +18,15 @@ class Website(models.Model):
     _inherit = 'website'
 
     zenith_primary_color = fields.Char(string="Color Primario", default="#007bff", help="Deprecated: Use native Odoo theme colors.")
-    # Dark Mode uses localStorage (client-side), no backend field needed.
+
+    # --- ODOO 18 COMPATIBILITY WRAPPERS ---
+    def get_current_pricelist(self):
+        """ Redirect to the new private method in Odoo 18. """
+        return self._get_current_pricelist()
+
+    def get_pricelist_available(self, show_visible=False):
+        """ Redirect to the new private method in Odoo 18. """
+        return self._get_pricelist_available(show_visible=show_visible)
 
     @api.model
     def clean_zombie_views(self):
@@ -43,11 +51,19 @@ class Website(models.Model):
                 with self.env.cr.savepoint():
                     # Search for views matching the pattern in their architecture
                     views = self.env['ir.ui.view'].search([('arch_db', 'like', pattern), ('type', '=', 'qweb')])
-                    if views:
-                        count = len(views)
-                        views.unlink()
-                        total_deleted += count
-                        _logger.info(f"Cleaned {count} views matching: {pattern}")
+                    for view in views:
+                        # SAFETY CHECK: Do not delete views from active, non-tecnosoft modules
+                        # This prevents breaking payli_suite, cashea, etc.
+                        external_id = view.get_external_id().get(view.id)
+                        if external_id:
+                            module_name = external_id.split('.')[0]
+                            # Only delete if it's explicitly from the old theme or has no module (purely DB)
+                            if module_name not in ['website_tecnosoft', '__export__']:
+                                continue
+                        
+                        _logger.info(f"Deleting zombie view: {view.name} ({external_id or 'Custom DB View'})")
+                        view.unlink()
+                        total_deleted += 1
             except Exception as e:
                 _logger.error(f"Cleanup failed for pattern {pattern}: {e}")
         

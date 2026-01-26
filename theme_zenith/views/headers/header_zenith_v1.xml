@@ -33,8 +33,8 @@
                                 <!-- Currency/Pricelist (Dynamic) - Safe check -->
                                 <t t-set="desktop_pricelist_available" t-value="False"/>
                                 <t t-if="website">
-                                    <t t-set="website_sale_pricelists" t-value="website.get_pricelist_available(show_visible=True)"/>
-                                    <t t-set="curr_pl" t-value="website.get_current_pricelist()"/>
+                                    <t t-set="website_sale_pricelists" t-value="website._get_pricelist_available(show_visible=True)"/>
+                                    <t t-set="curr_pl" t-value="website._get_current_pricelist()"/>
                                     <t t-if="website_sale_pricelists and len(website_sale_pricelists) > 1">
                                         <t t-set="desktop_pricelist_available" t-value="True"/>
                                     </t>
@@ -299,8 +299,8 @@
                         <!-- Currency Button (Mobile) - Only if website_sale is available -->
                         <t t-set="show_currency" t-value="False"/>
                         <t t-if="website">
-                            <t t-set="curr_pl" t-value="website.get_current_pricelist()"/>
-                            <t t-set="website_sale_pricelists" t-value="website.get_pricelist_available(show_visible=True)"/>
+                            <t t-set="curr_pl" t-value="website._get_current_pricelist()"/>
+                            <t t-set="website_sale_pricelists" t-value="website._get_pricelist_available(show_visible=True)"/>
                             <t t-if="website_sale_pricelists and len(website_sale_pricelists) > 1">
                                 <t t-set="show_currency" t-value="True"/>
                             </t>
@@ -328,8 +328,8 @@
                         <div class="modal-body pt-2">
                              <t t-set="modal_pricelist_ok" t-value="False"/>
                              <t t-if="website">
-                                 <t t-set="website_sale_pricelists" t-value="website.get_pricelist_available(show_visible=True)"/>
-                                 <t t-set="curr_pl" t-value="website.get_current_pricelist()"/>
+                                 <t t-set="website_sale_pricelists" t-value="website._get_pricelist_available(show_visible=True)"/>
+                                 <t t-set="curr_pl" t-value="website._get_current_pricelist()"/>
                                  <t t-if="website_sale_pricelists">
                                      <t t-set="modal_pricelist_ok" t-value="True"/>
                                  </t>
