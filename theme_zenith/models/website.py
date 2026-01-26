@@ -24,10 +24,6 @@ class Website(models.Model):
         """ Redirect to the new private method in Odoo 18. """
         return self._get_current_pricelist()
 
-    def get_pricelist_available(self, show_visible=False):
-        """ Redirect to the new private method in Odoo 18. """
-        return self._get_pricelist_available(show_visible=show_visible)
-
     @api.model
     def clean_zombie_views(self):
         """
