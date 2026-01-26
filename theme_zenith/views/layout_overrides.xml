@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Custom Layout Overrides -->
+    <template id="zenith_layout" inherit_id="website.layout" name="Zenith Layout">
+        <xpath expr="//head" position="inside">
+            <link rel="manifest" href="/theme_zenith/static/src/manifest.json"/>
+            <meta name="theme-color" content="var(--o-color-primary)"/>
+            <link rel="preconnect" href="https://fonts.googleapis.com"/>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+            <!-- noUiSlider -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.css"/>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
+            <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+            <!-- Leaflet (OpenStreetMap) -->
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+            <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+            <!-- Flag Icons (Country Flags) -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css"/>
+        </xpath>
+        <xpath expr="//div[@id='wrapwrap']" position="before">
+             <!-- Dark Mode Toggle (Floating above mobile bottom bar) -->
+             <!-- Desktop: bottom-left corner, Mobile: above the bottom nav bar -->
+             <div class="zenith-dark-mode-container position-fixed d-flex align-items-center justify-content-center bg-white rounded-circle shadow-lg zenith-dark-mode-toggle"
+                  style="width: 48px; height: 48px; z-index: 2147483647; cursor: pointer; border: 2px solid var(--o-color-primary, #007bff); left: 20px; bottom: 20px;"
+                  onclick="try { 
+                      event.stopPropagation(); 
+                      event.preventDefault();
+                      document.body.classList.toggle('o_dark_mode'); 
+                      var isDark = document.body.classList.contains('o_dark_mode');
+                      localStorage.setItem('zenith_dark_mode', isDark ? 'true' : 'false'); 
+                      var icon = this.querySelector('i'); 
+                      if (isDark) { 
+                          icon.classList.remove('fa-moon-o'); 
+                          icon.classList.add('fa-sun-o'); 
+                          this.style.background='#222'; 
+                          icon.style.color='#fff'; 
+                      } else { 
+                          icon.classList.remove('fa-sun-o'); 
+                          icon.classList.add('fa-moon-o'); 
+                          this.style.background='#fff'; 
+                          icon.style.color='#333'; 
+                      } 
+                  } catch(e) { console.error('Dark Mode Error:', e); }">
+                 <i class="fa fa-moon-o" style="font-size: 20px; color: #333; pointer-events: none;"></i>
+             </div>
+             <!-- Apply saved dark mode on page load -->
+             <script>
+                 (function() {
+                     if (localStorage.getItem('zenith_dark_mode') === 'true') {
+                         document.body.classList.add('o_dark_mode');
+                         var t = document.querySelector('.zenith-dark-mode-toggle');
+                         if (t) { t.style.background = '#222'; var i = t.querySelector('i'); if(i) { i.classList.remove('fa-moon-o'); i.classList.add('fa-sun-o'); i.style.color = '#fff'; } }
+                     }
+                 })();
+             </script>
+             <style>
+                 /* Mobile: position dark mode toggle above bottom nav bar */
+                 @media (max-width: 767.98px) {
+                     .zenith-dark-mode-toggle {
+                         bottom: 75px !important; /* Above the 60px bottom nav */
+                     }
+                 }
+             </style>
+        </xpath>
+        <xpath expr="//div[@id='wrapwrap']" position="inside">
+            <!-- Side Cart (Managed by JS) -->
+            <div class="zenith-side-cart-overlay"></div>
+            <div class="zenith-side-cart">
+                <div class="cart-header">
+                    <h4>Mi Carrito</h4>
+                    <span class="close-cart fa fa-times"></span>
+                </div>
+                <!-- Free Shipping Progress Bar -->
+                <div class="zenith-free-shipping p-3 bg-light border-bottom">
+                    <div class="shipping-msg small fw-bold text-center mb-2">
+                        <i class="fa fa-truck text-primary me-2"></i>
+                        <span class="js_shipping_text">Añade productos para envío GRATIS</span>
+                    </div>
+                    <div class="progress overflow-visible" style="height: 8px;">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary rounded-pill transition-all" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="cart-content">
+                    <div class="text-center py-5 empty-cart-msg">
+                        <i class="fa fa-shopping-basket fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">Tu carrito está vacío</p>
+                    </div>
+                </div>
+                <div class="cart-footer">
+                    <div class="subtotal">
+                        <span>Total</span>
+                        <span class="total-amount">$ 0.00</span>
+                    </div>
+                    <div class="actions">
+                        <a href="/shop/cart" class="btn btn-outline-primary py-3 rounded-pill fw-bold">Ver Carrito</a>
+                        <a href="/shop/checkout" class="btn btn-primary py-3 rounded-pill fw-bold">Pagar Ahora</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Bottom Bar -->
+            <nav class="zenith-mobile-bottom-bar d-flex d-md-none">
+                <a href="/" class="nav-item active">
+                    <div class="icon-container">
+                        <i class="fa fa-home"></i>
+                    </div>
+                    <span>Inicio</span>
+                </a>
+                <a href="/shop" class="nav-item">
+                    <div class="icon-container">
+                        <i class="fa fa-th-large"></i>
+                    </div>
+                    <span>Categorías</span>
+                </a>
+                <a href="/shop" class="nav-item">
+                    <div class="icon-container">
+                        <i class="fa fa-tag"></i>
+                    </div>
+                    <span>Ofertas</span>
+                </a>
+                <a href="/shop/cart" class="nav-item position-relative">
+                    <div class="icon-container">
+                        <i class="fa fa-shopping-cart"></i>
+                        <t t-set="website_sale_cart_quantity" t-value="request.website.sale_get_order().cart_quantity or 0"/>
+                        <span t-if="website_sale_cart_quantity" class="cart-badge badge rounded-pill bg-danger">
+                            <t t-esc="website_sale_cart_quantity"/>
+                        </span>
+                    </div>
+                    <span>Carrito</span>
+                </a>
+                <a href="/shop/wishlist" class="nav-item">
+                    <div class="icon-container">
+                        <i class="fa fa-heart-o"></i>
+                    </div>
+                    <span>Favoritos</span>
+                </a>
+                <!-- Hidden anchor to satisfy legacy database XPaths during upgrade -->
+                <a href="/my" class="d-none">Legacy Anchor</a>
+            </nav>
+        </xpath>
+    </template>
+
+
+    <!-- Custom Footer -->
+    <template id="zenith_footer" inherit_id="website.footer_custom" name="Zenith Footer">
+        <xpath expr="//div[@id='footer']" position="replace">
+            <footer id="footer" class="bg-dark text-white pt-5 pb-3">
+                <div class="container">
+                    <div class="row g-4">
+                        <!-- Branding & Contact -->
+                        <div class="col-lg-4">
+                            <h5 class="text-primary fw-bold mb-4" t-field="website.name"/>
+                            <div class="oe_structure">
+                                <p class="text-muted small">
+                                    Zenith es tu socio estratégico en soluciones de eCommerce y tecnología empresarial. 
+                                    Innovación y robustez en cada proyecto.
+                                </p>
+                            </div>
+                            <div class="mt-4 oe_structure">
+                                <p class="mb-1"><i class="fa fa-map-marker text-primary me-2"></i> Calle Tecnología 123, Ciudad IT</p>
+                                <p class="mb-1"><i class="fa fa-phone text-primary me-2"></i> +1 234 567 890</p>
+                                <p class="mb-1"><i class="fa fa-envelope text-primary me-2"></i> hola@zenith.com</p>
+                            </div>
+                        </div>
+                        <!-- Quick Links -->
+                        <div class="col-lg-2 offset-lg-1 col-md-4">
+                            <h6 class="text-uppercase fw-bold mb-4">Empresa</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><a href="/aboutus" class="text-muted text-decoration-none hover-primary">Nosotros</a></li>
+                                <li class="mb-2"><a href="/contactus" class="text-muted text-decoration-none hover-primary">Contacto</a></li>
+                                <li class="mb-2"><a href="/jobs" class="text-muted text-decoration-none hover-primary">Empleo</a></li>
+                                <li class="mb-2"><a href="/blog" class="text-muted text-decoration-none hover-primary">Blog</a></li>
+                            </ul>
+                        </div>
+                        <!-- Resources -->
+                        <div class="col-lg-2 col-md-4">
+                            <h6 class="text-uppercase fw-bold mb-4">Recursos</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><a href="/shop" class="text-muted text-decoration-none hover-primary">Tienda</a></li>
+                                <li class="mb-2"><a href="/help" class="text-muted text-decoration-none hover-primary">Ayuda</a></li>
+                                <li class="mb-2"><a href="/terms" class="text-muted text-decoration-none hover-primary">Términos</a></li>
+                                <li class="mb-2"><a href="/privacy" class="text-muted text-decoration-none hover-primary">Privacidad</a></li>
+                            </ul>
+                        </div>
+                        <!-- Newsletter -->
+                        <div class="col-lg-3 col-md-4">
+                            <h6 class="text-uppercase fw-bold mb-4">Newsletter</h6>
+                            <div class="oe_structure">
+                                <p class="text-muted small mb-3">Recibe las últimas noticias y ofertas de Zenith.</p>
+                            </div>
+                            <form action="/website/newsletter" method="post" class="js_subscribe">
+                                <div class="input-group">
+                                    <input type="email" class="form-control bg-transparent border-primary text-white" placeholder="Tu email" aria-label="Email"/>
+                                    <button class="btn btn-primary" type="button">Unirme</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <hr class="my-5 border-secondary"/>
+                    <div class="row align-items-center">
+                        <div class="col-md-6 text-center text-md-start">
+                            <p class="mb-0 text-muted small">© <t t-esc="datetime.datetime.now().year"/> Zenith. Todos los derechos reservados.</p>
+                        </div>
+                        <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                            <a href="#" class="text-muted me-3"><i class="fa fa-facebook"></i></a>
+                            <a href="#" class="text-muted me-3"><i class="fa fa-twitter"></i></a>
+                            <a href="#" class="text-muted me-3"><i class="fa fa-linkedin"></i></a>
+                            <a href="#" class="text-muted"><i class="fa fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </xpath>
+    </template>
+
+    <!-- Shop Page Customization -->
+    <template id="zenith_products" inherit_id="website_sale.products" name="Zenith Products">
+        <xpath expr="//div[hasclass('oe_website_sale')]" position="before">
+            <!-- Mobile Filter Button (Safer target) -->
+            <div class="d-lg-none mb-3">
+                <button type="button" class="btn btn-primary-light w-100 fw-bold zenith-mobile-filter-toggle">
+                    <i class="fa fa-filter me-2"></i> Filtros y Categorías
+                </button>
+            </div>
+            <!-- Mobile Sidebar Overlay -->
+            <div class="zenith-shop-sidebar-overlay d-lg-none"></div>
+        </xpath>
+    </template>
+
+    <!-- Modern Breadcrumbs Override (V2) -->
+    <!-- We renamed this to V2 to bypass any corrupted/COW views stuck in the database -->
+    <!-- Modern Breadcrumbs Override (V2) - REMOVED (Legacy/Obstructive)
+    <template id="zenith_breadcrumbs_v2" inherit_id="website.layout" name="Zenith Breadcrumbs V2" active="False">
+        <xpath expr="//main" position="before">
+            
+        </xpath>
+    </template>
+    -->
+
+    <!-- Product Item Customization with SEO & Quick View (V2 to bypass COW cache) -->
+    <template id="zenith_product_item_v2" inherit_id="website_sale.products_item" name="Zenith Product Item V2">
+        <xpath expr="//*[hasclass('oe_product_cart')]" position="attributes">
+            <attribute name="class" add="zenith-product-card h-100 shadow-sm border-0 rounded-3 overflow-hidden position-relative" separator=" "/>
+            <attribute name="itemscope" add="itemscope" separator=" "/>
+            <attribute name="itemtype" add="http://schema.org/Product" separator=" "/>
+        </xpath>
+        
+        <!-- Image Container Modifications -->
+        <xpath expr="//div[hasclass('oe_product_image')]" position="attributes">
+            <attribute name="class" add="border-bottom-0 position-relative overflow-hidden" separator=" "/>
+        </xpath>
+        
+        <xpath expr="//div[hasclass('oe_product_image')]" position="inside">
+            <!-- Secondary Image (Hover Effect) -->
+            <t t-set="second_image" t-value="product.product_variant_ids and product.product_variant_ids[0].image_1920 or product.image_1920"/> <!-- Placeholder logic - ideally we use extra media -->
+            <!-- Note: deeply retrieving extra_variant_media might be heavy here, checking for profile extra images if available -->
+            <span class="d-none d-md-block zenith-secondary-image position-absolute top-0 start-0 w-100 h-100 bg-white"
+                  t-attf-style="background-image: url('/web/image/product.template/#{product.id}/image_1024'); opacity: 0; transition: opacity 0.3s ease;">
+                  <!-- Ideally this would point to a different image field if Odoo stored 'hover_image' separately, 
+                       for now we use the main image zooming or a specific logic if user has 'product_images' module. 
+                       In standard Odoo, we often stick to the main image or look for the first extra image. -->
+            </span>
+            <!-- (Optimization: In a real 'All-in-One' we'd access product.product_template_image_ids[0] if exists) -->
+
+            <!-- Labels Overlay -->
+            <div class="zenith-labels position-absolute top-0 start-0 w-100 p-2 d-flex flex-column gap-1" style="pointer-events: none; z-index: 2;">
+                <!-- Discount Badge (Zenith Style: Yellow Pill) -->
+                <t t-set="combination_info" t-value="product._get_combination_info(combination, product_id, add_qty or 1)"/>
+                <t t-if="combination_info['has_discounted_price']">
+                     <t t-set="discount_pct" t-value="round((combination_info['list_price'] - combination_info['price']) * 100 / combination_info['list_price'])"/>
+                     <span class="zenith-discount-badge" t-if="discount_pct &gt; 0">
+                         -<t t-esc="discount_pct"/>%
+                     </span>
+                </t>
+
+                <!-- Standard Labels -->
+                <t t-foreach="product.label_ids" t-as="label">
+                    <span t-attf-class="badge zenith-label-{{label.style}} zenith-label-{{label.position}} align-self-{{'start' if 'left' in label.position else 'end'}} shadow-sm"
+                          t-attf-style="background-color: {{label.bg_color}}; color: {{label.text_color}}; backdrop-filter: blur(5px);">
+                        <t t-esc="label.name"/>
+                    </span>
+                </t>
+            </div>
+            
+            <!-- Premium Action Bar (Slide Up) -->
+            <div class="zenith-action-bar position-absolute bottom-0 start-0 w-100 p-2 d-flex justify-content-center gap-2 translate-y-100 transition-all opacity-0" style="z-index: 3;">
+                
+                <!-- Quick View -->
+                <button type="button" class="btn btn-light rounded-circle shadow-sm o_quick_view zenith-quick-view-btn" 
+                        t-att-data-product-id="product.id"
+                        aria-label="Vista Rápida" title="Vista Rápida">
+                    <i class="fa fa-eye"></i>
+                </button>
+                
+                <!-- Add to Cart (Icon only for clean look) -->
+                <t t-if="product._is_add_to_cart_possible()">
+                    <a role="button" class="btn btn-primary rounded-circle shadow-sm a-submit" t-att-data-product-id="product.product_variant_id.id" aria-label="Añadir">
+                        <i class="fa fa-shopping-cart"></i>
+                    </a>
+                </t>
+                
+                <!-- Wishlist (Native Hook - Safe for RPC context) -->
+                <!-- Wishlist (Native Hook - Safe for RPC context) -->
+                <t t-set="_wishlist_active" t-value="False"/>
+                <t t-set="website_safe" t-value="request.env['website'].get_current_website()"/>
+                <t t-if="website_safe">
+                    <t t-set="_wishlist_active" t-value="website_safe.viewref('website_sale_wishlist.add_to_wishlist').active"/>
+                </t>
+                
+                <t t-if="_wishlist_active">
+                    <button type="button" class="btn btn-light rounded-circle shadow-sm o_add_wishlist" t-att-disabled="in_wishlist" t-att-data-product-template-id="product.id" t-att-data-product-product-id="product.product_variant_ids[0].id if product.product_variant_ids else False" title="Add to Wishlist">
+                        <i class="fa fa-heart o_heart_icon" role="img" aria-label="Add to wishlist"></i>
+                    </button>
+                </t>
+                
+                <!-- Add to List (Shopping Lists Feature) -->
+                <div class="dropdown">
+                    <button type="button" class="btn btn-light rounded-circle shadow-sm js_add_to_list_btn" 
+                            data-bs-toggle="dropdown" aria-expanded="false"
+                            title="Agregar a lista" t-att-data-product-id="product.product_variant_id.id">
+                        <i class="fa fa-list-ul"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3 js_list_dropdown" style="min-width: 220px;">
+                        <div class="js_list_items">
+                            <div class="text-center p-3"><i class="fa fa-spinner fa-spin"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+
+        <xpath expr="//h6[hasclass('o_wsale_products_item_title')]" position="inside">
+            <meta itemprop="name" t-att-content="product.name"/>
+        </xpath>
+        <xpath expr="//div[hasclass('product_price')]" position="attributes">
+            <attribute name="itemprop" add="offers" separator=" "/>
+            <attribute name="itemscope" add="itemscope" separator=" "/>
+            <attribute name="itemtype" add="http://schema.org/Offer" separator=" "/>
+        </xpath>
+    </template>
+
+    <!-- Product Page Customization -->
+    <template id="zenith_product" inherit_id="website_sale.product" name="Zenith Product Page">
+        <xpath expr="//div[@id='product_details']" position="before">
+            <t t-set="product" t-value="product.sudo()"/>
+        </xpath>
+        <xpath expr="//div[@id='product_details']" position="attributes">
+            <attribute name="class" add="ps-lg-5" separator=" "/>
+        </xpath>
+        <!-- Size Guide Button -->
+        <xpath expr="//div[@id='product_details']//form" position="before">
+            <div class="d-flex gap-2 mb-3">
+                <button type="button" class="btn btn-link text-primary p-0 small fw-bold text-decoration-none" data-bs-toggle="modal" data-bs-target="#zenith_size_guide">
+                    <i class="fa fa-ruler-combined me-1"></i> Guía de Tallas
+                </button>
+                <!-- Video URL removed as field is missing -->
+                <!-- 
+                <t t-if="product.video_url">
+                    <span class="text-muted opacity-25">|</span>
+                    <button type="button" class="btn btn-link text-danger p-0 small fw-bold text-decoration-none" data-bs-toggle="modal" data-bs-target="#zenith_product_video">
+                        <i class="fa fa-play-circle me-1"></i> Ver Video
+                    </button>
+                </t>
+                -->
+            </div>
+            <!-- Flash Offer Countdown -->
+            <!-- Flash Offer Countdown (DISABLED: Missing validity_date field) -->
+            <!--
+            <div t-if="product.validity_date" class="zenith-flash-offer mb-4 p-3 rounded-4 bg-primary-light border border-primary-soft shadow-sm">
+                <div class="d-flex align-items-center gap-2 mb-2 text-primary fw-bold small">
+                    <i class="fa fa-bolt"></i> <span class="text-uppercase letter-spacing-1">¡Oferta por Tiempo Limitado!</span>
+                </div>
+                <div class="zenith-countdown" t-att-data-end-date="product.validity_date"/>
+            </div>
+            -->
+        </xpath>
+        <xpath expr="//div[@id='add_to_cart_wrap']" position="before">
+             <h5 t-if="branch_stock" class="mt-4 mb-3 border-bottom pb-2 fw-bold text-uppercase text-secondary small">Disponibilidad por Sede</h5>
+            <div id="zenith_branch_stock_container" t-att-class="'mb-4 bg-light p-3 rounded shadow-sm border ' + (not branch_stock and 'd-none' or '')">
+                <table class="table table-sm table-borderless mb-0">
+                    <tbody>
+                        <tr t-foreach="branch_stock" t-as="branch">
+                            <td class="align-middle py-2">
+                                <i class="fa fa-map-marker text-primary me-2"></i>
+                                <span class="fw-bold text-dark" t-esc="branch['name']"/>
+                                <small class="d-block text-muted ps-4" t-if="branch['desc']" t-esc="branch['desc']"/>
+                            </td>
+                            <td class="text-end align-middle py-2">
+                                <span class="badge bg-success rounded-pill px-3 py-2 shadow-sm">
+                                    <t t-esc="branch['qty']"/> Disponibles
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </xpath>
+        <xpath expr="//div[@id='product_details']//t[@t-call='website_sale.product_price']" position="after">
+            <div class="zenith-delivery-estimate mt-3 mb-4 p-3 bg-light-soft rounded-4 border border-dashed border-primary-soft">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="delivery-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; min-width: 40px;">
+                        <i class="fa fa-bolt"></i>
+                    </div>
+                    <div>
+                        <div class="fw-bold text-dark small">ENVÍO PRIORITARIO</div>
+                        <div class="text-primary fw-bold" t-esc="product.get_estimated_delivery_date()"/>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//h1[@t-field='product.name']" position="before">
+            <div t-if="product.brand_id" class="mb-2">
+                <span class="badge bg-light text-primary border" t-field="product.brand_id.name"/>
+            </div>
+        </xpath>
+        <xpath expr="//h1[@t-field='product.name']" position="attributes">
+            <attribute name="class" add="fw-bold text-dark mb-3" separator=" "/>
+        </xpath>
+        <!-- B2B Special Price Badge -->
+        <xpath expr="//div[@id='product_details']//t[@t-call='website_sale.product_price']" position="before">
+            <t t-set="is_b2b" t-value="not request.env.user._is_public()"/>
+            <div t-if="is_b2b" class="zenith-b2b-price-marker mb-2 animate__animated animate__fadeIn">
+                <span class="badge bg-success-light text-success border border-success-soft rounded-pill px-3 py-2 small fw-bold">
+                    <i class="fa fa-handshake-o me-2"></i> TARIFA ESPECIAL ACTIVADA
+                </span>
+            </div>
+        </xpath>
+        <xpath expr="//div[@id='wrap']" position="inside">
+            <!-- Dynamic Size Guide Modal -->
+            <div class="modal fade" id="zenith_size_guide" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content border-0 shadow-lg rounded-4">
+                        <t t-set="actual_guide" t-value="product.get_size_guide()"/>
+                        <div class="modal-header border-0 pb-0">
+                            <h5 class="fw-bold mb-0" t-esc="actual_guide.name if actual_guide else 'Guía de Tallas'"/>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body p-4">
+                            <t t-if="actual_guide">
+                                <div class="zenith-dynamic-guide" t-out="actual_guide.content"/>
+                            </t>
+                            <t t-else="">
+                                <div class="alert alert-info">Guía de tallas estándar seleccionada.</div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered text-center align-middle mb-0">
+                                        <thead class="bg-light">
+                                            <tr><th>Talla</th><th>Pecho (cm)</th><th>Cintura (cm)</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>S</td><td>86-91</td><td>71-76</td></tr>
+                                            <tr><td>M</td><td>97-102</td><td>81-86</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </t>
+                            <p class="small text-muted mt-3 mb-0">* Estas medidas son orientativas. Si tienes dudas, contáctanos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Video Modal (DISABLED: Missing video_url field) -->
+            <!-- 
+            <div t-if="False" class="d-none">
+                Video modal removed due to missing field.
+            </div>
+            -->
+
+            <div id="zenith_sticky_cart" t-if="product" class="zenith-sticky-cart-bar align-items-center justify-content-between">
+                <div class="d-flex align-items-center gap-3">
+                    <img t-if="product.image_128" t-att-src="'/web/image/product.template/%s/image_128' % product.id" class="rounded shadow-sm" style="width: 50px; height: 50px; object-fit: cover;"/>
+                    <div>
+                        <h6 class="mb-0 fw-bold text-truncate" style="max-width: 300px;" t-field="product.name"/>
+                        <span class="text-primary fw-bold" t-field="product.list_price" 
+                              t-options="{'widget': 'monetary', 'display_currency': product.currency_id}"/>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <form t-if="product._is_add_to_cart_possible()" action="/shop/cart/update" method="POST" class="d-flex gap-2 mb-0">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <input type="hidden" name="product_id" t-att-value="product.product_variant_id.id"/>
+                        <input type="number" class="form-control text-center" name="add_qty" value="1" min="1" style="width: 70px;" aria-label="Cantidad a añadir"/>
+                        <button type="submit" class="btn btn-primary fw-bold shadow-sm js_check_product a-submit" aria-label="Añadir al Carrito">
+                            <i class="fa fa-shopping-cart me-2"></i> Añadir al Carrito
+                        </button>
+                    </form>
+                    <a t-if="product._is_add_to_cart_possible()" role="button" class="btn btn-zenith-buy-now fw-bold shadow-sm js_buy_now" href="#">
+                        <i class="fa fa-bolt me-2"></i>COMPRAR YA
+                    </a>
+                </div>
+            </div>
+            
+            <!-- GEO / AI Structured Data -->
+            <script type="application/ld+json">
+            {
+                "@context": "https://schema.org/",
+                "@type": "Product",
+                "name": "<t t-esc="product.name"/>",
+                "image": "<t t-esc="website.get_base_url() + '/web/image/product.template/' + str(product.id) + '/image_1920'"/>",
+                "description": "<t t-esc="product.description_sale or product.name"/>",
+                "sku": "<t t-esc="product.default_code or ''"/>",
+                "brand": {
+                    "@type": "Brand",
+                    "name": "<t t-esc="product.brand_id.name if product.brand_id else ''"/>"
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "url": "<t t-esc="website.get_base_url() + product.website_url"/>",
+                    "priceCurrency": "<t t-esc="website.currency_id.name"/>",
+                    "price": "<t t-esc="product.list_price"/>",
+                    "availability": "<t t-esc="'https://schema.org/InStock' if product.is_published else 'https://schema.org/OutOfStock'"/>"
+                },
+                "potentialAction": {
+                    "@type": "BuyAction",
+                    "target": {
+                        "@type": "EntryPoint",
+                        "urlTemplate": "<t t-esc="website.get_base_url() + '/shop/cart/update?product_id=' + str(product.product_variant_id.id) + '&amp;add_qty=1'"/>",
+                        "actionPlatform": [
+                            "http://schema.org/DesktopWebPlatform",
+                            "http://schema.org/MobileWebPlatform"
+                        ]
+                    }
+                }
+            }
+            </script>
+        </xpath>
+    </template>
+
+    <!-- Price Slider Override -->
+    <template id="zenith_price_filter" inherit_id="website_sale.filter_products_price" name="Zenith Price Filter Visual">
+        <xpath expr="." position="replace">
+            <div t-if="available_min_price != available_max_price" class="zenith-price-filter-wrapper mb-4">
+                <h6 class="text-uppercase fw-bold mb-3">Precio</h6>
+                <div id="zenith_price_slider"
+                     t-att-data-min="available_min_price"
+                     t-att-data-max="available_max_price"
+                     t-att-data-current-min="min_price or available_min_price"
+                     t-att-data-current-max="max_price or available_max_price"
+                     t-att-data-currency-symbol="website.currency_id.symbol">
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3 text-muted small fw-bold">
+                    <span id="price_min_display" class="bg-light px-2 py-1 rounded border">
+                        <t t-esc="min_price or available_min_price" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                    </span>
+                    <span>-</span>
+                    <span id="price_max_display" class="bg-light px-2 py-1 rounded border">
+                        <t t-esc="max_price or available_max_price" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                    </span>
+                </div>
+                <input type="hidden" name="min_price" t-att-value="min_price or available_min_price"/>
+                <input type="hidden" name="max_price" t-att-value="max_price or available_max_price"/>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- Cross-selling & Up-selling Premium Styling (DISABLED: Missing ID) -->
+    <!--
+    <template id="zenith_recommended_products" inherit_id="website_sale.recommended_products" name="Zenith Recommended Products">
+        <xpath expr="//div[hasclass('container')]" position="attributes">
+            <attribute name="class" add="zenith-recommended pt-5 pb-5 border-top mt-5" separator=" "/>
+        </xpath>
+        <xpath expr="//h3" position="attributes">
+            <attribute name="class" add="fw-bold text-center mb-5 text-uppercase" separator=" "/>
+        </xpath>
+    </template>
+    -->
+
+    <!-- Alternative Products (Alternative version of the card) (DISABLED: Missing ID) -->
+    <!--
+    <template id="zenith_product_alternative" inherit_id="website_sale.product_item" name="Zenith Alternative Card" active="False">
+        < ! - - This is a placeholder for when we want to force specific cards in recommendations - - >
+    </template>
+    -->
+
+    <!-- Request Quote button in Cart (DISABLED: XPath not found) -->
+    <!--
+    <template id="zenith_cart_request_quote" inherit_id="website_sale.cart" name="Zenith Cart Request Quote">
+        <xpath expr="//div[hasclass('justify-content-between')]//a[hasclass('btn-primary')]" position="after">
+            <a role="button" href="/shop/request_quote" class="btn btn-outline-primary rounded-pill px-4 fw-bold ms-2">
+                <i class="fa fa-file-text-o me-2"></i> SOLICITAR PRESUPUESTO
+            </a>
+        </xpath>
+    </template>
+    -->
+
+    <!-- Lottie Empty Cart (DISABLED: XPath not found) -->
+    <!--
+    <template id="zenith_empty_cart_lottie" inherit_id="website_sale.cart" name="Zenith Empty Cart Lottie">
+        <xpath expr="//div[hasclass('oe_cart')]//div[hasclass('text-center')][1]" position="replace">
+            <div class="text-center py-5">
+                <div class="alert alert-info d-none">Animation Placeholder</div>
+                <h3 class="fw-bold mt-4">Tu carrito está vacío</h3>
+                <p class="text-muted mb-4">Parece que aún no has añadido nada a tu selección técnica.</p>
+                <a href="/shop" class="btn btn-primary btn-lg rounded-pill px-5 fw-bold">EMPEZAR A COMPRAR</a>
+            </div>
+        </xpath>
+    </template>
+    -->
+</odoo>

@@ -1,0 +1,47 @@
+.s_zenith_category_cards {
+    .category-card-premium {
+        display: block;
+        
+        .card {
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            
+            &:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 15px 35px rgba(0,0,0,0.15) !important;
+                
+                img {
+                    transform: scale(1.1);
+                }
+                
+                .glass-badge {
+                    background-color: rgba(255, 255, 255, 0.2);
+                    border-color: rgba(255, 255, 255, 0.4);
+                }
+                
+                .small {
+                    opacity: 1 !important;
+                }
+            }
+        }
+
+        .card-img-wrapper {
+            background-color: #fcfcfc;
+            img {
+                transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+            }
+        }
+
+        .bg-gradient-to-t {
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 70%);
+        }
+
+        .backdrop-blur-md {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        
+        .glass-badge {
+            transition: all 0.3s ease;
+        }
+    }
+}

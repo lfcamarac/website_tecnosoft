@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sticky CTA for Product Page -->
+    <template id="zenith_sticky_cta" inherit_id="website_sale.product" name="Zenith Sticky CTA">
+        <xpath expr="//div[@id='product_details']" position="after">
+            <!-- Sticky CTA moved to layout_overrides.xml as #zenith_sticky_cart -->
+        </xpath>
+    </template>
+
+    <!-- Urgency Element: Low Stock Alert -->
+    <template id="zenith_urgency_stock" inherit_id="website_sale.product" name="Zenith Urgency Stock">
+        <xpath expr="//div[@id='product_details']//form" position="inside">
+            <t t-set="threshold" t-value="5"/>
+            <div t-if="product.virtual_available &lt;= threshold and product.virtual_available &gt; 0" class="alert alert-warning d-flex align-items-center mt-3 mb-3 py-2 px-3 border-0 rounded-3">
+                <i class="fa fa-bolt me-2 text-warning animate-pulse"></i>
+                <span class="small fw-bold text-dark">
+                    ¡Date prisa! Solo quedan <t t-esc="int(product.virtual_available)"/> unidades en stock.
+                </span>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

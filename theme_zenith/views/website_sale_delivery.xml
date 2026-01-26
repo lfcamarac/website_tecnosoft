@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="zenith_product_delivery" inherit_id="website_sale.product" name="Zenith Product Delivery">
+        <xpath expr="//div[@id='add_to_cart_wrap']" position="after">
+            <div class="zenith-delivery-info mt-3 p-3 bg-light rounded d-flex align-items-center" 
+                 t-if="product.zenith_estimated_delivery">
+                <i class="fa fa-truck fa-2x text-primary me-3"/>
+                <div>
+                    <h6 class="mb-0 fw-bold">Estimated Delivery</h6>
+                    <span class="text-muted" t-field="product.zenith_estimated_delivery"/>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

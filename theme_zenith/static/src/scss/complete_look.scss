@@ -1,0 +1,61 @@
+/* Complete the Look Premium Styles */
+.zenith-complete-look {
+    .letter-spacing-1 {
+        letter-spacing: 1px;
+    }
+    
+    .together-item {
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        border: 1px solid rgba(0,0,0,0.05) !important;
+        
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08) !important;
+            border-color: var(--o-color-primary) !important;
+        }
+    }
+    
+    .js_together_check {
+        width: 1.5rem;
+        height: 1.5rem;
+        cursor: pointer;
+        border-color: var(--o-color-primary);
+        
+        &:checked {
+            background-color: var(--o-color-primary);
+            border-color: var(--o-color-primary);
+        }
+    }
+    
+    #together_pack_total {
+        color: #fff;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .js_add_together_pack {
+        transition: all 0.3s ease;
+        border: none;
+        
+        &:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+    }
+
+    /* Custom scrollbar for horizontal overflow */
+    .overflow-auto {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(var(--o-color-primary-rgb), 0.2) transparent;
+        
+        &::-webkit-scrollbar {
+            height: 4px;
+        }
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba(var(--o-color-primary-rgb), 0.2);
+            border-radius: 10px;
+        }
+    }
+}

@@ -1,0 +1,47 @@
+/* Zenith Special Blocks */
+
+// Timeline
+.s_zenith_timeline {
+    .timeline-wrapper {
+        &::before {
+            /* Line background handled in XML for now as a div */
+        }
+    }
+    .timeline-dot {
+        border: 4px solid #fff;
+        transition: all 0.3s ease;
+    }
+    .timeline-item {
+        &:hover .timeline-dot {
+            transform: scale(1.5);
+            background: var(--primary) !important;
+            box-shadow: 0 0 15px var(--primary);
+        }
+    }
+}
+
+// Pricing Table
+.s_zenith_pricing {
+    .pricing-card {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        
+        &.transform-scale-110 {
+            @media (min-width: 992px) {
+                transform: scale(1.1);
+                z-index: 2;
+            }
+        }
+
+        &:hover {
+            transform: translateY(-15px);
+            &.transform-scale-110 {
+                transform: scale(1.15) translateY(-5px);
+            }
+        }
+    }
+}
+
+/* Animations Helper */
+.transition-all {
+    transition: all 0.3s ease-in-out;
+}

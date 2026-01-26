@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Price Tracker Button on Product Page -->
+    <template id="zenith_price_tracker_button" inherit_id="website_sale.product" name="Zenith Price Tracker Button">
+        <xpath expr="//a[@id='add_to_cart']" position="after">
+            <button type="button" class="btn btn-outline-primary ms-2 rounded-pill fw-bold zenith-price-tracker-trigger" 
+                    t-if="not request.env.user._is_public()"
+                    t-att-data-product-id="product.id">
+                <i class="fa fa-bell-o me-2"></i>Avisarme si baja de precio
+            </button>
+        </xpath>
+    </template>
+
+    <!-- Email Template for Price Drop -->
+    <record id="email_template_price_drop" model="mail.template">
+        <field name="name">Zenith: Price Drop Notification</field>
+        <field name="model_id" ref="theme_zenith.model_website_price_tracker"/>
+        <field name="subject">¡El precio ha bajado! {{ object.product_id.name }}</field>
+        <field name="email_from">{{ object.product_id.company_id.email_formatted }}</field>
+        <field name="email_to">{{ object.partner_id.email_formatted }}</field>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                    Hola <t t-out="object.partner_id.name"/>,<br/><br/>
+                    Tenemos buenas noticias. El producto <strong><t t-out="object.product_id.name"/></strong> que estabas siguiendo ha bajado de precio.
+                    <br/><br/>
+                    Precio actual: <strong><t t-out="object.product_id.list_price"/></strong>
+                    <br/><br/>
+                    <a t-att-href="object.product_id.website_url" style="background-color: #0056b3; padding: 10px 20px; text-decoration: none; color: #fff; border-radius: 5px;">Ver producto ahora</a>
+                    <br/><br/>
+                    ¡Gracias por confiar en Zenith!
+                </p>
+            </div>
+        </field>
+    </record>
+</odoo>

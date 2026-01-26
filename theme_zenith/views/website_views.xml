@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="zenith_robots" inherit_id="website.robots">
+        <xpath expr="//t[@t-out='request.website.sudo().robots_txt']" position="after">
+User-agent: *
+Allow: /shop
+Allow: /static/
+Disallow: /my/
+Disallow: /web/
+Sitemap: <t t-esc="website.get_base_url()"/>sitemap.xml
+        </xpath>
+    </template>
+</odoo>

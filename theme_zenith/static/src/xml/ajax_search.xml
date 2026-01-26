@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="theme_zenith.AjaxSearchResults">
+        <div class="list-group list-group-flush">
+            <!-- Categories Section -->
+            <t t-if="categories and categories.length > 0">
+                <div class="text-xs fw-bold text-muted bg-light px-3 py-2 text-uppercase d-flex align-items-center">
+                    <i class="fa fa-folder-open me-2"></i> Categorías
+                </div>
+                <t t-foreach="categories" t-as="category" t-key="category.id">
+                    <a t-att-href="category.url" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between p-2 px-3 border-0">
+                        <span class="text-dark fw-bold" t-esc="category.name"/>
+                        <span class="badge bg-light text-dark rounded-pill border" t-if="category.count">
+                            <t t-esc="category.count"/>
+                        </span>
+                    </a>
+                </t>
+            </t>
+
+            <!-- Products Section -->
+            <t t-if="products.length > 0">
+                <div class="text-xs fw-bold text-muted bg-light px-3 py-2 text-uppercase d-flex align-items-center border-top">
+                    <i class="fa fa-shopping-bag me-2"></i> Productos
+                </div>
+                <t t-foreach="products" t-as="product" t-key="product.id">
+                    <a t-att-href="product.url" class="list-group-item list-group-item-action d-flex align-items-center p-3 border-0 border-bottom">
+                        <div class="search-result-img me-3">
+                            <img t-att-src="product.image_url" class="rounded shadow-sm" style="width: 48px; height: 48px; object-fit: cover;"/>
+                        </div>
+                        <div class="search-result-info flex-grow-1 overflow-hidden">
+                            <div class="d-flex align-items-center gap-2 mb-1" t-if="product.brand_name or product.category_name">
+                                <span t-if="product.brand_name" class="badge bg-light text-dark border small" t-esc="product.brand_name"/>
+                                <span t-if="product.category_name" class="text-muted small text-truncate" style="max-width: 100px;" t-esc="product.category_name"/>
+                            </div>
+                            <h6 class="mb-0 fw-bold text-dark text-truncate" t-esc="product.name"/>
+                            <div class="small text-primary fw-bold mt-1" t-esc="product.price_formatted"/>
+                        </div>
+                        <div class="search-result-arrow ms-2 text-muted opacity-50">
+                            <i class="fa fa-chevron-right"/>
+                        </div>
+                    </a>
+                </t>
+                <div class="p-2 bg-light text-center border-top">
+                    <a t-attf-href="/shop?search={{searchTerm}}" class="small fw-bold text-primary text-decoration-none">
+                        Ver todos los resultados <i class="fa fa-long-arrow-right ms-1"/>
+                    </a>
+                </div>
+            </t>
+            <t t-elif="!categories || categories.length === 0">
+                <div class="p-4 text-center text-muted">
+                    <i class="fa fa-frown-o fa-2x mb-2 opacity-50 d-block"/>
+                    No se encontraron productos para "<t t-esc="searchTerm"/>"
+                </div>
+            </t>
+        </div>
+    </t>
+
+    <t t-name="theme_zenith.SearchSuggestions">
+        <div class="list-group list-group-flush">
+            <!-- History Section -->
+            <t t-if="history and history.length > 0">
+                <div class="text-xs fw-bold text-muted bg-light px-3 py-2 text-uppercase d-flex align-items-center">
+                    <i class="fa fa-history me-2"></i> Recientes
+                </div>
+                <t t-foreach="history" t-as="term" t-key="term_index">
+                    <a href="#" class="list-group-item list-group-item-action border-0 px-3 py-2 d-flex justify-content-between align-items-center zenith-history-item" t-att-data-term="term">
+                        <span><i class="fa fa-clock-o text-muted me-2"></i> <t t-esc="term"/></span>
+                        <i class="fa fa-times text-muted opacity-50 zenith-remove-history p-1" title="Eliminar" t-on-click.stop.prevent="removeHistory"/>
+                    </a>
+                </t>
+            </t>
+
+            <!-- Trending Section -->
+            <div class="text-xs fw-bold text-muted bg-light px-3 py-2 text-uppercase d-flex align-items-center border-top">
+                <i class="fa fa-line-chart me-2"></i> Tendencias
+            </div>
+            <div class="p-3 d-flex flex-wrap gap-2">
+                <t t-foreach="trending" t-as="trend" t-key="trend">
+                    <a href="#" class="badge bg-light text-dark border text-decoration-none px-3 py-2 rounded-pill zenith-trending-item" t-att-data-term="trend">
+                        <i class="fa fa-search me-1 text-primary opacity-50"></i> <t t-esc="trend"/>
+                    </a>
+                </t>
+            </div>
+        </div>
+    </t>
+    <t t-name="theme_zenith.SearchSkeleton">
+        <div class="list-group list-group-flush ajax-search-skeleton">
+            <t t-foreach="[1, 2, 3]" t-as="i">
+                <div class="list-group-item d-flex align-items-center p-3 border-0 border-bottom">
+                    <div class="zenith-skeleton skeleton-img me-3 rounded"></div>
+                    <div class="flex-grow-1">
+                        <div class="zenith-skeleton skeleton-text" style="width: 80%;"></div>
+                        <div class="zenith-skeleton skeleton-text-sm"></div>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>

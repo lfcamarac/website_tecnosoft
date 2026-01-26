@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="theme_zenith.DynamicProductList">
+        <div t-attf-class="zenith-slider-container position-relative #{mode == 'slider' ? 'is-slider' : ''}">
+            <div t-attf-class="row g-4 #{mode == 'slider' ? 'zenith-slider-wrapper flex-nowrap overflow-auto' : ''}" style="#{mode == 'slider' ? 'scroll-snap-type: x mandatory; scrollbar-width: none;' : ''}">
+                <t t-foreach="products" t-as="product" t-key="product.id">
+                    <div t-attf-class="#{mode == 'slider' ? 'col-10 col-md-4 col-lg-3 flex-shrink-0' : 'col-lg-3 col-md-6'}" style="#{mode == 'slider' ? 'scroll-snap-align: start;' : ''}">
+                        <div class="card h-100 zenith_product_card">
+                            <a t-att-href="product.url" class="card-img-top-wrapper">
+                                <img t-att-src="product.image_url" class="card-img-top" loading="lazy" t-att-alt="product.name"/>
+                            </a>
+                            <div class="card-body">
+                                <h6 class="card-title fw-bold" t-esc="product.name"/>
+                                <p class="product-price fw-bold mb-0">
+                                    <span t-esc="product.price_formatted"/>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </div>
+            <!-- Slider Controls -->
+            <t t-if="mode == 'slider'">
+                <button class="slider-prev btn btn-light shadow-sm rounded-circle position-absolute top-50 start-0 translate-middle-y ms-n3" type="button" style="z-index: 5;">
+                    <i class="fa fa-chevron-left"/>
+                </button>
+                <button class="slider-next btn btn-light shadow-sm rounded-circle position-absolute top-50 end-0 translate-middle-y me-n3" type="button" style="z-index: 5;">
+                    <i class="fa fa-chevron-right"/>
+                </button>
+            </t>
+        </div>
+    </t>
+</templates>

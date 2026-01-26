@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Zenith Header V2: A search-centric, ultra-clean header inspired by modern app-shells (Farmatodo style) -->
+    <template id="header_zenith_v2" inherit_id="website.layout" name="Zenith Header V2 (Search Centric)" active="False">
+        <xpath expr="//header" position="attributes">
+            <attribute name="t-attf-class" add="zenith-header-v2" separator=" "/>
+        </xpath>
+        <xpath expr="//header//nav" position="replace">
+            <div id="o_main_nav" class="o_main_nav header_zenith_v2">
+                <!-- Top Utility Bar (Minimal) -->
+                <div class="zenith-v2-top-bar py-1 border-bottom d-none d-lg-block">
+                    <div class="container d-flex justify-content-end align-items-center gap-4">
+                        <a href="/shop/wishlist" class="small text-muted text-decoration-none">
+                            <i class="fa fa-heart-o me-1 text-primary"/> Mis Favoritos
+                        </a>
+                        <a href="/my/orders" class="small text-muted text-decoration-none">
+                            <i class="fa fa-truck me-1 text-primary"/> Rastrear Pedido
+                        </a>
+                        <t t-call="website.placeholder_header_language_selector">
+                            <t t-set="_div_classes" t-valuef="position-relative"/>
+                            <t t-set="_btn_class" t-valuef="btn btn-sm text-muted dropdown-toggle p-0"/>
+                        </t>
+                    </div>
+                </div>
+
+                <!-- Primary Branding & Search Bar -->
+                <div class="zenith-v2-main-header py-3 bg-white">
+                    <div class="container d-flex align-items-center gap-lg-5">
+                        <!-- Branding -->
+                        <div class="header-v2-logo flex-shrink-0">
+                            <t t-call="website.placeholder_header_brand">
+                                <t t-set="_link_class" t-valuef="navbar-brand logo m-0"/>
+                            </t>
+                        </div>
+
+                        <!-- Location Selector (Signature Feature) -->
+                        <div class="header-v2-location d-none d-xl-flex align-items-center gap-2 border-start ps-4 cursor-pointer">
+                            <div class="location-icon bg-primary-light rounded-circle p-2">
+                                <i class="fa fa-map-marker text-primary"/>
+                            </div>
+                            <div class="location-text lh-1">
+                                <span class="d-block text-muted small" style="font-size: 11px;">Entregar en</span>
+                                <span class="fw-bold text-dark d-flex align-items-center gap-1">
+                                    Maturín, Monagas <i class="fa fa-chevron-down text-primary small" style="font-size: 10px;"/>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- High-Performance Search -->
+                        <div class="header-v2-search flex-grow-1 mx-lg-2">
+                            <form method="get" action="/shop" class="o_wsale_products_searchbar_form position-relative">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-0 rounded-pill-start ps-4">
+                                        <i class="fa fa-search text-primary"/>
+                                    </span>
+                                    <input type="text" name="search" class="form-control bg-light border-0 py-2 fs-6" placeholder="¿Qué estás buscando hoy?" style="height: 48px;"/>
+                                    <button type="submit" class="btn btn-primary rounded-pill-end px-4 border-light">Buscar</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Action Icons -->
+                        <div class="header-v2-actions d-none d-lg-flex align-items-center gap-4">
+                            <!-- User Menu -->
+                            <t t-call="portal.placeholder_user_sign_in">
+                                <t t-set="_link_class" t-valuef="text-dark text-center d-flex flex-column align-items-center text-decoration-none"/>
+                                <t t-set="_item_class" t-valuef="d-flex flex-column align-items-center"/>
+                            </t>
+                            <t t-call="portal.user_dropdown">
+                                <t t-set="_icon" t-value="True"/>
+                                <t t-set="_item_class" t-valuef="dropdown"/>
+                                <t t-set="_link_class" t-valuef="text-dark d-flex flex-column align-items-center text-decoration-none mb-0"/>
+                                <t t-set="_dropdown_menu_class" t-valuef="dropdown-menu-end shadow border-0 mt-3"/>
+                            </t>
+
+                            <!-- Cart with Label -->
+                            <t t-call="website_sale.header_cart_link">
+                                <t t-set="_icon" t-value="True"/>
+                                <t t-set="_link_class" t-value="'nav-link text-dark position-relative p-0 text-center d-flex flex-column align-items-center'"/>
+                                <t t-set="_badge_class" t-value="'position-absolute top-0 start-50 translate-middle-y badge rounded-pill bg-danger shadow-sm'"/>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Bar (Sticky Optimized) -->
+                <nav class="zenith-v2-nav navbar navbar-expand-lg bg-primary text-white py-0">
+                    <div class="container">
+                        <!-- All Categories Trigger -->
+                        <div class="dropdown me-lg-4 border-end border-white-50 h-100">
+                            <a class="nav-link dropdown-toggle text-white fw-bold d-flex align-items-center gap-2 py-3 pe-4" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fa fa-bars"/> TODAS LAS CATEGORÍAS
+                            </a>
+                            <ul class="dropdown-menu shadow-lg border-0 p-3 mt-0 rounded-0 w-100 border-top border-primary" style="min-width: 250px;">
+                                <t t-set="categories" t-value="request.env['product.public.category'].search([('parent_id', '=', False)], limit=12)"/>
+                                <t t-foreach="categories" t-as="cat">
+                                    <li><a class="dropdown-item py-2 px-3 rounded" t-att-href="'/shop/category/%s' % slug(cat)" t-esc="cat.name"/></li>
+                                </t>
+                            </ul>
+                        </div>
+
+                        <!-- Main Nav Links -->
+                        <div class="collapse navbar-collapse" id="top_menu_collapse">
+                            <t t-call="website.navbar_nav">
+                                <t t-set="_nav_class" t-valuef="navbar-nav w-100 gap-lg-3"/>
+                            </t>
+                        </div>
+
+                        <!-- Quick Promos (Optional) -->
+                        <div class="d-none d-xl-flex align-items-center gap-2">
+                            <i class="fa fa-percent text-warning"/>
+                            <span class="small fw-bold">OFERTAS DEL DÍA</span>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </xpath>
+    </template>
+</odoo>

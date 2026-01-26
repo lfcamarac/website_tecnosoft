@@ -1,0 +1,131 @@
+/* Zenith Dynamic Snippet Styles */
+
+.zenith_product_card {
+    transition: all 0.3s ease;
+    border: none !important; /* Remove default border */
+    overflow: hidden; /* For image zoom effect */
+    background: #fff;
+    border-radius: 0.5rem; /* Standard rounded corners */
+}
+
+.zenith_product_card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+.zenith_product_card .card-img-top-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 220px; /* Fixed height for consistency */
+    display: flex;
+    align_items: center;
+    justify_content: center;
+    background-color: #f8f9fa; /* Light gray background for transparent images */
+}
+
+.zenith_product_card .card-img-top {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    transition: transform 0.5s ease;
+    padding: 1rem;
+}
+
+.zenith_product_card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.zenith_product_card .card-body {
+    padding: 1.25rem;
+    text-align: center;
+}
+
+.zenith_product_card .card-title {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #333;
+}
+
+.zenith_product_card .product-price {
+    font-size: 1.1rem;
+    color: var(--primary); /* Use Odoo primary color */
+}
+
+/* Action Button (Optional - appears on hover) */
+.zenith_product_card .card-actions {
+    margin-top: 1rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.zenith_product_card:hover .card-actions {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+// Slider Mode Specifics
+.zenith-slider-wrapper {
+    scrollbar-width: none; // Firefox
+    &::-webkit-scrollbar {
+        display: none; // Chrome, Safari
+    }
+}
+
+.zenith-slider-container {
+    &.is-slider {
+        margin: 0 -1rem; // Bleed out slightly to allow for card shadows
+        padding: 0 1rem;
+    }
+
+    .slider-prev, .slider-next {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        background: white !important;
+        border: none !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+        color: var(--primary) !important;
+        border-radius: 50%;
+
+        &:hover {
+            background: var(--primary) !important;
+            color: white !important;
+            transform: translateY(-50%) scale(1.1) !important;
+        }
+
+        &.start-0 { left: 0; margin-left: -5px; }
+        &.end-0 { right: 0; margin-right: -5px; }
+    }
+}
+
+// Category Tabs Styles
+.zenith_tabs_header {
+    .nav-pills {
+        .nav-link {
+            background: #f8f9fa;
+            color: #444;
+            border: 1px solid #eee;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+            &.active {
+                background: var(--primary) !important;
+                color: white !important;
+                border-color: var(--primary) !important;
+                box-shadow: 0 4px 15px rgba(0, 86, 179, 0.2);
+                transform: translateY(-2px);
+            }
+
+            &:hover:not(.active) {
+                background: #eee;
+                transform: translateY(-1px);
+            }
+        }
+    }
+}

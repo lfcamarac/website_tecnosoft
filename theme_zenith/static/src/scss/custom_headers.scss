@@ -1,0 +1,73 @@
+/* Zenith Header Variants */
+
+/* 1. Centered Master */
+header.zenith-header.header-variant-centered {
+    .navbar-collapse {
+        justify-content: center;
+    }
+    .navbar-brand {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0 !important;
+    }
+    .navbar-nav {
+        width: 100%;
+        justify-content: space-between;
+        /* Split menu effect requires logic or specific menu structure, 
+           but we can simulate with padding for now */
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+/* 2. Minimalista Sticky */
+header.zenith-header.header-variant-minimal {
+    padding: 0.5rem 0;
+    transition: all 0.3s ease;
+    
+    &.o_header_is_scrolled {
+        background: #fff;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        padding: 0.2rem 0;
+    }
+
+    .nav-link {
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+    }
+}
+
+/* 3. Cristal Flotante (Floating Glass) */
+header.zenith-header.header-variant-glass {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    z-index: 1000;
+    transition: all 0.3s ease;
+
+    .navbar { background: transparent !important; border: none !important; }
+
+    &.o_header_is_scrolled {
+        top: 10px;
+        width: 95%;
+        background: rgba(255, 255, 255, 0.9) !important;
+    }
+}
+
+/* Fix for Odoo 18 sticky headers when using variants */
+.zenith-header {
+    z-index: 1040;
+}
+
+// Global spacer for fixed headers to prevent overlap
+body:has(.zenith-header) #wrapwrap > main {
+    padding-top: 100px;
+}

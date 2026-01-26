@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="s_zenith_category_cards" name="Category Cards Grid">
+        <section class="s_zenith_category_cards pt-5 pb-5 bg-light">
+            <div class="container">
+                <div class="row mb-5 text-center">
+                    <div class="col-lg-8 mx-auto">
+                        <h2 class="fw-bold text-dark text-uppercase letter-spacing-1 mb-3">Busca por Categoría</h2>
+                        <p class="text-muted">Explora nuestra selección técnica por sectores especializados.</p>
+                    </div>
+                </div>
+                <div class="row g-4 justify-content-center">
+                    <!-- Fetch 4 top categories -->
+                    <t t-set="top_categories" t-value="request.env['product.public.category'].sudo().search([('parent_id', '=', False)], limit=4)"/>
+                    <t t-foreach="top_categories" t-as="cat">
+                        <div class="col-6 col-lg-3">
+                            <a t-attf-href="/shop/category/#{cat.id}" class="category-card-premium text-decoration-none group">
+                                <div class="card border-0 rounded-4 overflow-hidden shadow-sm h-100 position-relative transition-all hover-lift">
+                                    <div class="card-img-wrapper ratio ratio-1x1 bg-white">
+                                        <img t-att-src="website.image_url(cat, 'image_512')" class="img-fluid object-cover transition-transform duration-500 scale-100 group-hover:scale-110"/>
+                                    </div>
+                                    <div class="card-overlay position-absolute bottom-0 start-0 w-100 p-3 p-lg-4 d-flex flex-column justify-content-end bg-gradient-to-t from-dark to-transparent">
+                                        <div class="glass-badge d-inline-block px-3 py-2 rounded-pill bg-white bg-opacity-10 backdrop-blur-md border border-white border-opacity-20 text-white shadow-lg">
+                                            <h6 class="mb-0 fw-bold text-truncate" t-esc="cat.name"/>
+                                            <div class="small opacity-75 d-none d-md-block">Explorar ahora <i class="fa fa-arrow-right ms-1"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

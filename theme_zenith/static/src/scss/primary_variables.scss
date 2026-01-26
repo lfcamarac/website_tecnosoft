@@ -1,0 +1,22 @@
+// Zenith Brand Identity Tokens
+$o-color-palettes: (
+    'zenith-palette': (
+        'primary': #0056b3, // Trustworthy Blue
+        'secondary': #6c757d,
+        'success': #28a745,
+        'info': #17a2b8,
+        'warning': #ffc107,
+        'danger': #dc3545,
+        'light': #f8f9fa,
+        'dark': #343a40,
+    )
+);
+
+$o-website-values-palettes: (
+    (
+        'color-palettes': 'zenith-palette',
+        'font': 'Inter',
+        'headings-font': 'Outfit',
+        'header-template': 'header_zenith_v1',
+    )
+);

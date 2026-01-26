@@ -1,0 +1,153 @@
+/* Zenith Multi-Style Engine */
+
+:root {
+    /* Default (Moderno) */
+    --zenith-primary: #007bff;
+    --zenith-secondary: #6c757d;
+    --zenith-radius: 12px;
+    --zenith-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    --zenith-font: 'Inter', sans-serif;
+    --zenith-bg: #ffffff;
+    --zenith-text: #2c3e50;
+}
+
+/* 1. Minimalista */
+body.zenith-style-minimalista {
+    --zenith-primary: #000000;
+    --zenith-secondary: #f8f9fa;
+    --zenith-radius: 0px;
+    --zenith-shadow: none;
+    --zenith-font: 'Inter', sans-serif;
+    --zenith-bg: #ffffff;
+    --zenith-text: #000000;
+    
+    .feature-card, .product-card, .btn, .zenith_hero_img_container {
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+    .s_zenith_hero {
+        background: #fff !important;
+        h1, p { color: #000 !important; }
+        .btn-light { background: #000 !important; color: #fff !important; }
+    }
+}
+
+/* 2. Futurista */
+body.zenith-style-futurista {
+    --zenith-primary: #00f2ff;
+    --zenith-secondary: #1a1a2e;
+    --zenith-radius: 20px;
+    --zenith-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+    --zenith-font: 'Orbitron', sans-serif;
+    --zenith-bg: #0a0b1e;
+    --zenith-text: #e0e0e0;
+
+    background-color: var(--zenith-bg);
+    color: var(--zenith-text);
+
+    .zenith_hero_img_container {
+        border: 2px solid var(--zenith-primary);
+        box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
+    }
+
+    .hotspot-point {
+        background: var(--zenith-primary) !important;
+        box-shadow: 0 0 15px var(--zenith-primary) !important;
+    }
+
+    .bg-white { background-color: rgba(255, 255, 255, 0.05) !important; backdrop-filter: blur(10px); }
+    .text-muted { color: #888 !important; }
+    .shadow-sm, .shadow { box-shadow: var(--zenith-shadow) !important; }
+    
+    header.zenith-header {
+        border-bottom: 1px solid rgba(0, 242, 255, 0.2) !important;
+    }
+}
+
+/* 3. Épico */
+body.zenith-style-epico {
+    --zenith-primary: #ff4d00;
+    --zenith-secondary: #212121;
+    --zenith-radius: 4px;
+    --zenith-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    --zenith-font: 'Montserrat', sans-serif;
+    --zenith-bg: #ffffff;
+    --zenith-text: #111111;
+
+    h1, h2, h3, .btn { font-weight: 900 !important; text-transform: uppercase; letter-spacing: -1px; }
+    
+    .s_zenith_hero {
+        background: linear-gradient(135deg, #212121 0%, #000000 100%) !important;
+    }
+    
+    .pricing-card.transform-scale-110 {
+        border: 5px solid var(--zenith-primary) !important;
+    }
+}
+
+/* 4. Dinámico */
+body.zenith-style-dinamico {
+    --zenith-primary: #ff007a;
+    --zenith-secondary: #7000ff;
+    --zenith-radius: 50px;
+    --zenith-shadow: 10px 10px 0px rgba(255, 0, 122, 0.1);
+    --zenith-font: 'Outfit', sans-serif;
+    
+    .btn, .feature-card, .product-card {
+        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        &:hover { transform: translateY(-5px) rotate(1deg); }
+    }
+
+    .s_zenith_hero {
+        background: linear-gradient(45deg, var(--zenith-primary), var(--zenith-secondary)) !important;
+    }
+}
+
+/* eCommerce Global Reinforcement */
+body.zenith-style-minimalista {
+    #cart_products, .oe_cart, .wizard {
+        border: 1px solid #000 !important;
+        border-radius: 0 !important;
+    }
+    .btn-primary { background-color: #000 !important; border-color: #000 !important; }
+}
+
+body.zenith-style-futurista {
+    #wrap, .oe_website_sale, .modal-content {
+        background-color: var(--zenith-bg) !important;
+        color: var(--zenith-text) !important;
+    }
+    .card, .list-group-item {
+        background-color: rgba(255,255,255,0.05) !important;
+        border-color: rgba(0, 242, 255, 0.2) !important;
+        color: #fff !important;
+    }
+    input.form-control, select.form-select {
+        background-color: rgba(255,255,255,0.1) !important;
+        border-color: var(--zenith-primary) !important;
+        color: #fff !important;
+    }
+}
+
+body.zenith-style-epico {
+    .btn-primary { 
+        padding-top: 1rem !important; 
+        padding-bottom: 1rem !important; 
+        font-size: 1.2rem !important;
+    }
+}
+
+/* Global Variable Overrides */
+:root {
+    --primary: var(--zenith-primary);
+    --border-radius: var(--zenith-radius);
+}
+
+/* Apply Variables to Components */
+.btn { border-radius: var(--zenith-radius); }
+.rounded-4 { border-radius: var(--zenith-radius) !important; }
+.card, .feature-card, .product-card { 
+    border-radius: var(--zenith-radius); 
+    box-shadow: var(--zenith-shadow);
+}

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Custom Portal Dashboard -->
+    <template id="zenith_portal_my_home" inherit_id="portal.portal_my_home" name="Zenith Portal Dashboard">
+        <xpath expr="//div[hasclass('o_portal_my_home')]" position="attributes">
+            <attribute name="class" add="zenith-portal-dashboard row g-4" separator=" "/>
+        </xpath>
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="attributes">
+            <attribute name="class" add="col-12" separator=" "/>
+        </xpath>
+    </template>
+
+    <!-- Enhance Portal Layout with Sidebar/Card style -->
+    <template id="zenith_portal_layout" inherit_id="portal.portal_layout" name="Zenith Portal Layout">
+        <xpath expr="//div[descendant::t[@t-call='portal.side_content']][1]" position="attributes">
+            <attribute name="class" add="sticky-top" separator=" "/>
+        </xpath>
+        <xpath expr="//div[contains(@t-attf-class, 'o_portal_content')]" position="attributes">
+            <attribute name="class" add="ps-lg-5" separator=" "/>
+        </xpath>
+    </template>
+
+    <!-- Delivery Tracking Timeline (DISABLED: Missing ID) -->
+    <!--
+    <template id="portal_order_page_tracking" inherit_id="website_sale.portal_order_page" name="Zenith Portal Tracking">
+        <xpath expr="//div[@id='portal_order_content']" position="before">
+            <div class="zenith-tracking-timeline bg-white p-4 rounded-4 shadow-sm mb-4 border border-light">
+                <h5 class="fw-bold mb-4 text-uppercase small text-muted letter-spacing-1">Estado del Envío</h5>
+                <div class="d-flex justify-content-between position-relative">
+                    <div class="timeline-line position-absolute w-100 top-50 translate-middle-y bg-light" style="height: 4px; z-index: 0;"></div>
+                    
+                    <t t-set="order_state" t-value="order.state"/>
+                    <t t-set="delivery_state" t-value="order.delivery_status or 'pending'"/>
+
+                    <div t-attf-class="timeline-step text-center position-relative z-index-1 #{'active' if order_state in ['draft', 'sent', 'sale'] else ''}">
+                        <div class="step-icon rounded-circle bg-white border border-2 d-flex align-items-center justify-content-center mx-auto mb-2" style="width: 40px; height: 40px;">
+                            <i class="fa fa-shopping-basket"></i>
+                        </div>
+                        <div class="small fw-bold">Pedido</div>
+                    </div>
+
+                    <div t-attf-class="timeline-step text-center position-relative z-index-1 #{'active' if order.picking_ids and any(p.state == 'assigned' for p in order.picking_ids) else ''}">
+                        <div class="step-icon rounded-circle bg-white border border-2 d-flex align-items-center justify-content-center mx-auto mb-2" style="width: 40px; height: 40px;">
+                            <i class="fa fa-archive"></i>
+                        </div>
+                        <div class="small fw-bold">Preparando</div>
+                    </div>
+
+                    <div t-attf-class="timeline-step text-center position-relative z-index-1 #{'active' if order.picking_ids and any(p.state == 'done' for p in order.picking_ids) else ''}">
+                        <div class="step-icon rounded-circle bg-white border border-2 d-flex align-items-center justify-content-center mx-auto mb-2" style="width: 40px; height: 40px;">
+                            <i class="fa fa-truck"></i>
+                        </div>
+                        <div class="small fw-bold">Enviado</div>
+                    </div>
+
+                    <div t-attf-class="timeline-step text-center position-relative z-index-1 #{'active' if delivery_state == 'full' else ''}">
+                        <div class="step-icon rounded-circle bg-white border border-2 d-flex align-items-center justify-content-center mx-auto mb-2" style="width: 40px; height: 40px;">
+                            <i class="fa fa-check-circle"></i>
+                        </div>
+                        <div class="small fw-bold">Entregado</div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+    -->
+
+    <!-- Custom Portal Home Icons and Cards -->
+    <template id="zenith_portal_home_card" inherit_id="portal.portal_my_home" name="Zenith Portal Cards" priority="20">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
+            <div class="col-12 mb-4">
+                <div class="zenith-portal-welcome p-5 bg-primary text-white rounded-4 shadow-sm position-relative overflow-hidden">
+                    <div class="position-relative z-index-1">
+                        <h2 class="fw-bold">Bienvenido, <t t-esc="request.env.user.partner_id.name"/></h2>
+                        <p class="lead mb-0 opacity-75">Gestiona tus pedidos, facturas y preferencias desde tu panel profesional.</p>
+                    </div>
+                    <i class="fa fa-user-circle position-absolute end-0 bottom-0 opacity-25 m-n4" style="font-size: 15rem;"></i>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- Highlight Quote Requests in Portal (DISABLED: Missing ID) -->
+    <!--
+    <template id="portal_my_orders_quote_badge" inherit_id="website_sale.portal_my_orders" name="Zenith Portal Quote Badge">
+        <xpath expr="//t[@t-foreach='orders']//span[hasclass('badge')]" position="after">
+            <span t-if="order.is_quote_request" class="badge rounded-pill bg-info ms-1">
+                <i class="fa fa-clock-o me-1"></i>REVISIÓN
+            </span>
+        </xpath>
+    </template>
+    -->
+
+    <!-- Add Reorder Button to Portal Order List (DISABLED: Missing ID) -->
+    <!--
+    <template id="portal_my_orders_reorder" inherit_id="website_sale.portal_my_orders" name="Zenith Portal Reorder">
+        <xpath expr="//t[@t-foreach='orders']//td[hasclass('text-end')]" position="inside">
+            <a t-attf-href="/shop/reorder/#{order.id}" class="btn btn-secondary btn-sm rounded-pill ms-2" title="Volver a pedir">
+                <i class="fa fa-refresh"></i>
+            </a>
+        </xpath>
+    </template>
+    -->
+
+    <!-- Add Reorder Button to Portal Order Detail (DISABLED: Missing ID) -->
+    <!--
+    <template id="portal_order_page_reorder" inherit_id="website_sale.portal_order_page" name="Zenith Portal Order Reorder">
+        <xpath expr="//div[@id='portal_order_content']//h2" position="inside">
+            <a t-attf-href="/shop/reorder/#{order.id}" class="btn btn-primary rounded-pill float-end small fw-bold">
+                <i class="fa fa-refresh me-1"></i> REPETIR PEDIDO
+            </a>
+        </xpath>
+    </template>
+    -->
+
+    <!-- Extended User Dropdown (Farmatodo Style) - DISABLED: XPath incompatible with Odoo 18 -->
+    <!--
+    <template id="zenith_user_dropdown_extended" inherit_id="portal.user_dropdown" name="Zenith Extended User Dropdown">
+        <xpath expr="//ul[hasclass('dropdown-menu')]" position="inside">
+            <li><hr class="dropdown-divider"/></li>
+            <li>
+                <a class="dropdown-item py-2" href="/my/orders">
+                    <i class="fa fa-shopping-bag me-2 text-muted"></i> Mis Compras
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item py-2" href="/shop/wishlist">
+                    <i class="fa fa-heart me-2 text-muted"></i> Mis Favoritos
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item py-2" href="/my/addresses">
+                    <i class="fa fa-map-marker me-2 text-muted"></i> Mis Direcciones
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item py-2" href="/contactus">
+                    <i class="fa fa-envelope me-2 text-muted"></i> Contáctenos
+                </a>
+            </li>
+        </xpath>
+    </template>
+    -->
+</odoo>

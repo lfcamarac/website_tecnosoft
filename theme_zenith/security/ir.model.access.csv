@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_zenith_flash_sale_user,zenith.flash.sale.user,model_zenith_flash_sale,base.group_user,1,1,1,1
+access_zenith_flash_sale_public,zenith.flash.sale.public,model_zenith_flash_sale,base.group_public,1,0,0,0
+
+access_zenith_branch_user,zenith.branch.user,model_zenith_branch,base.group_user,1,1,1,1
+access_zenith_branch_public,zenith.branch.public,model_zenith_branch,base.group_public,1,0,0,0
+access_zenith_branch_portal,zenith.branch.portal,model_zenith_branch,base.group_portal,1,0,0,0
+
+access_website_shopping_list_user,website.shopping.list.user,model_website_shopping_list,base.group_user,1,1,1,1
+access_website_shopping_list_portal,website.shopping.list.portal,model_website_shopping_list,base.group_portal,1,1,1,1
+access_website_shopping_list_line_user,website.shopping.list.line.user,model_website_shopping_list_line,base.group_user,1,1,1,1
+access_website_shopping_list_line_portal,website.shopping.list.line.portal,model_website_shopping_list_line,base.group_portal,1,1,1,1

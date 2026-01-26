@@ -1,0 +1,34 @@
+/* Marketing Snippets Styles */
+
+// Countdown Timer
+.s_zenith_countdown {
+    .time-block {
+        min-width: 80px;
+        
+        @include media-breakpoint-up(md) {
+            min-width: 100px;
+        }
+        
+        .days, .hours, .minutes, .seconds {
+            font-family: 'Monospace', sans-serif; // Use a monospaced font for numbers to avoid jumping
+            line-height: 1;
+        }
+    }
+}
+
+// Shop Offer / Deal
+.s_zenith_shop_offer {
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 1rem 3rem rgba(0,0,0,0.1) !important;
+    }
+    
+    .countdown-wrapper {
+        .h3 {
+             font-family: 'Monospace', sans-serif;
+        }
+    }
+}

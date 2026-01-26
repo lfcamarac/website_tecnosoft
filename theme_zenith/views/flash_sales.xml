@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="s_zenith_flash_sale_hero" name="Flash Sale Hero">
+        <t t-set="flash_sale" t-value="request.env['zenith.flash.sale'].sudo().get_current_sale()"/>
+        <section t-if="flash_sale" class="s_zenith_flash_sale_hero pb-6 pt-6 oe_img_bg o_bg_img_center" 
+             t-attf-style="background-image: url('#{flash_sale.background_image and ('/web/image/zenith.flash.sale/%s/background_image' % flash_sale.id) or '/theme_zenith/static/src/img/flash_sale_bg.jpg'}');">
+            <div class="o_we_bg_filter bg-black-50"></div>
+            <div class="container position-relative">
+                <div class="row align-items-center">
+                    <div class="col-lg-7 text-white animate__animated animate__fadeInLeft">
+                        <div class="badge bg-danger rounded-pill px-3 py-2 mb-3 flash-badge">
+                            <i class="fa fa-bolt me-1"></i> <t t-esc="flash_sale.name"/>
+                        </div>
+                        <h1 class="display-3 fw-bold mb-3">GRANDES DESCUENTOS<br/>TERMINAN PRONTO</h1>
+                        <p class="lead mb-4 opacity-75">Aprovecha nuestras ofertas exclusivas. ¡No te quedes sin el tuyo!</p>
+                        
+                        <!-- Reusing countdown logic -->
+                        <div class="s_zenith_countdown d-flex gap-3 mb-5" t-att-data-date="flash_sale.end_date">
+                            <div class="countdown-unit">
+                                <span class="days h1 fw-bold mb-0">00</span>
+                                <small class="text-uppercase opacity-50">Días</small>
+                            </div>
+                            <div class="countdown-unit">
+                                <span class="hours h1 fw-bold mb-0">00</span>
+                                <small class="text-uppercase opacity-50">Hrs</small>
+                            </div>
+                            <div class="countdown-unit">
+                                <span class="minutes h1 fw-bold mb-0">00</span>
+                                <small class="text-uppercase opacity-50">Min</small>
+                            </div>
+                            <div class="countdown-unit">
+                                <span class="seconds h1 fw-bold mb-0">00</span>
+                                <small class="text-uppercase opacity-50">Seg</small>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-3">
+                            <a href="/shop" class="btn btn-primary btn-lg rounded-pill px-5">Comprar Ahora</a>
+                            <a href="#" class="btn btn-outline-white btn-lg rounded-pill px-5">Ver Ofertas</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section t-else="" class="d-none">
+            <!-- Hidden if no active flash sale -->
+        </section>
+    </template>
+</odoo>

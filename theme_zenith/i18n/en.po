@@ -1,0 +1,68 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* theme_zenith
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-19 00:00+0000\n"
+"PO-Revision-Date: 2025-01-19 00:00+0000\n"
+"Last-Translator: Zenith AI\n"
+"Language-Team: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: theme_zenith
+msgid "Modern Hero"
+msgstr "Modern Hero"
+
+#. module: theme_zenith
+msgid "Dynamic Snippet"
+msgstr "Dynamic Snippet"
+
+#. module: theme_zenith
+msgid "Category Tabs"
+msgstr "Category Tabs"
+
+#. module: theme_zenith
+msgid "Brand Slider"
+msgstr "Brand Slider"
+
+#. module: theme_zenith
+msgid "Benefit Grid"
+msgstr "Benefit Grid"
+
+#. module: theme_zenith
+msgid "Zenith Style Engine"
+msgstr "Zenith Style Engine"
+
+#. module: theme_zenith
+msgid "Futuristic"
+msgstr "Futuristic"
+
+#. module: theme_zenith
+msgid "Minimalist"
+msgstr "Minimalist"
+
+#. module: theme_zenith
+msgid "Epic"
+msgstr "Epic"
+
+#. module: theme_zenith
+msgid "Dynamic"
+msgstr "Dynamic"
+
+#. module: theme_zenith
+msgid "Pulsing Hotspots"
+msgstr "Pulsing Hotspots"
+
+#. module: theme_zenith
+msgid "Elevate Your Business"
+msgstr "Elevate Your Business"
+
+#. module: theme_zenith
+msgid "Premium solutions designed for modern enterprises."
+msgstr "Premium solutions designed for modern enterprises."

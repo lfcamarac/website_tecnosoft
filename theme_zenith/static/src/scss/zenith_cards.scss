@@ -1,0 +1,249 @@
+// ==========================================================================
+// ZENITH PRODUCT CARDS - Multi-Style System
+// ==========================================================================
+// Styles: minimal, classic, overlay, horizontal
+// Usage: Add .card-style-{name} to .zenith-product-card
+
+// Base Card Styling (Shared)
+.zenith-product-card {
+    border: none !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: white;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+    }
+}
+
+// Product Image Area
+.zenith-product-card .oe_product_image,
+.zenith-product-card .zenith-card-image {
+    position: relative;
+    padding: 1rem;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #fafafa;
+    
+    img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+    }
+}
+
+// Discount Badge
+.zenith-discount-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: #ffd900;
+    color: #333;
+    font-weight: 800;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 50px;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+// ==========================================================================
+// STYLE 1: MINIMAL (Default - Buttons slide up on hover)
+// ==========================================================================
+.card-style-minimal,
+.zenith-product-card:not([class*="card-style-"]) {
+    .zenith-action-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 0.75rem;
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+        transform: translateY(100%);
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: 15;
+    }
+    
+    &:hover .zenith-action-bar {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    
+    .zenith-action-bar .btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        font-size: 1rem;
+        
+        &.btn-primary {
+            background: var(--o-color-primary, #007bff);
+        }
+        &.btn-light {
+            background: white;
+            color: #333;
+        }
+    }
+}
+
+// ==========================================================================
+// STYLE 2: CLASSIC (Buttons always visible at bottom)
+// ==========================================================================
+.card-style-classic {
+    .zenith-action-bar {
+        display: none !important; // Hide hover bar
+    }
+    
+    .zenith-card-buttons {
+        display: flex !important;
+        gap: 0.5rem;
+        margin-top: auto;
+        padding: 1rem;
+        padding-top: 0;
+        
+        .btn {
+            flex: 1;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+        }
+    }
+}
+
+// ==========================================================================
+// STYLE 3: OVERLAY (Full dark overlay on hover)
+// ==========================================================================
+.card-style-overlay {
+    .zenith-card-image {
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+    }
+    
+    &:hover .zenith-card-image::after {
+        opacity: 1;
+    }
+    
+    .zenith-action-bar {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: 20;
+        gap: 1rem;
+        
+        .btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+    }
+    
+    &:hover .zenith-action-bar {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+// ==========================================================================
+// STYLE 4: HORIZONTAL (List view - image left, details right)
+// ==========================================================================
+.card-style-horizontal {
+    flex-direction: row !important;
+    max-height: 180px;
+    
+    .zenith-card-image {
+        width: 180px;
+        min-width: 180px;
+        height: 100%;
+        padding: 0.75rem;
+    }
+    
+    .zenith-card-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 1rem;
+    }
+    
+    .zenith-action-bar {
+        position: static;
+        opacity: 1;
+        transform: none;
+        background: transparent;
+        justify-content: flex-start;
+        padding: 0.5rem 0 0 0;
+        gap: 0.5rem;
+        
+        .btn {
+            width: auto;
+            height: auto;
+            border-radius: 50px;
+            padding: 0.4rem 1rem;
+            font-size: 0.8rem;
+        }
+    }
+}
+
+// ==========================================================================
+// Responsive Adjustments
+// ==========================================================================
+@media (max-width: 768px) {
+    // On mobile, always show action bar (no hover)
+    .card-style-minimal .zenith-action-bar,
+    .zenith-product-card:not([class*="card-style-"]) .zenith-action-bar {
+        transform: translateY(0);
+        opacity: 1;
+        background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+    }
+    
+    .card-style-horizontal {
+        flex-direction: column !important;
+        max-height: none;
+        
+        .zenith-card-image {
+            width: 100%;
+            height: 150px;
+        }
+    }
+}
+
+// ==========================================================================
+// Legacy Support - Map old classes to new system
+// ==========================================================================
+.oe_product_cart {
+    @extend .zenith-product-card;
+}

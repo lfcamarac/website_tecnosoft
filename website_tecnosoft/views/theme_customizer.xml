@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <template id="tecnosoft_theme_customizer_panel" name="Theme Customizer Panel">
-        <div id="tecnosoft_customizer" class="d-none">
-            <!-- Legacy Customizer: Removed in favor of Odoo Native Editor & Dark Mode Toggle -->
-        </div>
-    </template>
-</odoo>

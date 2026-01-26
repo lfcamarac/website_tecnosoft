@@ -1,0 +1,21 @@
+{
+  "name": "Zenith Zenith",
+  "short_name": "Zenith",
+  "start_url": "/shop",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#007bff",
+  "description": "Zenith eCommerce Zenith - The Ultimate High-Performance Theme",
+  "icons": [
+    {
+      "src": "/theme_zenith/static/description/zenith_snippet_thumb.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/theme_zenith/static/description/zenith_screenshot.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

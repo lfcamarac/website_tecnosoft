@@ -1,0 +1,128 @@
+/* Product Labels - Enhanced Styles */
+
+/* Base Label Styles */
+.zenith-label {
+    font-size: 0.7rem;
+    padding: 0.35em 0.65em;
+    display: inline-block;
+    z-index: 5;
+}
+
+/* Badge Style (Default - Rounded) */
+.zenith-label-badge {
+    border-radius: 0.375rem;
+}
+
+/* Tag Style (Pill) */
+.zenith-label-tag {
+    border-radius: 2rem;
+    padding: 0.25em 0.75em;
+}
+
+/* Ribbon Style (Corner) */
+.zenith-label-ribbon {
+    position: relative;
+    padding: 0.25em 1em 0.25em 0.5em;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 50%, 100% 100%, 0 100%);
+}
+
+.zenith-label-ribbon::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+}
+
+/* Position Styles */
+.zenith-labels-top {
+    align-items: flex-start;
+}
+
+.zenith-labels-bottom {
+    align-items: flex-start;
+}
+
+.zenith-label-top-right,
+.zenith-label-bottom-right {
+    margin-left: auto;
+}
+
+/* Special Sale Label Animation */
+.zenith-label[style*="e74c3c"],
+.zenith-label[style*="#e74c3c"] {
+    animation: pulse-sale 2s infinite;
+}
+
+@keyframes pulse-sale {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Hover Effects on Product Card */
+.zenith-product-card:hover .zenith-label,
+form:hover .zenith-label {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.zenith-label {
+    transition: all 0.3s ease;
+}
+
+/* Corner Ribbon (Full corner style) */
+.zenith-label-ribbon.zenith-label-top-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: top left;
+    clip-path: none;
+    border-radius: 0 0 0.5rem 0;
+}
+
+.zenith-label-ribbon.zenith-label-top-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform-origin: top right;
+    clip-path: none;
+    border-radius: 0 0 0 0.5rem;
+}
+
+/* Stock Badge (for out of stock) */
+.zenith-label-stock {
+    background: rgba(0, 0, 0, 0.7) !important;
+    color: white !important;
+    backdrop-filter: blur(4px);
+}
+
+/* New Arrival Animation */
+.zenith-label-new {
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -100% 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+/* Best Seller Badge */
+.zenith-label-bestseller {
+    background: linear-gradient(135deg, #f093fb, #f5576c) !important;
+}
+
+/* Discount Percentage Badge */
+.zenith-label-discount {
+    background: #e74c3c !important;
+    font-weight: 700;
+}

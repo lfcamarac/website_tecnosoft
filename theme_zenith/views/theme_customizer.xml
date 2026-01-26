@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="zenith_theme_customizer_panel" name="Theme Customizer Panel">
+        <div id="zenith_customizer" class="d-none">
+            <!-- Legacy Customizer: Removed in favor of Odoo Native Editor & Dark Mode Toggle -->
+        </div>
+    </template>
+</odoo>

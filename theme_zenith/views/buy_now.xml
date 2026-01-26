@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="zenith_buy_now_button" inherit_id="website_sale.product" name="Zenith Buy Now Button">
+        <xpath expr="//div[@id='add_to_cart_wrap']" position="inside">
+            <a role="button" id="buy_now" class="btn btn-zenith-buy-now btn-lg ms-2 py-3 px-4 fw-bold rounded-pill js_buy_now" href="#">
+                <i class="fa fa-bolt me-2"></i>COMPRAR YA
+            </a>
+        </xpath>
+    </template>
+</odoo>

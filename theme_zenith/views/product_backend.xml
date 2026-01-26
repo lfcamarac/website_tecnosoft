@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Define the Client Action -->
+    <record id="action_generate_ai_description" model="ir.actions.client">
+        <field name="name">Generate with AI</field>
+        <field name="tag">theme_zenith.ai_generator</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Extend Product Template Form -->
+    <record id="product_template_form_view_ai" model="ir.ui.view">
+        <field name="name">product.template.form.ai</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="%(action_generate_ai_description)d" 
+                        string="✨ AI Description" 
+                        type="action" 
+                        class="btn-primary"
+                        context="{'active_id': id}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

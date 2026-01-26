@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Safely redefine old IDs to overwrite anything broken in the DB -->
+    <template id="zenith_header_wishlist_compare" inherit_id="theme_zenith.header_zenith_v1" name="Zenith Header Wishlist/Compare (Legacy Fix)">
+        <xpath expr="//a[contains(@href, '/shop/cart')]" position="before">
+            <t t-if="is_view_active('website_sale_comparison.add_to_compare')">
+                <a href="/shop/compare" class="nav-link text-dark position-relative mx-2 o_product_compare" title="Comparar">
+                    <i class="fa fa-exchange o_not-animable"></i>
+                </a>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="zenith_header_wishlist_compare_v2" inherit_id="theme_zenith.header_zenith_v1" name="Zenith Header Wishlist/Compare V2 (Legacy Fix)">
+        <xpath expr="//a[contains(@href, '/shop/cart')]" position="before">
+            <!-- Already fixed in V1 above, doing nothing here to avoid double icons -->
+        </xpath>
+    </template>
+
+    <!-- Final and Clean Version - V3 -->
+    <template id="zenith_header_wishlist_compare_v3" inherit_id="theme_zenith.header_zenith_v1" name="Zenith Header Wishlist/Compare Final">
+        <xpath expr="//a[contains(@href, '/shop/cart')]" position="before">
+            <!-- Compare Button -->
+            <t t-if="is_view_active('website_sale_comparison.add_to_compare')">
+                <a href="/shop/compare" class="nav-link text-dark position-relative mx-2 o_product_compare" title="Comparar">
+                    <i class="fa fa-exchange o_not-animable"></i>
+                </a>
+            </t>
+            <!-- Wishlist Button -->
+            <t t-if="is_view_active('website_sale_wishlist.add_to_wishlist')">
+                <a href="/shop/wishlist" class="nav-link text-dark position-relative mx-2 o_wsale_my_wish" title="Lista de Deseos">
+                    <i class="fa fa-heart-o o_not-animable"></i>
+                    <t t-set="wish_count" t-value="request.env['product.wishlist'].sudo().search_count([('partner_id', '=', request.env.user.partner_id.id)]) if request.env.user.partner_id else 0"/>
+                    <span t-if="wish_count" class="badge rounded-pill bg-primary" t-esc="wish_count"/>
+                </a>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- Override removed to use standard Odoo buttons and avoid duplication -->
+    <!-- <template id="zenith_product_card_buttons" ...> REMOVED </template> -->
+
+    <!-- Custom Wishlist Page Template -->
+    <template id="zenith_wishlist_page" inherit_id="website_sale_wishlist.product_wishlist" name="Zenith Wishlist Page">
+        <xpath expr="//div[@id='wrap']" position="attributes">
+            <attribute name="class" add="zenith-wishlist-page" separator=" "/>
+        </xpath>
+    </template>
+
+    <!-- Custom Compare Page Template -->
+    <template id="zenith_compare_page" inherit_id="website_sale_comparison.product_compare" name="Zenith Compare Page">
+        <xpath expr="//div[@id='wrap']" position="attributes">
+            <attribute name="class" add="zenith-compare-page" separator=" "/>
+        </xpath>
+    </template>
+
+    <!-- Add wishlist/compare to Quick View -->
+    <template id="zenith_quick_view_buttons" inherit_id="theme_zenith.quick_view_modal" name="Quick View Wishlist/Compare">
+        <xpath expr="//button[contains(@class, 'a-submit')]" position="after">
+            <!-- Wishlist Button in Quick View -->
+            <t t-if="request.env['website'].get_current_website().viewref('website_sale_wishlist.add_to_wishlist')">
+                <button type="button" 
+                        class="btn btn-outline-danger rounded-pill js_add_wishlist" 
+                        t-att-data-product-product-id="product.product_variant_id.id"
+                        t-att-data-product-template-id="product.id"
+                        title="Añadir a Lista de Deseos">
+                    <i class="fa fa-heart-o"></i>
+                </button>
+            </t>
+            <!-- Compare Button in Quick View -->
+            <t t-if="request.env['website'].get_current_website().viewref('website_sale_comparison.add_to_compare')">
+                <button type="button" 
+                        class="btn btn-outline-secondary rounded-pill o_add_compare" 
+                        t-att-data-product-product-id="product.product_variant_id.id"
+                        title="Comparar">
+                    <i class="fa fa-exchange"></i>
+                </button>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- Neutralizing broken DB view that causes ParseError -->
+    <template id="zenith_mobile_bar_wishlist" inherit_id="theme_zenith.zenith_layout" name="Mobile Bar Wishlist" active="False">
+        <xpath expr="//nav[hasclass('zenith-mobile-bottom-bar')]" position="inside">
+            <!-- Do nothing, just to allow successful validation and overwrite broken DB view -->
+        </xpath>
+    </template>
+</odoo>
