@@ -1,0 +1,41 @@
+/* Header V3: Modern Minimal */
+.header_zenith_v3,
+.zenith-header-v3 {
+  font-family: "Outfit", sans-serif;
+
+  .hover-scale {
+    transition: transform 0.2s ease;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  .hover-underline {
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0px;
+      left: 0;
+      background-color: var(--o-color-primary, #000);
+      transition: width 0.3s ease;
+    }
+    &:hover::after,
+    &.active::after {
+      width: 100%;
+    }
+  }
+
+  /* Modal Fullscreen Search */
+  #ZenithSearchModalV3 {
+    .modal-content {
+      background-color: rgba(255, 255, 255, 0.98) !important;
+    }
+    .form-control::placeholder {
+      color: #ddd;
+      font-weight: 300;
+    }
+  }
+}

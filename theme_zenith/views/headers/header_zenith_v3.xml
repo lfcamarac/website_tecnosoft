@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Zenith Header V3: Modern Minimal (Logo Center, Menu Below) -->
+    <template id="header_zenith_v3" inherit_id="website.layout" name="Zenith Header V3 (Modern Minimal)" active="False">
+        <xpath expr="//header" position="attributes">
+            <attribute name="t-attf-class" add="zenith-header-v3" separator=" "/>
+        </xpath>
+        <xpath expr="//header//nav" position="replace">
+            <header id="top" data-anchor="true" class="zenith-header-v3 o_header_standard border-bottom">
+                
+                <!-- MAIN AREA: Logo Center + Actions -->
+                <div class="zenith-v3-main py-4 bg-white position-relative">
+                    <div class="container">
+                        <div class="d-flex align-items-center justify-content-between position-relative">
+                            
+                            <!-- Left: Search Trigger (Desktop) / Hamburger (Mobile) -->
+                            <div class="d-flex align-items-center gap-3" style="width: 200px;">
+                                <button class="btn btn-link text-dark p-0 d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#ZenithMobileMenuV3">
+                                    <i class="fa fa-bars fs-2"></i>
+                                </button>
+                                <a href="#" class="nav-link text-dark d-none d-lg-block hover-scale" data-bs-toggle="modal" data-bs-target="#ZenithSearchModalV3">
+                                    <i class="fa fa-search fs-5"></i>
+                                    <span class="ms-2 small text-uppercase fw-bold" style="letter-spacing: 1px;">Buscar</span>
+                                </a>
+                            </div>
+
+                            <!-- Center: Logo -->
+                            <div class="flex-grow-1 text-center">
+                                <a href="/" class="navbar-brand logo p-0 m-0">
+                                    <span t-field="website.logo_image" t-options="{'widget': 'image', 'fixed_size': [160, 160]}" role="img" t-att-aria-label="'Logo of %s' % website.name" t-att-title="website.name" />
+                                </a>
+                            </div>
+
+                            <!-- Right: Actions -->
+                            <div class="d-flex align-items-center justify-content-end gap-3" style="width: 200px;">
+                                <t t-call="portal.placeholder_user_sign_in">
+                                    <t t-set="_link_class" t-valuef="nav-link text-dark px-2 hover-scale"/>
+                                </t>
+                                <t t-call="website_sale.header_cart_link">
+                                    <t t-set="_icon" t-value="True"/>
+                                    <t t-set="_link_class" t-value="'nav-link text-dark position-relative px-2 hover-scale'"/>
+                                    <t t-set="_badge_class" t-value="'position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark'"/>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NAV AREA: Centered Links -->
+                <div class="zenith-v3-nav d-none d-lg-block bg-white py-2">
+                    <div class="container">
+                        <ul class="nav justify-content-center gap-4 text-uppercase fw-bold" style="font-size: 0.85rem; letter-spacing: 1px;">
+                            <t t-foreach="website.menu_id.child_id" t-as="submenu">
+                                <t t-call="website.submenu">
+                                    <t t-set="item_class" t-value="'nav-item position-relative'"/>
+                                    <t t-set="link_class" t-value="'nav-link text-dark px-0 mx-2 hover-underline'"/>
+                                </t>
+                            </t>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Search Modal -->
+                <div class="modal fade" id="ZenithSearchModalV3" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-fullscreen bg-white opacity-95">
+                        <div class="modal-content border-0 shadow-none h-100">
+                             <div class="modal-header border-0">
+                                <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+                             </div>
+                             <div class="modal-body d-flex align-items-center justify-content-center">
+                                <form method="get" action="/shop" class="w-100" style="max-width: 800px;">
+                                    <input type="text" name="search" class="form-control form-control-lg border-0 border-bottom border-dark rounded-0 text-center display-4 shadow-none" placeholder="Escribe para buscar..." autofocus="autofocus"/>
+                                </form>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Offcanvas Mobile -->
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="ZenithMobileMenuV3">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title fw-bold">MENÚ</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                         <form method="get" action="/shop" class="mb-4">
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control" placeholder="Buscar..."/>
+                                <button class="btn btn-dark" type="submit"><i class="fa fa-search"></i></button>
+                            </div>
+                        </form>
+                        <ul class="list-unstyled">
+                            <t t-foreach="website.menu_id.child_id" t-as="submenu">
+                                <li class="mb-2">
+                                    <a t-att-href="submenu.url" class="d-block py-2 text-dark text-decoration-none fw-bold text-uppercase fs-5">
+                                        <span t-esc="submenu.name"/>
+                                    </a>
+                                </li>
+                            </t>
+                        </ul>
+                    </div>
+                </div>
+
+            </header>
+        </xpath>
+    </template>
+</odoo>
