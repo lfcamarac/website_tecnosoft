@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- Zenith Header V1: App-First Unified Navigation (Farmatodo Style) -->
-    <template id="header_zenith_v1" inherit_id="website.layout" name="Zenith Header V1" active="True" priority="99">
+    <template id="header_zenith_v1" inherit_id="website.layout" name="Zenith Smart App" active="True" priority="99">
+
         <xpath expr="//header" position="replace">
             <header id="top" data-anchor="true" t-attf-class="zenith-header-v1 o_header_standard o_top_fixed_element">
                 <div id="o_main_nav" class="o_main_nav header_zenith_v1">

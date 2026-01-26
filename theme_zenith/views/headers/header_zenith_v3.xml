@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- Zenith Header V3: Modern Minimal (Logo Center, Menu Below) -->
-    <template id="header_zenith_v3" inherit_id="website.layout" name="Zenith Header V3 (Modern Minimal)" active="False">
+    <template id="header_zenith_v3" inherit_id="website.layout" name="Zenith Boutique" active="False">
         <xpath expr="//header" position="attributes">
             <attribute name="t-attf-class" add="zenith-header-v3" separator=" "/>
         </xpath>

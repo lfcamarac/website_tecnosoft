@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- Zenith Header V2: A search-centric, ultra-clean header inspired by modern app-shells (Farmatodo style) -->
-    <template id="header_zenith_v2" inherit_id="website.layout" name="Zenith Header V2 (Search Centric)" active="False">
+    <template id="header_zenith_v2" inherit_id="website.layout" name="Zenith Global Store" active="False" customize_show="True">
+
         <xpath expr="//header" position="attributes">
             <attribute name="t-attf-class" add="zenith-header-v2" separator=" "/>
         </xpath>
