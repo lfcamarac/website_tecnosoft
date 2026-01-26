@@ -41,13 +41,6 @@
                                 </t>
                                 <div t-if="desktop_pricelist_available" class="d-none d-lg-flex align-items-center gap-1 dropdown ms-2">
                                     <a role="button" href="#" class="dropdown-toggle text-dark text-decoration-none fw-bold d-flex align-items-center gap-1 small" data-bs-toggle="dropdown">
-                                        <!-- Dynamic Flag Mapping -->
-                                        <t t-set="flag_code" t-value="'ve'"/>
-                                        <t t-if="curr_pl and curr_pl.currency_id.name == 'USD'"><t t-set="flag_code" t-value="'us'"/></t>
-                                        <t t-elif="curr_pl and curr_pl.currency_id.name == 'EUR'"><t t-set="flag_code" t-value="'eu'"/></t>
-                                        <t t-elif="curr_pl and curr_pl.currency_id.name == 'COP'"><t t-set="flag_code" t-value="'co'"/></t>
-                                        
-                                        <span t-attf-class="fi fi-{{flag_code}} rounded-1" style="font-size: 1rem;"></span>
                                         <span t-esc="curr_pl.currency_id.symbol if curr_pl else '$'"/>
                                     </a>
                                     <ul class="dropdown-menu shadow border-0 mt-2 rounded-3" style="min-width: 100px;">
@@ -55,11 +48,6 @@
                                             <li>
                                                 <a t-att-href="'/shop/change_pricelist/%s' % pl.id" class="dropdown-item d-flex align-items-center justify-content-between py-2" style="font-size: 0.85rem;">
                                                     <div class="d-flex align-items-center gap-2">
-                                                        <t t-set="pl_flag" t-value="'ve'"/>
-                                                        <t t-if="pl.currency_id.name == 'USD'"><t t-set="pl_flag" t-value="'us'"/></t>
-                                                        <t t-elif="pl.currency_id.name == 'EUR'"><t t-set="pl_flag" t-value="'eu'"/></t>
-                                                        <t t-elif="pl.currency_id.name == 'COP'"><t t-set="pl_flag" t-value="'co'"/></t>
-                                                        <span t-attf-class="fi fi-{{pl_flag}} rounded-1"></span>
                                                         <span t-esc="pl.name or pl.currency_id.name"/>
                                                     </div>
                                                     <span t-if="curr_pl and pl.id == curr_pl.id" class="text-primary"><i class="fa fa-check"></i></span>
@@ -163,7 +151,7 @@
                                 <t t-call="website_sale.header_cart_link">
                                     <t t-set="_icon" t-value="True"/>
                                     <t t-set="_link_class" t-value="'text-dark position-relative p-0 px-1'"/>
-                                    <t t-set="_badge_class" t-value="'position-absolute top-0 start-100 translate-middle-x mt-1 badge rounded-pill bg-primary'"/>
+                                    <t t-set="_badge_class" t-value="'position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary'"/>
                                 </t>
                                 
                                 <!-- User Dropdown -->
@@ -206,6 +194,7 @@
                                                 <li><a class="dropdown-item py-2" href="/my/orders"><i class="fa fa-shopping-bag me-2 text-muted"></i> Mis Compras</a></li>
                                                 <li><a class="dropdown-item py-2" href="/shop/wishlist"><i class="fa fa-heart me-2 text-muted"></i> Mis Favoritos</a></li>
                                                 <li><a class="dropdown-item py-2" href="/my/lists"><i class="fa fa-list-ul me-2 text-muted"></i> Mis Listas</a></li>
+                                                <li><a class="dropdown-item py-2" href="/my/addresses"><i class="fa fa-map-marker me-2 text-muted"></i> Mis Direcciones</a></li>
                                                 <li><hr class="dropdown-divider my-1"/></li>
                                                 <li><a class="dropdown-item py-2 text-danger" href="/web/session/logout?redirect=/"><i class="fa fa-sign-out me-2"></i> Salir</a></li>
                                             </ul>

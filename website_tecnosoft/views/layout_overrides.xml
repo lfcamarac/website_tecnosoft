@@ -21,9 +21,27 @@
              <!-- Dark Mode Toggle (Floating above mobile bottom bar) -->
              <!-- Desktop: bottom-left corner, Mobile: above the bottom nav bar -->
              <div class="tecnosoft-dark-mode-container position-fixed d-flex align-items-center justify-content-center bg-white rounded-circle shadow-lg tecnosoft-dark-mode-toggle"
-                  style="width: 48px; height: 48px; z-index: 99999; cursor: pointer; border: 2px solid var(--o-color-primary, #007bff); left: 20px; bottom: 20px;"
-                  onclick="document.body.classList.toggle('o_dark_mode'); localStorage.setItem('tecnosoft_dark_mode', document.body.classList.contains('o_dark_mode') ? 'true' : 'false'); var icon = this.querySelector('i'); if (document.body.classList.contains('o_dark_mode')) { icon.classList.remove('fa-moon-o'); icon.classList.add('fa-sun-o'); this.style.background='#222'; icon.style.color='#fff'; } else { icon.classList.remove('fa-sun-o'); icon.classList.add('fa-moon-o'); this.style.background='#fff'; icon.style.color='#333'; }">
-                 <i class="fa fa-moon-o" style="font-size: 20px; color: #333;"></i>
+                  style="width: 48px; height: 48px; z-index: 2147483647; cursor: pointer; border: 2px solid var(--o-color-primary, #007bff); left: 20px; bottom: 20px;"
+                  onclick="try { 
+                      event.stopPropagation(); 
+                      event.preventDefault();
+                      document.body.classList.toggle('o_dark_mode'); 
+                      var isDark = document.body.classList.contains('o_dark_mode');
+                      localStorage.setItem('tecnosoft_dark_mode', isDark ? 'true' : 'false'); 
+                      var icon = this.querySelector('i'); 
+                      if (isDark) { 
+                          icon.classList.remove('fa-moon-o'); 
+                          icon.classList.add('fa-sun-o'); 
+                          this.style.background='#222'; 
+                          icon.style.color='#fff'; 
+                      } else { 
+                          icon.classList.remove('fa-sun-o'); 
+                          icon.classList.add('fa-moon-o'); 
+                          this.style.background='#fff'; 
+                          icon.style.color='#333'; 
+                      } 
+                  } catch(e) { console.error('Dark Mode Error:', e); }">
+                 <i class="fa fa-moon-o" style="font-size: 20px; color: #333; pointer-events: none;"></i>
              </div>
              <!-- Apply saved dark mode on page load -->
              <script>
