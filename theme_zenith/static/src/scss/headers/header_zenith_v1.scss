@@ -280,6 +280,18 @@ body:has(.header_zenith_v1) #wrapwrap > main {
     }
 }
 
+/* Cart Badge Fix Global */
+.my_cart_quantity {
+    background-color: var(--o-color-primary) !important;
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    font-size: 0.65rem !important;
+    padding: 2px 5px !important;
+    border-radius: 10px !important;
+    transform: none !important;
+}
+
 /* Cart badge positioning fix for mobile */
 @media (max-width: 991.98px) {
     .header_zenith_v1 {
