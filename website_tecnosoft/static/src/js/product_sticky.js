@@ -16,6 +16,12 @@ const StickyCart = publicWidget.Widget.extend({
         this.$mainBtn = this.$target.find('.js_check_product'); // Main Add to Cart button
         
         if (this.$stickyBar.length && this.$mainBtn.length) {
+            // FIX: Move to body to prevent transform inheritance issues (z-index/fixed positioning)
+            // But checking if it's already there to avoid duplicates if widget restarts
+            if (this.$stickyBar.parent()[0] !== document.body) {
+                this.$stickyBar.appendTo('body');
+            }
+            
             this._setupObserver();
             // Listen for variant updates
             $(this.el).on('website_sale:update_combination_info', this._onCombinationUpdate.bind(this));
@@ -74,6 +80,9 @@ const StickyCart = publicWidget.Widget.extend({
     destroy() {
         if (this.observer) {
             this.observer.disconnect();
+        }
+        if (this.$stickyBar && this.$stickyBar.length) {
+            this.$stickyBar.remove();
         }
         this._super(...arguments);
     }
