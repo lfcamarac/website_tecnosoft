@@ -209,14 +209,21 @@ class ZenithController(http.Controller):
     @http.route('/theme_zenith/quick_view', type='http', auth='public', website=True)
     def quick_view(self, product_id, **kwargs):
         """ Render the Quick View modal content. """
-        # Handle composite IDs (e.g. "6:1" -> template_id:variant_id?)
-        if product_id and isinstance(product_id, str) and ':' in product_id:
-            product_id = product_id.split(':')[0]
+        try:
+            # Handle composite IDs (e.g. "6:1" -> template_id:variant_id?)
+            if product_id and isinstance(product_id, str) and ':' in product_id:
+                product_id = product_id.split(':')[0]
             
-        product = request.env['product.template'].browse(int(product_id))
-        return request.render("theme_zenith.quick_view_modal", {
-            'product': product,
-        })
+            p_id = int(product_id)
+            product = request.env['product.template'].browse(p_id)
+            if not product.exists():
+                return request.not_found()
+                
+            return request.render("theme_zenith.quick_view_modal", {
+                'product': product,
+            })
+        except (ValueError, TypeError):
+            return request.not_found()
 
     @http.route('/llms.txt', type='http', auth='public', website=True, sitemap=False)
     def llms_txt(self, **kwargs):
