@@ -64,12 +64,14 @@ body.o_dark_mode {
     }
   }
 
-  /* Navbar */
+  /* Navbar & Mobile Header */
   #top_menu_container,
-  .navbar-light {
+  .navbar-light,
+  .zenith-mobile-header,
+  .o_main_nav {
     background-color: var(--o-dark-surface) !important;
 
-    .nav-link {
+    .nav-link, .fa, i {
       color: var(--o-dark-text-secondary);
       &.active,
       &:hover {
