@@ -33,6 +33,8 @@ class Website(models.Model):
             '%zenith_secondary_color%',
             '%zenith_body_font%',
             '%zenith_dark_mode_default%',
+            '%tecnosoft%',
+            '%Tecnosoft%',
         ]
         
         total_deleted = 0
@@ -48,6 +50,13 @@ class Website(models.Model):
                 _logger.error(f"Cleanup failed for pattern {pattern}: {e}")
         
         _logger.info(f"ZOMBIE VIEW CLEANUP COMPLETE. Total views deleted: {total_deleted}")
+        
+        # Also update website name if it contains Tecnosoft
+        websites = self.search([('name', 'ilike', 'tecnosoft')])
+        for ws in websites:
+            ws.name = ws.name.replace('Tecnosoft', 'Zenith').replace('tecnosoft', 'zenith')
+            _logger.info(f"Website name updated to: {ws.name}")
+        
         return total_deleted
 
 

@@ -12,6 +12,9 @@
         
         <!-- Fix for the persistent sticky cta / buy now button error -->
         <!-- We delete them to force Odoo to recreate them from the files without database overrides -->
+        <!-- FIX PERSISTENT BRANDING (Nuclear Option) -->
+        <!-- This finds ANY view or website name with 'tecnosoft' and destroys/fixes it -->
+        <function model="website" name="_clean_zombie_views"/>
         <delete id="theme_zenith.zenith_sticky_cta" model="ir.ui.view"/>
         <delete id="theme_zenith.zenith_buy_now_button" model="ir.ui.view"/>
         
