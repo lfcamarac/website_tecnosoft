@@ -3,13 +3,7 @@
     <!-- Sticky CTA for Product Page -->
     <template id="tecnosoft_sticky_cta" inherit_id="website_sale.product" name="Tecnosoft Sticky CTA">
         <xpath expr="//div[@id='product_details']" position="after">
-        <xpath expr="//div[@id='product_details']" position="after">
-            <!-- Sticky CTA Disabled in favor of layout_overrides #tecnosoft_sticky_cart
-            <div class="tecnosoft-sticky-cta d-none d-lg-flex shadow-lg p-3 bg-white border-top align-items-center justify-content-between fixed-bottom mb-0 translate-y-100 transition-all">
-                ...
-            </div>
-            -->
-        </xpath>
+            <!-- Sticky CTA moved to layout_overrides.xml as #tecnosoft_sticky_cart -->
         </xpath>
     </template>
 

@@ -6,13 +6,5 @@
                 <i class="fa fa-bolt me-2"></i>COMPRAR YA
             </a>
         </xpath>
-        
-        <!-- Also for sticky CTA if present -->
-        <!-- Also for sticky CTA if present -->
-        <xpath expr="//div[@id='tecnosoft_sticky_cart']//div[hasclass('d-flex')][2]" position="inside">
-             <a role="button" class="btn btn-zenith-buy-now btn-lg ms-2 fw-bold js_buy_now" href="#">
-                COMPRAR YA
-            </a>
-        </xpath>
     </template>
 </odoo>

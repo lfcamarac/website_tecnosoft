@@ -466,7 +466,7 @@
             </div>
             -->
 
-            <div id="tecnosoft_sticky_cart" class="tecnosoft-sticky-cart-bar align-items-center justify-content-between">
+            <div id="tecnosoft_sticky_cart" t-if="product" class="tecnosoft-sticky-cart-bar align-items-center justify-content-between">
                 <div class="d-flex align-items-center gap-3">
                     <img t-if="product.image_128" t-att-src="'/web/image/product.template/%s/image_128' % product.id" class="rounded shadow-sm" style="width: 50px; height: 50px; object-fit: cover;"/>
                     <div>
@@ -484,6 +484,9 @@
                             <i class="fa fa-shopping-cart me-2"></i> Añadir al Carrito
                         </button>
                     </form>
+                    <a t-if="product._is_add_to_cart_possible()" role="button" class="btn btn-zenith-buy-now fw-bold shadow-sm js_buy_now" href="#">
+                        <i class="fa fa-bolt me-2"></i>COMPRAR YA
+                    </a>
                 </div>
             </div>
             
