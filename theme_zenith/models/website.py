@@ -21,7 +21,7 @@ class Website(models.Model):
     # Dark Mode uses localStorage (client-side), no backend field needed.
 
     @api.model
-    def _clean_zombie_views(self):
+    def clean_zombie_views(self):
         """
         Emergency cleanup method to delete views containing deprecated code.
         Uses raw SQL to bypass ORM filters (active_test, protections) and guarantees deletion.
@@ -76,4 +76,4 @@ class Website(models.Model):
 
 def _post_init_cleanup(env):
     """Called after module install/upgrade to clean zombie views."""
-    env['website']._clean_zombie_views()
+    env['website'].clean_zombie_views()

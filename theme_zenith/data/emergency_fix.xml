@@ -13,7 +13,7 @@
         <!-- This finds ANY view or website name with 'tecnosoft' and fixes it.
              It also handles the sticky cta and buy now button by cleaning up 
              customized database overrides. -->
-        <function model="website" name="_clean_zombie_views"/>
+        <function model="website" name="clean_zombie_views" eval="[]"/>
         
     </data>
 </odoo>
